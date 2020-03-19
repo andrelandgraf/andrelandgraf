@@ -8,6 +8,7 @@ import Layout from '../components/layout/layout';
 import Experience from '../components/experience/experience';
 import Project from '../components/project/project';
 import Skills from '../components/skills/skills';
+import Education from '../components/education/education';
 
 const Content = styled.div`
   width: 90vw;
@@ -73,6 +74,38 @@ const projects = [
   />,
 ];
 
+const educations = [
+  <Education
+    key="TUM"
+    univeristy="Technical University of Munich (TUM)"
+    degree="Master of Science"
+    major="Information Systems"
+    fromTo="2017 - today"
+  />,
+  <Education
+    key="Stanford"
+    univeristy="Stanford University"
+    degree="Certificate (Continuing Studies)"
+    major="The Frontiers of AI Research and Applications"
+    fromTo="5 Weeks"
+  />,
+  <Education
+    key="RMIT"
+    univeristy="Royale Melbourne Institue of Technology (RMIT)"
+    degree="Semester abroad"
+    major="Information Systems"
+    fromTo="2016"
+  />,
+  <Education
+    key="FAU"
+    univeristy="Friedrich-Alexander-Universitiy Erlangen-Nuremberg"
+    degree="Bachelor of Science"
+    major="Information Systems"
+    fromTo="2014 - 2017"
+  />,
+
+];
+
 const skills = [
   'Fullstack Software Engineering',
   'Web Development',
@@ -92,6 +125,7 @@ export default () => (
       <h2>Projects</h2>
       {projects}
       <h2>Education</h2>
+      {educations}
       <h2>Skills</h2>
       <Skills skills={skills} />
     </Content>

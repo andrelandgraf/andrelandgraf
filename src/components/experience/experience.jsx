@@ -4,17 +4,37 @@ import styled from 'styled-components';
 
 const Container = styled.div` 
   display: flex;
+  flex-direction: row;
+`;
+
+const Title = styled.h3`
+
+`;
+
+const Company = styled.h4`
+
+`;
+
+const Time = styled.p`
+  margin-left: auto;
+  display: inline-flex;
   flex-direction: column;
+  text-align: right;
 `;
 
 const Experience = ({
   title, description, fromTo, duration, location, company,
 }) => (
   <Container>
-    <h4>{`${title} @ ${company}`}</h4>
-    <p>{`${fromTo} (${duration})`}</p>
-    <p>{location}</p>
-    <p>{description}</p>
+    <div>
+      <Title>{title}</Title>
+      <Company>{`@ ${company} in ${location}`}</Company>
+      <p>{description}</p>
+    </div>
+    <Time>
+      {fromTo}
+      <span>{duration}</span>
+    </Time>
   </Container>
 );
 

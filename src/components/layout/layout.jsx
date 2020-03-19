@@ -38,6 +38,7 @@ const GlobalStyle = createGlobalStyle`
 
     @media screen and (max-width: ${styles.widths.phoneWidth}) {
         margin: 10px 0;
+        max-width: 90vw;
     }
   }
 
@@ -48,22 +49,41 @@ const GlobalStyle = createGlobalStyle`
 
     @media screen and (max-width: ${styles.widths.phoneWidth}) {
         margin: 15px 0;
+        max-width: 90vw;
     }
   }
 
   h3 {
-    @extend h2;
-    font-size: 42px;
+    margin: 10px 0;
+    font-size: ${styles.fontSizes.m};
     font-weight: ${styles.fontWeights.bold};
+    max-width: 50vw;
 
     @media screen and (max-width: ${styles.widths.phoneWidth}) {
-        font-size: 32px;
+        max-width: 90vw;
+    }
+  }
+
+  h4 {
+    margin: 0;
+    font-size: ${styles.fontSizes.m};
+    font-weight: ${styles.fontWeights.semiBold};
+    max-width: 50vw;
+
+    @media screen and (max-width: ${styles.widths.phoneWidth}) {
+      max-width: 90vw;
     }
   }
 
   p {
     hyphens: none;
     line-height: 1.5;
+    font-size: ${styles.fontSizes.s};
+    max-width: 50vw;
+
+    @media screen and (max-width: ${styles.widths.phoneWidth}) {
+      max-width: 90vw;
+    }
   }
 
   p.limit {
