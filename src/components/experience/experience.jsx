@@ -17,13 +17,11 @@ const Company = styled.h4`
 
 const Time = styled.p`
   margin-left: auto;
-  display: inline-flex;
-  flex-direction: column;
   text-align: right;
 `;
 
 const Experience = ({
-  title, description, fromTo, duration, location, company,
+  title, description, fromTo, location, company,
 }) => (
   <Container>
     <div>
@@ -33,7 +31,6 @@ const Experience = ({
     </div>
     <Time>
       {fromTo}
-      <span>{duration}</span>
     </Time>
   </Container>
 );
@@ -42,7 +39,6 @@ Experience.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   fromTo: PropTypes.string.isRequired,
-  duration: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
   company: PropTypes.string.isRequired,
 };

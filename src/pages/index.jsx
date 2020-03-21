@@ -9,6 +9,13 @@ import Experience from '../components/experience/experience';
 import Project from '../components/project/project';
 import Skills from '../components/skills/skills';
 import Education from '../components/education/education';
+import Header from '../components/header/header';
+
+import College from '../assets/svg/college.svg';
+import Group from '../assets/svg/group.svg';
+import Electron from '../assets/svg/electron.svg';
+import Rocket from '../assets/svg/rocket.svg';
+
 
 const Content = styled.div`
   width: 90vw;
@@ -17,6 +24,37 @@ const Content = styled.div`
 
   @media screen and (max-width: ${styles.widths.phoneWidth}) {
       margin-bottom: 15%;
+  }
+`;
+
+const Intro = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  max-width: 50vw;
+  
+  @media screen and (max-width: ${styles.widths.phoneWidth}) {
+    max-width: 90vw;
+  }
+`;
+
+const IntroText = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 45px;
+`;
+
+const Portrait = styled.img`
+  height: 120px;
+  width: 111px;
+  border-radius: 0 10px;
+`;
+
+const Curriculum = styled.div`
+  max-width: 65vw;
+
+  @media screen and (max-width: ${styles.widths.phoneWidth}) {
+    max-width: 90vw;
   }
 `;
 
@@ -64,7 +102,7 @@ const projects = [
     key="VelaPilates"
     title="VelaPilates"
     link="https://pilates-fitness.studio/"
-    description="A online pilates studio and course purchasing webapp powered by Gatsbjs, Express, MongoDB."
+    description="An online pilates studio and course purchasing webapp powered by Gatsbjs, Express, MongoDB."
   />,
   <Project
     key="react-datalist-input"
@@ -81,6 +119,7 @@ const educations = [
     degree="Master of Science"
     major="Information Systems"
     fromTo="2017 - today"
+    location="Munich, Germany"
   />,
   <Education
     key="Stanford"
@@ -88,6 +127,7 @@ const educations = [
     degree="Certificate (Continuing Studies)"
     major="The Frontiers of AI Research and Applications"
     fromTo="5 Weeks"
+    location="Stanford, CA, USA"
   />,
   <Education
     key="RMIT"
@@ -95,13 +135,15 @@ const educations = [
     degree="Semester abroad"
     major="Information Systems"
     fromTo="2016"
+    location="Melbourne, Australia"
   />,
   <Education
     key="FAU"
-    univeristy="Friedrich-Alexander-Universitiy Erlangen-Nuremberg"
+    univeristy="Friedrich-Alexander-Universitiy Erlangen-Nuremberg (FAU)"
     degree="Bachelor of Science"
     major="Information Systems"
     fromTo="2014 - 2017"
+    location="Nuremberg, Germany"
   />,
 
 ];
@@ -113,21 +155,30 @@ const skills = [
   'Design Thinking',
 ];
 
+console.log(process.env.GATSBY_AWS_S3);
 export default () => (
   <Layout>
     <Content>
-      <h1>Andre Landgraf</h1>
-      <p>
-        A tech enthusiast and student who loves to develop fullstack software solutions.
-      </p>
-      <h2>Working Experience</h2>
-      {experiences}
-      <h2>Projects</h2>
-      {projects}
-      <h2>Education</h2>
-      {educations}
-      <h2>Skills</h2>
-      <Skills skills={skills} />
+      <Intro>
+        <Portrait src={`${process.env.GATSBY_AWS_S3}/portrait.jpg`} alt="Portrait of Andre Landgraf" />
+        <IntroText>
+          <h1>Andre Landgraf</h1>
+          <p>
+            A tech enthusiast and student who loves to develop fullstack software solutions.
+          </p>
+        </IntroText>
+      </Intro>
+      <Curriculum>
+        <Header title="Working Experience" icon={<Group />} />
+        {experiences}
+        <Header title="Projects" icon={<Rocket />} />
+        {projects}
+        <Header title="Education" icon={<College />} />
+        {educations}
+        <Header title="Skills" icon={<Electron />} />
+        <Skills skills={skills} />
+      </Curriculum>
+
     </Content>
   </Layout>
 );

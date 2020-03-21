@@ -12,15 +12,18 @@ const Degree = styled.h4`
 `;
 
 const Education = ({
-  univeristy, degree, major, fromTo,
+  univeristy, degree, major, fromTo, location,
 }) => (
   <Container>
     <h3>{univeristy}</h3>
-    <h4>
+    <Degree>
       {degree}
       <i>{` - ${major}`}</i>
-    </h4>
-    <p>{fromTo}</p>
+    </Degree>
+    <p>
+      {fromTo}
+      {location}
+    </p>
   </Container>
 );
 
@@ -29,6 +32,7 @@ Education.propTypes = {
   degree: PropTypes.string.isRequired,
   major: PropTypes.string.isRequired,
   fromTo: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
 };
 
 export default Education;

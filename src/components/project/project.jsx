@@ -12,7 +12,7 @@ const Project = ({
 }) => (
   <Container>
     <a href={link} target="_blank" rel="noopener noreferrer">
-      <h4>{title}</h4>
+      <h3>{title}</h3>
     </a>
     <p>{description}</p>
   </Container>

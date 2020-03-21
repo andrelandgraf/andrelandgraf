@@ -34,9 +34,10 @@ const GlobalStyle = createGlobalStyle`
   h1 {
     font-size: ${styles.fontSizes.xxl};
     font-weight: ${styles.fontWeights.heavy};
-    margin: 20px 0;
+    margin: 0 0 10px 0;
 
     @media screen and (max-width: ${styles.widths.phoneWidth}) {
+      font-size: ${styles.fontSizes.xl};
         margin: 10px 0;
         max-width: 90vw;
     }
@@ -86,14 +87,7 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  p.limit {
-    max-width: 890px;
-    text-align: justify;
-  }
-
   button {
-    border: none;
-    box-shadow: none;
     font-size: 0.8rem;
     height: 3rem;
     margin: 0 0 10px 0;
