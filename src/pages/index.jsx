@@ -59,8 +59,8 @@ const IntroText = styled.div`
 
 const Portrait = styled.img`
   height: 120px;
-  width: 111px;
-  border-radius: 0 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
 `;
 
 const Curriculum = styled.div`
@@ -164,7 +164,6 @@ const skills = [
   'Design Thinking',
 ];
 
-console.log(process.env.GATSBY_AWS_S3);
 export default () => (
   <Layout>
     <Content>

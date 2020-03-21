@@ -56,7 +56,9 @@ const Education = ({
         {fromTo}
       </span>
       <Location>
-        {location}
+        <i>
+          {location}
+        </i>
       </Location>
     </TimeLocation>
   </Container>
