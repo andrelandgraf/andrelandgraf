@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${styles.colors.backgroundColor};
     margin: 0;
     font-family: ${styles.fonts.default};
+    font-size: ${styles.fontSizes.m}
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -27,6 +28,7 @@ const GlobalStyle = createGlobalStyle`
 
   a {
     padding: 0;
+    font-size: ${styles.fontSizes.m};
     color: ${styles.colors.linkColor};
     text-decoration: none;
   }
@@ -68,7 +70,7 @@ const GlobalStyle = createGlobalStyle`
   h4 {
     margin: 0;
     font-size: ${styles.fontSizes.m};
-    font-weight: ${styles.fontWeights.semiBold};
+    font-weight: ${styles.fontWeights.medium};
     max-width: 50vw;
 
     @media screen and (max-width: ${styles.widths.phoneWidth}) {
@@ -76,24 +78,15 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  p {
+  p span i {
     hyphens: none;
     line-height: 1.5;
-    font-size: ${styles.fontSizes.s};
+    font-size: ${styles.fontSizes.m};
     max-width: 50vw;
 
     @media screen and (max-width: ${styles.widths.phoneWidth}) {
       max-width: 90vw;
     }
-  }
-
-  button {
-    font-size: 0.8rem;
-    height: 3rem;
-    margin: 0 0 10px 0;
-    outline: none;
-    padding: 0;
-    transition: all 0.3s;
   }
 `;
 

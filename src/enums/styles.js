@@ -1,8 +1,8 @@
 const styles = {
   fontSizes: {
-    s: '13px',
-    m: '16px',
-    l: '18px',
+    s: '10px',
+    m: '13px',
+    l: '16px',
     xl: '24px',
     xxl: '32px',
   },

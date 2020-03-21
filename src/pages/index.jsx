@@ -10,6 +10,7 @@ import Project from '../components/project/project';
 import Skills from '../components/skills/skills';
 import Education from '../components/education/education';
 import Header from '../components/header/header';
+import DownloadButton from '../components/download/download';
 
 import College from '../assets/svg/college.svg';
 import Group from '../assets/svg/group.svg';
@@ -27,11 +28,22 @@ const Content = styled.div`
   }
 `;
 
+const Navigation = styled.nav`
+  display: flex;
+  flex-direction: row;
+  flex-align: flex-start;
+
+  @media screen and (max-width: ${styles.widths.phoneWidth}) {
+    flex-direction: column;
+}
+`;
+
 const Intro = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   max-width: 50vw;
+  margin-right: auto;
   
   @media screen and (max-width: ${styles.widths.phoneWidth}) {
     max-width: 90vw;
@@ -159,15 +171,18 @@ console.log(process.env.GATSBY_AWS_S3);
 export default () => (
   <Layout>
     <Content>
-      <Intro>
-        <Portrait src={`${process.env.GATSBY_AWS_S3}/portrait.jpg`} alt="Portrait of Andre Landgraf" />
-        <IntroText>
-          <h1>Andre Landgraf</h1>
-          <p>
-            A tech enthusiast and student who loves to develop fullstack software solutions.
-          </p>
-        </IntroText>
-      </Intro>
+      <Navigation>
+        <Intro>
+          <Portrait src={`${process.env.GATSBY_AWS_S3}/portrait.jpg`} alt="Portrait of Andre Landgraf" />
+          <IntroText>
+            <h1>Andre Landgraf</h1>
+            <p>
+              A tech enthusiast and student who loves to develop fullstack software solutions.
+            </p>
+          </IntroText>
+        </Intro>
+        <DownloadButton />
+      </Navigation>
       <Curriculum>
         <Header title="Working Experience" icon={<Group />} />
         {experiences}
