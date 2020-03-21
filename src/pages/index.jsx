@@ -32,6 +32,7 @@ const Navigation = styled.nav`
   display: flex;
   flex-direction: row;
   flex-align: flex-start;
+  margin-bottom: 4vh;
 
   @media screen and (max-width: ${styles.widths.phoneWidth}) {
     flex-direction: column;
@@ -76,7 +77,6 @@ const experiences = [
     title="Software Engineering Intern"
     description="Designing and implementing voice assistant applications. Developing internal fullstack software solutions."
     fromTo="11/2019 – today"
-    duration="5 month"
     location="Sunnyvale, CA, USA"
     company="Mercedes-Benz Research & Development Nothern America"
   />,
@@ -85,7 +85,6 @@ const experiences = [
     title="Software Engineering Working Student"
     description="Part of an international Scrum team. Developing the internal knowledge management software in React, HTML5, SCSS, and Drupal."
     fromTo="01/2019 – 09/2019"
-    duration="9 month"
     location="Munich, Germany"
     company="Netlight"
   />,
@@ -94,7 +93,6 @@ const experiences = [
     title="Software Engineering Working Student"
     description="Implemented multiple features for the internal web based business software in PHP, MySQL, HTML5/CSS3, and JS. Developed an user interface and backend service to synchronize data with the companies’ active directory."
     fromTo="02/2017 – 09/2018"
-    duration="1 year 8 month"
     location="Nuremberg, Germany"
     company="qSkills"
   />,
@@ -103,7 +101,6 @@ const experiences = [
     title="Quality Assurance Working Student"
     description="Helped my team to reorganize the product backlog to meet Scrum based requirements. Worked on quality assurance, reverse engineering and manual testing activities like creating new test cases."
     fromTo="02/2016 -06/2016"
-    duration="5 month"
     location="Nuremberg, Germany"
     company="DATEV"
   />,
@@ -120,7 +117,7 @@ const projects = [
     key="react-datalist-input"
     title="react-datalist-input"
     link="https://www.npmjs.com/package/react-datalist-input"
-    description="A npm package that provides a single react component. It contains an input field with a drop down menu to pick a possible option based on the current input as a react component."
+    description="A npm package that provides a single react component. It contains an input field with a drop down menu to pick a possible option based on the current input."
   />,
 ];
 
@@ -138,7 +135,7 @@ const educations = [
     univeristy="Stanford University"
     degree="Certificate (Continuing Studies)"
     major="The Frontiers of AI Research and Applications"
-    fromTo="5 Weeks"
+    fromTo="Five Weeks"
     location="Stanford, CA, USA"
   />,
   <Education
@@ -146,7 +143,7 @@ const educations = [
     univeristy="Royale Melbourne Institue of Technology (RMIT)"
     degree="Semester abroad"
     major="Information Systems"
-    fromTo="2016"
+    fromTo="One Semester"
     location="Melbourne, Australia"
   />,
   <Education
@@ -193,7 +190,6 @@ export default () => (
         <Header title="Skills" icon={<Electron />} />
         <Skills skills={skills} />
       </Curriculum>
-
     </Content>
   </Layout>
 );

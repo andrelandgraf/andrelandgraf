@@ -7,10 +7,10 @@ import styles from '../../enums/styles';
 const Container = styled.div` 
   display: flex;
   flex-direction: row;
-  margin-bottom: 3vh;
+  margin-bottom: 1vh;
 
   @media screen and (max-width: ${styles.widths.phoneWidth}) {
-    margin-bottom: 4vh;
+    margin-bottom: 3vh;
     flex-direction: column-reverse;
   }
 `;
@@ -31,10 +31,10 @@ const TimeLocation = styled.p`
 `;
 
 const Location = styled.span`
-@media screen and (max-width: ${styles.widths.phoneWidth}) {
-  margin-left: auto;
-  padding-right: 2px;
-}
+  @media screen and (max-width: ${styles.widths.phoneWidth}) {
+    margin-left: auto;
+    padding-right: 2px;
+  }
 `;
 
 

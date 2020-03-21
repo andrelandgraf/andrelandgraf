@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Container = styled.div`
-    margin-top: 5vh;
     display: inline-flex;
     flex-direction: row;
     align-items: center;
+    margin-top: 1vh;
 `;
 
 const Text = styled.h2`

@@ -78,12 +78,27 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  p span i {
+  p {
     hyphens: none;
     line-height: 1.5;
     font-size: ${styles.fontSizes.m};
-    max-width: 50vw;
+    max-width: 500px;
 
+    @media screen and (max-width: ${styles.widths.phoneWidth}) {
+      max-width: 90vw;
+    }
+  }
+
+  ul {
+    margin: 0;
+    padding-inline-start: 20px;
+  }
+
+  li {
+    line-height: 1.5;
+    font-size: ${styles.fontSizes.m};
+    margin: 10px 0;
+    max-width: 500px;
     @media screen and (max-width: ${styles.widths.phoneWidth}) {
       max-width: 90vw;
     }
