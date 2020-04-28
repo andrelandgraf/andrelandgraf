@@ -20,57 +20,46 @@ import Group from '../assets/svgs/group.svg';
 import Electron from '../assets/svgs/electron.svg';
 import Rocket from '../assets/svgs/rocket.svg';
 
-
-const Content = styled.div`
-  width: 90vw;
-  overflow-x: hidden;
-  margin: 5vh 5vw 15% 5vw;
-
-  @media screen and (max-width: ${styles.widths.phoneWidth}) {
-      margin-bottom: 15%;
-  }
-`;
-
 const Navigation = styled.nav`
-  display: flex;
-  flex-direction: row;
-  flex-align: flex-start;
-  margin-bottom: 4vh;
+display: flex;
+flex-direction: row;
+flex-align: flex-start;
+margin-bottom: 4vh;
 
-  @media screen and (max-width: ${styles.widths.phoneWidth}) {
-    flex-direction: column;
+@media screen and (max-width: ${styles.widths.phoneWidth}) {
+  flex-direction: column;
 }
 `;
 
 const Intro = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  max-width: 50vw;
-  margin-right: auto;
-  
-  @media screen and (max-width: ${styles.widths.phoneWidth}) {
-    max-width: 90vw;
-  }
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+max-width: 50vw;
+margin-right: auto;
+
+@media screen and (max-width: ${styles.widths.phoneWidth}) {
+  max-width: 90vw;
+}
 `;
 
 const IntroText = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: 45px;
+display: flex;
+flex-direction: column;
+margin-left: 45px;
 `;
 
 const Portrait = styled.div`
-  width: 120px;
-  margin-bottom: 10px;
+width: 120px;
+margin-bottom: 10px;
 `;
 
-const Curriculum = styled.div`
-  max-width: 65vw;
+const Curriculum = styled.main`
+max-width: 65vw;
 
-  @media screen and (max-width: ${styles.widths.phoneWidth}) {
-    max-width: 90vw;
-  }
+@media screen and (max-width: ${styles.widths.phoneWidth}) {
+  max-width: 90vw;
+}
 `;
 
 const experiences = [
@@ -168,35 +157,33 @@ const skills = [
 
 const CV = ({ data }) => (
   <Layout>
-    <Content>
-      <Navigation>
-        <Intro>
-          <Portrait>
-            <Img
-              fluid={data.file.childImageSharp.fluid}
-              alt="Portrait of Andre Landgraf"
-            />
-          </Portrait>
-          <IntroText>
-            <h1>Andre Landgraf</h1>
-            <p>
-              A tech enthusiast and student who loves to develop fullstack software solutions.
-            </p>
-          </IntroText>
-        </Intro>
-        <DownloadButton />
-      </Navigation>
-      <Curriculum>
-        <Header title="Working Experience" icon={<Group />} />
-        {experiences}
-        <Header title="Projects" icon={<Rocket />} />
-        {projects}
-        <Header title="Education" icon={<College />} />
-        {educations}
-        <Header title="Skills" icon={<Electron />} />
-        <Skills skills={skills} />
-      </Curriculum>
-    </Content>
+    <Navigation>
+      <Intro>
+        <Portrait>
+          <Img
+            fluid={data.file.childImageSharp.fluid}
+            alt="Portrait of Andre Landgraf"
+          />
+        </Portrait>
+        <IntroText>
+          <h1>Andre Landgraf</h1>
+          <p>
+            A tech enthusiast and student who loves to develop fullstack software solutions.
+          </p>
+        </IntroText>
+      </Intro>
+      <DownloadButton />
+    </Navigation>
+    <Curriculum>
+      <Header title="Working Experience" icon={<Group />} />
+      {experiences}
+      <Header title="Projects" icon={<Rocket />} />
+      {projects}
+      <Header title="Education" icon={<College />} />
+      {educations}
+      <Header title="Skills" icon={<Electron />} />
+      <Skills skills={skills} />
+    </Curriculum>
   </Layout>
 );
 

@@ -118,6 +118,13 @@ const Page = styled.div`
     overflow-x: hidden;
 `;
 
+const Content = styled.div`
+  width: 90vw;
+  max-width: 2000px;
+  overflow-x: hidden;
+  margin: 5vh auto 15% auto;
+`;
+
 const Layout = ({ children }) => {
   const query = graphql`
   query SEO {
@@ -145,7 +152,9 @@ const Layout = ({ children }) => {
         <title>{title}</title>
       </Helmet>
       <GlobalStyle />
-      {children}
+      <Content>
+        {children}
+      </Content>
     </Page>
   );
 };
