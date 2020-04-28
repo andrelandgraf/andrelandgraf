@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import styles from '../../enums/styles';
-import ArrowDown from '../../assets/svg/download.svg';
+import ArrowDown from '../../assets/svgs/download.svg';
 
 const ButtonLike = styled.div`
     padding: 2px 5px;

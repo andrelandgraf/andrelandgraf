@@ -1,6 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
+import { useStaticQuery, graphql } from 'gatsby';
 import styled, { createGlobalStyle } from 'styled-components';
+import PropTypes from 'prop-types';
 
 import styles from '../../enums/styles';
 
@@ -103,6 +105,10 @@ const GlobalStyle = createGlobalStyle`
       max-width: 90vw;
     }
   }
+
+  img {
+    border-radius: 10px;
+  }
 `;
 
 const Page = styled.div`
@@ -112,12 +118,37 @@ const Page = styled.div`
     overflow-x: hidden;
 `;
 
-const Layout = ({ children }) => (
-  <Page>
-    <GlobalStyle />
-    {children}
-  </Page>
-);
+const Layout = ({ children }) => {
+  const query = graphql`
+  query SEO {
+    site {
+      siteMetadata {
+        title
+        description
+        image
+      }
+    }
+  }
+`;
+  const { site: { siteMetadata: { title, description, image } } } = useStaticQuery(query);
+
+  return (
+    <Page>
+      <Helmet>
+        <html lang="en" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta
+          name="description"
+          content={description}
+        />
+        <meta name="image" content={image} />
+        <title>{title}</title>
+      </Helmet>
+      <GlobalStyle />
+      {children}
+    </Page>
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.oneOfType([

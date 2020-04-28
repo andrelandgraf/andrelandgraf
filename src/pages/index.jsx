@@ -1,5 +1,8 @@
 import React from 'react';
+import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import '../utilities/logger';
 
@@ -12,10 +15,10 @@ import Education from '../components/education/education';
 import Header from '../components/header/header';
 import DownloadButton from '../components/download/download';
 
-import College from '../assets/svg/college.svg';
-import Group from '../assets/svg/group.svg';
-import Electron from '../assets/svg/electron.svg';
-import Rocket from '../assets/svg/rocket.svg';
+import College from '../assets/svgs/college.svg';
+import Group from '../assets/svgs/group.svg';
+import Electron from '../assets/svgs/electron.svg';
+import Rocket from '../assets/svgs/rocket.svg';
 
 
 const Content = styled.div`
@@ -57,9 +60,8 @@ const IntroText = styled.div`
   margin-left: 45px;
 `;
 
-const Portrait = styled.img`
-  height: 120px;
-  border-radius: 10px;
+const Portrait = styled.div`
+  width: 120px;
   margin-bottom: 10px;
 `;
 
@@ -164,12 +166,17 @@ const skills = [
   'Design Thinking',
 ];
 
-export default () => (
+const CV = ({ data }) => (
   <Layout>
     <Content>
       <Navigation>
         <Intro>
-          <Portrait src={`${process.env.GATSBY_AWS_S3}/portrait.jpg`} alt="Portrait of Andre Landgraf" />
+          <Portrait>
+            <Img
+              fluid={data.file.childImageSharp.fluid}
+              alt="Portrait of Andre Landgraf"
+            />
+          </Portrait>
           <IntroText>
             <h1>Andre Landgraf</h1>
             <p>
@@ -192,3 +199,29 @@ export default () => (
     </Content>
   </Layout>
 );
+
+CV.propTypes = {
+  data: PropTypes.shape({
+    file: PropTypes.shape({
+      childImageSharp: PropTypes.shape({
+        fluid: PropTypes.oneOfType([
+          PropTypes.arrayOf(PropTypes.shape({})),
+          PropTypes.shape({}),
+        ]),
+      }),
+    }),
+  }).isRequired,
+};
+
+export default CV;
+
+export const query = graphql`
+query ImageQuery {
+  file(relativePath: { eq: "portrait.jpg" }) {
+    childImageSharp {
+      fluid( maxWidth: 480) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
+    }
+  }
+}`;
