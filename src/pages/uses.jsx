@@ -7,15 +7,30 @@ import '../utilities/logger';
 import styles from '../enums/styles';
 import Layout from '../components/layout/layout';
 
+const Navigation = styled.nav`
+display: flex;
+flex-direction: row;
+flex-align: flex-start;
+margin-bottom: 4vh;
+
+@media screen and (max-width: ${styles.widths.phoneWidth}) {
+  flex-direction: column;
+}
+`;
+
+const Header = styled.div`
+margin-right: auto;
+`;
+
 const Search = styled.div`
-  width: 25vw;
-  min-width: 300px;
-  max-width: 600px;
-  margin-bottom: 6vh;
-  @media screen and (max-width: ${styles.widths.phoneWidth}) {
-    width: 90vw;
-    margin-bottom: 3vh;
-  }
+width: 25vw;
+min-width: 300px;
+max-width: 600px;
+margin-bottom: 6vh;
+@media screen and (max-width: ${styles.widths.phoneWidth}) {
+  width: 90vw;
+  margin-bottom: 3vh;
+}
 `;
 
 const ThingsContainer = styled.main`
@@ -261,7 +276,12 @@ export default () => {
 
   return (
     <Layout>
-      <h1>Andre Landgraf Uses</h1>
+      <Navigation>
+        <Header>
+          <h1>Andre Landgraf Uses</h1>
+        </Header>
+        <a href="/">Checkout my CV</a>
+      </Navigation>
       <Search>
         <SearchField
           placeholder="Search for a thing..."
