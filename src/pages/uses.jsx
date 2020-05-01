@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import SearchField from 'react-datalist-input';
+import DataListInput from 'react-plain-datalist-input';
 
 import '../utilities/logger';
 
@@ -30,6 +30,57 @@ margin-bottom: 6vh;
 @media screen and (max-width: ${styles.widths.phoneWidth}) {
   width: 90vw;
   margin-bottom: 3vh;
+}
+
+// copy pasted from react-datalist-input
+.datalist-input {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.datalist-input .autocomplete-input {
+  width: 100%;
+}
+
+.datalist-input .datalist-items {
+  position: absolute;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.datalist-input .default-datalist-items {
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+}
+
+.datalist-input .default-datalist-items div:not(.datalist-active-item) {
+  padding: 10px;
+  cursor: pointer;
+  background-color: ${styles.colors.backgroundColor};
+  border-bottom: 1px solid #d4d4d4;
+}
+
+.datalist-input .default-datalist-items div:not(.datalist-active-item):hover {
+  /*when hovering an item:*/
+  background-color: ${styles.colors.backgroundColor};
+}
+
+.datalist-input .datalist-active-item {
+  /*when navigating through the items using the arrow keys:*/
+  cursor: pointer;
+}
+
+.datalist-input .datalist-active-item-default {
+  background-color: ${styles.colors.linkColor};
+  color: #ffffff;
+  border-bottom: 1px solid #d4d4d4;
+  padding: 10px;
 }
 `;
 
@@ -283,7 +334,7 @@ export default () => {
         <a href="/">Checkout my CV</a>
       </Navigation>
       <Search>
-        <SearchField
+        <DataListInput
           placeholder="Search for a thing..."
           items={things.map((thing) => ({ label: thing.name, key: thing.name, ...thing }))}
           onSelect={handleSelect}

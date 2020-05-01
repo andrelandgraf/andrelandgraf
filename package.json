@@ -36,9 +36,9 @@
     "gatsby-transformer-sharp": "^2.5.0",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
-    "react-datalist-input": "^1.2.14",
     "react-dom": "^16.12.0",
     "react-helmet": "^6.0.0",
+    "react-plain-datalist-input": "^1.0.0",
     "styled-components": "^5.0.1"
   },
   "devDependencies": {},
