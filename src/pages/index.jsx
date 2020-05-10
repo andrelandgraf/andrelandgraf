@@ -101,7 +101,7 @@ const projects = [
   <Project
     key="VelaPilates"
     title="VelaPilates"
-    link="https://pilates-fitness.studio/"
+    link="https://velapilates.de/"
     description="An online pilates studio and course purchasing webapp powered by Gatsbjs, Express, MongoDB."
   />,
   <Project
