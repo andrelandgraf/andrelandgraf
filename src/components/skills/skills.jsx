@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Container = styled.div` 
+const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
@@ -10,10 +10,8 @@ const Container = styled.div`
 const Skills = ({ skills }) => (
   <Container>
     <ul>
-      { skills.map((skill) => (
-        <li key={skill}>
-          {skill}
-        </li>
+      {skills.map(skill => (
+        <li key={skill}>{skill}</li>
       ))}
     </ul>
   </Container>

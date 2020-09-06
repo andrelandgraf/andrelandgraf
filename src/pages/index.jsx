@@ -21,45 +21,45 @@ import Electron from '../assets/svgs/electron.svg';
 import Rocket from '../assets/svgs/rocket.svg';
 
 const Navigation = styled.nav`
-display: flex;
-flex-direction: row;
-flex-align: flex-start;
-margin-bottom: 4vh;
+  display: flex;
+  flex-direction: row;
+  flex-align: flex-start;
+  margin-bottom: 4vh;
 
-@media screen and (max-width: ${styles.widths.phoneWidth}) {
-  flex-direction: column;
-}
+  @media screen and (max-width: ${styles.widths.phoneWidth}) {
+    flex-direction: column;
+  }
 `;
 
 const Intro = styled.div`
-display: flex;
-flex-direction: row;
-align-items: flex-start;
-max-width: 50vw;
-margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  max-width: 50vw;
+  margin-right: auto;
 
-@media screen and (max-width: ${styles.widths.phoneWidth}) {
-  max-width: 90vw;
-}
+  @media screen and (max-width: ${styles.widths.phoneWidth}) {
+    max-width: 90vw;
+  }
 `;
 
 const IntroText = styled.div`
-display: flex;
-flex-direction: column;
-margin-left: 45px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 45px;
 `;
 
 const Portrait = styled.div`
-width: 120px;
-margin-bottom: 10px;
+  width: 120px;
+  margin-bottom: 10px;
 `;
 
 const Curriculum = styled.main`
-max-width: 65vw;
+  max-width: 65vw;
 
-@media screen and (max-width: ${styles.widths.phoneWidth}) {
-  max-width: 90vw;
-}
+  @media screen and (max-width: ${styles.widths.phoneWidth}) {
+    max-width: 90vw;
+  }
 `;
 
 const experiences = [
@@ -145,7 +145,6 @@ const educations = [
     fromTo="2014 - 2017"
     location="Nuremberg, Germany"
   />,
-
 ];
 
 const skills = [
@@ -168,7 +167,8 @@ const CV = ({ data }) => (
         <IntroText>
           <h1>Andre Landgraf</h1>
           <p>
-            A tech enthusiast and student who loves to develop fullstack software solutions.
+            A tech enthusiast and student who loves to develop fullstack
+            software solutions.
           </p>
         </IntroText>
       </Intro>
@@ -203,12 +203,13 @@ CV.propTypes = {
 export default CV;
 
 export const query = graphql`
-query ImageQuery {
-  file(relativePath: { eq: "portrait.jpg" }) {
-    childImageSharp {
-      fluid( maxWidth: 480) {
-        ...GatsbyImageSharpFluid_withWebp
+  query ImageQuery {
+    file(relativePath: { eq: "portrait.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 480) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
       }
     }
   }
-}`;
+`;

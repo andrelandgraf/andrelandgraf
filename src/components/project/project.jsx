@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Container = styled.div` 
+const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const Project = ({
-  title, description, link,
-}) => (
+const Project = ({ title, description, link }) => (
   <Container>
     <a href={link} target="_blank" rel="noopener noreferrer">
       <h3>{title}</h3>

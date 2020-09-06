@@ -12,7 +12,7 @@ const logLevels = {
   silly: 6,
 };
 
-const shouldLog = (logLevel) => logLevels[LOG_LEVEL] >= logLevels[logLevel];
+const shouldLog = logLevel => logLevels[LOG_LEVEL] >= logLevels[logLevel];
 
 /**
  * Configures the logging utility and returns a unique logger
@@ -21,11 +21,25 @@ const shouldLog = (logLevel) => logLevels[LOG_LEVEL] >= logLevels[logLevel];
  * @returns {winston.Logger}
  */
 console.tag = (logLabel = 'misc') => ({
-  error: (message, ...params) => shouldLog('error') && console.error(`[${new Date()}] ${logLabel}: ${message}`, ...params),
-  warn: (message, ...params) => shouldLog('warn') && console.warn(`[${new Date()}] ${logLabel}: ${message}`, ...params),
-  info: (message, ...params) => shouldLog('info') && console.info(`[${new Date()}] ${logLabel}: ${message}`, ...params),
-  http: (message, ...params) => shouldLog('http') && console.log(`[${new Date()}] ${logLabel}: ${message}`, ...params),
-  verbose: (message, ...params) => shouldLog('verbose') && console.log(`[${new Date()}] ${logLabel}: ${message}`, ...params),
-  debug: (message, ...params) => shouldLog('debug') && console.debug(`[${new Date()}] ${logLabel}: ${message}`, ...params),
-  silly: (message, ...params) => shouldLog('silly') && console.log(`[${new Date()}] ${logLabel}: ${message}`, ...params),
+  error: (message, ...params) =>
+    shouldLog('error') &&
+    console.error(`[${new Date()}] ${logLabel}: ${message}`, ...params),
+  warn: (message, ...params) =>
+    shouldLog('warn') &&
+    console.warn(`[${new Date()}] ${logLabel}: ${message}`, ...params),
+  info: (message, ...params) =>
+    shouldLog('info') &&
+    console.info(`[${new Date()}] ${logLabel}: ${message}`, ...params),
+  http: (message, ...params) =>
+    shouldLog('http') &&
+    console.log(`[${new Date()}] ${logLabel}: ${message}`, ...params),
+  verbose: (message, ...params) =>
+    shouldLog('verbose') &&
+    console.log(`[${new Date()}] ${logLabel}: ${message}`, ...params),
+  debug: (message, ...params) =>
+    shouldLog('debug') &&
+    console.debug(`[${new Date()}] ${logLabel}: ${message}`, ...params),
+  silly: (message, ...params) =>
+    shouldLog('silly') &&
+    console.log(`[${new Date()}] ${logLabel}: ${message}`, ...params),
 });

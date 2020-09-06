@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import styles from '../../enums/styles';
 
-const Container = styled.div` 
+const Container = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 1vh;
@@ -38,27 +38,22 @@ const Location = styled.span`
 `;
 
 const Degree = styled.h4`
-  margin: 10px 0; 
+  margin: 10px 0;
 `;
 
-
-const Education = ({
-  univeristy, degree, major, fromTo, location,
-}) => (
+const Education = ({ univeristy, degree, major, fromTo, location }) => (
   <Container>
     <div>
       <h3>{univeristy}</h3>
       <Degree>{degree}</Degree>
-      <h4><i>{major}</i></h4>
+      <h4>
+        <i>{major}</i>
+      </h4>
     </div>
     <TimeLocation>
-      <span>
-        {fromTo}
-      </span>
+      <span>{fromTo}</span>
       <Location>
-        <i>
-          {location}
-        </i>
+        <i>{location}</i>
       </Location>
     </TimeLocation>
   </Container>

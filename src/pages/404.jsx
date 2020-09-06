@@ -13,11 +13,11 @@ const Content = styled.div`
   margin: 5vh 5vw 15% 5vw;
 
   @media screen and (max-width: ${styles.widths.phoneWidth}) {
-      margin-bottom: 15%;
+    margin-bottom: 15%;
   }
 `;
 
-export default () => {
+const NotFoundPage = () => {
   useEffect(() => {
     navigate('/');
   });
@@ -30,3 +30,5 @@ export default () => {
     </Layout>
   );
 };
+
+export default NotFoundPage;

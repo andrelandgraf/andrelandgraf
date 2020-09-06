@@ -25,7 +25,8 @@ const styles = {
     linkColor: '#1890ff',
   },
   fonts: {
-    default: 'Rubik,Lato,"Lucida Grande","Lucida Sans Unicode",Tahoma,Sans-Serif',
+    default:
+      'Rubik,Lato,"Lucida Grande","Lucida Sans Unicode",Tahoma,Sans-Serif',
     code: 'source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace',
   },
 };

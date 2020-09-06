@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import styles from '../../enums/styles';
 
-const Container = styled.div` 
+const Container = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 1vh;
@@ -37,10 +37,7 @@ const Location = styled.span`
   }
 `;
 
-
-const Experience = ({
-  title, description, fromTo, location, company,
-}) => (
+const Experience = ({ title, description, fromTo, location, company }) => (
   <Container>
     <div>
       <h3>{title}</h3>
@@ -48,13 +45,9 @@ const Experience = ({
       <p>{description}</p>
     </div>
     <TimeLocation>
-      <span>
-        {fromTo}
-      </span>
+      <span>{fromTo}</span>
       <Location>
-        <i>
-          {location}
-        </i>
+        <i>{location}</i>
       </Location>
     </TimeLocation>
   </Container>

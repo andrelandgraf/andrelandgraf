@@ -8,101 +8,101 @@ import styles from '../enums/styles';
 import Layout from '../components/layout/layout';
 
 const Navigation = styled.nav`
-display: flex;
-flex-direction: row;
-flex-align: flex-start;
-margin-bottom: 4vh;
+  display: flex;
+  flex-direction: row;
+  flex-align: flex-start;
+  margin-bottom: 4vh;
 
-@media screen and (max-width: ${styles.widths.phoneWidth}) {
-  flex-direction: column;
-}
+  @media screen and (max-width: ${styles.widths.phoneWidth}) {
+    flex-direction: column;
+  }
 `;
 
 const Header = styled.div`
-margin-right: auto;
+  margin-right: auto;
 `;
 
 const Search = styled.div`
-width: 25vw;
-min-width: 300px;
-max-width: 600px;
-margin-bottom: 6vh;
-@media screen and (max-width: ${styles.widths.phoneWidth}) {
-  width: 90vw;
-  margin-bottom: 3vh;
-}
+  width: 25vw;
+  min-width: 300px;
+  max-width: 600px;
+  margin-bottom: 6vh;
+  @media screen and (max-width: ${styles.widths.phoneWidth}) {
+    width: 90vw;
+    margin-bottom: 3vh;
+  }
 
-// copy pasted from react-datalist-input
-.datalist-input {
-  /*the container must be positioned relative:*/
-  position: relative;
-  display: inline-block;
-  width: 100%;
-}
+  // copy pasted from react-datalist-input
+  .datalist-input {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
 
-.datalist-input .autocomplete-input {
-  width: 100%;
-}
+  .datalist-input .autocomplete-input {
+    width: 100%;
+  }
 
-.datalist-input .datalist-items {
-  position: absolute;
-  z-index: 99;
-  /*position the autocomplete items to be the same width as the container:*/
-  top: 100%;
-  left: 0;
-  right: 0;
-}
+  .datalist-input .datalist-items {
+    position: absolute;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+  }
 
-.datalist-input .default-datalist-items {
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
-  border-top: none;
-}
+  .datalist-input .default-datalist-items {
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+  }
 
-.datalist-input .default-datalist-items div:not(.datalist-active-item) {
-  padding: 10px;
-  cursor: pointer;
-  background-color: ${styles.colors.backgroundColor};
-  border-bottom: 1px solid #d4d4d4;
-}
+  .datalist-input .default-datalist-items div:not(.datalist-active-item) {
+    padding: 10px;
+    cursor: pointer;
+    background-color: ${styles.colors.backgroundColor};
+    border-bottom: 1px solid #d4d4d4;
+  }
 
-.datalist-input .default-datalist-items div:not(.datalist-active-item):hover {
-  /*when hovering an item:*/
-  background-color: ${styles.colors.backgroundColor};
-}
+  .datalist-input .default-datalist-items div:not(.datalist-active-item):hover {
+    /*when hovering an item:*/
+    background-color: ${styles.colors.backgroundColor};
+  }
 
-.datalist-input .datalist-active-item {
-  /*when navigating through the items using the arrow keys:*/
-  cursor: pointer;
-}
+  .datalist-input .datalist-active-item {
+    /*when navigating through the items using the arrow keys:*/
+    cursor: pointer;
+  }
 
-.datalist-input .datalist-active-item-default {
-  background-color: ${styles.colors.linkColor};
-  color: #ffffff;
-  border-bottom: 1px solid #d4d4d4;
-  padding: 10px;
-}
+  .datalist-input .datalist-active-item-default {
+    background-color: ${styles.colors.linkColor};
+    color: #ffffff;
+    border-bottom: 1px solid #d4d4d4;
+    padding: 10px;
+  }
 `;
 
 const ThingsContainer = styled.main`
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-@media screen and (max-width: ${styles.widths.phoneWidth}) {
-  flex-direction: column;
-}
-@media screen and (min-width: ${styles.widths.pcWidth}) {
-  max-width: 800px;
-}
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  @media screen and (max-width: ${styles.widths.phoneWidth}) {
+    flex-direction: column;
+  }
+  @media screen and (min-width: ${styles.widths.pcWidth}) {
+    max-width: 800px;
+  }
 `;
 
 const Thing = styled.div`
-border-radius: 10px;
-text-align: center;
-min-width: 120px;
-margin: 10px;
-padding: 5px;
-border: 1px solid ${(props) => props.theme};
+  border-radius: 10px;
+  text-align: center;
+  min-width: 120px;
+  margin: 10px;
+  padding: 5px;
+  border: 1px solid ${props => props.theme};
 `;
 
 const tags = {
@@ -305,25 +305,22 @@ const things = [
   },
 ];
 
-export default () => {
+const UsesPage = () => {
   const [filteredThings, setFilteredThings] = useState(things);
 
-  const handleSelect = useCallback((selectedItem) => {
+  const handleSelect = useCallback(selectedItem => {
     if (selectedItem) {
       setFilteredThings([selectedItem]);
     } else {
       setFilteredThings(things);
     }
-  });
+  }, []);
 
-  const matchSearch = useCallback((currentInput, item) => (
-    item.name.substr(0, currentInput.length).toLowerCase() === currentInput.toLowerCase()));
-
-  const handleInput = useCallback((currentInput) => {
+  const handleInput = useCallback(currentInput => {
     if (!currentInput) {
       setFilteredThings(things);
     }
-  });
+  }, []);
 
   return (
     <Layout>
@@ -336,22 +333,25 @@ export default () => {
       <Search>
         <DataListInput
           placeholder="Search for a thing..."
-          items={things.map((thing) => ({ label: thing.name, key: thing.name, ...thing }))}
+          items={things.map(thing => ({
+            label: thing.name,
+            key: thing.name,
+            ...thing,
+          }))}
           onSelect={handleSelect}
-          match={matchSearch}
           requiredInputLength={1}
           onInput={handleInput}
         />
       </Search>
       <ThingsContainer>
-        {
-        filteredThings.map((thing) => (
+        {filteredThings.map(thing => (
           <Thing theme={thing.theme} key={thing.name}>
             <h2>{thing.name}</h2>
           </Thing>
-        ))
-      }
+        ))}
       </ThingsContainer>
     </Layout>
   );
 };
+
+export default UsesPage;

@@ -121,10 +121,10 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Page = styled.div`
-    position: relative;
-    width: 100vw;
-    min-height: 100vh;
-    overflow-x: hidden;
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
 `;
 
 const Content = styled.div`
@@ -136,34 +136,33 @@ const Content = styled.div`
 
 const Layout = ({ children }) => {
   const query = graphql`
-  query SEO {
-    site {
-      siteMetadata {
-        title
-        description
-        image
+    query SEO {
+      site {
+        siteMetadata {
+          title
+          description
+          image
+        }
       }
     }
-  }
-`;
-  const { site: { siteMetadata: { title, description, image } } } = useStaticQuery(query);
+  `;
+  const {
+    site: {
+      siteMetadata: { title, description, image },
+    },
+  } = useStaticQuery(query);
 
   return (
     <Page>
       <Helmet>
         <html lang="en" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta
-          name="description"
-          content={description}
-        />
+        <meta name="description" content={description} />
         <meta name="image" content={image} />
         <title>{title}</title>
       </Helmet>
       <GlobalStyle />
-      <Content>
-        {children}
-      </Content>
+      <Content>{children}</Content>
     </Page>
   );
 };
@@ -171,9 +170,7 @@ const Layout = ({ children }) => {
 Layout.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.node,
-    PropTypes.arrayOf(
-      PropTypes.node,
-    ),
+    PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
 };
 
