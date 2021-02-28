@@ -1,99 +1,142 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-<p align="center">
-  <a href="https://www.gatsbyjs.org">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby's hello-world starter
-</h1>
+# My GitHub README
 
-Kick off your project with this hello-world boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+Hey there! Thanks for visiting my GitHub profile. 🙋‍♂️ 
+## About me
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.org/docs/gatsby-starters/)._
+My name is Andre and I love developing web and voice applications! I am a huge Marvel fan 🦸‍♂️ and like to spent my evenings binge watching Big Bang Theory. My collegues know me as the React enthusiast. I listen to Blinding Lights at least once a day and my car only knows [Syntax.fm](https://syntax.fm/).
 
-## 🚀 Quick start
+Also, I am a...
 
-1.  **Create a Gatsby site.**
+- Fullstack developer from Germany 🇩🇪
+- M.Sc. in Information Systems from the TUM 👨‍🎓
+- Remote software engineer at MBRDNA ⭐
+- Developer and maintainer of
+  - [velapilates.de](https://www.velapilates.de)
+  - [psychologie-landgraf.de](https://www.psychologie-landgraf.de)
 
-    Use the Gatsby CLI to create a new site, specifying the hello-world starter.
+You can follow this link - [andre-landgraf.dev](https://www.andre-landgraf.dev) - to my personal website for more information!
 
-    ```shell
-    # create a new Gatsby site using the hello-world starter
-    gatsby new my-hello-world-starter https://github.com/gatsbyjs/gatsby-starter-hello-world
-    ```
+Please hit me up on [Twitter](https://twitter.com/AndreLandgraf94) or [LinkedIn](https://www.linkedin.com/in/andre-landgraf/) to get in touch. I love to chat about tech & IT!
 
-1.  **Start developing.**
+I love and use:
 
-    Navigate into your new site’s directory and start it up.
+- React 💜 (Gatsby, Next.js)
+- JavaScript + TypeScript
+- Node.js + Express.js
+- Mongoose + MongoDB
 
-    ```shell
-    cd my-hello-world-starter/
-    gatsby develop
-    ```
+You can find a more detailed list at [andre-landgraf.dev/uses](https://www.andre-landgraf.dev/uses).
 
-1.  **Open the source code and start editing!**
+## Repositories
 
-    Your site is now running at `http://localhost:8000`!
+In the following, you can find a description to most of my public GitHub repositories. Feel free to get inspired, reuse my code, and please provide feedback or contribution if you are interested in any of the projects!
 
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
+### Open source packages
 
-    Open the `my-hello-world-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+Following repositories are also available on npm!
 
-## 🧐 What's inside?
+#### react-datalist-input
 
-A quick look at the top-level files and directories you'll see in a Gatsby project.
+My first ever npm package! I created react-datalist-input both to learn more about packaging on npm and to fit my own dropdown use cases. Over time, I have constantly updated the package based on my own changing use cases and feedback. You can find the package [here on npm](https://www.npmjs.com/package/react-datalist-input). 🚀
 
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── .prettierrc
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    └── README.md
+=> [react-datalist-input](https://github.com/andrelandgraf/react-datalist-input)
 
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
+#### react-plain-datalist-input
 
-2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
+A non-styled version of react-datalist-input. When I created react-datalist-input, I bundled a css file with it. The plain version comes without the css file and does support server-side-rendering and static-site-generation. You can find the package [here on npm](https://www.npmjs.com/package/react-plain-datalist-input).  🚀
 
-3.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+=> [react-plain-datalist-input](https://github.com/andrelandgraf/react-plain-datalist-input)
 
-4.  **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
+#### react-ssml-dom
 
-5.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.org/docs/browser-apis/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
+I love voice UIs 💜. I believe that voice will only become more prominent over time. However, today's voice UI and speech sdks are vendor-dependent and provide more an interface to platform APIs than tools to build sophisticated UIs. Amazon developers build lambda functions and use the Alexa Console while Google Assistant developers develop on Dialogflow or Actions on Google and use different sdks. react-ssml-dom is a research project that aims to take advantage of React and its component-based UI development for voice UIs. It also provides a middleware engine to parse any request from any vendor to a unified runtime payload and then revert back the response to the vendor-based response JSON. You can find the package [here on npm](https://www.npmjs.com/package/react-ssml-dom). I wrote more about my motivation [here on Medium.com](https://andre-timo-landgraf.medium.com/a-react-renderer-for-ssml-91cdd1d66b3e). 👀
 
-6.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.org/docs/gatsby-config/) for more detail).
+=> Package: [react-ssml-dom](https://github.com/andrelandgraf/react-ssml-dom)
+=> Demo project: [covid-stats-ssml](https://github.com/andrelandgraf/covid-stats-ssml)
+### portfolio
 
-7.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.org/docs/node-apis/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
+The following repositories are skeleton apps, portfolio projects, and university exercises, I built over time.
 
-8.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.org/docs/ssr-apis/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
+#### Gatsby-x
 
-9.  **`LICENSE`**: Gatsby is licensed under the MIT license.
+I started using Gatsby in the beginning of 2020. I developed my first real-world project - velapilates - using the framework. I learned a lot over time about styling, theming, a11y, and more. Gatsby-X was my first run at creating my own design system. It implements a full-fetched online store with OAuth 2 user logic, purchasing, animations, and reusable UI components.
 
-10. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
+This is both a portfolio project and a work-in-progress attempt to create a skeleton app for future sites. Please feel free to use my code!
 
-11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
+=> Frontend: [gatsby-x](https://github.com/andrelandgraf/gatsby-x)
+=> Backend: [gatsby-x-backend](https://github.com/andrelandgraf/gatsby-x-backend)
+=> Live on Netlify 💚: [Gatsby-X demo](https://demo.andre-landgraf.cool/)
+=> Storybook 📖: [Gatsby-X design-system](https://design-system.andre-landgraf.cool/)
 
-12. **`README.md`**: A text file containing useful reference information about your project.
+#### Foodo
 
-## 🎓 Learning Gatsby
+My favorite university project. Foodo - a recipe optimization application and your ultimate health buddy - really improved my React and web development skills. It consists of a React frontend, Express.js backend, and an Alexa skill. The Alexa skill requires account linking which we implemented from scratch using our own OAuth 2 implementation! We were a team of five students and spent a whole semester to create Foodo and I could not be prouder! 🤓
 
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.org/). Here are some places to start:
+=> Documentation: [foodo-documentation](https://github.com/andreweinkoetz/foodo-documentation)
+=> Frontend: [foodo-frontend](https://github.com/andrelandgraf/foodo-frontend)
+=> Backend: [foodo-backend](https://github.com/andreweinkoetz/foodo-backend)
+=> Alexa skill: [foodo-alexa-skill](https://github.com/andrelandgraf/foodo-alexa-skill)
 
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.org/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
+#### andrelandgraf
 
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.org/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
+My personal website! It is produly hosted on my favorite hosting platform - Netlify! 💚
 
-## 💫 Deploy
+It uses React and Gatby and also includes the README.md that you are currently reading!
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-hello-world)
+=> Code: [andrelandgraf](https://github.com/andrelandgraf/andrelandgraf)
+=> Website: [andre-landgraf.dev](https://www.andre-landgraf.dev)
 
-[![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/import/project?template=https://github.com/gatsbyjs/gatsby-starter-hello-world)
+#### covid-stats-SSML
 
-<!-- AUTO-GENERATED-CONTENT:END -->
+Unfortunately, both Google and Alexa do not allow third-party information about covid on their voice platforms. I created covid-stats-ssml as a demo app to try out react-ssml-dom! Covid-stats-ssml is a React-rendered voice application! 🚀
+
+=> [covid-stats-ssml](https://github.com/andrelandgraf/covid-stats-ssml)
+#### Leetcode
+
+A collection of leetcode exercises from Leetcode.com. It's both fun and exercise for me!
+
+=> [leetcode](https://github.com/andrelandgraf/leetcode)
+
+#### react-oauth2-skeleton
+
+A small skeleton application that uses a self-made OAuth 2 flow. Feel free to copy this code if you want to get rid of passport.js or want to work around with MongoDB, Express.js, React, and your custom OAuth 2 flow!
+
+=> Frontend: [react-oauth2-skeleton](https://github.com/andrelandgraf/react-oauth2-skeleton)
+=> Backend: [express-oauth2-skeleton](https://github.com/andreweinkoetz/express-oauth2-skeleton)
+
+#### High-5-Learning
+
+How I got introduced to React and met my best friends from Munich 💜. High-5-Learning is the result of a seminar project at the second semester of my master's degree. A teacher-student application that allows the creation of single-choice exercises, student invitations, exercise feedback for students, and resulting stats for the teachers. 
+
+=> Frontend: [high5-learning-frontend](https://github.com/andreweinkoetz/high5-learning-frontend)
+=> Backend: [high5-learning-backend](https://github.com/andrelandgraf/high5-learning-backend)
+
+#### web-snippets
+
+Just some HTML, CSS, and JavaScript exercises.
+
+=> [web-snippets](https://github.com/andrelandgraf/web-snippets)
+
+#### laravel-docker
+
+Super outdated. A laravel docker skeleton application that I built at my first working student position.
+
+=> [laravel-docker](https://github.com/andrelandgraf/laravel-docker)
+
+#### Discrete Structures
+
+Some exercises that helped me prepare for my exam in discrete structures.
+
+=> [graph-theory](https://github.com/andrelandgraf/graph-theory)
+=> [gale-shapley-algorithm](https://github.com/andrelandgraf/gale-shapley-algorithm)
+
+## Contact
+
+I love to chat about tech & IT! Please hit me up on Twitter or LinkedIn! You can find me here:
+
+- [Twitter](https://twitter.com/AndreLandgraf94) - @andrelandgraf94
+- [LinkedIn](https://www.linkedin.com/in/andre-landgraf/)
+- [Instagram](https://www.instagram.com/andre.fullstack/) - andre.fullstack
+- [StackOverflow](https://stackoverflow.com/users/6331985/andre)
+- [npm](https://www.npmjs.com/settings/andrelandgraf/packages)
+- [Medium](https://andre-timo-landgraf.medium.com/)
