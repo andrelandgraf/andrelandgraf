@@ -12,7 +12,7 @@ Also, I am a...
 - Remote software engineer at MBRDNA ⭐
 - Developer and maintainer of
   - [velapilates.de](https://www.velapilates.de)
-  - [psychologie-landgraf.de](https://www.psychologie-landgraf.de)
+  - [psychologie-landgraf.de](https://www.psychologie-landgraf.de) + ["Alexa, spreche mit psychologie landgraf"](https://www.amazon.de/andrelandgraf-Psychologie-f%C3%BCr-Sie/dp/B08X1VTX53/)
 
 You can follow this link - [andre-landgraf.dev](https://www.andre-landgraf.dev) - to my personal website for more information!
 
