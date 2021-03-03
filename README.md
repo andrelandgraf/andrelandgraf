@@ -3,7 +3,7 @@
 Hey there! Thanks for visiting my GitHub profile. 🙋‍♂️ 
 ## About me
 
-My name is Andre and I love developing web and voice applications! I am a huge Marvel fan 🦸‍♂️ and like to spent my evenings binge watching Big Bang Theory. My collegues know me as the React enthusiast. I listen to Blinding Lights at least once a day and my car only knows [Syntax.fm](https://syntax.fm/).
+My name is Andre and I love to develop web and voice applications! I am a huge Marvel fan 🦸‍♂️ and like to spent my evenings binge watching Big Bang Theory. My collegues know me as the React enthusiast. I listen to Blinding Lights at least once a day and my car only knows [Syntax.fm](https://syntax.fm/).
 
 Also, I am a...
 
@@ -139,4 +139,4 @@ I love to chat about tech & IT! Please hit me up on Twitter or LinkedIn! You can
 - [Instagram](https://www.instagram.com/andre.fullstack/) - andre.fullstack
 - [StackOverflow](https://stackoverflow.com/users/6331985/andre)
 - [npm](https://www.npmjs.com/settings/andrelandgraf/packages)
-- [Medium](https://andre-timo-landgraf.medium.com/)
+- [Medium](https://andrelandgraf.medium.com/)
