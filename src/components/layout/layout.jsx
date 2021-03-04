@@ -106,10 +106,6 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  img {
-    border-radius: 10px;
-  }
-
   input {
     border-radius: 5px;
     padding: 10px;

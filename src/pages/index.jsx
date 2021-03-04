@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -52,6 +52,9 @@ const IntroText = styled.div`
 const Portrait = styled.div`
   width: 120px;
   margin-bottom: 10px;
+  img {
+    border-radius: 10px;
+  }
 `;
 
 const Curriculum = styled.main`
@@ -185,8 +188,8 @@ const CV = ({ data }) => (
     <Navigation>
       <Intro>
         <Portrait>
-          <Img
-            fluid={data.file.childImageSharp.fluid}
+          <GatsbyImage
+            image={data.file.childImageSharp.gatsbyImageData}
             alt="Portrait of Andre Landgraf"
           />
         </Portrait>
@@ -217,7 +220,7 @@ CV.propTypes = {
   data: PropTypes.shape({
     file: PropTypes.shape({
       childImageSharp: PropTypes.shape({
-        fluid: PropTypes.oneOfType([
+        gatsbyImageData: PropTypes.oneOfType([
           PropTypes.arrayOf(PropTypes.shape({})),
           PropTypes.shape({}),
         ]),
@@ -232,9 +235,7 @@ export const query = graphql`
   query ImageQuery {
     file(relativePath: { eq: "portrait.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 480) {
-          ...GatsbyImageSharpFluid_withWebp
-        }
+        gatsbyImageData(width: 480, layout: CONSTRAINED)
       }
     }
   }

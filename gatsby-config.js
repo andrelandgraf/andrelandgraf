@@ -18,7 +18,7 @@ module.exports = {
     title: 'Andre Landgraf',
     description:
       'Hello World! This is my personal website. Check out my CV and the tech stacks that I develop with.',
-    image: '/images/appicon.jpg',
+    image: '/images/portrait.jpg',
   },
   plugins: [
     'gatsby-plugin-styled-components',
@@ -30,9 +30,9 @@ module.exports = {
         },
       },
     },
-    'gatsby-image',
-    'gatsby-transformer-sharp',
+    `gatsby-plugin-image`,
     'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -76,7 +76,8 @@ module.exports = {
         // Enables "Add to Homescreen" prompt and disables browser UI (including back button)
         // see https://developers.google.com/web/fundamentals/web-app-manifest/#display
         display: 'standalone',
-        icon: 'src/assets/images/appicon.jpg', // This path is relative to the root of the site.
+        icon: 'static/appicon.png',
+        // This path is relative to the root of the site.
         // An optional attribute which provides support for CORS check.
         // If you do not provide a crossOrigin option, it will skip CORS for manifest.
         // Any invalid keyword or empty string defaults to `anonymous`
