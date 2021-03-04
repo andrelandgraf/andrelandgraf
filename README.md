@@ -1,6 +1,7 @@
 # My GitHub README
 
-Hey there! Thanks for visiting my GitHub profile. 🙋‍♂️ 
+Hey there! Thanks for visiting my GitHub profile. 🙋‍♂️
+
 ## About me
 
 My name is Andre and I love to develop web and voice applications! I am a huge Marvel fan 🦸‍♂️ and like to spent my evenings binge watching Big Bang Theory. My collegues know me as the React enthusiast. I listen to Blinding Lights at least once a day and my car only knows [Syntax.fm](https://syntax.fm/).
@@ -43,7 +44,7 @@ My first ever npm package! I created react-datalist-input both to learn more abo
 
 #### react-plain-datalist-input
 
-A non-styled version of react-datalist-input. When I created react-datalist-input, I bundled a css file with it. The plain version comes without the css file and does support server-side-rendering and static-site-generation. You can find the package [here on npm](https://www.npmjs.com/package/react-plain-datalist-input).  🚀
+A non-styled version of react-datalist-input. When I created react-datalist-input, I bundled a css file with it. The plain version comes without the css file and does support server-side-rendering and static-site-generation. You can find the package [here on npm](https://www.npmjs.com/package/react-plain-datalist-input). 🚀
 
 => [react-plain-datalist-input](https://github.com/andrelandgraf/react-plain-datalist-input)
 
@@ -53,11 +54,14 @@ I love voice UIs 💜. I believe that voice will only become more prominent over
 
 => Package: [react-ssml-dom](https://github.com/andrelandgraf/react-ssml-dom)
 => Demo project: [covid-stats-ssml](https://github.com/andrelandgraf/covid-stats-ssml)
+
 ### portfolio
 
 The following repositories are skeleton apps, portfolio projects, and university exercises, I built over time.
 
 #### Gatsby-x
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8b147a7f-5070-444b-b0c4-6149376f2c5d/deploy-status)](https://app.netlify.com/sites/gatsbyx/deploys)
 
 I started using Gatsby in the beginning of 2020. I developed my first real-world project - velapilates - using the framework. I learned a lot over time about styling, theming, a11y, and more. Gatsby-X was my first run at creating my own design system. It implements a full-fetched online store with OAuth 2 user logic, purchasing, animations, and reusable UI components.
 
@@ -79,6 +83,8 @@ My favorite university project. Foodo - a recipe optimization application and yo
 
 #### andrelandgraf
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8a32237e-e6d6-4567-aaf0-e518810a1061/deploy-status)](https://app.netlify.com/sites/andre-landgraf/deploys)
+
 My personal website! It is produly hosted on my favorite hosting platform - Netlify! 💚
 
 It uses React and Gatby and also includes the README.md that you are currently reading!
@@ -91,6 +97,7 @@ It uses React and Gatby and also includes the README.md that you are currently r
 Unfortunately, both Google and Alexa do not allow third-party information about covid on their voice platforms. I created covid-stats-ssml as a demo app to try out react-ssml-dom! Covid-stats-ssml is a React-rendered voice application! 🚀
 
 => [covid-stats-ssml](https://github.com/andrelandgraf/covid-stats-ssml)
+
 #### Leetcode
 
 A collection of leetcode exercises from Leetcode.com. It's both fun and exercise for me!
@@ -106,7 +113,7 @@ A small skeleton application that uses a self-made OAuth 2 flow. Feel free to co
 
 #### High-5-Learning
 
-How I got introduced to React and met my best friends from Munich 💜. High-5-Learning is the result of a seminar project at the second semester of my master's degree. A teacher-student application that allows the creation of single-choice exercises, student invitations, exercise feedback for students, and resulting stats for the teachers. 
+How I got introduced to React and met my best friends from Munich 💜. High-5-Learning is the result of a seminar project at the second semester of my master's degree. A teacher-student application that allows the creation of single-choice exercises, student invitations, exercise feedback for students, and resulting stats for the teachers.
 
 => Frontend: [high5-learning-frontend](https://github.com/andreweinkoetz/high5-learning-frontend)
 => Backend: [high5-learning-backend](https://github.com/andrelandgraf/high5-learning-backend)
