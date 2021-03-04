@@ -114,6 +114,7 @@ const tags = {
   database: 'database',
   entertainment: 'entertainment',
   management: 'task management',
+  styling: 'styling',
 };
 
 const things = [
@@ -137,7 +138,7 @@ const things = [
   },
   {
     name: 'CSS',
-    tags: [tags.language],
+    tags: [tags.language, tags.styling],
     theme: '#2965f1',
     src: '',
   },
@@ -203,13 +204,13 @@ const things = [
   },
   {
     name: 'SASS',
-    tags: [tags.framework],
+    tags: [tags.framework, tags.styling],
     theme: '#BF406F',
     src: '',
   },
   {
     name: 'styled-components',
-    tags: [tags.framework],
+    tags: [tags.framework, tags.styling],
     theme: '#db7093',
     src: '',
   },
@@ -301,6 +302,24 @@ const things = [
     name: 'Trello',
     tags: [tags.management],
     theme: '#0079bf',
+    src: '',
+  },
+  {
+    name: 'Tailwind',
+    tags: [tags.framework, tags.styling],
+    theme: '#0ea5e9',
+    src: '',
+  },
+  {
+    name: 'TypeScript',
+    tags: [tags.language],
+    theme: '#3178c6',
+    src: '',
+  },
+  {
+    name: 'Next.js',
+    tags: [tags.framework],
+    theme: '#000',
     src: '',
   },
 ];

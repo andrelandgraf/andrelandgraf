@@ -65,9 +65,17 @@ const Curriculum = styled.main`
 const experiences = [
   <Experience
     key="MBRDNA"
+    title="Software Engineer (external)"
+    description="Design and implementation of HeyMercedes voice applications. Development of internal fullstack software solutions such as SDKs, admin panels, and more to enable customer personalization features."
+    fromTo="11/2020 – today"
+    location="Remote"
+    company="Mercedes-Benz Research & Development Nothern America"
+  />,
+  <Experience
+    key="MBRDNA"
     title="Software Engineering Intern"
-    description="Designing and implementing voice assistant applications. Developing internal fullstack software solutions."
-    fromTo="11/2019 – today"
+    description="Design and implementation of HeyMercedes voice applications. Full rewrite and maintenance of the Mercedes ME Action on Google."
+    fromTo="11/2019 – 11/2020"
     location="Sunnyvale, CA, USA"
     company="Mercedes-Benz Research & Development Nothern America"
   />,
@@ -82,7 +90,7 @@ const experiences = [
   <Experience
     key="qSkills"
     title="Software Engineering Working Student"
-    description="Implemented multiple features for the internal web based business software in PHP, MySQL, HTML5/CSS3, and JS. Developed an user interface and backend service to synchronize data with the companies’ active directory."
+    description="Implementation of multiple features for the internal web based business software in PHP, MySQL, HTML5/CSS3, and JS. Developed a user interface and backend service to synchronize data with the companies’ active directory."
     fromTo="02/2017 – 09/2018"
     location="Nuremberg, Germany"
     company="qSkills"
@@ -90,7 +98,7 @@ const experiences = [
   <Experience
     key="DATEV"
     title="Quality Assurance Working Student"
-    description="Helped my team to reorganize the product backlog to meet Scrum based requirements. Worked on quality assurance, reverse engineering and manual testing activities like creating new test cases."
+    description="Support activities to reorganize the product backlog to meet Scrum based requirements. I worked on quality assurance, reverse engineering, and manual testing activities such as creating new test cases."
     fromTo="02/2016 -06/2016"
     location="Nuremberg, Germany"
     company="DATEV"
@@ -99,16 +107,34 @@ const experiences = [
 
 const projects = [
   <Project
+    key="PsychologieAlexa"
+    title="Alexa, spreche mit Psychologie Landgraf"
+    link="https://www.amazon.de/andrelandgraf-Psychologie-f%C3%BCr-Sie/dp/B08X1VTX53/"
+    description="A psycho-education Alexa skill that provides answers to common psychological questions and offers guided hypnosis."
+  />,
+  <Project
+    key="Psychologie"
+    title="Psychologie für Sie"
+    link="https://psychologie-landgraf.de/"
+    description="An online psychology studio and course purchasing web app powered by Gatsby.js, Express, MongoDB."
+  />,
+  <Project
     key="VelaPilates"
-    title="VelaPilates"
+    title="Vela Pilates"
     link="https://velapilates.de/"
-    description="An online pilates studio and course purchasing webapp powered by Gatsbjs, Express, MongoDB."
+    description="An online pilates studio and course purchasing web app powered by Gatsby.js, Express, MongoDB."
   />,
   <Project
     key="react-datalist-input"
     title="react-datalist-input"
     link="https://www.npmjs.com/package/react-datalist-input"
-    description="A npm package that provides a single react component. It contains an input field with a drop down menu to pick a possible option based on the current input."
+    description="A npm package that provides a single React component. It contains an input field with a drop down menu to pick a possible option based on the current input."
+  />,
+  <Project
+    key="react-ssml-dom"
+    title="react-ssml-dom"
+    link="https://www.npmjs.com/package/react-ssml-dom"
+    description="A npm package that provides a React renderer for voice applications. react-ssml-dom is a research project that aims to take advantage of React and its component-based UI development for voice UIs. It also provides a middleware engine to parse any request from any vendor to a unified runtime payload and then revert back the response to the vendor-based response JSON."
   />,
 ];
 
@@ -118,7 +144,7 @@ const educations = [
     univeristy="Technical University of Munich (TUM)"
     degree="Master of Science"
     major="Information Systems"
-    fromTo="2017 - today"
+    fromTo="2017 - 2021"
     location="Munich, Germany"
   />,
   <Education

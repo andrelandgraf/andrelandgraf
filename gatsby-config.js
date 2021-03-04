@@ -16,7 +16,8 @@ module.exports = {
   siteMetadata: {
     siteUrl,
     title: 'Andre Landgraf',
-    description: 'Hello World! This is my personal website. Check out my CV and the tech stacks that I develop with.',
+    description:
+      'Hello World! This is my personal website. Check out my CV and the tech stacks that I develop with.',
     image: '/images/appicon.jpg',
   },
   plugins: [

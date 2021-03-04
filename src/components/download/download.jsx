@@ -5,7 +5,7 @@ import styles from '../../enums/styles';
 import ArrowDown from '../../assets/svgs/download.svg';
 
 const ButtonLike = styled.div`
-  padding: 2px 5px;
+  padding: 5px 15px;
   border: 1px solid transparent;
   border-radius: 10px;
   border-color: ${styles.colors.fontColor};
@@ -37,6 +37,10 @@ const ButtonLike = styled.div`
   }
 `;
 
+const Text = styled.div`
+  margin-left: 8px;
+`;
+
 const DownloadButton = () => (
   <a
     href={`${process.env.GATSBY_AWS_S3}/cv.pdf`}
@@ -46,7 +50,7 @@ const DownloadButton = () => (
   >
     <ButtonLike>
       <ArrowDown />
-      Download CV
+      <Text>Download CV</Text>
     </ButtonLike>
   </a>
 );
