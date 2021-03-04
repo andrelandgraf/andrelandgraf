@@ -53,7 +53,7 @@ const Portrait = styled.div`
   width: 120px;
   margin-bottom: 10px;
   img {
-    border-radius: 10px;
+    border-radius: 10px !important;
   }
 `;
 
