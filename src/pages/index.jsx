@@ -113,7 +113,7 @@ const projects = [
     key="PsychologieAlexa"
     title="Alexa, spreche mit Psychologie Landgraf"
     link="https://www.amazon.de/andrelandgraf-Psychologie-f%C3%BCr-Sie/dp/B08X1VTX53/"
-    description="A psycho-education Alexa skill that provides answers to common psychological questions and offers guided hypnosis."
+    description="A psych-education Alexa skill that provides answers to common psychological questions and offers guided hypnosis."
   />,
   <Project
     key="Psychologie"
