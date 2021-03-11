@@ -8,7 +8,7 @@ My name is Andre and I love to develop web and voice applications! I am a huge M
 
 Also, I am a...
 
-- Fullstack developer from Germany 🇩🇪
+- Full stack developer from Germany 🇩🇪
 - M.Sc. in Information Systems from the TUM 👨‍🎓
 - Remote software engineer at MBRDNA ⭐
 - Developer and maintainer of
