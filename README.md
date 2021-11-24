@@ -87,7 +87,7 @@ My favorite university project. Foodo - a recipe optimization application and yo
 
 My personal website! It is produly hosted on my favorite hosting platform - Netlify! 💚
 
-It uses React and Gatby and also includes the README.md that you are currently reading!
+It uses React and [Remix](https://remix.run) and also includes the README.md that you are currently reading!
 
 => Code: [andrelandgraf](https://github.com/andrelandgraf/andrelandgraf)
 => Website: [andre-landgraf.dev](https://www.andre-landgraf.dev)
