@@ -6,11 +6,10 @@ module.exports = {
     'plugin:cypress/recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
-    // 'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
     'prettier',
   ],
-  plugins: ['cypress'],
+  plugins: ['@typescript-eslint', 'cypress', 'jsx-a11y'],
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',

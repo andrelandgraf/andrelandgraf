@@ -1,9 +1,9 @@
 import * as React from 'react';
-import type { LinksFunction } from 'remix';
+import type { LinksFunction, HeadersFunction } from 'remix';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch, useLocation } from 'remix';
+import Layout from './components/layout/layout';
 
 import globalStylesUrl from '~/styles/global.css';
-import Layout from './components/layout/layout';
 
 /**
  * The `links` export is a function that returns an array of objects that map to
@@ -15,6 +15,15 @@ import Layout from './components/layout/layout';
  */
 export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: globalStylesUrl }];
+};
+
+/**
+ * Use Cache-Control for all pages.
+ */
+export const headers: HeadersFunction = () => {
+  const headers = new Headers();
+  headers.set('Cache-Control', 'public, max-age=3600');
+  return headers;
 };
 
 /**

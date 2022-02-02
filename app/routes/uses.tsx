@@ -1,10 +1,4 @@
-import type { MetaFunction, HeadersFunction } from 'remix';
-
-export const headers: HeadersFunction = () => {
-  const headers = new Headers();
-  headers.set('Cache-Control', 'public, max-age=3600');
-  return headers;
-};
+import type { MetaFunction } from 'remix';
 
 export const meta: MetaFunction = () => {
   return {

@@ -5,8 +5,8 @@ const DownloadButton = () => (
     <div className="m-0 lg:mr-auto flex-grow lg:flex-grow-0">
       <a
         className="w-full flex gap-1 items-center justify-center flex-row bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        href="https://andre-landgraf-s3-bucket.s3.eu-west-1.amazonaws.com/cv.pdf"
-        download="andre_landgraf.pdf"
+        href="/Andre_Landgraf_CV.pdf"
+        download="Andre_Landgraf_CV.pdf"
         target="_blank"
         rel="noopener noreferrer"
       >

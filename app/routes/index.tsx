@@ -1,4 +1,4 @@
-import type { MetaFunction, HeadersFunction } from 'remix';
+import type { MetaFunction } from 'remix';
 import Experience from '~/components/experience/experience';
 import Project from '~/components/project/project';
 import Skills from '~/components/skills/skills';
@@ -6,12 +6,6 @@ import Education from '~/components/education/education';
 import Header from '~/components/header/header';
 
 import { CollegeSvg, GroupSvg, ElectronSvg, RocketSvg } from '~/components/icons';
-
-export const headers: HeadersFunction = () => {
-  const headers = new Headers();
-  headers.set('Cache-Control', 'public, max-age=3600');
-  return headers;
-};
 
 export const meta: MetaFunction = () => {
   return {
@@ -154,7 +148,7 @@ const IndexPage = () => (
       {experiences}
     </section>
     <section className="w-full flex flex-col gap-8">
-      <Header title="Projects" icon={RocketSvg} />
+      <Header title="Selected Projects" icon={RocketSvg} />
       {projects}
     </section>
     <section className="w-full flex flex-col gap-8">

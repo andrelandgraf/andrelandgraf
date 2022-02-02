@@ -1,4 +1,7 @@
+.DS_Store
+
 node_modules
+
 /.cache
 /netlify/functions/server/build
 /public/build

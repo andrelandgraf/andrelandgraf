@@ -4,29 +4,27 @@ Hey there! Thanks for visiting my GitHub profile. 🙋‍♂️
 
 ## About me
 
-My name is Andre and I love to develop web and voice applications! I am a huge Marvel fan 🦸‍♂️ and like to spent my evenings binge watching Big Bang Theory. My collegues know me as the React enthusiast. I listen to Blinding Lights at least once a day and my car only knows [Syntax.fm](https://syntax.fm/).
-
-Also, I am a...
-
-- Full stack developer from Germany 🇩🇪
-- M.Sc. in Information Systems from the TUM 👨‍🎓
-- Remote software engineer at MBRDNA ⭐
-- Developer and maintainer of
-  - [velapilates.de](https://www.velapilates.de)
-  - [psychologie-landgraf.de](https://www.psychologie-landgraf.de) + ["Alexa, spreche mit psychologie landgraf"](https://www.amazon.de/andrelandgraf-Psychologie-f%C3%BCr-Sie/dp/B08X1VTX53/)
-
-You can follow this link - [andre-landgraf.dev](https://www.andre-landgraf.dev) - to my personal website for more information!
+My name is Andre and I love to develop web and voice applications! I am a huge Marvel fan 🦸‍♂️ and like to spend my evenings binge watching movies and shows, that I have already watched a hundred times. My colleagues know me as the React enthusiast. I listen to Blinding Lights at least once a day and [Syntax.fm](https://syntax.fm/) is my favorite podcast.
 
 Please hit me up on [Twitter](https://twitter.com/AndreLandgraf94) or [LinkedIn](https://www.linkedin.com/in/andre-landgraf/) to get in touch. I love to chat about tech & IT!
 
-I love and use:
+Some more bullet points about me:
 
-- React 💜 (Gatsby, Next.js)
-- JavaScript + TypeScript
-- Node.js + Express.js
-- Mongoose + MongoDB
+- Full stack developer and student from Germany 🇩🇪
+- M.Sc. in Information Systems from the TUM 👨‍🎓
+- Developer and maintainer of
+  - [Particular.Cloud](https://particular.cloud) - Localize your application and reach more people.
+  - [Flash Me](https://flash-me.fly.dev/) - Learn through rehearsal. Create and study with flashcards online.
+  - [velapilates.de](https://www.velapilates.de) - Your pilates online studio.
+  - [react-datalist-input](https://www.npmjs.com/package/react-datalist-input) - An npm package providing a React combobox component.
 
-You can find a more detailed list at [andre-landgraf.dev/uses](https://www.andre-landgraf.dev/uses).
+You can follow this link - [andre-landgraf.dev](https://www.andre-landgraf.dev) - to my personal website for more information!
+
+## Uses
+
+I am actively working with React, TypeScript, HTML5, and CSS3. On top of that, I am currently really passionate about Tailwindcss and Remix.run. 💜
+
+You can find a more detailed list of all the technologies I like and work with at [andre-landgraf.dev/uses](https://www.andre-landgraf.dev/uses).
 
 ## Repositories
 
@@ -34,7 +32,7 @@ In the following, you can find a description to most of my public GitHub reposit
 
 ### Open source packages
 
-Following repositories are also available on npm!
+The following repositories are also available on npm!
 
 #### react-datalist-input
 
@@ -55,13 +53,35 @@ I love voice UIs 💜. I believe that voice will only become more prominent over
 => Package: [react-ssml-dom](https://github.com/andrelandgraf/react-ssml-dom)
 => Demo project: [covid-stats-ssml](https://github.com/andrelandgraf/covid-stats-ssml)
 
-### portfolio
+### Portfolio
 
 The following repositories are skeleton apps, portfolio projects, and university exercises, I built over time.
 
-#### Gatsby-x
+#### Flash Me
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8b147a7f-5070-444b-b0c4-6149376f2c5d/deploy-status)](https://app.netlify.com/sites/gatsbyx/deploys)
+Flash Me - Learn through rehearsal. Create and study with flashcards online.
+
+Ever since my studies, I learn most productively with flashcards. Flash Me is a small weekend project that I actively use myself to learn with flashcards. It comes with markdown support and a self-made sign in/up logic with GitHub.
+
+I gave my first talk at a remote Meetup about "full stack web development with Remix" and used Flash Me as an example. [Check it out!](https://www.youtube.com/watch?v=az9QZRSeuPM)
+
+Flash Me is developed with React, TypeScript, Tailwindcss, and [Remix](https://remix.run).
+
+=> Code: [flash-me](https://github.com/andrelandgraf/flash-me)
+=> Website: [Flash Me](https://flash-me.fly.dev/)
+
+#### andrelandgraf
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8a32237e-e6d6-4567-aaf0-e518810a1061/deploy-status)](https://app.netlify.com/sites/andre-landgraf/deploys)
+
+My personal website! It is hosted on Netlify! 💚
+
+It uses React, TypeScript, Tailwindcss, and [Remix](https://remix.run) and also includes the README.md that you are currently reading!
+
+=> Code: [andrelandgraf](https://github.com/andrelandgraf/andrelandgraf)
+=> Website: [andre-landgraf.dev](https://www.andre-landgraf.dev)
+
+#### Gatsby-x (outdated)
 
 I started using Gatsby in the beginning of 2020. I developed my first real-world project - velapilates - using the framework. I learned a lot over time about styling, theming, a11y, and more. Gatsby-X was my first run at creating my own design system. It implements a full-fetched online store with OAuth 2 user logic, purchasing, animations, and reusable UI components.
 
@@ -72,25 +92,14 @@ This is both a portfolio project and a work-in-progress attempt to create a skel
 => Live on Netlify 💚: [Gatsby-X demo](https://demo.andre-landgraf.cool/)
 => Storybook 📖: [Gatsby-X design-system](https://design-system.andre-landgraf.cool/)
 
-#### Foodo
+#### Foodo (outdated)
 
-My favorite university project. Foodo - a recipe optimization application and your ultimate health buddy - really improved my React and web development skills. It consists of a React frontend, Express.js backend, and an Alexa skill. The Alexa skill requires account linking which we implemented from scratch using our own OAuth 2 implementation! We were a team of five students and spent a whole semester to create Foodo and I could not be prouder! 🤓
+My favorite university project. Foodo - a recipe optimization application and your ultimate health buddy - really improved my React and web development skills. It consists of a React frontend, Express.js backend, and an Alexa skill. The Alexa skill requires account linking, which we implemented from scratch using our own OAuth 2 implementation! We were a team of five students and spent a whole semester to create Foodo and I could not be prouder! 🤓
 
 => Documentation: [foodo-documentation](https://github.com/andreweinkoetz/foodo-documentation)
 => Frontend: [foodo-frontend](https://github.com/andrelandgraf/foodo-frontend)
 => Backend: [foodo-backend](https://github.com/andreweinkoetz/foodo-backend)
 => Alexa skill: [foodo-alexa-skill](https://github.com/andrelandgraf/foodo-alexa-skill)
-
-#### andrelandgraf
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8a32237e-e6d6-4567-aaf0-e518810a1061/deploy-status)](https://app.netlify.com/sites/andre-landgraf/deploys)
-
-My personal website! It is produly hosted on my favorite hosting platform - Netlify! 💚
-
-It uses React and [Remix](https://remix.run) and also includes the README.md that you are currently reading!
-
-=> Code: [andrelandgraf](https://github.com/andrelandgraf/andrelandgraf)
-=> Website: [andre-landgraf.dev](https://www.andre-landgraf.dev)
 
 #### covid-stats-SSML
 
@@ -100,18 +109,18 @@ Unfortunately, both Google and Alexa do not allow third-party information about 
 
 #### Leetcode
 
-A collection of leetcode exercises from Leetcode.com. It's both fun and exercise for me!
+A collection of my solutions/attempts to leetcode exercises from Leetcode.com and other sites.
 
 => [leetcode](https://github.com/andrelandgraf/leetcode)
 
-#### react-oauth2-skeleton
+#### react-oauth2-skeleton (outdated)
 
-A small skeleton application that uses a self-made OAuth 2 flow. Feel free to copy this code if you want to get rid of passport.js or want to work around with MongoDB, Express.js, React, and your custom OAuth 2 flow!
+A small skeleton application that uses a self-made OAuth 2 flow. It is definetly outdated at this point.
 
 => Frontend: [react-oauth2-skeleton](https://github.com/andrelandgraf/react-oauth2-skeleton)
 => Backend: [express-oauth2-skeleton](https://github.com/andreweinkoetz/express-oauth2-skeleton)
 
-#### High-5-Learning
+#### High-5-Learning (outdated)
 
 How I got introduced to React and met my best friends from Munich 💜. High-5-Learning is the result of a seminar project at the second semester of my master's degree. A teacher-student application that allows the creation of single-choice exercises, student invitations, exercise feedback for students, and resulting stats for the teachers.
 
@@ -124,7 +133,7 @@ Just some HTML, CSS, and JavaScript exercises.
 
 => [web-snippets](https://github.com/andrelandgraf/web-snippets)
 
-#### laravel-docker
+#### laravel-docker (outdated)
 
 Super outdated. A laravel docker skeleton application that I built at my first working student position.
 
