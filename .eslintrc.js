@@ -9,7 +9,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'prettier',
   ],
-  plugins: ['@typescript-eslint', 'cypress', 'jsx-a11y'],
+  plugins: ['@typescript-eslint', 'html', 'cypress', 'jsx-a11y'],
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
