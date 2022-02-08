@@ -4,25 +4,26 @@ Hey there! Thanks for visiting my GitHub profile. 🙋‍♂️
 
 ## About me
 
-My name is Andre and I love to develop web and voice applications! I am a huge Marvel fan 🦸‍♂️ and like to spend my evenings binge watching movies and shows, that I have already watched a hundred times. My colleagues know me as the React enthusiast. I listen to Blinding Lights at least once a day and [Syntax.fm](https://syntax.fm/) is my favorite podcast.
+My name is Andre and I love to develop web and voice applications! I am a huge Marvel fan 🦸‍♂️ and like to spend my evenings binge watching movies and shows, that I have watched a hundred times already. My colleagues know me as the React enthusiast. I listen to Blinding Lights at least once a day and [Syntax.fm](https://syntax.fm/) is my favorite podcast!
 
 Please hit me up on [Twitter](https://twitter.com/AndreLandgraf94) or [LinkedIn](https://www.linkedin.com/in/andre-landgraf/) to get in touch. I love to chat about tech & IT!
 
 Some more bullet points about me:
 
+- A tech enthusiast who loves to develop software solutions.
 - Full stack developer and student from Germany 🇩🇪
 - M.Sc. in Information Systems from the TUM 👨‍🎓
 - Developer and maintainer of
   - [Particular.Cloud](https://particular.cloud) - Localize your application and reach more people.
   - [Flash Me](https://flash-me.fly.dev/) - Learn through rehearsal. Create and study with flashcards online.
   - [velapilates.de](https://www.velapilates.de) - Your pilates online studio.
-  - [react-datalist-input](https://www.npmjs.com/package/react-datalist-input) - An npm package providing a React combobox component.
+  - [react-datalist-input](https://www.npmjs.com/package/react-datalist-input) - An React combobox component with ease-of-use in mind, which I open sourced on npm.
 
 You can follow this link - [andre-landgraf.dev](https://www.andre-landgraf.dev) - to my personal website for more information!
 
 ## Uses
 
-I am actively working with React, TypeScript, HTML5, and CSS3. On top of that, I am currently really passionate about Tailwindcss and Remix.run. 💜
+I am actively working with React, TypeScript, HTML5, and CSS3. On top of that, I am currently really passionate about Tailwind CSS and Remix.run. 💜
 
 You can find a more detailed list of all the technologies I like and work with at [andre-landgraf.dev/uses](https://www.andre-landgraf.dev/uses).
 
@@ -65,7 +66,7 @@ Ever since my studies, I learn most productively with flashcards. Flash Me is a 
 
 I gave my first talk at a remote Meetup about "full stack web development with Remix" and used Flash Me as an example. [Check it out!](https://www.youtube.com/watch?v=az9QZRSeuPM)
 
-Flash Me is developed with React, TypeScript, Tailwindcss, and [Remix](https://remix.run).
+Flash Me is developed with React, TypeScript, Tailwind Css, and [Remix](https://remix.run).
 
 => Code: [flash-me](https://github.com/andrelandgraf/flash-me)
 => Website: [Flash Me](https://flash-me.fly.dev/)
@@ -76,7 +77,7 @@ Flash Me is developed with React, TypeScript, Tailwindcss, and [Remix](https://r
 
 My personal website! It is hosted on Netlify! 💚
 
-It uses React, TypeScript, Tailwindcss, and [Remix](https://remix.run) and also includes the README.md that you are currently reading!
+It uses React, TypeScript, Tailwind CSS, and [Remix](https://remix.run) and also includes the README.md that you are currently reading!
 
 => Code: [andrelandgraf](https://github.com/andrelandgraf/andrelandgraf)
 => Website: [andre-landgraf.dev](https://www.andre-landgraf.dev)

@@ -64,13 +64,13 @@ const things = [
     src: '',
   },
   {
-    name: 'node.js',
+    name: 'Node.js',
     tags: [tags.language],
     theme: '#43853d',
     src: '',
   },
   {
-    name: 'express',
+    name: 'Express',
     tags: [tags.framework],
     theme: '#eee',
     src: '',
@@ -106,25 +106,25 @@ const things = [
     src: '',
   },
   {
-    name: 'Logrocket',
+    name: 'LogRocket',
     tags: [tags.app],
     theme: '#764ABC',
     src: '',
   },
   {
-    name: 'Eslint',
+    name: 'ESLint',
     tags: [tags.framework],
     theme: '#3a33d1',
     src: '',
   },
   {
-    name: 'tailwindcss',
+    name: 'Tailwind CSS',
     tags: [tags.framework, tags.styling],
     theme: '#0ea5e9',
     src: 'https://tailwindcss.com/',
   },
   {
-    name: 'SASS',
+    name: 'SCSS',
     tags: [tags.framework, tags.styling],
     theme: '#BF406F',
     src: '',
@@ -163,12 +163,6 @@ const things = [
     name: 'Papertrail',
     tags: [tags.app],
     theme: '#04498F',
-    src: '',
-  },
-  {
-    name: 'Webpack',
-    tags: [],
-    theme: '#8dd6f9',
     src: '',
   },
   {
@@ -226,9 +220,9 @@ const things = [
     src: '',
   },
   {
-    name: 'Next.js',
-    tags: [tags.framework],
-    theme: '#000',
+    name: 'Fly.io',
+    tags: [tags.cloud],
+    theme: '#8B5CF6',
     src: '',
   },
 ];
