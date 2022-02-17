@@ -4,20 +4,16 @@ Hey there! Thanks for visiting my GitHub profile. 🙋‍♂️
 
 ## About me
 
-My name is Andre and I love to develop web and voice applications! I am a huge Marvel fan 🦸‍♂️ and like to spend my evenings binge watching movies and shows, that I have watched a hundred times already. My colleagues know me as the React enthusiast. I listen to Blinding Lights at least once a day and [Syntax.fm](https://syntax.fm/) is my favorite podcast!
+Hey there! I am a Software Engineer from Germany with a master's degree in Information Systems. Currently, I am located in the Bay Area, CA, and I am pursuing a master's degree in Computer Science. I am passionate about web technologies and programming. I love to create software solutions and to engage with people about software development. Thank you very much for stopping by! Have an awesome day!
 
-Please hit me up on [Twitter](https://twitter.com/AndreLandgraf94) or [LinkedIn](https://www.linkedin.com/in/andre-landgraf/) to get in touch. I love to chat about tech & IT!
+Please hit me up on [Twitter](https://twitter.com/AndreLandgraf94) or [LinkedIn](https://www.linkedin.com/in/andre-landgraf/) to get in touch!
 
-Some more bullet points about me:
+I am also the developer and maintainer of:
 
-- A tech enthusiast who loves to develop software solutions.
-- Full stack developer and student from Germany 🇩🇪
-- M.Sc. in Information Systems from the TUM 👨‍🎓
-- Developer and maintainer of
-  - [Particular.Cloud](https://particular.cloud) - Localize your application and reach more people.
-  - [Flash Me](https://flash-me.fly.dev/) - Learn through rehearsal. Create and study with flashcards online.
-  - [velapilates.de](https://www.velapilates.de) - Your pilates online studio.
-  - [react-datalist-input](https://www.npmjs.com/package/react-datalist-input) - An React combobox component with ease-of-use in mind, which I open sourced on npm.
+- [Particular.Cloud](https://particular.cloud) - Localize your application and reach more people.
+- [Flash Me](https://flash-me.fly.dev/) - Learn through rehearsal. Create and study with flashcards online.
+- [velapilates.de](https://www.velapilates.de) - Your pilates online studio.
+- [react-datalist-input](https://www.npmjs.com/package/react-datalist-input) - An React combobox component with ease-of-use in mind, which I open sourced on npm.
 
 You can follow this link - [andre-landgraf.dev](https://www.andre-landgraf.dev) - to my personal website for more information!
 
