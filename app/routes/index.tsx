@@ -3,9 +3,9 @@ import Experience from '~/components/experience/experience';
 import Project from '~/components/project/project';
 import Skills from '~/components/skills/skills';
 import Education from '~/components/education/education';
-import Header from '~/components/header/header';
+import { PageHeading, SectionHeadingWithIcon } from '~/components/UI/headings';
 
-import { CollegeSvg, GroupSvg, ElectronSvg, RocketSvg } from '~/components/icons';
+import { CollegeSvg, GroupSvg, ElectronSvg, RocketSvg } from '~/components/UI/icons';
 
 export const meta: MetaFunction = () => {
   return {
@@ -143,20 +143,21 @@ const skills = [
 
 const IndexPage = () => (
   <div className="flex flex-col gap-10 lg:gap-16 w-full lg:max-w-5xl">
+    <PageHeading>Resume</PageHeading>
     <section className="w-full flex flex-col gap-5 lg:gap-8">
-      <Header title="Working Experience" icon={GroupSvg} />
+      <SectionHeadingWithIcon icon={GroupSvg}>Working Experience</SectionHeadingWithIcon>
       {experiences}
     </section>
     <section className="w-full flex flex-col gap-8">
-      <Header title="Selected Projects" icon={RocketSvg} />
+      <SectionHeadingWithIcon icon={RocketSvg}>Selected Projects</SectionHeadingWithIcon>
       {projects}
     </section>
     <section className="w-full flex flex-col gap-8">
-      <Header title="Education" icon={CollegeSvg} />
+      <SectionHeadingWithIcon icon={CollegeSvg}>Education</SectionHeadingWithIcon>
       {educations}
     </section>
     <section className="w-full flex flex-col gap-8">
-      <Header title="Skills" icon={ElectronSvg} />
+      <SectionHeadingWithIcon icon={ElectronSvg}>Skills</SectionHeadingWithIcon>
       <Skills skills={skills} />
     </section>
   </div>

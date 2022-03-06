@@ -1,6 +1,6 @@
 import type { FC, PropsWithChildren } from 'react';
 import DownloadButton from '~/components/download/download';
-import Link from '~/components/link/link';
+import Link from '~/components/UI/link/link';
 
 const Layout: FC<PropsWithChildren<any>> = ({ children }) => {
   return (
@@ -13,7 +13,7 @@ const Layout: FC<PropsWithChildren<any>> = ({ children }) => {
             alt="Andre Landgraf smiling into the camera"
           />
           <div className="flex flex-col gap-5">
-            <h1 className="font-bold text-2xl xl:text-4xl 2xl:text-6xl">Andre Landgraf</h1>
+            <h2 className="font-bold text-2xl xl:text-4xl 2xl:text-6xl">Andre Landgraf</h2>
             <p className="text-xl xl:text-2xl 2xl:text-4xl font-semibold">
               A tech enthusiast and student who loves to develop fullstack software solutions.
             </p>
@@ -30,6 +30,11 @@ const Layout: FC<PropsWithChildren<any>> = ({ children }) => {
                     Tech
                   </Link>
                 </li>
+                <li>
+                  <Link to="/100-days-of-code/" nav>
+                    #100DaysOfCode
+                  </Link>
+                </li>
               </ul>
             </nav>
           </div>
@@ -37,7 +42,7 @@ const Layout: FC<PropsWithChildren<any>> = ({ children }) => {
       </header>
       <main className="py-20">{children}</main>
       <footer className="absolute bottom-0 p-5 w-full flex justify-center items-center">
-        Andre Landgraf © {new Date().getFullYear()}
+        <small>Andre Landgraf © {new Date().getFullYear()}</small>
       </footer>
     </div>
   );

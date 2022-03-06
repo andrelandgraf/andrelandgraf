@@ -1,7 +1,8 @@
 import * as React from 'react';
 import type { LinksFunction, HeadersFunction } from 'remix';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch, useLocation } from 'remix';
-import Layout from './components/layout/layout';
+import Layout from '~/components/layout/layout';
+import { PageHeading } from '~/components/UI/headings';
 
 import globalStylesUrl from '~/styles/global.css';
 
@@ -56,6 +57,7 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
         <RouteChangeAnnouncement />
         <ScrollRestoration />
         <Scripts />
+        <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8" />
         {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>
     </html>
@@ -95,12 +97,10 @@ export function ErrorBoundary({ error }: { error: Error }) {
   return (
     <Document title="Error!">
       <Layout>
-        <div>
-          <h1>There was an error</h1>
+        <section className="border-4 border-red-500 p-10">
+          <PageHeading>There was an error</PageHeading>
           <p>{error.message}</p>
-          <hr />
-          <p>Hey, developer, you should replace this with what you want your users to see.</p>
-        </div>
+        </section>
       </Layout>
     </Document>
   );

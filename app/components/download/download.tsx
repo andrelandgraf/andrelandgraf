@@ -1,4 +1,4 @@
-import { DownloadSvg } from '../icons';
+import { DownloadSvg } from '../UI/icons';
 
 const DownloadButton = () => (
   <div className="flex items-center justify-center md:items-start">

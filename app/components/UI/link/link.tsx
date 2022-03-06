@@ -1,5 +1,6 @@
 import type { FC, PropsWithChildren } from 'react';
-import { NavLink, NavLinkProps } from 'remix';
+import type { NavLinkProps } from 'remix';
+import { NavLink } from 'remix';
 
 /**
  * Why do we to add final slashes?

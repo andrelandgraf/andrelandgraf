@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import Link from '~/components/link/link';
+import Link from '~/components/UI/link/link';
 
 interface ProjectProps {
   title: string;
