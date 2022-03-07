@@ -3,6 +3,9 @@ module.exports = {
   darkMode: 'media', // or 'media' or 'class'
   theme: {
     extend: {
+      fontFamily: {
+        gamified: ['"Press Start 2P"', 'cursive'],
+      },
       screens: {
         /**
          * sometimes its nice to say: mobileOnly: without needing to reset it with md:...
