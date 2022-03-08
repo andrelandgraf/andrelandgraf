@@ -1,11 +1,16 @@
-import type { MetaFunction } from 'remix';
+import type { MetaFunction, LinksFunction } from 'remix';
 import Experience from '~/components/experience/experience';
 import Project from '~/components/project/project';
 import Skills from '~/components/skills/skills';
 import Education from '~/components/education/education';
 import { PageHeading, SectionHeadingWithIcon } from '~/components/UI/headings';
-
 import { CollegeSvg, GroupSvg, ElectronSvg, RocketSvg } from '~/components/UI/icons';
+
+import resumeStylesUrl from '~/styles/resume.css';
+
+export const links: LinksFunction = () => {
+  return [{ rel: 'stylesheet', href: resumeStylesUrl }];
+};
 
 export const meta: MetaFunction = () => {
   return {
@@ -81,13 +86,13 @@ const projects = [
     key="react-datalist-input"
     title="react-datalist-input"
     link="https://www.npmjs.com/package/react-datalist-input"
-    description="A npm package that provides a single React component. It contains an input field with a drop down menu to pick a possible option based on the current input."
+    description="An npm package that provides a single React component. It contains an input field with a drop down menu to pick a possible option based on the current input."
   />,
   <Project
     key="react-ssml-dom"
     title="react-ssml-dom"
     link="https://www.npmjs.com/package/react-ssml-dom"
-    description="A npm package that provides a React renderer for voice applications. react-ssml-dom is a research project that aims to take advantage of React and its component-based UI development for voice UIs. It also provides a middleware engine to parse any request from any vendor to a unified runtime payload and then revert back the response to the vendor-based response JSON."
+    description="An npm package that provides a React renderer for voice applications. react-ssml-dom is a research project that aims to take advantage of React and its component-based UI development for voice UIs. It also provides a middleware engine to parse any request from any vendor to a unified runtime payload and then revert back the response to the vendor-based response JSON."
   />,
 ];
 
@@ -145,19 +150,19 @@ const IndexPage = () => (
   <div className="flex flex-col gap-10 lg:gap-16 w-full lg:max-w-5xl">
     <PageHeading>Resume</PageHeading>
     <section className="w-full flex flex-col gap-5 lg:gap-8">
-      <SectionHeadingWithIcon icon={GroupSvg}>Working Experience</SectionHeadingWithIcon>
+      <SectionHeadingWithIcon icon={<GroupSvg />}>Working Experience</SectionHeadingWithIcon>
       {experiences}
     </section>
     <section className="w-full flex flex-col gap-8">
-      <SectionHeadingWithIcon icon={RocketSvg}>Selected Projects</SectionHeadingWithIcon>
+      <SectionHeadingWithIcon icon={<RocketSvg />}>Selected Projects</SectionHeadingWithIcon>
       {projects}
     </section>
     <section className="w-full flex flex-col gap-8">
-      <SectionHeadingWithIcon icon={CollegeSvg}>Education</SectionHeadingWithIcon>
+      <SectionHeadingWithIcon icon={<CollegeSvg />}>Education</SectionHeadingWithIcon>
       {educations}
     </section>
     <section className="w-full flex flex-col gap-8">
-      <SectionHeadingWithIcon icon={ElectronSvg}>Skills</SectionHeadingWithIcon>
+      <SectionHeadingWithIcon icon={<ElectronSvg />}>Skills</SectionHeadingWithIcon>
       <Skills skills={skills} />
     </section>
   </div>
