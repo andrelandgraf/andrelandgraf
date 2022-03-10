@@ -5,6 +5,7 @@ import Skills from '~/components/skills/skills';
 import Education from '~/components/education/education';
 import { PageHeading, SectionHeadingWithIcon } from '~/components/UI/headings';
 import { CollegeSvg, GroupSvg, ElectronSvg, RocketSvg } from '~/components/UI/icons';
+import { getMetaTags } from '~/utilities';
 
 import resumeStylesUrl from '~/styles/resume.css';
 
@@ -13,11 +14,11 @@ export const links: LinksFunction = () => {
 };
 
 export const meta: MetaFunction = () => {
-  return {
-    title: 'CV | Andre Landgraf',
-    description: 'Hello World! This is my personal website. Check out my CV and the tech stacks that I develop with.',
-    'Cache-Control': 'public, max-age=3600',
-  };
+  return getMetaTags({
+    title: 'Resume',
+    description:
+      'Hello World! This is my personal website. Check out my resume and the tech stacks that I develop with.',
+  });
 };
 
 const experiences = [

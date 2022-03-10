@@ -2,9 +2,9 @@ import type { MetaFunction } from 'remix';
 
 export const meta: MetaFunction = () => {
   return {
-    title: 'USES TECH | Andre Landgraf',
-    description: 'Hello World! This is my personal website. Check out my CV and the tech stacks that I develop with.',
-    'Cache-Control': 'public, max-age=3600',
+    title: 'Uses',
+    description:
+      'Hello World! This is my personal website. Check out my resume and the tech stacks that I develop with.',
   };
 };
 

@@ -1,8 +1,9 @@
 import * as React from 'react';
-import type { LinksFunction, HeadersFunction } from 'remix';
+import type { LinksFunction, HeadersFunction, MetaFunction } from 'remix';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch, useLocation } from 'remix';
 import Layout from '~/components/layout/layout';
 import { PageHeading } from '~/components/UI/headings';
+import { getMetaTags } from '~/utilities';
 
 import globalStylesUrl from '~/styles/global.css';
 
@@ -25,6 +26,12 @@ export const headers: HeadersFunction = () => {
   const headers = new Headers();
   headers.set('Cache-Control', 'public, max-age=3600');
   return headers;
+};
+
+export const meta: MetaFunction = () => {
+  return getMetaTags({
+    useCatchPhraseInTitle: true,
+  });
 };
 
 /**

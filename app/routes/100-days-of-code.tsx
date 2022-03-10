@@ -1,4 +1,4 @@
-import type { LoaderFunction, LinksFunction } from 'remix';
+import type { LoaderFunction, LinksFunction, MetaFunction } from 'remix';
 import { useLoaderData } from 'remix';
 import { getPrivateEnvVars } from '~/config/env.server';
 import type { MarkdownFile } from '~/actions/github/index.server';
@@ -6,6 +6,7 @@ import { fetchMarkdownFiles } from '~/actions/github/index.server';
 import { H1, H2, H3, ListItem, UnorderedList, OrderedList } from '~/components/100DaysOfCode/markdown';
 import { MarkdownContainer } from '~/components/UI/markdown';
 import { PageHeading, SectionHeading } from '~/components/UI/headings';
+import { getMetaTags } from '~/utilities';
 
 export const links: LinksFunction = () => {
   return [
@@ -13,6 +14,13 @@ export const links: LinksFunction = () => {
     { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
     { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap' },
   ];
+};
+
+export const meta: MetaFunction = () => {
+  return getMetaTags({
+    title: '#100DaysOfCode',
+    description: 'My Goals for the next 100 Days!',
+  });
 };
 
 type HundredDaysOfCodeFrontmatter = {
@@ -76,9 +84,9 @@ const HundredDaysOfCodePage = () => {
       <PageHeading className="font-gamified">100 Days of Code</PageHeading>
       {entries.map(({ frontmatter, markdown, slug, day }, index) => (
         <article className="flex flex-col gap-3" key={slug}>
-          <SectionHeading className="w-full flex flex-row flex-nowrap font-gamified">
+          <SectionHeading className="w-full flex flex-col lg:flex-row flex-nowrap font-gamified">
             <span>{`Day ${day} of 100`}</span>
-            <time className="ml-auto" dateTime={getISODate(startDate, index)}>
+            <time className="lg:ml-auto" dateTime={getISODate(startDate, index)}>
               {getReadableDate(startDate, day)}
             </time>
           </SectionHeading>

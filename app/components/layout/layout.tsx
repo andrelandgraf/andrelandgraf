@@ -1,6 +1,6 @@
 import type { FC, PropsWithChildren } from 'react';
 import DownloadButton from '~/components/download/download';
-import Link from '~/components/UI/link/link';
+import { StyledLink } from '~/components/UI/links';
 
 const Layout: FC<PropsWithChildren<any>> = ({ children }) => {
   return (
@@ -17,23 +17,25 @@ const Layout: FC<PropsWithChildren<any>> = ({ children }) => {
             <p className="text-xl xl:text-2xl 2xl:text-4xl font-semibold">
               A tech enthusiast and student who loves to develop fullstack software solutions.
             </p>
-            <DownloadButton />
+            <div className="lg:mr-auto">
+              <DownloadButton />
+            </div>
             <nav>
               <ul className="flex gap-5">
                 <li>
-                  <Link to="/" nav>
+                  <StyledLink to="/" nav>
                     CV
-                  </Link>
+                  </StyledLink>
                 </li>
                 <li>
-                  <Link to="/uses/" nav>
+                  <StyledLink to="/uses/" nav>
                     Tech
-                  </Link>
+                  </StyledLink>
                 </li>
                 <li>
-                  <Link to="/100-days-of-code/" nav>
+                  <StyledLink to="/100-days-of-code/" nav>
                     #100DaysOfCode
-                  </Link>
+                  </StyledLink>
                 </li>
               </ul>
             </nav>

@@ -1,6 +1,7 @@
 import type { FC, PropsWithChildren } from 'react';
 import type { NavLinkProps } from 'remix';
 import { NavLink } from 'remix';
+import { getAriaClasses, getNavLinkClasses } from '~/utilities';
 
 /**
  * Why do we to add final slashes?
@@ -38,28 +39,22 @@ export function addFinalSlash(link: string): string {
   return path + '?' + splits[0];
 }
 
-const getNavLinkClasses = (className: NavLinkProps['className'], isActive: boolean): string => {
-  if (!className) {
-    return '';
-  }
-  if (typeof className === 'string') {
-    return className;
-  }
-  return className({ isActive });
-};
-
-type LinkProps = {
+type UnstyledLinkProps = {
   to: string;
   external?: boolean;
-  nav?: boolean;
+  outline?: 'normal' | 'small' | 'none';
 } & NavLinkProps;
 
-const StyledLink: FC<PropsWithChildren<LinkProps>> = ({
+type LinkProps = {
+  nav?: boolean;
+} & UnstyledLinkProps;
+
+const UnstyledLink: FC<PropsWithChildren<UnstyledLinkProps>> = ({
   to,
   external = false,
-  nav = false,
-  className = '',
+  outline = 'small',
   children,
+  className = '',
   ...props
 }) => {
   return (
@@ -69,26 +64,19 @@ const StyledLink: FC<PropsWithChildren<LinkProps>> = ({
           href={to}
           target="_blank"
           rel="noopener noreferrer"
-          className={`${
-            nav ? 'text-xl xl:text-2xl 2xl:text-4xl' : ''
-          } font-bold text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500 focus:outline-none focus:ring-4 dark:focus:ring-blue-500 focus:ring-blue-700 ${getNavLinkClasses(
-            className,
-            false,
-          )}`}
+          className={`${getNavLinkClasses(className, false)} ${
+            outline === 'none' ? '' : getAriaClasses(outline === 'small')
+          }`}
         >
           {children}
         </a>
       ) : (
         <NavLink
+          {...props}
           to={addFinalSlash(to)}
           className={({ isActive }) =>
-            `${
-              nav ? 'text-xl xl:text-2xl 2xl:text-4xl' : ''
-            } font-bold text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500 focus:outline-none focus:ring-4 dark:focus:ring-blue-500 focus:ring-blue-700 ${
-              isActive ? 'underline pointer-events-none' : ''
-            } ${getNavLinkClasses(className, isActive)}`
+            `${getNavLinkClasses(className, isActive)} ${outline === 'none' ? '' : getAriaClasses(outline === 'small')}`
           }
-          {...props}
           prefetch="intent"
           end
         >
@@ -99,4 +87,33 @@ const StyledLink: FC<PropsWithChildren<LinkProps>> = ({
   );
 };
 
-export default StyledLink;
+const StyledLink: FC<PropsWithChildren<LinkProps>> = ({
+  to,
+  external = false,
+  nav = false,
+  className = '',
+  children,
+  ...props
+}) => {
+  return (
+    <UnstyledLink
+      {...props}
+      to={to}
+      external={external}
+      outline="none"
+      className={({ isActive }) =>
+        `underline decoration-primary ${
+          nav
+            ? 'underline text-xl xl:text-2xl 2xl:text-4xl decoration-4 underline-offset-4'
+            : 'decoration-2 underline-offset-2'
+        } font-bold ${isActive ? 'underline pointer-events-none' : ''} ${getNavLinkClasses(className, isActive)}`
+      }
+    >
+      {children}
+    </UnstyledLink>
+  );
+};
+
+export type { LinkProps };
+
+export { UnstyledLink, StyledLink };
