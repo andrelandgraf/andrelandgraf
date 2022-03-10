@@ -2,7 +2,7 @@ import type { PropsWithoutRef } from 'react';
 import { forwardRef } from 'react';
 import type { LinkProps } from '../links';
 import { UnstyledLink } from '../links';
-import { getNavLinkClasses, getAriaClasses } from '~/utilities';
+import { getNavLinkClasses, getFocusClasses } from '~/utilities';
 
 type ButtonProps = PropsWithoutRef<
   {
@@ -20,7 +20,7 @@ type ButtonLinkProps = PropsWithoutRef<
 const getClasses = (primary: boolean, className: string, disabled: boolean) => {
   // inherited by all buttons
   const base = `flex gap-2 justify-center items-center mobile:w-full transform motion-safe:active:translate-y-px text-center font-semibold mobile:text-xs shadow-lg rounded-lg px-4 py-2 leading-relaxed
-  ${disabled ? 'bg-gray-100 text-gray-700 pointer-events-none' : getAriaClasses()}`;
+  ${disabled ? 'bg-gray-100 text-gray-700 pointer-events-none' : getFocusClasses()}`;
   // for normal button => will be overriden below (not inherited like base)
   let style = ``;
   if (primary) {
@@ -39,6 +39,7 @@ const ButtonLink = ({ children, primary = false, disabled = false, to, className
       to={to}
       aria-disabled={disabled}
       className={getClasses(primary, getNavLinkClasses(className, false), disabled)}
+      outline="none"
     >
       {children}
     </UnstyledLink>

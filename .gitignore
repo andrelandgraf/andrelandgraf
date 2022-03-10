@@ -1,9 +1,12 @@
 /.cache
-/netlify/functions/server/build
 /public/build
+/netlify/functions/server/index.js
 /.netlify
-app/styles/global.css
 package-lock.json
+node_modules
+/app/styles/global.css
+
+
 
 # standard .gitignore
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.

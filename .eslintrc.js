@@ -3,6 +3,7 @@ const config = require('./.prettierrc.js');
 module.exports = {
   parser: '@typescript-eslint/parser',
   extends: [
+    '@remix-run/eslint-config',
     'plugin:cypress/recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',

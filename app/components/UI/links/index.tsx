@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from 'react';
 import type { NavLinkProps } from 'remix';
 import { NavLink } from 'remix';
-import { getAriaClasses, getNavLinkClasses } from '~/utilities';
+import { getAriaClasses, getNavLinkClasses, getFocusClasses } from '~/utilities';
 
 /**
  * Why do we to add final slashes?
@@ -102,11 +102,14 @@ const StyledLink: FC<PropsWithChildren<LinkProps>> = ({
       external={external}
       outline="none"
       className={({ isActive }) =>
-        `underline decoration-primary ${
+        `${getFocusClasses(true)} underline decoration-primary hover:decoration-secondary focus:decoration-secondary ${
           nav
-            ? 'underline text-xl xl:text-2xl 2xl:text-4xl decoration-4 underline-offset-4'
-            : 'decoration-2 underline-offset-2'
-        } font-bold ${isActive ? 'underline pointer-events-none' : ''} ${getNavLinkClasses(className, isActive)}`
+            ? 'text-xl xl:text-2xl 2xl:text-4xl decoration-8 underline-offset-4 hover:underline-offset-2 active:underline-offset-0'
+            : 'decoration-4 underline-offset-2 hover:underline-offset-1 active:underline-offset-0'
+        } font-bold ${isActive ? 'pointer-events-none decoration-darkPrimary' : ''} ${getNavLinkClasses(
+          className,
+          isActive,
+        )}`
       }
     >
       {children}
