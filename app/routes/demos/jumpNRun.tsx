@@ -69,7 +69,7 @@ class Player implements Player {
   constructor(game: Game) {
     this.game = game;
     this.size = { x: 20, y: 20 };
-    this.center = { x: game.gameSize.x / 8, y: game.gameSize.y - this.game.gameSize.padding };
+    this.center = { x: game.gameSize.x / 8, y: game.gameSize.y - this.game.gameSize.padding - this.size.y / 2 };
   }
 
   update = () => {
@@ -85,7 +85,7 @@ class Player implements Player {
   };
 
   #playerinAir = () => {
-    return this.center.y < this.game.gameSize.y - this.game.gameSize.padding;
+    return this.center.y < this.game.gameSize.y - this.game.gameSize.padding - this.size.y / 2;
   };
 
   draw = () => {
@@ -104,11 +104,15 @@ interface Obstacle extends Body {
 }
 
 class Obstacle implements Obstacle {
-  constructor(game: Game, velocity: { x: number; y: number }) {
+  constructor(game: Game, velocity: { x: number; y: number }, hard = false) {
     this.game = game;
     this.velocity = velocity;
     this.size = { x: 20, y: 20 };
-    this.center = { x: game.gameSize.x, y: Math.random() * (game.gameSize.y - this.size.y - game.gameSize.padding) };
+    const shouldSpawnAtPlayer = hard ? Math.random() > 0.5 : Math.random() > 0.8;
+    const y = shouldSpawnAtPlayer
+      ? game.gameSize.y - game.gameSize.padding - this.size.y / 2
+      : Math.random() * (game.gameSize.y - this.size.y - game.gameSize.padding);
+    this.center = { x: game.gameSize.x, y };
   }
 
   draw = () => {
@@ -182,9 +186,9 @@ class Game implements Game {
     this.hasStarted = true;
     this.#interval = window.setInterval(
       () => {
-        this.bodies.push(new Obstacle(this, { x: -7, y: 0 }));
+        this.bodies.push(new Obstacle(this, { x: -7, y: 0 }, this.config.hard));
       },
-      this.config.hard ? 500 : 700,
+      this.config.hard ? 400 : 800,
     );
     this.playSound(this.sounds.background, true);
   };
@@ -317,7 +321,7 @@ export default function JumpNRunGame() {
         <section className="ml-2 flex flex-col lg:flex-row gap-5 lg:gap-10">
           <h3 className="sr-only">Game Controls</h3>
           <label className="flex gap-2 items-center">
-            Audio?:{' '}
+            Audio?:
             <input
               className="transform scale-150"
               type="checkbox"
@@ -326,7 +330,7 @@ export default function JumpNRunGame() {
             />
           </label>
           <label className="flex gap-2 items-center">
-            Hard Mode?:{' '}
+            Hard Mode?:
             <input className="transform scale-150" type="checkbox" checked={hard} onChange={() => setHard((h) => !h)} />
           </label>
         </section>
