@@ -4,7 +4,7 @@ import { StyledLink } from '~/components/UI/links';
 
 const Layout: FC<PropsWithChildren<any>> = ({ children }) => {
   return (
-    <div className="relative bg-gray-300 dark:bg-gray-900 text-gray-800 dark:text-white font-medium text-lg min-h-screen px-5 py-10 lg:p-10 2xl:p-16">
+    <div className="relative bg-white dark:bg-gray-900 text-gray-800 dark:text-white font-medium text-lg min-h-screen w-screen overflow-x-hidden px-5 py-10 lg:p-10 2xl:p-16">
       <header className="w-full flex flex-col lg:flex-row items-center mb-5 lg:mb-10 2xl:mb-16">
         <div className="w-full flex flex-col lg:flex-row items-start gap-10 lg:ml-auto">
           <img
@@ -30,6 +30,11 @@ const Layout: FC<PropsWithChildren<any>> = ({ children }) => {
                 <li>
                   <StyledLink to="/uses/" nav>
                     Tech
+                  </StyledLink>
+                </li>
+                <li>
+                  <StyledLink to="/demos/" nav>
+                    Demos
                   </StyledLink>
                 </li>
                 <li>

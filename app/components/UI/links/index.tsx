@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from 'react';
+import type { FC, HTMLAttributes, PropsWithChildren } from 'react';
 import type { NavLinkProps } from 'remix';
 import { NavLink } from 'remix';
 import { getAriaClasses, getNavLinkClasses, getFocusClasses } from '~/utilities';
@@ -67,6 +67,7 @@ const UnstyledLink: FC<PropsWithChildren<UnstyledLinkProps>> = ({
           className={`${getNavLinkClasses(className, false)} ${
             outline === 'none' ? '' : getAriaClasses(outline === 'small')
           }`}
+          {...(props as HTMLAttributes<HTMLAnchorElement>)}
         >
           {children}
         </a>

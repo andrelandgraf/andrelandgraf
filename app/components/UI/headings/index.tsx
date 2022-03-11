@@ -3,7 +3,7 @@ import type { FC, HTMLAttributes } from 'react';
 type PageHeadingProps = HTMLAttributes<HTMLHeadingElement>;
 
 const PageHeading: FC<PageHeadingProps> = ({ children, className = '', ...props }) => (
-  <h1 {...props} className={`text-4xl xl:text-6xl font-semibold ${className}`}>
+  <h1 {...props} className={`text-xl md:text-2xl xl:text-4xl font-semibold ${className}`}>
     {children}
   </h1>
 );
@@ -13,13 +13,13 @@ type SectionHeadingProps = HTMLAttributes<HTMLHeadingElement> & {
 };
 
 const SectionHeading: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, className = '', ...props }) => (
-  <h2 {...props} className={`text-xl xl:text-2xl 2xl:text-4xl font-semibold ${className}`}>
+  <h2 {...props} className={`text-lg md:text-xl xl:text-2xl font-semibold ${className}`}>
     {children}
   </h2>
 );
 
 const SectionHeadingWithIcon: FC<SectionHeadingProps> = ({ children, icon, className = '', ...props }) => (
-  <div className={`flex items-center gap-5 text-xl xl:text-2xl 2xl:text-4xl font-semibold ${className}`}>
+  <div className={`flex items-center gap-5 text-lg md:text-xl xl:text-2xl font-semibold ${className}`}>
     {icon}
     <SectionHeading {...props}>{children}</SectionHeading>
   </div>
