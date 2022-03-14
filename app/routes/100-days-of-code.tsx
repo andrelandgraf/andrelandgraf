@@ -31,11 +31,18 @@ type HundredDaysOfCodeFrontmatter = {
 };
 
 const validateFrontMatter = (attributes: unknown): attributes is HundredDaysOfCodeFrontmatter => {
-  return true;
+  return (
+    !!attributes &&
+    typeof attributes !== 'function' &&
+    typeof attributes === 'object' &&
+    (attributes as any)['tweetUrl'] &&
+    (attributes as any)['title']
+  );
 };
 
 type JournalEntry = MarkdownFile<HundredDaysOfCodeFrontmatter> & {
   day: number;
+  index: number;
 };
 
 type LoaderData = {
@@ -54,14 +61,16 @@ export const loader: LoaderFunction = async (): Promise<LoaderData> => {
     throw Error(`Error (${status}) ${state}: Failed to fetch 100 days of code files.`);
   }
   // sort in descending order by index (newest first)
-  const entries = files.map((file, index) => ({ ...file, day: index })).sort((a, b) => (a.slug > b.slug ? -1 : 1));
+  const entries = files
+    .map((file, index) => ({ ...file, index, day: index === 0 ? 1 : index }))
+    .sort((a, b) => (a.slug > b.slug ? -1 : 1));
   return { entries, startDate: '2022-03-05' };
 };
 
 function getReadableDate(dateStr: string, index: number): string {
   const [year, month, day] = dateStr.split('-');
   const date = new Date(Number.parseInt(year), Number.parseInt(month) - 1, Number.parseInt(day));
-  const datePlusIndex = new Date(date.getTime() + index * 24 * 60 * 60 * 1000);
+  const datePlusIndex = new Date(date.getTime() + (index - 1) * 24 * 60 * 60 * 1000);
   return datePlusIndex.toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
@@ -72,7 +81,7 @@ function getReadableDate(dateStr: string, index: number): string {
 function getISODate(dateStr: string, index: number): string {
   const [year, month, day] = dateStr.split('-');
   const date = new Date(Number.parseInt(year), Number.parseInt(month) - 1, Number.parseInt(day));
-  const datePlusIndex = new Date(date.getTime() + index * 24 * 60 * 60 * 1000);
+  const datePlusIndex = new Date(date.getTime() + (index - 1) * 24 * 60 * 60 * 1000);
   return datePlusIndex.toISOString();
 }
 
@@ -82,11 +91,11 @@ const HundredDaysOfCodePage = () => {
   return (
     <section className="flex flex-col gap-20">
       <PageHeading className="font-gamified">100 Days of Code</PageHeading>
-      {entries.map(({ frontmatter, markdown, slug, day }, index) => (
+      {entries.map(({ frontmatter, markdown, slug, index, day }) => (
         <article className="flex flex-col gap-3" key={slug}>
           <SectionHeading className="w-full flex flex-col lg:flex-row flex-nowrap font-gamified">
-            <span>{`Day ${day} of 100`}</span>
-            <time className="lg:ml-auto" dateTime={getISODate(startDate, index)}>
+            <span>{`Day ${index} of 100`}</span>
+            <time className="lg:ml-auto" dateTime={getISODate(startDate, day)}>
               {getReadableDate(startDate, day)}
             </time>
           </SectionHeading>
