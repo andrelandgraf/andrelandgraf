@@ -50,6 +50,11 @@ type LoaderData = {
   startDate: string;
 };
 
+function slugToIndex(slug: string): number {
+  const num = slug.split('.')[0];
+  return Number.parseInt(num);
+}
+
 export const loader: LoaderFunction = async (): Promise<LoaderData> => {
   const { githubAccessToken, githubRepoAPIUrl } = getPrivateEnvVars();
   const [status, state, files] = await fetchMarkdownFiles(
@@ -62,8 +67,11 @@ export const loader: LoaderFunction = async (): Promise<LoaderData> => {
   }
   // sort in descending order by index (newest first)
   const entries = files
-    .map((file, index) => ({ ...file, index, day: index === 0 ? 1 : index }))
-    .sort((a, b) => (a.slug > b.slug ? -1 : 1));
+    .map((file) => {
+      const index = slugToIndex(file.slug);
+      return { ...file, index, day: index === 0 ? 1 : index };
+    })
+    .sort((a, b) => (a.index > b.index ? -1 : 1));
   return { entries, startDate: '2022-03-05' };
 };
 
