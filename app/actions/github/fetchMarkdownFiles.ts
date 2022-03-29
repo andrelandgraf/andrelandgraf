@@ -1,7 +1,7 @@
 import type { ActionResult } from '../ActionResult';
 import type { MarkdownFile } from './fetchMarkdownFile';
 import { fetchFileItems, FetchFileItemsResState } from './fetchFileItems';
-import { fetchMarkdownFile } from './fetchMarkdownFile';
+import { fetchMarkdownFile, FetchMarkdownFileResState } from './fetchMarkdownFile';
 
 enum FetchMarkdownFilesResState {
   directoryNotFound = 'directory_not_found',
@@ -36,6 +36,9 @@ async function fetchMarkdownFiles<FrontMatter>(
       hasValidFrontMatter,
     );
     if (fetchStatus !== 200 || !file) {
+      if (fetchState === FetchMarkdownFileResState.fileIgnored) {
+        continue;
+      }
       console.error(`FetchMarkdownFiles failed for ${directoryUrl}/${item.slug} with [${fetchStatus}] ${fetchState}.`);
       return [fetchStatus, FetchMarkdownFilesResState.internalError, undefined];
     }
