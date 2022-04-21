@@ -23,6 +23,7 @@
     "front-matter": "^4.0.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-router-isomorphic-link": "^0.0.1",
     "rehype-react": "^6.2.1",
     "remark-parse": "^9.0.0",
     "remark-rehype": "^8.1.0",

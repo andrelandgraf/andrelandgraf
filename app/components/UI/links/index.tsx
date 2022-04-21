@@ -1,6 +1,6 @@
 import type { FC, HTMLAttributes, PropsWithChildren } from 'react';
-import type { NavLinkProps } from 'remix';
-import { NavLink } from 'remix';
+import type { IsomorphicLinkProps } from 'react-router-isomorphic-link';
+import { IsomorphicLink } from 'react-router-isomorphic-link';
 import { getAriaClasses, getNavLinkClasses, getFocusClasses } from '~/utilities';
 
 /**
@@ -40,10 +40,8 @@ export function addFinalSlash(link: string): string {
 }
 
 type UnstyledLinkProps = {
-  to: string;
-  external?: boolean;
   outline?: 'normal' | 'small' | 'none';
-} & NavLinkProps;
+} & IsomorphicLinkProps;
 
 type LinkProps = {
   nav?: boolean;
@@ -51,40 +49,23 @@ type LinkProps = {
 
 const UnstyledLink: FC<PropsWithChildren<UnstyledLinkProps>> = ({
   to,
-  external = false,
   outline = 'small',
   children,
   className = '',
   ...props
 }) => {
   return (
-    <>
-      {external ? (
-        <a
-          href={to}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`${getNavLinkClasses(className, false)} ${
-            outline === 'none' ? '' : getAriaClasses(outline === 'small')
-          }`}
-          {...(props as HTMLAttributes<HTMLAnchorElement>)}
-        >
-          {children}
-        </a>
-      ) : (
-        <NavLink
-          {...props}
-          to={addFinalSlash(to)}
-          className={({ isActive }) =>
-            `${getNavLinkClasses(className, isActive)} ${outline === 'none' ? '' : getAriaClasses(outline === 'small')}`
-          }
-          prefetch="intent"
-          end
-        >
-          {children}
-        </NavLink>
-      )}
-    </>
+    <IsomorphicLink
+      {...props}
+      to={addFinalSlash(to)}
+      className={({ isActive }) =>
+        `${getNavLinkClasses(className, isActive)} ${outline === 'none' ? '' : getAriaClasses(outline === 'small')}`
+      }
+      prefetch="intent"
+      end
+    >
+      {children}
+    </IsomorphicLink>
   );
 };
 
