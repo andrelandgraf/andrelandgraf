@@ -12,7 +12,7 @@ const DownloadButton = () => {
   }, []);
 
   return (
-    <ButtonLink onClick={handleClick} to="" download={href} external primary>
+    <ButtonLink onClick={handleClick} to="" download={href} primary>
       <DownloadSvg />
       <span>Download CV</span>
     </ButtonLink>

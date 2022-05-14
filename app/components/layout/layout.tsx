@@ -38,6 +38,11 @@ const Layout: FC<PropsWithChildren<any>> = ({ children }) => {
                   </StyledLink>
                 </li>
                 <li>
+                  <StyledLink to="/tutoring/" nav>
+                    Tutoring
+                  </StyledLink>
+                </li>
+                <li>
                   <StyledLink to="/100-days-of-code/" nav>
                     #100DaysOfCode
                   </StyledLink>

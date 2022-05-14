@@ -1,6 +1,8 @@
 import * as React from 'react';
-import type { LinksFunction, HeadersFunction, MetaFunction } from 'remix';
+import type { LinksFunction, HeadersFunction, MetaFunction, LoaderFunction } from 'remix';
+import { useLoaderData } from 'remix';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch, useLocation } from 'remix';
+import { IsomorphicNavProvider } from 'react-router-isomorphic-link';
 import Layout from '~/components/layout/layout';
 import { PageHeading } from '~/components/UI/headings';
 import { getMetaTags } from '~/utilities';
@@ -34,18 +36,32 @@ export const meta: MetaFunction = () => {
   });
 };
 
+export const loader: LoaderFunction = ({ request }) => {
+  const url = new URL(request.url);
+  return { host: url.host };
+};
+
 /**
  * The root module's default export is a component that renders the current
  * route via the `<Outlet />` component. Think of this as the global layout
  * component for your app.
  */
 export default function App() {
+  const { host } = useLoaderData();
   return (
     <Document>
-      <Layout>
-        <Outlet />
-      </Layout>
+      <IsomorphicNavProvider host={host} useFinalSlash>
+        <AppContent />
+      </IsomorphicNavProvider>
     </Document>
+  );
+}
+
+function AppContent() {
+  return (
+    <Layout>
+      <Outlet />
+    </Layout>
   );
 }
 

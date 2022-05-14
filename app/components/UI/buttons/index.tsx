@@ -2,7 +2,7 @@ import type { PropsWithoutRef } from 'react';
 import { forwardRef } from 'react';
 import type { LinkProps } from '../links';
 import { UnstyledLink } from '../links';
-import { getNavLinkClasses, getFocusClasses } from '~/utilities';
+import { getFocusClasses } from '~/utilities';
 
 type ButtonProps = PropsWithoutRef<
   {
@@ -14,7 +14,9 @@ type ButtonLinkProps = PropsWithoutRef<
   {
     primary?: boolean;
     disabled?: boolean;
-  } & LinkProps
+    className?: string;
+    children?: React.ReactNode;
+  } & Omit<LinkProps, 'className' | 'children'>
 >;
 
 const getClasses = (primary: boolean, className: string, disabled: boolean) => {
@@ -38,7 +40,7 @@ const ButtonLink = ({ children, primary = false, disabled = false, to, className
       {...props}
       to={to}
       aria-disabled={disabled}
-      className={getClasses(primary, getNavLinkClasses(className, false), disabled)}
+      className={getClasses(primary, className, disabled)}
       outline="none"
     >
       {children}
