@@ -1,6 +1,6 @@
-import type { FC, PropsWithChildren } from 'react';
+import type { AnchorHTMLAttributes, FC, PropsWithChildren } from 'react';
 import type { IsomorphicLinkProps } from 'react-router-isomorphic-link';
-import { IsomorphicLink } from 'react-router-isomorphic-link';
+import { IsomorphicLink, isomorphicClassName } from 'react-router-isomorphic-link';
 import { getAriaClasses, getFocusClasses } from '~/utilities';
 
 type UnstyledLinkProps = {
@@ -23,7 +23,9 @@ const UnstyledLink: FC<PropsWithChildren<UnstyledLinkProps>> = ({
     <IsomorphicLink
       {...props}
       to={to}
-      className={`${outline === 'none' ? '' : getAriaClasses(outline === 'small')} ${className}`}
+      className={({ isActive }) =>
+        `${outline === 'none' ? '' : getAriaClasses(outline === 'small')} ${isomorphicClassName(className, isActive)}`
+      }
       prefetch="intent"
       end
     >
@@ -43,7 +45,10 @@ const StyledLink: FC<PropsWithChildren<LinkProps>> = ({ to, nav = false, classNa
           nav
             ? 'text-xl xl:text-2xl 2xl:text-4xl decoration-8 underline-offset-4 hover:underline-offset-2 active:underline-offset-0'
             : 'decoration-4 underline-offset-2 hover:underline-offset-1 active:underline-offset-0'
-        } font-bold ${isActive ? 'pointer-events-none decoration-darkPrimary' : ''} ${className}`
+        } font-bold ${isActive ? 'pointer-events-none decoration-darkPrimary' : ''} ${isomorphicClassName(
+          className,
+          isActive,
+        )}`
       }
     >
       {children}
@@ -51,6 +56,16 @@ const StyledLink: FC<PropsWithChildren<LinkProps>> = ({ to, nav = false, classNa
   );
 };
 
+const MarkdownLinkWrapper: FC<PropsWithChildren<AnchorHTMLAttributes<HTMLAnchorElement>>> = ({
+  href = '/404',
+  children,
+  ...props
+}) => (
+  <StyledLink to={href} {...props}>
+    {children}
+  </StyledLink>
+);
+
 export type { LinkProps };
 
-export { UnstyledLink, StyledLink };
+export { UnstyledLink, StyledLink, MarkdownLinkWrapper };

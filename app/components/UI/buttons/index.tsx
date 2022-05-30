@@ -1,8 +1,8 @@
-import type { PropsWithoutRef } from 'react';
+import type { ButtonHTMLAttributes, FC, PropsWithChildren, PropsWithoutRef } from 'react';
 import { forwardRef } from 'react';
 import type { LinkProps } from '../links';
 import { UnstyledLink } from '../links';
-import { getFocusClasses } from '~/utilities';
+import { getFocusClasses, getAriaClasses } from '~/utilities';
 
 type ButtonProps = PropsWithoutRef<
   {
@@ -36,15 +36,17 @@ const getClasses = (primary: boolean, className: string, disabled: boolean) => {
 
 const ButtonLink = ({ children, primary = false, disabled = false, to, className = '', ...props }: ButtonLinkProps) => {
   return (
-    <UnstyledLink
-      {...props}
-      to={to}
-      aria-disabled={disabled}
-      className={getClasses(primary, className, disabled)}
-      outline="none"
-    >
-      {children}
-    </UnstyledLink>
+    <div className="w-full md:w-fit">
+      <UnstyledLink
+        {...props}
+        to={to}
+        aria-disabled={disabled}
+        className={getClasses(primary, className, disabled)}
+        outline="none"
+      >
+        {children}
+      </UnstyledLink>
+    </div>
   );
 };
 
@@ -57,6 +59,22 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     );
   },
 );
+
 Button.displayName = 'Button';
 
-export { Button, ButtonLink };
+const IconButton: FC<PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>>> = ({
+  title,
+  children,
+  className = '',
+  ...props
+}) => (
+  <button
+    type="button"
+    className={`transform motion-safe:hover:scale-105 ${getAriaClasses(true)} ${className}`}
+    {...props}
+  >
+    {children}
+  </button>
+);
+
+export { Button, ButtonLink, IconButton };

@@ -63,14 +63,15 @@ interface Body extends GameElement {
   center: { x: number; y: number };
 }
 
-interface Player extends Body {}
-
-class Player implements Player {
+class Player implements Body {
   constructor(game: Game) {
     this.game = game;
     this.size = { x: 20, y: 20 };
     this.center = { x: game.gameSize.x / 8, y: game.gameSize.y - this.game.gameSize.padding - this.size.y / 2 };
   }
+  game: Game;
+  size: { x: number; y: number };
+  center: { x: number; y: number };
 
   update = () => {
     if (this.isColliding()) {

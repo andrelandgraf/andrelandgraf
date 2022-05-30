@@ -41,9 +41,8 @@ async function fetchFileItems(
 
   // don't confuse with OAuth auth token flow, this requires a private accessToken of the GitHub account
   headers.set('Authorization', `token ${accessToken}`);
-  headers.set('User-Agent', 'Particular.Cloud');
+  headers.set('User-Agent', 'andre.landgraf.cool');
 
-  console.log(directoryUrl);
   const response = await fetch(directoryUrl, { headers });
   if (!response.ok || response.status !== 200) {
     console.error(

@@ -24,27 +24,17 @@ const Layout: FC<PropsWithChildren<any>> = ({ children }) => {
               <ul className="flex gap-5">
                 <li>
                   <StyledLink to="/" nav>
+                    Home
+                  </StyledLink>
+                </li>
+                <li>
+                  <StyledLink to="/cv/" nav>
                     CV
                   </StyledLink>
                 </li>
                 <li>
-                  <StyledLink to="/uses/" nav>
-                    Tech
-                  </StyledLink>
-                </li>
-                <li>
-                  <StyledLink to="/demos/" nav>
-                    Demos
-                  </StyledLink>
-                </li>
-                <li>
-                  <StyledLink to="/tutoring/" nav>
-                    Tutoring
-                  </StyledLink>
-                </li>
-                <li>
-                  <StyledLink to="/100-days-of-code/" nav>
-                    #100DaysOfCode
+                  <StyledLink to="/blog/" nav>
+                    Blog
                   </StyledLink>
                 </li>
               </ul>

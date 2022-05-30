@@ -52,7 +52,7 @@ async function getGitHubAuthToken(
 
     const headers = new Headers();
     headers.set('Authorization', `token ${accessToken}`);
-    headers.set('User-Agent', 'Particular.Cloud');
+    headers.set('User-Agent', 'andre-landgraf.cool');
 
     return [200, GithubAuthTokenResState.success, headers];
   } catch (error) {

@@ -40,7 +40,7 @@ async function fetchMarkdownFile<FrontMatter>(
 
   // don't confuse with OAuth auth token flow, this requires a private accessToken of the GitHub account
   headers.set('Authorization', `token ${accessToken}`);
-  headers.set('User-Agent', 'andrelandgraf');
+  headers.set('User-Agent', 'andre-landgraf.cool');
 
   const response = await fetch(contentUrl, { headers });
   if (!response.ok || response.status !== 200) {

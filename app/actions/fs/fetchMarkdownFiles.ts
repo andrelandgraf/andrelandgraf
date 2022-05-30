@@ -42,7 +42,11 @@ async function fetchMarkdownFilesFs<FrontMatter>(
       if (attributes.ignore) {
         continue;
       }
-      mdFiles.push({ slug: entry.name, frontmatter: attributes, markdown: body });
+      mdFiles.push({
+        slug: entry.name.replace('.md', '').replace('index', ''),
+        frontmatter: attributes,
+        markdown: body,
+      });
     }
   }
 

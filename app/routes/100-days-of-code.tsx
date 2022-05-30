@@ -7,7 +7,8 @@ import { fetchMarkdownFilesFs } from '~/actions/fs/index.server';
 import { H1, H2, H3, ListItem, UnorderedList, OrderedList } from '~/components/100DaysOfCode/markdown';
 import { MarkdownContainer } from '~/components/UI/markdown';
 import { PageHeading, SectionHeading } from '~/components/UI/headings';
-import { getMetaTags } from '~/utilities';
+import { MarkdownLinkWrapper } from '~/components/UI/links';
+import { getMetaTags, getISODate, getReadableDate } from '~/utilities';
 
 export const links: LinksFunction = () => {
   return [
@@ -41,7 +42,7 @@ const validateFrontMatter = (attributes: unknown): attributes is HundredDaysOfCo
     (attributes as any)['tweetUrl'] &&
     typeof (attributes as any)['title'] === 'string' &&
     typeof (attributes as any)['index'] === 'number' &&
-    typeof (attributes as any)['date']
+    typeof (attributes as any)['date'] === 'object'
   );
 };
 
@@ -69,22 +70,6 @@ export const loader: LoaderFunction = async (): Promise<LoaderData> => {
   const entries = files.sort((a, b) => (a.frontmatter.index > b.frontmatter.index ? -1 : 1));
   return { entries };
 };
-
-function getReadableDate(dateStr: string): string {
-  const [year, month, day] = dateStr.split('-');
-  const date = new Date(Number.parseInt(year), Number.parseInt(month) - 1, Number.parseInt(day));
-  return date.toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  });
-}
-
-function getISODate(dateStr: string): string {
-  const [year, month, day] = dateStr.split('-');
-  const date = new Date(Number.parseInt(year), Number.parseInt(month) - 1, Number.parseInt(day));
-  return date.toISOString();
-}
 
 const HundredDaysOfCodePage = () => {
   const { entries } = useLoaderData<LoaderData>();
@@ -119,6 +104,7 @@ const HundredDaysOfCodePage = () => {
                     ul: UnorderedList,
                     ol: OrderedList,
                     li: ListItem,
+                    a: MarkdownLinkWrapper,
                   },
                 }}
               />
