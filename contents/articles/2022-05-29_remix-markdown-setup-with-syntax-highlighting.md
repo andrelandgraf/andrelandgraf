@@ -9,7 +9,7 @@ Markdown is amazing. It's a powerful tool for writing and publishing content. In
 
 ## MDX route modules
 
-The easiest way of integrating Markdown in Remix is probably to use [MDX route modules](https://remix.run/docs/en/v1/guides/mdx) directly in the `app/routes` directory. Remix will compile those files for you and you can even add frontmatter to them.
+The easiest way of integrating Markdown in Remix is probably to use [MDX route modules](https://remix.run/docs/en/v1/guides/mdx) directly in the `app/routes` directory. Remix will compile those files for you and you can even add frontmatter for meta and headers properties - more about frontmatter later.
 
 MDX files can be put directly in `app/routes` to act as route modules:
 
@@ -29,7 +29,7 @@ headers:
 
 A custom setup that separates data and display allows for more flexibility. We can read our Markdown content from the filesystem, parse the frontmatter, and then render the Markdown content inside our application.
 
-Let's create a folder for our Markdown content, e.g. `contents/articles`. Inside the folder, we create one example file, e.g. `remix-markdown-setup.md`. In a Node.js environment, we can read the file using `fs.readFile` in our route's loader function.
+Let's create a folder for our Markdown content, e.g. `contents/articles`. Inside the folder, we create one Markdown file - e.g. `remix-markdown-setup.md` - for each of our articles. In a Node.js-based environment, we can read the file using `fs.readFile`.
 
 Let's create a file reading utility, e.g. `readPost.server.ts`:
 
@@ -55,35 +55,37 @@ export const loader: LoaderFunction = async () => {
   return { markdown };
 };
 
-export default function PostComponent() {
+export default function ArticleComponent() {
   const { markdown } = useLoaderData();
   // ...
 }
 ```
 
-Great! Now we can access the Markdown string in our route component! Unfortunately, this will only work in a Node.js environment that has access to the filesystem. Unfortunately, most serverless environments - such as Vercel or Netlify - don't have access to the filesystem.
+Great! Now we can access the Markdown string in our route component using the `useLoaderData` hook! Unfortunately, this will only work in an environment that has access to the filesystem. Most serverless environments - such as Vercel or Netlify - don't have access to the filesystem.
 
 ## Fetching Markdown files from a remote origin
 
-Instead, let's fetch Markdown files from a remote server. This approach will work in serverless environments and will also make curating the content easier. If the content lives in the filesystem, then an update to the content requires a new deployment of the application. With a remote origin, the content can be updated without redeploying.
+Instead, we can fetch Markdown files from a remote server. This approach also works for serverless environments and eases updating content. If the content lives on our server's filesystem, then an update to the content requires a new deployment of the application to update the server's filesystem. By using a remote origin, the content can be updated without the need to redeploy.
 
 ### Fetching from GitHub
 
 It's still convinient to co-locate Markdown content and our code. We can get the best of both worlds by using GitHub. We can manage our content using git but we are also able to fetch the content using the GitHub API.
 
-I am using this approach on my own blog (thanks for reading btw.) and it works great! More precisely, I am reading from the filesystem on localhost and fetch the files from GitHub on production. This way, I am able to review new blog posts locally but can also make changes to the content without triggering a deploy!
+I am using this approach on my own blog (thanks for reading btw.) and it works great! More precisely, I am reading from the filesystem on localhost and fetch the files from GitHub on production. This way, I am able to review new blog posts locally but can also make changes to the content without triggering a redeploy!
 
 Let's fetch the content of one file from GitHub:
 
 ```typescript
 export async function fetchMarkdownFile(fileName: string) {
   const accessToken = '<your-github-access-token>';
+  const accountName = '<your-github-account-name>';
+  const repoName = '<your-github-repo-name>';
   const headers = new Headers();
   headers.set('Accept', 'application/vnd.github.v3.raw');
   headers.set('Authorization', `token ${accessToken}`);
   headers.set('User-Agent', '<your-app-name>');
 
-  const repo = 'https://api.github.com/repos/andrelandgraf/andrelandgraf';
+  const repo = `https://api.github.com/repos/${accountName}/${repoName}`;
   const dir = '/contents/articles/';
   const url = new URL(repo + dir + fileName);
 
@@ -111,17 +113,17 @@ export const loader: LoaderFunction = async () => {
   return { markdown };
 };
 
-export default function PostComponent() {
+export default function ArticleComponent() {
   const { markdown } = useLoaderData();
   // ...
 }
 ```
 
-Awesome! We are now able to read and fetch Markdown strings and load them into our route components using `useLoaderData`. So how do we transform the Markdown string into HTML?
+Awesome! We are now able to fetch Markdown files from a remote origin and load them into our route components! So how do we transform the Markdown string into HTML?
 
 <a href={https://twitter.com/tannerlinsley/status/1527752952768696320}></a>
 
-Parsing Markdown is not straightforward. Even the pros may struggle with it and it's quite a rabbit-hole.
+Parsing Markdown is not straightforward. Even the pros of the industry sometimes struggle with it. It's quite a rabbit hole.
 
 ## Parsing Frontmatter
 
@@ -136,7 +138,7 @@ description: Markdown is amazing.
 # Remix Markdown Setup
 ```
 
-We can do this using the `front-matter` package and one function call:
+We can do this using the `front-matter` package and just one function call:
 
 ```tsx
 import type { LoaderFunction } from 'remix';
@@ -145,11 +147,13 @@ import { fetchMarkdownFile } from '~/utilities/github.server.ts';
 
 export const loader: LoaderFunction = async () => {
   const markdown = await fetchMarkdownFile('remix-markdown-setup.md');
+  // "attributes" contains the parsed frontmatter
+  // "body" contains the markdown string without the frontmatter
   const { attributes, body } = parseFrontMatter(markdown);
   return { attributes, body };
 };
 
-export default function PostComponent() {
+export default function ArticleComponent() {
   const { attributes, body } = useLoaderData();
   return (
     <article>
@@ -160,6 +164,8 @@ export default function PostComponent() {
 ```
 
 ## Transforming Markdown to HTML
+
+Now it gets a bit tricky but bear with me!
 
 Markdown is transformed to HTML through the [unified](https://github.com/unifiedjs/unified) interface. unified provides an abstract interface for parsing syntax trees. First, we use [remark](https://github.com/remarkjs/remark) to parse the Markdown into an abstract representation (using unified), then we use [rehype](https://github.com/rehypejs/rehype) to transform the abstract representation into HTML.
 
@@ -240,7 +246,7 @@ export const loader: LoaderFunction = async () => {
   return { attributes, body };
 };
 
-export default function PostComponent() {
+export default function ArticleComponent() {
   const { attributes, body } = useLoaderData();
   return (
     <article>
@@ -253,16 +259,24 @@ export default function PostComponent() {
 
 ## Using custom React components
 
-rehype-react allows you to select custom React components for each HTML tag. rehype-react will then go ahead a map the HTML to the custom React component.
+rehype-react allows you to select custom React components for each HTML tag. rehype-react will then go ahead and map the HTML to those custom React components.
 This is a great way to extend the functionality of your Markdown and to reuse your app's styling and behavior!
 
-Since we already built this functionality into our component and hook, we just need to provide the rehype-react options:
+Some cool things you can do with custom React components:
+
+- A custom video player
+- A custom link component that handles external links differently
+- An optimized image component
+- Syntax highlighting for code and pre blocks
+- A code component that maps special markup "codes" to custom components e.g. to insert advertisments, marketing banners, etc.
+
+We already built in the `options` property in our Markdown component and hook. So we can go ahead and provide our custom components as rehype-react options:
 
 ```tsx
 import { MarkdownContainer } from '~/components/MarkdownContainer';
 import { H1, StyledLink } from '~/components/UI';
 
-export default function PostComponent() {
+export default function ArticleComponent() {
   const { attributes, body } = useLoaderData();
   return (
     <article>
@@ -281,9 +295,11 @@ export default function PostComponent() {
 }
 ```
 
-Just import the components you want to use and pass them to the `components` option. All HTML tags are supported! This is especially useful to add syntax highlighting to code blocks.
+Just import the components you want to use and pass them to the `components` object. All HTML tags are supported!
 
 ## Syntax Highlighting
+
+Let's take a look at how we can use rehype-react to add syntax highlighting to our Markdown code content.
 
 ```javascript
 console.log('Do you like the syntax highlighting?');
@@ -374,7 +390,7 @@ export const CodeBlock: FC<HTMLAttributes<HTMLPreElement>> = ({ children }) => {
 };
 ```
 
-Since we have full control over the markup of our code block component, we can add custom features such as copy-to-clipboard buttons or custom styling to it! To style the code block, we just have to copy-paste a CSS file from the[prism-react-renderer repository](https://github.com/themarcba/prism-themes/tree/master/themes) and [import it into our Remix route](https://remix.run/docs/en/v1/guides/styling#styling).
+Since we have full control over the markup of our code block component, we can add custom features such as copy-to-clipboard buttons and custom styling to it! To style the code block content, we can select a CSS file from the[prism-react-renderer repository](https://github.com/themarcba/prism-themes/tree/master/themes) and [import it into our Remix route](https://remix.run/docs/en/v1/guides/styling#styling).
 
 Now, we only have to add the `CodeBlock` component to our `components` mapping:
 
@@ -382,7 +398,7 @@ Now, we only have to add the `CodeBlock` component to our `components` mapping:
 import { MarkdownContainer } from '~/components/MarkdownContainer';
 import { H1, StyledLink, CodeBlock } from '~/components/UI';
 
-export default function PostComponent() {
+export default function ArticleComponent() {
   const { attributes, body } = useLoaderData();
   return (
     <article>
