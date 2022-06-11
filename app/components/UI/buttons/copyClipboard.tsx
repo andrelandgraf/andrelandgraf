@@ -26,7 +26,7 @@ const CopyClipboardButton: React.FC<ButtonProps> = ({ id, title, content, classN
     <div className={`relative inline-flex items-center ${className}`}>
       <Tooltip elementId={id} text={text} width="w-10" />
       <IconButton {...props} onClick={handleClick} title={title} id={id}>
-        <CopyClipboardSvg />
+        <CopyClipboardSvg className="mobile:w-5 mobile:h-5" />
       </IconButton>
     </div>
   );

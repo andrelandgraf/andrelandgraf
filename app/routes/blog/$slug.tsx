@@ -11,10 +11,10 @@ import { SectionHeading } from '~/components/UI/headings';
 import { MarkdownLinkWrapper } from '~/components/UI/links';
 import { getMetaTags, getISODate, getReadableDate } from '~/utilities';
 
-import synthwave84StylesUrl from '~/styles/code.css';
+import syntaxHighlightingStylesUrl from '~/styles/code.css';
 
 export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: synthwave84StylesUrl }];
+  return [{ rel: 'stylesheet', href: syntaxHighlightingStylesUrl }];
 };
 
 export const meta: MetaFunction = ({ data }) => {
