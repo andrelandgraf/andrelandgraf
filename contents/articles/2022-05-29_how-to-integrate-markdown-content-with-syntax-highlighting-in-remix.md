@@ -25,6 +25,8 @@ headers:
 # MDX route modules
 ```
 
+So why don't we stop here? MDX route modules are a great starting point but they aren't as flexibile. MDX is very convinient to work with but personally, I like to separate content from code. Instead of importing React components into my content (MDX), I rather render my Markdown inside components. It's also worth mentioning that if you want to maintain hundreds of Markdown files, then you will likely run into [scalability issues](https://remix.run/docs/en/v1/guides/mdx#:~:text=Clearly%20this%20is,MDX%20Bundler.) when using MDX route modules.
+
 ## Reading Markdown files from fs
 
 A custom setup that separates data and display allows for more flexibility. We can read our Markdown content from the filesystem, parse the frontmatter, and then render the Markdown content inside our application.
@@ -174,7 +176,7 @@ The easiest way to transform Markdown to HTML in React is using [react-markdown]
 
 **Note:** You can use ESM in Remix by using the workaround documented [in the Remix docs](https://remix.run/docs/en/v1/pages/gotchas#importing-esm-packages).
 
-My own solution utilizes older versions of remark and rehype that still support CommonJS. I basically reimplemented react-markdown to make it work with CommonJS and expose a hook that renders the HTML in a synchronized manner.
+My own solution utilizes older versions of remark and rehype that still support CommonJS. I basically reimplemented react-markdown to make it work with CommonJS and expose a hook that renders the HTML in a synchronized manner. I created this logic before the ESM workaround was available and I still think it's more robust than the ESM workaround.
 
 So let's install the following packages in their correct versions:
 
@@ -213,7 +215,7 @@ export const useMarkdown = (source: string, rehypeReactOptions: ReyhpeOptions = 
   );
 ```
 
-Our `useMarkdown` hook takes the Markdown string and the options for rehype-react as arguments and returns an React element for us to render.
+Our `useMarkdown` hook takes the Markdown string and the options for rehype-react as arguments and returns a React element for us to render.
 
 ### What is unified?
 
@@ -442,11 +444,13 @@ Usually, you want to display a list of all blog posts to the user as well. Lucki
 
 I won't go into more details here but you can find my GitHub fetching logic [here](https://github.com/andrelandgraf/andrelandgraf/tree/6c5158770dbebd55d71788194d3ce6ed1004e1c0/app/actions/github). The `fetchFileItems` function fetches an array of all items within a GitHub repository. For each of those items, I then go ahead and fetch the content of the file using the `fetchMarkdownFile` function that we defined earlier.
 
+Alternatively, [github-md](https://github.com/jacob-ebey/github-md) also provides an API endpoint to get all files and additionally returns the the sha of the commit where each file was changed, so you could even create your own caching logic!
+
 ## Generating a Table of Contents from a Markdown file
 
 So far, I have not found a nice way to create a dynamic table of content based on the content of a Markdown file. In [Particular.Cloud](https://particular.cloud/documentation/developers/v1), I dynamically parse through the final HTML (in a `useEffect`), but I don't think that's a very elegant solution. I hope I can update this section soon!
 
-Please let me know on Twitter @andrelandgraf94 if you have any suggestions!
+Please let me know [on Twitter](https://twitter.com/AndreLandgraf94) if you have any suggestions!
 
 ## References & Inspirations
 
