@@ -66,7 +66,9 @@ const BlogPage = () => {
       <PageHeading>My Blog Posts</PageHeading>
       {entries.map(({ frontmatter, slug }) => (
         <article className="flex flex-col gap-3 w-full lg:max-w-3xl" key={slug}>
-          <SectionHeading>{frontmatter.title}</SectionHeading>
+          <PageHeading asH2 className="text-secondary dark:text-primary">
+            {frontmatter.title}
+          </PageHeading>
           <h3>
             <time dateTime={getISODate(frontmatter.date)}>{getReadableDate(frontmatter.date)}</time>
           </h3>

@@ -3,6 +3,7 @@ date: 2022-05-29
 title: The JavaScript Event Loop
 description: JavaScript operates on one thread using the event loop. It definetly makes our lives as developers easier as it's no fun dealing with paralellism. However, the event loop has some tricky parts to it as well. In this blog article, I want to go over those tricky parts and try to explain them to you.
 categories: [JavaScript, AllThingsWeb]
+ignore: true
 ---
 
 ## The main thread

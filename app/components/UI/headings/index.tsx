@@ -1,12 +1,19 @@
 import type { FC, HTMLAttributes } from 'react';
 
-type PageHeadingProps = HTMLAttributes<HTMLHeadingElement>;
+type PageHeadingProps = HTMLAttributes<HTMLHeadingElement> & {
+  asH2?: boolean;
+};
 
-const PageHeading: FC<PageHeadingProps> = ({ children, className = '', ...props }) => (
-  <h1 {...props} className={`text-xl md:text-2xl xl:text-4xl font-semibold ${className}`}>
-    {children}
-  </h1>
-);
+const PageHeading: FC<PageHeadingProps> = ({ children, asH2 = false, className = '', ...props }) =>
+  asH2 ? (
+    <h2 {...props} className={`text-xl md:text-2xl xl:text-4xl font-semibold ${className}`}>
+      {children}
+    </h2>
+  ) : (
+    <h1 {...props} className={`text-xl md:text-2xl xl:text-4xl font-semibold ${className}`}>
+      {children}
+    </h1>
+  );
 
 type SectionHeadingProps = HTMLAttributes<HTMLHeadingElement> & {
   icon: JSX.Element;
