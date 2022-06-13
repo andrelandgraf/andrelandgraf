@@ -9,6 +9,7 @@ import { MarkdownContainer } from '~/components/UI/markdown';
 import { PageHeading, SectionHeading } from '~/components/UI/headings';
 import { MarkdownLinkWrapper } from '~/components/UI/links';
 import { getMetaTags, getISODate, getReadableDate } from '~/utilities';
+import { useTwitterEmbeds } from '~/hooks';
 
 export const links: LinksFunction = () => {
   return [
@@ -72,6 +73,7 @@ export const loader: LoaderFunction = async (): Promise<LoaderData> => {
 };
 
 const HundredDaysOfCodePage = () => {
+  useTwitterEmbeds();
   const { entries } = useLoaderData<LoaderData>();
 
   return (

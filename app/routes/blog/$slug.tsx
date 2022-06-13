@@ -12,6 +12,7 @@ import { MarkdownLinkWrapper } from '~/components/UI/links';
 import { getMetaTags, getISODate, getReadableDate } from '~/utilities';
 
 import syntaxHighlightingStylesUrl from '~/styles/code.css';
+import { useTwitterEmbeds } from '~/hooks';
 
 export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: syntaxHighlightingStylesUrl }];
@@ -69,6 +70,7 @@ export const loader: LoaderFunction = async ({ params }): Promise<LoaderData> =>
 };
 
 const ArticlePage = () => {
+  useTwitterEmbeds();
   const { article } = useLoaderData<LoaderData>();
 
   return (
