@@ -1,4 +1,5 @@
 import type { FC, HTMLAttributes } from 'react';
+import { Decoder, CustomParagraph } from '~/components/UI/markdown';
 
 const H1: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
   return (
@@ -36,22 +37,22 @@ const UnorderedList: FC<HTMLAttributes<HTMLUListElement>> = ({ children }) => {
 };
 
 const ListItem: FC<HTMLAttributes<HTMLLIElement>> = ({ children }) => {
-  return <li className="pl-4 lg:mb-1 w-full text-lg lg:text-xl xl:text-2xl leading-loose">{children}</li>;
+  return <li className="pl-4 lg:mb-1 w-full text-lg lg:text-xl xl:text-2xl leading-loose font-light">{children}</li>;
 };
 
 const P: FC<HTMLAttributes<HTMLParagraphElement>> = ({ children, ...props }) => {
   return (
-    <p {...props} className="text-lg lg:text-xl xl:text-2xl leading-loose font-light">
+    <CustomParagraph {...props} className="text-lg lg:text-xl xl:text-2xl leading-loose font-light">
       {children}
-    </p>
+    </CustomParagraph>
   );
 };
 
 const Code: FC<HTMLAttributes<HTMLElement>> = ({ children, ...props }) => {
   return (
-    <code {...props} className="text-base font-mono p-1 bg-gray-200 dark:bg-gray-800 rounded-lg">
+    <Decoder {...props} className="text-base font-mono p-1 bg-gray-200 dark:bg-gray-800 rounded-lg">
       {children}
-    </code>
+    </Decoder>
   );
 };
 

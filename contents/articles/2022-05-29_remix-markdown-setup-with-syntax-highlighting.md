@@ -1,6 +1,6 @@
 ---
 date: 2022-05-29
-title: Remix Markdown Setup with Syntax Highlighting
+title: How to set up Markdown with Syntax Highlighting in Remix
 description: Markdown is a powerful tool for writing and publishing content. There are different ways of integrating Markdown in your Remix application. In this blog post, I want to show you how my own Markdown setup works.
 categories: [Remix.run]
 ---
@@ -76,6 +76,8 @@ It's still convinient to co-locate Markdown content and our code. We can get the
 
 I am using this approach on my own blog (thanks for reading btw.) and it works great! More precisely, I am reading from the filesystem on localhost and fetch the files from GitHub on production. This way, I am able to review new blog posts locally but can also make changes to the content without triggering a redeploy!
 
+**Note:** Please check out [github-md](https://github.com/jacob-ebey/github-md) by [Jacob Ebey](https://twitter.com/ebey_jacob). It's an awesome abstraction layer on top of the GitHub API, which let's you fetch Markdown from GitHub in no time. In the following, we will use the GitHub API directly but you can use github-md to skip ahead and simplify your code.
+
 Let's fetch the content of one file from GitHub:
 
 ```typescript
@@ -121,9 +123,9 @@ export default function ArticleComponent() {
 }
 ```
 
-Awesome! We are now able to fetch Markdown files from a remote origin and load them into our route components! So how do we transform the Markdown string into HTML?
+Awesome! We are able to fetch Markdown files from a remote origin and load them into our route components! So how do we transform the Markdown string into HTML?
 
-<a href={https://twitter.com/tannerlinsley/status/1527752952768696320}></a>
+`twitterEmbed: https://twitter.com/tannerlinsley/status/1527752952768696320`
 
 Parsing Markdown is not straightforward. Even the pros of the industry sometimes struggle with it. It's quite a rabbit hole.
 
@@ -235,7 +237,7 @@ export const MarkdownContainer: FC<MarkdownContainerProps> = ({ source, options,
 };
 ```
 
-Now we have all the bits and pieces together to render Markdown content! 🥳
+We have all the bits and pieces together to render Markdown content! 🥳
 
 So let's put it all together:
 
@@ -274,7 +276,7 @@ Some cool things you can do with custom React components:
 - A custom link component that handles external links differently
 - An optimized image component
 - Syntax highlighting for code and pre blocks
-- A code component that maps special markup "codes" to custom components e.g. to insert advertisments, marketing banners, etc.
+- Custom codes that map to custom components to insert advertisments, marketing banners, etc.
 
 We already built in the `options` property in our Markdown component and hook. So we can go ahead and provide our custom components as rehype-react options:
 
@@ -396,7 +398,7 @@ export const CodeBlock: FC<HTMLAttributes<HTMLPreElement>> = ({ children }) => {
 };
 ```
 
-Since we have full control over the markup of our code block component, we can add custom features such as copy-to-clipboard buttons and custom styling to it! To style the code block content, we can select a CSS file from the[prism-react-renderer repository](https://github.com/themarcba/prism-themes/tree/master/themes) and [import it into our Remix route](https://remix.run/docs/en/v1/guides/styling#styling):
+Since we have full control over the markup of our code block component, we can add custom features such as copy-to-clipboard buttons and custom styling to it! To style the code block content, we can select a CSS file from the [prism-react-renderer repository](https://github.com/themarcba/prism-themes/tree/master/themes) and [import it into our Remix route](https://remix.run/docs/en/v1/guides/styling#styling):
 
 ```tsx
 import stylesUrl from '~/styles/code.css';

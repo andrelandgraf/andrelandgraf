@@ -60,7 +60,7 @@ const CodeBlock: FC<HTMLAttributes<HTMLPreElement>> = ({ children }) => {
     <div className="w-full">
       <Highlight {...defaultProps} code={code.trim()} language={lang || 'bash'}>
         {({ className, tokens, getLineProps, getTokenProps }) => (
-          <div className="p-2 lg:p-4 rounded-md font-normal text-sm md:text-base w-full bg-[#2b2b2b]">
+          <div className="p-2 lg:p-4 rounded-md font-normal text-sm md:text-base w-full bg-[#2b2b2b] text-white">
             <div className="flex justify-end">
               <span className="mr-5 text-sm md:text-lg">{lang || 'text'}</span>
               <CopyClipboardButton title="Copy code" content={code} id={id} />
