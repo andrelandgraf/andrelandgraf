@@ -31,7 +31,7 @@ headers:
 
 So why don't we just stop here? MDX route modules are a great starting point but they aren't as flexibile as other options. MDX is convinient to work with but personally, I like to separate content from code. Instead of importing React components into my content (MDX), I'd rather render my Markdown inside components. It's also worth mentioning that if you want to maintain hundreds of Markdown files, then you will likely run into [scalability issues](https://remix.run/docs/en/v1/guides/mdx#:~:text=Clearly%20this%20is,MDX%20Bundler.) when using MDX route modules.
 
-In case you would like to work with MDX but want more flexibility than MDX route modules, have a look at [MDX Bundler](https://github.com/kentcdodds/mdx-bundler). However, we will continue with Markdown files instead of MDX in this blog post.
+In case you would like to work with MDX but want more flexibility than MDX route modules, have a look at [MDX Bundler](https://github.com/kentcdodds/mdx-bundler). If you are interested in pursuing this route (pun intended), check out [Kiliman's](https://twitter.com/kiliman) implementation [on GitHub](https://github.com/kiliman/kiliman-dev). However, we will be working with Markdown files instead of MDX in this blog post.
 
 ## Reading Markdown files from fs
 
@@ -423,30 +423,30 @@ export const CodeBlock: FC<HTMLAttributes<HTMLPreElement>> = ({ children }) => {
   const lang = getLanguageFromClassName(className);
   if (!isLanguageSupported(lang)) throw Error(`CodeBlock: language ${lang} is not supported`);
   return (
-    <div className="w-full">
-      <Highlight {...defaultProps} code={code.trim()} language={lang || 'bash'}>
-        {({ className, tokens, getLineProps, getTokenProps }) => (
-          <div className="p-2 lg:p-4 rounded-md font-normal text-sm md:text-base w-full">
-            <pre className={`overflow-scroll ${className}`} style={{}}>
-              <code className={className} style={{}}>
-                {tokens.map((line, i) => (
-                  <div key={i} {...getLineProps({ line, key: i })} style={{}}>
-                    {line.map((token, key) => (
-                      <span key={key} {...getTokenProps({ token, key })} style={{}} />
-                    ))}
-                  </div>
+    <Highlight {...defaultProps} code={code.trim()} language={lang || 'bash'}>
+      {({ className, tokens, getLineProps, getTokenProps }) => (
+        <pre className={`overflow-scroll ${className}`} style={{}}>
+          <code className={className} style={{}}>
+            {tokens.map((line, i) => (
+              <div key={i} {...getLineProps({ line, key: i })} style={{}}>
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({ token, key })} style={{}} />
                 ))}
-              </code>
-            </pre>
-          </div>
-        )}
-      </Highlight>
-    </div>
+              </div>
+            ))}
+          </code>
+        </pre>
+      )}
+    </Highlight>
   );
 };
 ```
 
-Since we have full control over the markup of our code block component, we can add custom features such as copy-to-clipboard buttons and custom styling to it! To style the code block content, we can select a CSS file from the [prism-react-renderer repository](https://github.com/themarcba/prism-themes/tree/master/themes) and [import it into our Remix application](https://remix.run/docs/en/v1/guides/styling#styling):
+Since we have full control over the markup of our code block component, we can add custom features such as copy-to-clipboard buttons, headers, and custom styling! You can find my own implementation with Tailwind CSS [here](https://github.com/andrelandgraf/andrelandgraf/blob/64f2a0b77ea944e6337ac060000407509ec11d8f/app/components/UI/markdown/pre.tsx#L50).
+
+**Note:** Make sure to add `overflow: scroll` to the `pre` element's styling to ensure that your code is displayed nicely.
+
+To change the syntax highlighting, we can select a CSS file from the [prism-react-renderer repository](https://github.com/themarcba/prism-themes/tree/master/themes). Copy-paste the content of the theme in a CSS file in your project and [import it into your Remix application](https://remix.run/docs/en/v1/guides/styling#styling):
 
 ```tsx
 import stylesUrl from '~/styles/code.css';
