@@ -201,7 +201,7 @@ npm i react-markdown
 
 Now we have to alter the remix.config.js file as specified in the [remix.run documentation](https://remix.run/docs/en/v1/pages/gotchas#importing-esm-packages) and add all ESM packages that we want to use (that is react-markdown and all its dependencies):
 
-```js
+```javascript
 /**
  * @type {import('@remix-run/dev/config').AppConfig}
  */
@@ -256,7 +256,7 @@ We are now rendering Markdown content in a synchronized manner in our Remix app 
 
 If you have issues with the ESM workaround and receive `Error [ERR_REQUIRE_ESM]: require() of ES Module` errors, try deleting the `.cache` folder in your project root:
 
-```
+```bash
 rm -rf .cache public/build node_modules package-lock.json
 ```
 
