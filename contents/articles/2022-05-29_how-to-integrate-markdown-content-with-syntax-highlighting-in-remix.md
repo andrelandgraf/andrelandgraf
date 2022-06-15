@@ -7,6 +7,10 @@ categories: [Remix.run]
 
 Markdown is amazing. It's a powerful tool for writing and publishing content. In fact, the text you are reading right now is stored in a Markdown file. There are different ways of integrating Markdown into your Remix application, and not all of them are straightforward. In this blog post, I want to show you how my own Markdown setup works. Let's start by going over different options of integrating Markdown in Remix.
 
+## Off-the-shelf solution
+
+[Remix Stacks](https://remix.run/docs/en/v1/pages/stacks) can be used to generate Remix projects quickly and easily based on official and community-created templates. One of those templates is the [Speed Metal Stack](https://github.com/Girish21/speed-metal-stack) by [Girish](https://twitter.com/girishk21). It's a blog starter template that includes a lot of useful features for writing and publishing content. If you are looking for an out-of-the-box solution, then this is the stack for you!
+
 ## MDX route modules
 
 The easiest way of integrating Markdown into Remix is probably to use [MDX route modules](https://remix.run/docs/en/v1/guides/mdx) directly in the `app/routes` directory. Remix will compile those files for you, and you can even add frontmatter for meta and headers properties - more about frontmatter later.
@@ -31,7 +35,7 @@ In case you would like to work with MDX but want more flexibility than MDX route
 
 ## Reading Markdown files from fs
 
-A custom setup that separates data and display allows for more flexibility. We can read our Markdown content from the filesystem, parse the frontmatter, and then render the Markdown content inside our application.
+A custom setup that separates data and display allows for more flexibility than MDX route modules. We can read our Markdown content from the filesystem, parse the frontmatter, and then render the Markdown content inside our application.
 
 **Note:** Most serverless environments, such as Vercel or Netlify, don't have access to the filesystem. This means that you can't use this setup in those environments.
 
@@ -260,7 +264,9 @@ module.exports = {
 };
 ```
 
-After that, we can go ahead and utilize the `ReactMarkdown` component exposed by the react-markdown package:
+Shout-out to [Girish](https://twitter.com/girishk21) for helping me with this workaround!
+
+We can now go ahead and utilize the `ReactMarkdown` component exposed by the react-markdown package:
 
 ```tsx
 import { parseFrontMatter } from 'front-matter';
