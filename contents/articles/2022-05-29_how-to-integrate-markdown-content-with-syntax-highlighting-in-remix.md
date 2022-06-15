@@ -1,15 +1,15 @@
 ---
 date: 2022-05-29
-title: How to integrate Markdown Content with Syntax Highlighting in Remix
+title: How to Integrate Markdown Content with Syntax Highlighting in Remix
 description: Markdown is a powerful tool for writing and publishing content. There are different ways of integrating Markdown in your Remix application. In this blog post, I want to show you how my own Markdown setup works.
 categories: [Remix.run]
 ---
 
-Markdown is amazing. It's a powerful tool for writing and publishing content. In fact, the text you are reading right now is stored in a Markdown file. There are different ways of integrating Markdown in your Remix application. Not all of them are straightforward. In this blog post, I want to show you how my own Markdown setup works. Let's start by going over different options of integrating Markdown in Remix.
+Markdown is amazing. It's a powerful tool for writing and publishing content. In fact, the text you are reading right now is stored in a Markdown file. There are different ways of integrating Markdown into your Remix application, and not all of them are straightforward. In this blog post, I want to show you how my own Markdown setup works. Let's start by going over different options of integrating Markdown in Remix.
 
 ## MDX route modules
 
-The easiest way of integrating Markdown in Remix is probably to use [MDX route modules](https://remix.run/docs/en/v1/guides/mdx) directly in the `app/routes` directory. Remix will compile those files for you and you can even add frontmatter for meta and headers properties - more about frontmatter later.
+The easiest way of integrating Markdown into Remix is probably to use [MDX route modules](https://remix.run/docs/en/v1/guides/mdx) directly in the `app/routes` directory. Remix will compile those files for you, and you can even add frontmatter for meta and headers properties - more about frontmatter later.
 
 MDX files can be put directly in `app/routes` to act as route modules:
 
@@ -25,7 +25,7 @@ headers:
 # A route module using MDX
 ```
 
-So why don't we just stop here? MDX route modules are a great starting point but they aren't as flexibile as other options. MDX is convinient to work with but personally, I like to separate content from code. Instead of importing React components into my content (MDX), I rather render my Markdown inside components. It's also worth mentioning that if you want to maintain hundreds of Markdown files, then you will likely run into [scalability issues](https://remix.run/docs/en/v1/guides/mdx#:~:text=Clearly%20this%20is,MDX%20Bundler.) when using MDX route modules.
+So why don't we just stop here? MDX route modules are a great starting point but they aren't as flexibile as other options. MDX is convinient to work with but personally, I like to separate content from code. Instead of importing React components into my content (MDX), I'd rather render my Markdown inside components. It's also worth mentioning that if you want to maintain hundreds of Markdown files, then you will likely run into [scalability issues](https://remix.run/docs/en/v1/guides/mdx#:~:text=Clearly%20this%20is,MDX%20Bundler.) when using MDX route modules.
 
 In case you would like to work with MDX but want more flexibility than MDX route modules, have a look at [MDX Bundler](https://github.com/kentcdodds/mdx-bundler). However, we will continue with Markdown files instead of MDX in this blog post.
 
@@ -33,7 +33,7 @@ In case you would like to work with MDX but want more flexibility than MDX route
 
 A custom setup that separates data and display allows for more flexibility. We can read our Markdown content from the filesystem, parse the frontmatter, and then render the Markdown content inside our application.
 
-**Note:** Most serverless environments, such as Vercel or Netlify, don't have access to the filesystem. This means that you can't use this setup in those environment.
+**Note:** Most serverless environments, such as Vercel or Netlify, don't have access to the filesystem. This means that you can't use this setup in those environments.
 
 Let's create a folder for our Markdown content, e.g. `contents/articles`. Inside the folder, we create one Markdown file for each of our articles. In a Node.js-based environment, we can read a file using `fs.readFile`.
 
@@ -70,7 +70,7 @@ export default function ArticleComponent() {
 
 Great! Now we can access the Markdown string in our React components using the `useLoaderData` hook from Remix!
 
-### URL-based Markdown content using Slugs
+### URL-based Markdown content using slugs
 
 In the previous example, we hardcoded the filename of the Markdown file. Let's change that to use slugs. A slug is a URL-friendly string. It's used to identify a specific article or blog post.
 
@@ -104,9 +104,9 @@ We can fetch Markdown files from a remote server. This approach also works for s
 
 ### Fetching Markdown files from GitHub
 
-It's still convinient to co-locate Markdown content and our code. We can get the best of both worlds by using GitHub. We can manage our content using git but we are also able to fetch the content using the GitHub API.
+It's still convinient to co-locate Markdown content and our code. We can get the best of both worlds by using GitHub. We can manage our content using git, but we are also able to fetch the content using the GitHub API.
 
-I am using this approach on my own blog (thanks for reading btw.) and it works great! More precisely, I am reading from the filesystem on localhost and fetch the files from GitHub on production. This way, I am able to review new blog posts locally but can also make changes to the content without triggering a redeploy!
+I am using this approach on my own blog (thanks for reading btw.) and it works great! More precisely, I am reading from the filesystem on localhost and fetching the files from GitHub on production. This way, I am able to review new blog posts locally but can also make changes to the content without triggering a redeploy!
 
 So let's see how we can fetch Markdown content from GitHub. In the following, we will use the GitHub API directly.
 
@@ -137,7 +137,7 @@ export async function fetchMarkdownFile(fileName: string) {
 }
 ```
 
-**Note:** If you think this is too cumbersome, then you are definetly not alone! [Jacob Ebey](https://twitter.com/ebey_jacob) created an awesome abstraction layer on top of the GitHub API, which let's you fetch Markdown from GitHub in no time. Please check out the[github-md](https://github.com/jacob-ebey/github-md) API to save some code.
+**Note:** If you think this is too cumbersome, then you are definetly not alone! [Jacob Ebey](https://twitter.com/ebey_jacob) created an awesome abstraction layer on top of the GitHub API, which let's you fetch Markdown from GitHub in no time. Please check out the [github-md](https://github.com/jacob-ebey/github-md) API to save some code.
 
 Either way, using github-md or our custom fetch logic, we are now able to fetch Markdown content from GitHub!
 
@@ -356,7 +356,7 @@ We introduce another package here: prism-react-renderer:
 npm i prism-react-renderer
 ```
 
-Next, we create a wrapper component around the primitives provided by prism-react-renderer. With rism-react-renderer syntax highlighing aka. styling our code block becomes as easy as copy-pasting one of the CSS themes from the [prism-react-renderer repository](https://github.com/themarcba/prism-themes/tree/master/themes).
+Next, we create a wrapper component around the primitives provided by prism-react-renderer. With prism-react-renderer syntax highlighing aka. styling our code block becomes as easy as copy-pasting one of the CSS themes from the [prism-react-renderer repository](https://github.com/themarcba/prism-themes/tree/master/themes).
 
 Our wrapper component:
 
@@ -490,11 +490,11 @@ Usually, you want to display a list of all your content to users as well. GitHub
 
 ## Caching responses from GitHub
 
-GitHub throttles the number of requests you can make to the API. This means that if you make too many requests, you will get a `403 Forbidden` error. To avoid this, we can cache the responses from GitHub. Both github-md and the GitHub API return the SHA of the commit where each file was changed. We can use the SHA identifier to cache the response. This way, we can avoid making too many requests to GitHub.
+[GitHub throttles](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting) the number of requests you can make to their API. To avoid this, we can cache the responses from GitHub. Both github-md and the GitHub API return the SHA of the commit where each file was changed. We can use the SHA identifier to cache the response. That's a great starting point for creating a custom caching layer using something like Redis.
 
 ## Generating a Table of Contents from a Markdown file
 
-So far, I have not found a nice way to create a dynamic table of content based on the content of a Markdown file. In [Particular.Cloud](https://particular.cloud/documentation/developers/v1), I dynamically parse through the final HTML (in a `useEffect`), but I don't think that's a very elegant solution. I hope I can update this section soon!
+So far, I have not found a nice way to create a dynamic table of contents based on the content of a Markdown file. In [Particular.Cloud](https://particular.cloud/documentation/developers/v1), I dynamically parse through the final HTML (in a `useEffect`), but I don't think that's a very elegant solution. I hope I can update this section soon!
 
 Please let me know [on Twitter](https://twitter.com/AndreLandgraf94) if you have any suggestions!
 
@@ -502,4 +502,4 @@ Please let me know [on Twitter](https://twitter.com/AndreLandgraf94) if you have
 
 It wouldn't be a blog post about Remix.run without referencing Kent C. Dodds. Kent has created a very sophisticated Markdown pipeline for his website. Check out [the kentcdodds.com repository](https://github.com/kentcdodds/kentcdodds.com) on GitHub.
 
-It took me a long time to create a nice Markdown logic on [Particular.Cloud](https://particular.cloud/documentation/developers/v1) and on my personal website. I am pretty happy with the current implementation, but I am still looking into way to improve it over time (especially the table of contents). I will try to keep this blog post up to date!
+It took me a long time to create a nice Markdown logic on [Particular.Cloud](https://particular.cloud/documentation/developers/v1) and on my personal website. I am pretty happy with the current implementation, but I am still looking into ways to improve it over time (especially the table of contents). I will try to keep this blog post up to date!
