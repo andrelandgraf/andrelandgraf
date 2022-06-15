@@ -74,7 +74,7 @@ export default function ArticleComponent() {
 
 Great! Now we can access the Markdown string in our React components using the `useLoaderData` hook from Remix!
 
-### URL-based Markdown content using slugs
+### Load Markdown content dynamically using slugs
 
 In the previous example, we hardcoded the filename of the Markdown file. Let's change that to use slugs. A slug is a URL-friendly string. It's used to identify a specific article or blog post.
 
