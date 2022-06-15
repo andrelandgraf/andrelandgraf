@@ -1,6 +1,6 @@
 import type { FC, HTMLAttributes } from 'react';
-import type { ReyhpeOptions } from '~/hooks';
-import { useMarkdown } from '~/hooks';
+import type { Components } from 'react-markdown';
+import ReactMarkdown from 'react-markdown';
 
 export * from './decoder';
 export * from './paragraph';
@@ -8,12 +8,15 @@ export * from './pre';
 
 interface MarkdownContainerProps extends HTMLAttributes<HTMLDivElement> {
   source: string;
-  options?: ReyhpeOptions;
+  components?: Components;
 }
 
-const MarkdownContainer: FC<MarkdownContainerProps> = ({ source, options, ...props }) => {
-  const html = useMarkdown(source, options);
-  return <div {...props}>{html}</div>;
+const MarkdownContainer: FC<MarkdownContainerProps> = ({ source, components, ...props }) => {
+  return (
+    <div {...props}>
+      <ReactMarkdown components={components}>{source}</ReactMarkdown>
+    </div>
+  );
 };
 
 export { MarkdownContainer };

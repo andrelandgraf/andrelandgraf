@@ -25,7 +25,9 @@ headers:
 # MDX route modules
 ```
 
-So why don't we stop here? MDX route modules are a great starting point but they aren't as flexibile. MDX is very convinient to work with but personally, I like to separate content from code. Instead of importing React components into my content (MDX), I rather render my Markdown inside components. It's also worth mentioning that if you want to maintain hundreds of Markdown files, then you will likely run into [scalability issues](https://remix.run/docs/en/v1/guides/mdx#:~:text=Clearly%20this%20is,MDX%20Bundler.) when using MDX route modules.
+So why don't we just stop here? MDX route modules are a great starting point but they aren't as flexibile. MDX is very convinient to work with but personally, I like to separate content from code. Instead of importing React components into my content (MDX), I rather render my Markdown inside components. It's also worth mentioning that if you want to maintain hundreds of Markdown files, then you will likely run into [scalability issues](https://remix.run/docs/en/v1/guides/mdx#:~:text=Clearly%20this%20is,MDX%20Bundler.) when using MDX route modules.
+
+In case you would like to work with MDX but want more flexibility than MDX route modules, have a look at [MDX Bundler](https://github.com/kentcdodds/mdx-bundler). However, we will continue with Markdown files instead of MDX in this blog post.
 
 ## Reading Markdown files from fs
 

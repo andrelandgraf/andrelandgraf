@@ -98,15 +98,27 @@ const HundredDaysOfCodePage = () => {
               <MarkdownContainer
                 className="flex flex-col gap-3 max-w-2xl"
                 source={markdown}
-                options={{
-                  components: {
-                    h1: H1,
-                    h2: H2,
-                    h3: H3,
-                    ul: UnorderedList,
-                    ol: OrderedList,
-                    li: ListItem,
-                    a: MarkdownLinkWrapper,
+                components={{
+                  h1({ node, children, ...props }) {
+                    return <H1 {...props}>{children}</H1>;
+                  },
+                  h2({ node, children, ...props }) {
+                    return <H2 {...props}>{children}</H2>;
+                  },
+                  h3({ node, children, ...props }) {
+                    return <H3 {...props}>{children}</H3>;
+                  },
+                  ul({ node, children, ...props }) {
+                    return <UnorderedList {...props}>{children}</UnorderedList>;
+                  },
+                  ol({ node, children, ...props }) {
+                    return <OrderedList {...props}>{children}</OrderedList>;
+                  },
+                  li({ node, children, ...props }) {
+                    return <ListItem {...props}>{children}</ListItem>;
+                  },
+                  a({ node, children, ...props }) {
+                    return <MarkdownLinkWrapper {...props}>{children}</MarkdownLinkWrapper>;
                   },
                 }}
               />
