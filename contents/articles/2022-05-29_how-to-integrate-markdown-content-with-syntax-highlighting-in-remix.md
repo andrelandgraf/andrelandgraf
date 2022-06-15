@@ -70,6 +70,32 @@ export default function ArticleComponent() {
 
 Great! Now we can access the Markdown string in our React components using the `useLoaderData` hook from Remix!
 
+### URL-based Markdown content using Slugs
+
+In the previous example, we hardcoded the filename of the Markdown file. Let's change that to use slugs. A slug is a URL-friendly string. It's used to identify a specific article or blog post.
+
+Let's create a route module named `/blog/$slug` with a `slug` parameter and use the `slug` parameter to access a Markdown file dynamically based on the user's request:
+
+```tsx
+import { readPost } from '~/utilities/readPost.server.ts';
+
+export async function loader({ params }) {
+  const { slug } = params;
+  const markdown = await readPost(`${slug}.md`);
+  if (!markdown) {
+    throw new Response('Not Found', { status: 404 });
+  }
+  return { markdown };
+}
+
+export default function ArticleComponent() {
+  const { markdown } = useLoaderData();
+  // TODO transform markdown to HTML (we come to this later)
+}
+```
+
+Sweet! Now we dynamically find our Markdown file based on the user's request! 🥳
+
 There are still some downsides to this approach. Firstly, we don't always have access to the filesystem. Some edge and serverless environments do not allow access to the underlying filesystem. Additionally, if the content lives on our server's filesystem, then an update to the content requires a new deployment of the application to update the server's filesystem. This is inconvinient. We want to be able to save our content changes and see our changes right away, right? Well, we can do so if we decouple the content from the server.
 
 ## Fetching Markdown files from a remote origin
@@ -104,12 +130,10 @@ export async function fetchMarkdownFile(fileName: string) {
   if (!response.ok || response.status !== 200) {
     if (response.status === 404) {
       return undefined; // File not found
-    } else {
-      throw Error(`Fetching Markdown file from GitHub failed with ${response.status}: ${response.statusText}`);
     }
+    throw Error(`Fetching Markdown file from GitHub failed with ${response.status}: ${response.statusText}`);
   }
-  const textContent = await response.text();
-  return textContent;
+  return response.text();
 }
 ```
 
@@ -122,8 +146,12 @@ Now we can update our code from earlier and fetch the content from GitHub:
 ```tsx
 import { fetchMarkdownFile } from '~/utilities/github.server.ts';
 
-export async function loader() {
-  const markdown = await fetchMarkdownFile('remix-markdown-setup.md');
+export async function loader({ params }) {
+  const { slug } = params;
+  const markdown = await fetchMarkdownFile(`${slug}.md`);
+  if (!markdown) {
+    throw new Response('Not Found', { status: 404 });
+  }
   return { markdown };
 }
 
@@ -166,8 +194,12 @@ Then we can just call the `parseFrontMatter` function:
 import { parseFrontMatter } from 'front-matter';
 import { fetchMarkdownFile } from '~/utilities/github.server.ts';
 
-export async function loader() {
-  const markdown = await fetchMarkdownFile('remix-markdown-setup.md');
+export async function loader({ params }) {
+  const { slug } = params;
+  const markdown = await fetchMarkdownFile(`${slug}.md`);
+  if (!markdown) {
+    throw new Response('Not Found', { status: 404 });
+  }
   // "attributes" contains the parsed frontmatter
   // "body" contains the Markdown string without the frontmatter
   const { attributes, body } = parseFrontMatter(markdown);
@@ -199,7 +231,7 @@ Let's first install react-markdown:
 npm i react-markdown
 ```
 
-Now we have to alter the remix.config.js file as specified in the [remix.run documentation](https://remix.run/docs/en/v1/pages/gotchas#importing-esm-packages) and add all ESM packages that we want to use (that is react-markdown and all its dependencies):
+Now we have to alter the `remix.config.js` file as specified in the [remix.run documentation](https://remix.run/docs/en/v1/pages/gotchas#importing-esm-packages) and add all ESM packages that we want to use (that is react-markdown and all its dependencies):
 
 ```javascript
 /**
@@ -235,8 +267,12 @@ import { parseFrontMatter } from 'front-matter';
 import ReactMarkdown from 'react-markdown';
 import { fetchMarkdownFile } from '~/utilities/github.server.ts';
 
-export async function loader() {
-  const markdown = await fetchMarkdownFile('remix-markdown-setup.md');
+export async function loader({ params }) {
+  const { slug } = params;
+  const markdown = await fetchMarkdownFile(`${slug}.md`);
+  if (!markdown) {
+    throw new Response('Not Found', { status: 404 });
+  }
   const { attributes, body } = parseFrontMatter(markdown);
   return { attributes, body };
 }
@@ -440,9 +476,9 @@ export default function ArticleComponent() {
 }
 ```
 
-That's it! We successfully implemented a custom pipeline to fetch Markdown from a remote origin, parse frontmatter, transform the Markdown into HTML, and map it to custom React components. We added syntax highlighting through a custom code block component and a CSS theme with prism-react-renderer. 💯
+That's it! We successfully implemented a custom pipeline to fetch dynamic Markdown content from a remote origin, parse its frontmatter, transform the Markdown into HTML, and map it to custom React components! We also added syntax highlighting through a custom code block component and a CSS theme with prism-react-renderer. 💯
 
-Wow, that's a lot of work! And there is so much more to explore! We are now able to fetch one Markdown file from GitHub but what about fetching multiple Markdown files from GitHub? What about rendering Markdown content based on a slug (URL-based content)? I will not go into more code examples here but touch onto some more topics in the following. I will also try to add more blog posts about more advanced topics in the future, so make sure to follow me [on Twitter](https://twitter.com/AndreLandgraf94)!
+Wow, that's a lot of work! And there is so much more to explore! We are now able to fetch one dynamic Markdown file from GitHub but what about fetching multiple Markdown files from GitHub? I will not go into more code examples here but touch onto some more topics in the following. I will also try to add more blog posts about more advanced topics in the future, so make sure to follow me [on Twitter](https://twitter.com/AndreLandgraf94)!
 
 Thanks for reading! Have a great one! 👋
 
