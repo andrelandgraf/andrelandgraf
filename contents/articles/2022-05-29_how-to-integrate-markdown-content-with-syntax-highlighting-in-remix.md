@@ -287,19 +287,18 @@ export default function ArticleComponent() {
   return (
     <article>
       <h1>{attributes.title}</h1>
-      <MarkdownContainer
-        source={body}
-        options={{
-          components: {
-            h1({ node, children, ...props }) {
-              return <H1 {...props}>{children}</H1>;
-            },
-            a({ node, children, ...props }) {
-              return <StyledLink {...props}>{children}</StyledLink>;
-            },
+      <ReactMarkdown
+        components={{
+          h1({ node, children, ...props }) {
+            return <H1 {...props}>{children}</H1>;
+          },
+          a({ node, children, ...props }) {
+            return <StyledLink {...props}>{children}</StyledLink>;
           },
         }}
-      />
+      >
+        {body}
+      </ReactMarkdown>
     </article>
   );
 }
