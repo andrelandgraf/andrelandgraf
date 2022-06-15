@@ -254,9 +254,19 @@ export default function ArticleComponent() {
 
 We are now rendering Markdown content in a synchronized manner in our Remix app with frontmatter support and our fancy remote fetching logic! 🔥
 
+If you have issues with the ESM workaround and receive `Error [ERR_REQUIRE_ESM]: require() of ES Module` errors, try deleting the `.cache` folder in your project root:
+
+```
+rm -rf .cache public/build node_modules package-lock.json
+```
+
+**Note:** Run `rm -rf` at your own risk!
+
+**Note:** If your issues persist, you can also go ahead and reimplement react-markdown yourself. That's what I did before the ESM workaround was introduced by the Remix team. You can find my old source code for the CommonJS version of react-markdown [here](https://gist.github.com/andrelandgraf/895d6251d9d3c8160251d86cd3c10d50).
+
 ## How to use custom React components with Markdown
 
-Mapping our Markdown HTML elements to custom React components is a great way to extend the functionality of your Markdown and to reuse your app's styling and behavior!
+Mapping Markdown HTML elements to custom React components is a great way to extend the functionality of your Markdown and to reuse your app's styling and behavior!
 
 Some cool things you can do with custom React components:
 
@@ -295,7 +305,7 @@ export default function ArticleComponent() {
 }
 ```
 
-**Note:** The `components` property is a JavaScript object that maps HTML elements to custom React components. The keys of the object are the HTML element names and the values are the custom React components. The mapping also gives you access to a `node` property that contains the parsed HTML element (type `Element`).
+**Note:** The `components` property is a JavaScript object that maps HTML elements to custom React components. The keys of the object are the HTML element names and the values are the custom React components. The mapping also gives us access to a `node` property that contains the parsed HTML element (type `Element`).
 
 ## Adding syntax highlighting to Markdown code blocks
 
@@ -433,61 +443,19 @@ export default function ArticleComponent() {
 
 That's it! We successfully implemented a custom pipeline to fetch Markdown from a remote origin, parse frontmatter, transform the Markdown into HTML, and map it to custom React components. We added syntax highlighting through a custom code block component and a CSS theme with prism-react-renderer. 💯
 
+Wow, that's a lot of work! And there is so much more to explore! We are now able to fetch one Markdown file from GitHub but what about fetching multiple Markdown files from GitHub? What about rendering Markdown content based on a slug (URL-based content)? I will not go into more code examples here but touch onto some more topics in the following. I will also try to add more blog posts about more advanced topics in the future, so make sure to follow me [on Twitter](https://twitter.com/AndreLandgraf94)!
+
+Thanks for reading! Have a great one! 👋
+
 ## How to fetch multiple Markdown Files
 
-Usually, you want to display a list of all your content to users as well. GitHub offers another API endpoint to get all files within a directory. From there, we can fetch each file content and parse the frontmatter. This should give us all the information required to render a list of contents.
+Usually, you want to display a list of all your content to users as well. GitHub offers [an API endpoint](https://docs.github.com/en/rest/repos/contents#if-the-content-is-a-directory) to get all files within a directory. From there, we can fetch each file content and parse the frontmatter. This should give us all the information required to render a list of contents.
 
-**Note:** Alternatively, [github-md](https://github.com/jacob-ebey/github-md) also provides an API endpoint to get all files and additionally returns the the sha of the commit where each file was changed, so you could even create your own caching logic!
+**Note:** Alternatively, [github-md](https://github.com/jacob-ebey/github-md) also provides an API endpoint to get all files of a directory.
 
-Let's fetch a list of all files in a directory from GitHub:
+## Caching responses from GitHub
 
-```typescript
-type GitHubFileObject = {
-  name: string;
-  path: string;
-  sha: string;
-  size: number;
-  url: string;
-  html_url: string;
-  git_url: string;
-  download_url: string;
-  type: string;
-};
-
-interface GithubContentResponse extends GitHubFileObject {
-  entries: GitHubFileObject[];
-}
-
-export async function fetchFileItems(dir: string): Promise<GitHubFileObject[]> {
-  const accessToken = '<your-github-access-token>';
-  const accountName = '<your-github-account-name>';
-  const repoName = '<your-github-repo-name>';
-  const headers = new Headers();
-  headers.set('Accept', 'application/vnd.github.v3.object');
-  headers.set('Authorization', `token ${accessToken}`);
-  headers.set('User-Agent', '<your-app-name>');
-
-  const repo = `https://api.github.com/repos/${accountName}/${repoName}`;
-  const url = new URL(repo + dir);
-
-  const response = await fetch(url, { headers });
-  if (!response.ok || response.status !== 200) {
-    if (response.status === 404) {
-      return undefined; // File not found
-    }
-    throw Error(`Fetching list of files from GitHub failed with ${response.status}: ${response.statusText}`);
-  }
-
-  const content: GithubContentResponse = await response.json();
-  return content.entries;
-}
-```
-
-Now we can iterate over the list of files and use the file's `name` property of each file item to fetch its Markdown content using the `fetchMarkdownFile` function that we implemented earlier. We then parse the frontmatter of each file to get all the metadata we need to display a table of contents! 💯
-
-## Render content based on a slug
-
-// TBD
+GitHub throttles the number of requests you can make to the API. This means that if you make too many requests, you will get a `403 Forbidden` error. To avoid this, we can cache the responses from GitHub. Both github-md and the GitHub API return the SHA of the commit where each file was changed. We can use the SHA identifier to cache the response. This way, we can avoid making too many requests to GitHub.
 
 ## Generating a Table of Contents from a Markdown file
 
