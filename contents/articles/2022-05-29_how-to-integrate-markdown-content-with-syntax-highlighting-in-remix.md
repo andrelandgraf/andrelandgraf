@@ -22,10 +22,10 @@ headers:
   Cache-Control: no-cache
 ---
 
-# MDX route modules
+# A route module using MDX
 ```
 
-So why don't we just stop here? MDX route modules are a great starting point but they aren't as flexibile. MDX is very convinient to work with but personally, I like to separate content from code. Instead of importing React components into my content (MDX), I rather render my Markdown inside components. It's also worth mentioning that if you want to maintain hundreds of Markdown files, then you will likely run into [scalability issues](https://remix.run/docs/en/v1/guides/mdx#:~:text=Clearly%20this%20is,MDX%20Bundler.) when using MDX route modules.
+So why don't we just stop here? MDX route modules are a great starting point but they aren't as flexibile as other options. MDX is convinient to work with but personally, I like to separate content from code. Instead of importing React components into my content (MDX), I rather render my Markdown inside components. It's also worth mentioning that if you want to maintain hundreds of Markdown files, then you will likely run into [scalability issues](https://remix.run/docs/en/v1/guides/mdx#:~:text=Clearly%20this%20is,MDX%20Bundler.) when using MDX route modules.
 
 In case you would like to work with MDX but want more flexibility than MDX route modules, have a look at [MDX Bundler](https://github.com/kentcdodds/mdx-bundler). However, we will continue with Markdown files instead of MDX in this blog post.
 
@@ -33,13 +33,13 @@ In case you would like to work with MDX but want more flexibility than MDX route
 
 A custom setup that separates data and display allows for more flexibility. We can read our Markdown content from the filesystem, parse the frontmatter, and then render the Markdown content inside our application.
 
-**Note:** Most serverless environments - such as Vercel or Netlify - don't have access to the filesystem. This means that you can't use this setup in a serverless environment.
+**Note:** Most serverless environments, such as Vercel or Netlify, don't have access to the filesystem. This means that you can't use this setup in those environment.
 
-Let's create a folder for our Markdown content, e.g. `contents/articles`. Inside the folder, we create one Markdown file - e.g. `remix-markdown-setup.md` - for each of our articles. In a Node.js-based environment, we can read the file using `fs.readFile`.
-
-Let's create a file reading utility, e.g. `readPost.server.ts`:
+Let's create a folder for our Markdown content, e.g. `contents/articles`. Inside the folder, we create one Markdown file for each of our articles. In a Node.js-based environment, we can read a file using `fs.readFile`.
 
 **Note:** If you are using Deno, you can use `Deno.readTextFile` instead of `fs.readFile`. Find more information in the [deno documentation](https://deno.land/manual/examples/read_write_files).
+
+Let's create a file reading utility, e.g. `readPost.server.ts`:
 
 ```typescript
 import fs from 'fs/promises';
@@ -50,7 +50,7 @@ export async function readPost(fileName: string) {
 }
 ```
 
-**Note:** Make sure to put the utility function in a file ending with `.server` to exclude the Node.js lib imports from the client bundle (e.g. `readPost.server.ts`).
+**Note:** Make sure to put the utility function in a file ending with `.server` to exclude the Node.js lib imports from the client bundle.
 
 We call `readPost` in our route's loader function to access the Markdown string on the server:
 
@@ -64,15 +64,17 @@ export async function loader() {
 
 export default function ArticleComponent() {
   const { markdown } = useLoaderData();
-  // ...
+  // TODO transform markdown to HTML (we come to this later)
 }
 ```
 
-Great! Now we can access the Markdown string in our route component using the `useLoaderData` hook! Unfortunately, this will only work in an environment that has access to the filesystem.
+Great! Now we can access the Markdown string in our React components using the `useLoaderData` hook from Remix!
+
+There are still some downsides to this approach. Firstly, we don't always have access to the filesystem. Some edge and serverless environments do not allow access to the underlying filesystem. Additionally, if the content lives on our server's filesystem, then an update to the content requires a new deployment of the application to update the server's filesystem. This is inconvinient. We want to be able to save our content changes and see our changes right away, right? Well, we can do so if we decouple the content from the server.
 
 ## Fetching Markdown files from a remote origin
 
-Instead, we can fetch Markdown files from a remote server. This approach also works for serverless environments and eases updating content. If the content lives on our server's filesystem, then an update to the content requires a new deployment of the application to update the server's filesystem. By using a remote origin, the content can be updated without the need to redeploy.
+We can fetch Markdown files from a remote server. This approach also works for serverless environments and eases updating content. By using a remote origin, the content can be updated without the need to redeploy.
 
 ### Fetching Markdown files from GitHub
 
@@ -80,7 +82,7 @@ It's still convinient to co-locate Markdown content and our code. We can get the
 
 I am using this approach on my own blog (thanks for reading btw.) and it works great! More precisely, I am reading from the filesystem on localhost and fetch the files from GitHub on production. This way, I am able to review new blog posts locally but can also make changes to the content without triggering a redeploy!
 
-**Note:** Please check out [github-md](https://github.com/jacob-ebey/github-md) by [Jacob Ebey](https://twitter.com/ebey_jacob). It's an awesome abstraction layer on top of the GitHub API, which let's you fetch Markdown from GitHub in no time. In the following, we will use the GitHub API directly but you can use github-md to skip ahead and simplify your code.
+So let's see how we can fetch Markdown content from GitHub. In the following, we will use the GitHub API directly.
 
 Let's fetch the content of one file from GitHub:
 
@@ -103,7 +105,7 @@ export async function fetchMarkdownFile(fileName: string) {
     if (response.status === 404) {
       return undefined; // File not found
     } else {
-      throw Error(`GitHub fetch markdown API request failed with ${response.status}: ${response.statusText}`);
+      throw Error(`Fetching Markdown file from GitHub failed with ${response.status}: ${response.statusText}`);
     }
   }
   const textContent = await response.text();
@@ -111,7 +113,11 @@ export async function fetchMarkdownFile(fileName: string) {
 }
 ```
 
-Sweet! Now we can update our code from earlier and fetch the content from GitHub.
+**Note:** If you think this is too cumbersome, then you are definetly not alone! [Jacob Ebey](https://twitter.com/ebey_jacob) created an awesome abstraction layer on top of the GitHub API, which let's you fetch Markdown from GitHub in no time. Please check out the[github-md](https://github.com/jacob-ebey/github-md) API to save some code.
+
+Either way, using github-md or our custom fetch logic, we are now able to fetch Markdown content from GitHub!
+
+Now we can update our code from earlier and fetch the content from GitHub:
 
 ```tsx
 import { fetchMarkdownFile } from '~/utilities/github.server.ts';
@@ -123,11 +129,11 @@ export async function loader() {
 
 export default function ArticleComponent() {
   const { markdown } = useLoaderData();
-  // ...
+  // TODO transform markdown to HTML (almost there!)
 }
 ```
 
-Awesome! We are able to fetch Markdown files from a remote origin and load them into our route components! So how do we transform the Markdown string into HTML?
+Awesome! We are able to fetch Markdown files from a remote origin and load them into our React components! 🎉 So how do we transform the Markdown string into HTML?
 
 `twitterEmbed: https://twitter.com/tannerlinsley/status/1527752952768696320`
 
@@ -135,7 +141,7 @@ Parsing Markdown is not straightforward. Even the pros of the industry sometimes
 
 ## How to parse frontmatter
 
-Let's first discuss how we parse the frontmatter off the Markdown file. Frontmatter is a way to store metadata in a Markdown file.
+Let's first discuss how we parse the frontmatter off the Markdown file. Frontmatter is a great way to store metadata in a Markdown file. Frontmatter is added to a Markdown file using the following convention:
 
 ```markdown
 ---
@@ -143,10 +149,18 @@ title: Remix Markdown Setup with Syntax Highlighting
 description: Markdown is amazing.
 ---
 
-# Remix Markdown Setup
+# Frontmatter
+
+On top of a Markdown file add `---` to start and `---` to end of your frontmatter content. Each frontmatter attribute is a key-value pair.
 ```
 
-We can do this using the `front-matter` package and just one function call:
+Parsing frontmatter off a Markdown file is as easy as installing the front-matter package:
+
+```bash
+npm i front-matter
+```
+
+Then we can just call the `parseFrontMatter` function:
 
 ```tsx
 import { parseFrontMatter } from 'front-matter';
@@ -155,13 +169,14 @@ import { fetchMarkdownFile } from '~/utilities/github.server.ts';
 export async function loader() {
   const markdown = await fetchMarkdownFile('remix-markdown-setup.md');
   // "attributes" contains the parsed frontmatter
-  // "body" contains the markdown string without the frontmatter
+  // "body" contains the Markdown string without the frontmatter
   const { attributes, body } = parseFrontMatter(markdown);
   return { attributes, body };
 }
 
 export default function ArticleComponent() {
   const { attributes, body } = useLoaderData();
+  // TODO transform Markdown to HTML (I swear, next section!)
   return (
     <article>
       <h1>{attributes.title}</h1>
@@ -174,80 +189,50 @@ export default function ArticleComponent() {
 
 Now it gets a bit tricky but bear with me!
 
-The easiest way to transform Markdown to HTML in React is using [react-markdown](https://github.com/remarkjs/react-markdown). Unfortunately, react-markdown switched [to only support ESM](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) and Remix currently runs as a CommonJS module. Using an older version of react-markdown is also not an option as they only support async rendering. We want to make sure to render the HTML content right on the server without the need to use `useEffect` or multiple renders.
+The easiest way to transform Markdown to HTML in React is using [react-markdown](https://github.com/remarkjs/react-markdown). Unfortunately, react-markdown switched [to only support ESM](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) and Remix currently runs as a CommonJS module. Using an older version of react-markdown is not an option as they only support async rendering. We want to make sure to render the HTML content right on the server without the need to use `useEffect` or multiple renders.
 
-**Note:** You can use ESM in Remix by using the workaround documented [in the Remix docs](https://remix.run/docs/en/v1/pages/gotchas#importing-esm-packages).
+Luckily, Remix introduced [a workaround to integrate ESM packages](https://remix.run/docs/en/v1/pages/gotchas#importing-esm-packages) in its CommonJS environment.
 
-My own solution utilizes older versions of remark and rehype that still support CommonJS. I basically reimplemented react-markdown to make it work with CommonJS and expose a hook that renders the HTML in a synchronized manner. I created this logic before the ESM workaround was available and I still think it's more robust than the ESM workaround.
-
-So let's install the following packages in their correct versions:
+Let's first install react-markdown:
 
 ```bash
-npm i rehype-react@^6.2.1 remark-parse@^9.0.0 remark-rehype@^8.1.0 unified@^9.2.2
+npm i react-markdown
 ```
 
-Next, we can create a single hook to parse the Markdown and transform it to HTML:
+Now we have to alter the remix.config.js file as specified in the [remix.run documentation](https://remix.run/docs/en/v1/pages/gotchas#importing-esm-packages) and add all ESM packages that we want to use (that is react-markdown and all its dependencies):
 
-```tsx
-import type { ReactElement } from 'react';
-import { useMemo } from 'react';
-import { Fragment, createElement } from 'react';
-import unified from 'unified';
-import remarkParse from 'remark-parse';
-import remarkToRehype from 'remark-rehype';
-import type { Options as RehypeReactOptions } from 'rehype-react';
-import rehypeReact from 'rehype-react';
-
-type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
-export type ReyhpeOptions = PartialBy<RehypeReactOptions<typeof createElement>, 'createElement'>;
-
-export const useMarkdown = (source: string, rehypeReactOptions: ReyhpeOptions = {}): ReactElement =>
-  useMemo(
-    () =>
-      unified()
-        .use(remarkParse)
-        .use(remarkToRehype)
-        .use(rehypeReact, {
-          createElement,
-          Fragment,
-          ...rehypeReactOptions,
-        } as RehypeReactOptions<typeof createElement>)
-        .processSync(source).result as ReactElement,
-    [source, rehypeReactOptions],
-  );
-```
-
-Our `useMarkdown` hook takes the Markdown string and the options for rehype-react as arguments and returns a React element for us to render.
-
-### What is unified?
-
-Markdown is transformed to HTML through the [unified](https://github.com/unifiedjs/unified) interface. unified provides an abstract interface for parsing syntax trees. First, we use [remark](https://github.com/remarkjs/remark) to parse the Markdown into an abstract representation (using unified), then we use [rehype](https://github.com/rehypejs/rehype) to transform the abstract representation into HTML.
-
-I usually wrap the created hook in a custom component that renders the Markdown content:
-
-```tsx
-import type { FC, HTMLAttributes } from 'react';
-import type { ReyhpeOptions } from '~/hooks';
-import { useMarkdown } from '~/hooks';
-
-interface MarkdownContainerProps extends HTMLAttributes<HTMLDivElement> {
-  source: string;
-  options?: ReyhpeOptions;
-}
-
-export const MarkdownContainer: FC<MarkdownContainerProps> = ({ source, options, ...props }) => {
-  const html = useMarkdown(source, options);
-  return <div {...props}>{html}</div>;
+```js
+/**
+ * @type {import('@remix-run/dev/config').AppConfig}
+ */
+module.exports = {
+  // ...
+  serverDependenciesToBundle: [
+    /^rehype.*/,
+    /^remark.*/,
+    /^unified.*/,
+    /^unist.*/,
+    /^hast.*/,
+    /^bail.*/,
+    /^trough.*/,
+    /^mdast.*/,
+    /^micromark.*/,
+    /^decode.*/,
+    /^character.*/,
+    /^property.*/,
+    /^space.*/,
+    /^comma.*/,
+    /^react-markdown$/,
+    /^vfile.*/,
+  ],
 };
 ```
 
-We have all the bits and pieces together to render Markdown content! 🥳
-
-So let's put it all together:
+After that, we can go ahead and utilize the `ReactMarkdown` component exposed by the react-markdown package:
 
 ```tsx
 import { parseFrontMatter } from 'front-matter';
-import { MarkdownContainer } from '~/components/MarkdownContainer';
+import ReactMarkdown from 'react-markdown';
 import { fetchMarkdownFile } from '~/utilities/github.server.ts';
 
 export async function loader() {
@@ -261,18 +246,17 @@ export default function ArticleComponent() {
   return (
     <article>
       <h1>{attributes.title}</h1>
-      <MarkdownContainer source={body} />
+      <ReactMarkdown>{body}</ReactMarkdown>
     </article>
   );
 }
 ```
 
-We are now rendering Markdown content in a synchronized manner in our Remix app using our custom Markdown hook/component and fetching logic! 🔥
+We are now rendering Markdown content in a synchronized manner in our Remix app with frontmatter support and our fancy remote fetching logic! 🔥
 
 ## How to use custom React components with Markdown
 
-rehype-react allows you to select custom React components for each HTML tag. rehype-react will then go ahead and map the HTML to those custom React components.
-This is a great way to extend the functionality of your Markdown and to reuse your app's styling and behavior!
+Mapping our Markdown HTML elements to custom React components is a great way to extend the functionality of your Markdown and to reuse your app's styling and behavior!
 
 Some cool things you can do with custom React components:
 
@@ -282,10 +266,10 @@ Some cool things you can do with custom React components:
 - Syntax highlighting for code and pre blocks
 - Custom codes that map to custom components to insert advertisments, marketing banners, etc.
 
-We already built in the `options` property in our Markdown component and hook. So we can go ahead and provide our custom components as rehype-react options:
+react-markdown (using rehype-react under the hood) comes with a `components` property that allows us to map HTML elements to custom React components. Import the components you want to use and pass them to the `components` property:
 
 ```tsx
-import { MarkdownContainer } from '~/components/MarkdownContainer';
+import ReactMarkdown from 'react-markdown';
 import { H1, StyledLink } from '~/components/UI';
 
 export default function ArticleComponent() {
@@ -297,8 +281,12 @@ export default function ArticleComponent() {
         source={body}
         options={{
           components: {
-            h1: H1,
-            a: StyledLink,
+            h1({ node, children, ...props }) {
+              return <H1 {...props}>{children}</H1>;
+            },
+            a({ node, children, ...props }) {
+              return <StyledLink {...props}>{children}</StyledLink>;
+            },
           },
         }}
       />
@@ -307,17 +295,23 @@ export default function ArticleComponent() {
 }
 ```
 
-Just import the components you want to use and pass them to the `components` object. All HTML tags are supported!
+**Note:** The `components` property is a JavaScript object that maps HTML elements to custom React components. The keys of the object are the HTML element names and the values are the custom React components. The mapping also gives you access to a `node` property that contains the parsed HTML element (type `Element`).
 
 ## Adding syntax highlighting to Markdown code blocks
 
-Let's take a look at how we can use rehype-react to add syntax highlighting to our Markdown code content.
+Let's take a look at how we can add syntax highlighting to our Markdown code content.
 
 ```javascript
 console.log('Do you like the syntax highlighting?');
 ```
 
-We introduce another package here: prism-react-renderer. We need to create a wrapper component around the primitives provided by prism-react-renderer. Then styling becomes as easy as copy-pasting one of the themes from the [prism-react-renderer repository](https://github.com/themarcba/prism-themes/tree/master/themes).
+We introduce another package here: prism-react-renderer:
+
+```bash
+npm i prism-react-renderer
+```
+
+Next, we create a wrapper component around the primitives provided by prism-react-renderer. With rism-react-renderer syntax highlighing aka. styling our code block becomes as easy as copy-pasting one of the CSS themes from the [prism-react-renderer repository](https://github.com/themarcba/prism-themes/tree/master/themes).
 
 Our wrapper component:
 
@@ -370,7 +364,6 @@ function isLanguageSupported(lang: string): lang is Language {
 }
 
 export const CodeBlock: FC<HTMLAttributes<HTMLPreElement>> = ({ children }) => {
-  const id = useId();
   if (!children) throw Error('CodeBlock: children is required');
   const childrenArray = Children.toArray(children);
   const codeElement = childrenArray[0] as ReactElement;
@@ -402,7 +395,7 @@ export const CodeBlock: FC<HTMLAttributes<HTMLPreElement>> = ({ children }) => {
 };
 ```
 
-Since we have full control over the markup of our code block component, we can add custom features such as copy-to-clipboard buttons and custom styling to it! To style the code block content, we can select a CSS file from the [prism-react-renderer repository](https://github.com/themarcba/prism-themes/tree/master/themes) and [import it into our Remix route](https://remix.run/docs/en/v1/guides/styling#styling):
+Since we have full control over the markup of our code block component, we can add custom features such as copy-to-clipboard buttons and custom styling to it! To style the code block content, we can select a CSS file from the [prism-react-renderer repository](https://github.com/themarcba/prism-themes/tree/master/themes) and [import it into our Remix application](https://remix.run/docs/en/v1/guides/styling#styling):
 
 ```tsx
 import stylesUrl from '~/styles/code.css';
@@ -416,7 +409,7 @@ Now, we only have to add the `CodeBlock` component to our `components` mapping:
 
 ```tsx
 import { MarkdownContainer } from '~/components/MarkdownContainer';
-import { H1, StyledLink, CodeBlock } from '~/components/UI';
+import { CodeBlock } from '~/components/UI';
 
 export default function ArticleComponent() {
   const { attributes, body } = useLoaderData();
@@ -427,9 +420,9 @@ export default function ArticleComponent() {
         source={body}
         options={{
           components: {
-            h1: H1,
-            a: StyledLink,
-            pre: CodeBlock,
+            pre(node, children, ...props) {
+              return <CodeBlock {...props}>{children}</CodeBlock>;
+            },
           },
         }}
       />
@@ -438,15 +431,63 @@ export default function ArticleComponent() {
 }
 ```
 
-That's it! We successfully implemented a custom pipeline to fetch Markdown from a remote origin, parse frontmatter, transform the Markdown into HTML, and map it to custom React components. We added syntax highlighting through a custom code block component and a CSS theme from prism-react-renderer. 💯
+That's it! We successfully implemented a custom pipeline to fetch Markdown from a remote origin, parse frontmatter, transform the Markdown into HTML, and map it to custom React components. We added syntax highlighting through a custom code block component and a CSS theme with prism-react-renderer. 💯
 
 ## How to fetch multiple Markdown Files
 
-Usually, you want to display a list of all blog posts to the user as well. Luckily, this isn't very complicated. GitHub offers another API endpoint to get all files within a directory. From there, we can fetch each file content and parse the frontmatter. This should give us all the information needed to render a list of all blog articles.
+Usually, you want to display a list of all your content to users as well. GitHub offers another API endpoint to get all files within a directory. From there, we can fetch each file content and parse the frontmatter. This should give us all the information required to render a list of contents.
 
-I won't go into more details here but you can find my GitHub fetching logic [here](https://github.com/andrelandgraf/andrelandgraf/tree/6c5158770dbebd55d71788194d3ce6ed1004e1c0/app/actions/github). The `fetchFileItems` function fetches an array of all items within a GitHub repository. For each of those items, I then go ahead and fetch the content of the file using the `fetchMarkdownFile` function that we defined earlier.
+**Note:** Alternatively, [github-md](https://github.com/jacob-ebey/github-md) also provides an API endpoint to get all files and additionally returns the the sha of the commit where each file was changed, so you could even create your own caching logic!
 
-Alternatively, [github-md](https://github.com/jacob-ebey/github-md) also provides an API endpoint to get all files and additionally returns the the sha of the commit where each file was changed, so you could even create your own caching logic!
+Let's fetch a list of all files in a directory from GitHub:
+
+```typescript
+type GitHubFileObject = {
+  name: string;
+  path: string;
+  sha: string;
+  size: number;
+  url: string;
+  html_url: string;
+  git_url: string;
+  download_url: string;
+  type: string;
+};
+
+interface GithubContentResponse extends GitHubFileObject {
+  entries: GitHubFileObject[];
+}
+
+export async function fetchFileItems(dir: string): Promise<GitHubFileObject[]> {
+  const accessToken = '<your-github-access-token>';
+  const accountName = '<your-github-account-name>';
+  const repoName = '<your-github-repo-name>';
+  const headers = new Headers();
+  headers.set('Accept', 'application/vnd.github.v3.object');
+  headers.set('Authorization', `token ${accessToken}`);
+  headers.set('User-Agent', '<your-app-name>');
+
+  const repo = `https://api.github.com/repos/${accountName}/${repoName}`;
+  const url = new URL(repo + dir);
+
+  const response = await fetch(url, { headers });
+  if (!response.ok || response.status !== 200) {
+    if (response.status === 404) {
+      return undefined; // File not found
+    }
+    throw Error(`Fetching list of files from GitHub failed with ${response.status}: ${response.statusText}`);
+  }
+
+  const content: GithubContentResponse = await response.json();
+  return content.entries;
+}
+```
+
+Now we can iterate over the list of files and use the file's `name` property of each file item to fetch its Markdown content using the `fetchMarkdownFile` function that we implemented earlier. We then parse the frontmatter of each file to get all the metadata we need to display a table of contents! 💯
+
+## Render content based on a slug
+
+// TBD
 
 ## Generating a Table of Contents from a Markdown file
 
@@ -456,6 +497,6 @@ Please let me know [on Twitter](https://twitter.com/AndreLandgraf94) if you have
 
 ## References & Inspirations
 
-It wouldn't be a blog post about Remix.run without referencing Kent C. Dodds website. Kent has created a very sophisticated Markdown pipeline himself. Check out [the kentcdodds.com repository](https://github.com/kentcdodds/kentcdodds.com) on GitHub.
+It wouldn't be a blog post about Remix.run without referencing Kent C. Dodds. Kent has created a very sophisticated Markdown pipeline for his website. Check out [the kentcdodds.com repository](https://github.com/kentcdodds/kentcdodds.com) on GitHub.
 
-It took me a long time to create a nice Markdown logic in [Particular.Cloud](https://particular.cloud/documentation/developers/v1). I am pretty happy with the current implementation, but I am still looking into way to improve it over time (especially the table of contents). I will update everything I find out about it on this blog post!
+It took me a long time to create a nice Markdown logic on [Particular.Cloud](https://particular.cloud/documentation/developers/v1) and on my personal website. I am pretty happy with the current implementation, but I am still looking into way to improve it over time (especially the table of contents). I will try to keep this blog post up to date!
