@@ -504,8 +504,16 @@ So far, I have not found a nice way to create a dynamic table of contents based 
 
 Please let me know [on Twitter](https://twitter.com/AndreLandgraf94) if you have any suggestions!
 
-## References & Inspirations
+## Alternative solutions
+
+It took me a long time to create a nice Markdown logic on [Particular.Cloud](https://particular.cloud/documentation/developers/v1) and on my personal website. I am pretty happy with the current implementation, but I am still looking into ways to improve it over time (especially the table of contents). I will try to keep this blog post up to date!
+
+There are a lot of alternative solutions out there and I want to make sure to list some of them in the following.
+
+### Kent's custom Markdown setup
 
 It wouldn't be a blog post about Remix.run without referencing Kent C. Dodds. Kent has created a very sophisticated Markdown pipeline for his website. Check out [the kentcdodds.com repository](https://github.com/kentcdodds/kentcdodds.com) on GitHub.
 
-It took me a long time to create a nice Markdown logic on [Particular.Cloud](https://particular.cloud/documentation/developers/v1) and on my personal website. I am pretty happy with the current implementation, but I am still looking into ways to improve it over time (especially the table of contents). I will try to keep this blog post up to date!
+### Ben Wishovich's Markdown setup using Rust
+
+Ben loves Rust and created a server-side Markdown processing pipeline using Rust. You can find a nice presentation about the benchmarking and motivation [on YouTube](https://www.youtube.com/watch?v=ApiK8EPvW38), a detailed blog post [on his personal site](https://benw.is/posts/compiling-markdown), and his npm package [on npm](https://www.npmjs.com/package/@benwis/femark).
