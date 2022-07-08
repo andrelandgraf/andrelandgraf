@@ -1,7 +1,10 @@
+import { images } from './images';
+
 interface GetMetaTagsParams {
   title?: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
   useCatchPhraseInTitle?: boolean;
   standaloneTitle?: boolean;
   noIndex?: boolean;
@@ -19,7 +22,8 @@ const getTitle = (standaloneTitle: boolean, useCatchPhraseInTitle: boolean, titl
 const getMetaTags: (params: GetMetaTagsParams) => Record<string, string> = ({
   title = 'Andre Landgraf',
   description = 'A tech enthusiast and student who loves to develop fullstack software solutions.',
-  image,
+  image = images.resumeImage.src,
+  imageAlt = images.resumeImage.alt,
   meta = {},
   useCatchPhraseInTitle = false,
   standaloneTitle = false,
@@ -27,18 +31,23 @@ const getMetaTags: (params: GetMetaTagsParams) => Record<string, string> = ({
 }) => {
   const metaTags: Record<string, string> = {
     title: getTitle(standaloneTitle, useCatchPhraseInTitle, title),
-    ogTitle: getTitle(standaloneTitle, useCatchPhraseInTitle, title),
-    twitterTitle: getTitle(standaloneTitle, useCatchPhraseInTitle, title),
+    'og:title': getTitle(standaloneTitle, useCatchPhraseInTitle, title),
+    'twitter:title': getTitle(standaloneTitle, useCatchPhraseInTitle, title),
     description: description,
-    ogDescription: description,
-    twitterDescription: description,
+    'og:description': description,
+    'twitter:description': description,
     robots: noIndex ? 'noindex' : 'all',
     ...meta,
   };
   if (image) {
     metaTags.image = image;
-    metaTags.ogImage = image;
-    metaTags.twitterImage = image;
+    metaTags['og:image'] = image;
+    metaTags['twitter:image'] = image;
+  }
+  if (imageAlt) {
+    metaTags['image:alt'] = imageAlt;
+    metaTags['og:image:alt'] = imageAlt;
+    metaTags['twitter:image:alt'] = imageAlt;
   }
   return metaTags;
 };
