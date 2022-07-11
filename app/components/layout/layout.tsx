@@ -11,7 +11,7 @@ const Layout: FC<PropsWithChildren<any>> = ({ children }) => {
           <img className="w-60 xl:w-64 2xl:w-72 rounded-md" src={images.resumeImage.src} alt={images.resumeImage.alt} />
           <div className="flex flex-col gap-5">
             <h2 className="font-bold text-2xl xl:text-4xl 2xl:text-6xl">Andre Landgraf</h2>
-            <p className="text-xl xl:text-2xl 2xl:text-4xl font-semibold">
+            <p className="max-w-2xl text-xl xl:text-2xl 2xl:text-4xl font-semibold">
               A tech enthusiast and student who loves to develop fullstack software solutions.
             </p>
             <div className="lg:mr-auto">

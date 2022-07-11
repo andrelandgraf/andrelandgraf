@@ -49,3 +49,21 @@ https://twitter.com/swyx/status/1528906372917604352
 Websites communicate with more and more third-party and micro services. Remix backend loaders and actions act as filters and abstraction layers that securely communicate with those services and keep them (and their secrets) away from the client. Avoid overfetching. Composition-based business logic.
 
 => This is all work in progress and I would love to hear some feedback! Just some initial thoughts! :)
+
+## Database
+
+Do you remember earlier when I said Remix is full stack and kind of compared it to the MERN stack? Well, I conviniently left out that full stack usually includes the database layer. Remix does not offer a built-in database model or any other abstractions. Is Remix fully full stack if it has no opinions and utilities for the database layer?
+
+Remix handles data mutations (actions) and data loading (loaders) insanely well. I was blown away when it finally clicked for me how HUGE Remix's nested routing and re-loading of data after mutations is for developer ergonimoics. No revalidation of data on the client needed. Remix will always load the latest changes after every mutation. Obviously, that just means Remix handles the dataflow between client and server well. No database layer so far.
+
+Prisma
+
+## Router-first render-anything
+
+Remix is a compiler for its underlying routing system. There has been much work recently to abstract React from the Remix router. Hence, Remix is able to integrate with other frontend libraries/frameworks. I believe Remix could successfully be used together with templating engines and render things such as PDFs, emails, or even voice (SSML) either as part of a web app or standalone. Remix can be used to create state-of-the-art web apps but it embraces the full potential of the web platform including the HTTP protocol (headers, cookies), progressive enhancements, browser APIs (fetch, Response, Request), and a more frontend framework/library agnostic view with Vue & Svelte support in development.
+
+`twitterEmbed: https://twitter.com/crim_codes/status/1542684471195045889`
+
+`twitterEmbed: https://twitter.com/ryanflorence/status/1539039725029183489`
+
+Remix is a full stack framework for the web Of course Remix is not going to be around forever but right now Remix is shaping the web - and in my own opinion for the better.

@@ -10,9 +10,9 @@ import { H1, H2, H3, P, ListItem, OrderedList, UnorderedList, Code, H4 } from '~
 import { SectionHeading } from '~/components/UI/headings';
 import { MarkdownLinkWrapper } from '~/components/UI/links';
 import { getMetaTags, getISODate, getReadableDate } from '~/utilities';
+import { useTwitterEmbeds } from '~/hooks';
 
 import syntaxHighlightingStylesUrl from '~/styles/code.css';
-import { useTwitterEmbeds } from '~/hooks';
 
 export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: syntaxHighlightingStylesUrl }];
