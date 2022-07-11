@@ -6,7 +6,7 @@ type PrivateEnvVars = {
   githubRepoAPIUrl: string;
 };
 
-const DEV_FETCH_FROM = 'locale';
+const DEV_FETCH_FROM = 'production';
 
 function getPrivateEnvVars(): PrivateEnvVars {
   const readContentFrom = process.env.NODE_ENV === 'production' ? 'production' : DEV_FETCH_FROM;
