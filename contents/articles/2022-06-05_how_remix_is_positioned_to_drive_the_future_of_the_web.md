@@ -7,51 +7,94 @@ categories: [Remix.run, AI/ML, edge computing, VR/AR, 3D, offline, IoT]
 
 Remix is a full stack web framework that both embraces web fundamentals and cutting-edge technologies. In this post, I want to summarize my own thoughts about why I believe that Remix is very well suited to be part of the future of the web and why it might even accelerate some trends.
 
-My goal with this blog post is to articulate some of the nuances that make me so excited about Remix. First, I want to go over the things that I think make Remix future proof. After that, I will go over the latest trends in tech - topic by topic - to emphasize why I believe that Remix is going to be a perfect match for those trends and might even accelerate some of them.
+There are a lot of great tools out there and people have [great careers](https://twitter.com/taylorotwell/status/1534178479201259520?lang=en) all around web dev! When it comes to React-land, Remix, Gatsby, and Next.js are all great tools to build applications. On top of that, there are so many other tools that I don't mention due to a lack of awareness and experience. My goal with this blog post is to articulate some of the nuances that make me so excited about Remix. Thus, just a quick disclaimer that this blog post is opinionated based on my own experiences and preferences.
 
-# From a Remix perspective
-
-It's intuitive to compare Remix to Next.js and Gatsby and treat it as another React apps framework. However, the Remix team stresses that Remix is not a React framework but a **full stack web framework** - an important distinction.
+It's intuitive to compare Remix to Next.js and Gatsby and treat it as another React apps framework. The Remix team has done its best to objectively compare Remix to Next.js [in this blog post](https://remix.run/blog/remix-vs-next). However, the Remix team also stresses that Remix is not a React framework but a 🌟 full stack web framework 🌟 - an important distinction.
 
 ## Remix is a web framework
 
-Remix tries to be frontend library/framework agnostic and aims to add support for Preact, Vue, Svelte, and other React alternatives. From this point of view alone, it makes sense to call Remix a web framework and not a React-specific framework. However, the main reason I believe Remix is a web framework is its deep embrace of the web platform.
+There are a couple of reasons why Remix is best described as a web framework. For once, Remix tries to be frontend library/framework agnostic and aims to support Preact, Vue, and other React alternatives in the future. However, I don't think that's what it really is about.
 
-Remix aims to create great user experiences by using the platform ([#useThePlatform](https://twitter.com/search?q=%23useThePlatform&src=typed_query&f=top)). Search parameters, cookies, meta tags, HTML forms, HTTP headers, and the web fetch API are all first-class citizens in Remix. Remix's conventions, mental model, and primitives are all just thin abstraction layers of existing web APIs and standards. This sets Remix apart from other popular frameworks that feel more decoupled from the web platform. Obviously, React plays an important role in Remix but Remix is more than just a React framework. Thus, it makes sense to emphasize that Remix is a web framework.
+The main reason I believe Remix is a web framework is its deep embrace of the web platform. Remix's goal is to enable ["fast, slick, and resilient"](https://remix.run/#:~:text=fast%2C%20slick%2C%20and%20resilient) user experiences by using the platform ([#useThePlatform](https://twitter.com/search?q=%23useThePlatform&src=typed_query&f=top)). Search parameters, cookies, meta tags, HTML forms, HTTP headers, and the web fetch API are all first-class citizens in Remix. Remix's conventions, levers, and primitives are thoughful designed abstraction layers of existing web APIs and standards. This sets Remix apart from other popular frameworks that feel more decoupled from the web platform.
 
-Now it gets a bit tricky. What makes Remix full stack? Next.js renders React applications on the server, does that mean Next.js is full stack? I would say Remix plays in its own league here but let's start from the beginning.
+`statement: Remix embraces the web platform and provides thoughful designed conventions, levers, and primitives for existing web APIs and standards.`
+
+Obviously, React still plays an important role in Remix and its origin story (React Router and all that). However, when working with Remix, React only feels like one puzzle piece of the bigger picture of creating fast, slick, and resilient user experiences. Remix pushes me to think about HTTP caching, session cookies, the URL bar, the network tab, and so much more. Remix is a web framework.
 
 ## Remix is full stack
 
-I think I could write a long blog post just about how HUGE Remix is for this whole frontend/backend divide. There is so much perspective to this. I want to emphasize at least two point of views here. First, I want to motivate Remix from a PHP/Rails perspective, then I am going to go over the wins from a JavaScript perspective.
+Remix also describes itself as full stack. Now it gets a bit tricky. What makes Remix full stack? Next.js renders React applications on the server and includes API routes; does that mean Next.js is full stack? I would argue that Remix plays in its own league here but let's start from the beginning...
+
+If anything, I want to express how HUGE Remix is for this whole frontend/backend divide and there is so much perspective to this.
 
 ### The PHP/Rails perspective
 
-Web developers have always worked on both the client and the server. Say PHP or Rails: you build your business logic in PHP or Ruby (server side) and add some JavaScript to make your site dynamic (client side). Remix closes the network gap between the front- and backend by wrapping both in one JavaScript-based framework. In Remix, both your server and client code are just JavaScript/TypeScript and all code lives in the same file-based route modules (files in the `/routes` folder). Things like reusing types and utility functions between client and server code becomes trivial. Even more though, Remix's router knows both your client and server-side, which enables progressive enhancement and rich SPA-like experiences (the best of both worlds). This sets Remix projects apart from projects written with PHP, Rails, and so on.
+Web developers have always worked on both the client and the server. Think [LAMP](<https://en.wikipedia.org/wiki/LAMP_(software_bundle)>) stack or Rails: you build your business logic in PHP or Ruby (server side) and add some JavaScript to make your site dynamic (client side). Unfortunately, the integration between client (JavaScript) and server (PHP/Ruby) is limited by the language divide. In Remix, both your server and client code is just JavaScript/TypeScript. Reusing types and utility functions between client and server code becomes trivial. Additionally, Remix's router has a client and a server-side part to it, thus, closing the network gap and enabling progressive enhancement, prefetching, and a rich SPA-like experiences out of the box. This sets Remix apart from PHP, Rails, and so on.
 
-`twitterEmbed: https://twitter.com/mrtinsal/status/1543335281683742721`
+Developing with Remix also has some similarties with PHP and Rails development. I remember having PHP files that included HTML, CSS, JavaScript, SQL, and PHP code. I would invoke database queries from within HTML. Straight-up madness that leads to crazy spaghetti but nicely co-located code. In Remix, server-side request handlers (loaders, actions) - that can also act as API endpoints - live in the same file-based route modules (files in the `/routes` folder) as the route's component, giving me that same feeling of closeness of everything important. Not to mention that Remix promotes the usage of form elements to trigger data mutations. Much PHP vibes, very old school. Funny enough, this gave Remix the stigma of being a boomer framework. Let's rather say - from a PHP/Rails perspective - Remix feels familiar but comes with all the advancements of the JavaScript ecosystem.
 
-The way Remix applications work feels similar to PHP and Rails. Funny enough, this gave Remix the stigma of being a boomer framework, a nod to the similarities between Remix and Rails and PHP. I think Remix is a healthy combination of what works (the web platform) and new (cutting-edge technologies & lessons learned) of both the PHP and Rails ecosystems and the JavaScript ecosystem.
+`statement: I think Remix is a healthy combination of what works (the web platform) and new ideas, trends, and technologies.`
 
-### The JavaScript Perspective
+### The JavaScript perspective
 
-One might think server-side React and Remix are just another pendulum swing in the back and forth of the JavaScript ecosystem between server-side and client-side apps. I disagree. Remix is the next iteration, the next evolutionary step that takes the best of both worlds.
+There are a lot of different approaches and stacks in JavaScript-land. I want to put Remix into perspective based on different established technologies. So let's start with single-page applications (SPAs) and the MERN (MongoDB, Express, React, and Node.js) stack.
+
+#### SPAs
+
+Create React App was for a long time the go to starting point to create rich client-side applications - no server involved other than handling the static requests to send out the JavaScript bundle. However, SPAs might negatively affect search rankings and slow down the inital page load times. From a SPA perspective, Remix fulfills the same job as Next.js of utilizing the latest improvements in React to improve performance and take advantage of server-side rendering (SSR).
+
+From a SPA perspective, Remix might also seem as just another pendulum swing in the never-ending back and forth between server-side and client-side heavy apps but I believe Remix is the evolutionary step that takes the best of both worlds.
+
+For bigger organizations, the rise of SPAs has certainly made the divide between frontend and backend bigger by separating the frontend and the backend code into two separate applications. Instead of using PHP to render the website and using JavaScript to enhance the experience, one would now render the application on the client with JavaScript. Moreover, organizations use enterprise backend technologies such as Java Spring to create a scalable systems. Inherently, different teams are now working on the front and backend code. A full vertical divide across the stack.
+
+I think for most complex systems, Remix will not be used as a backend server that connects to databases but instead be used as a SPA replacement that comes with progressive enhancement and its own thin server layer. Remix apps thrive in microservice architectures where they fetch and aggregate data from different backends _on the server_ and implement the business logic before returning the data to the client (avoiding over-fetching as well). Moreover, Remix apps can easily forward client-requests to other backends and act as adapters without the complexity of client-side fetching - resilient error handling through boundaries included.
+
+`statement: Remix is a perfect replacement for an SPA and works well in microservice architectures as it can aggregate data on the server and avoid overfetching.`
+
+Data aggregation is a huge topic and one of the main reason GraphQL is so successful. I would argue, if you are just developing a website/webapp and think about using GraphQL to aggregate data, use Remix instead. Since Remix doesn't care where you fetch your data from in your loaders and actions, Remix can also easily be integrated with GraphQL withouth shipping a heaviy GraphQL client to the user's browser.
+
+#### MERN stack
+
+I worked with MySQL, PHP5, and jQuery for a year or so but I really got started with web development through university. I had a bunch of innovation/protoyping courses and the MERN stack was the go to suggestion to use for our imaginary startup ideas. The mantra was: "MERN is great for rapid prototyping". We would spin up two apps: one [Create React App](https://create-react-app.dev/) frontend application and one Express backend application. If I scroll through my GitHub projects, there is a long list of long forgotten uni projects that all consist of two separate repositories with the following naming convention:
+
+- `[cool-startup-name]-frontend`
+- `[cool-startup-name]-backend`
+
+Yes, everything is JavaScript but what does it help when the JavaScript lives in two separate repositories? Monorepo support has significantly improved in the past few years with tools like [pnpm](https://pnpm.io/) and obviously you can use git submodules and other shenanigans to re-use code between your Express app and React app but there is just a lot of custom tooling and boilerplate code involved to make everything work nicely. From a MERN-stack perspective, Remix biggest plus is the increased developer experience. Remix provides the glue between the frontend and backend code.
+
+Remix brings a lot of quality-of-life improvements by out-of-the-box support for prefetching, progressive enhancement and file-based API and document request routing. Just think about all the Express router and React Router boilerplate code you can get rid off by using Remix's file-based routing for both your ressource and document routes. And then you also get progressive enhancement, server-side React rendering, error and catch boundaries, and a bunch of other APIs that increase the overall developer experience and reduce boiler plate code.
 
 `twitterEmbed: https://twitter.com/ryanflorence/status/1534928868154433536`
 
-The rise of SPAs made the divide between frontend and backend bigger by separating the frontend and the backend code into two separate applications and moving more logic towards the client. This led to SPAs and JamStack architectures. Frontend developers implement business logic on the client and use third-party services to replace a backend. Now, we had to add serverless functions as we realized we need some server-side environment. Thus, the JavaScript ecosystem learned that every frontend still requires a backend to abstract business logic. You cannot store your secrets and all your computations and verifications on the client. You need a backend. That's also why the MERN stack exist. Web developers have always been full stack. That's the environment, which most aspiring devs these days are exposed to. MongoDB, express, React, and Node.js - two apps, one for the server, and one for the client, all JavaScript but divided into two projects. With Remix, there is no need for git submodules or other shenanigans to re-use code between your express app and React app, just one app (to rule them all) that knows both your server and your client-side. That's the perspective that makes many compare Remix to Next.js. They both fit into the same spot of this JavaScript perspective: We need a server and server-side rendering has it's advantages but we also want a client-side React application. But I believe there is even more to it. Remix is more.
+**Note:** I think from a MERN perspective, Remix and Next.js kind of solve the same pain points. Personally, I just prefer Remix's developer experience and philosophy.
 
-Today's React frameworks focus on app development. Both Gatsby and Next.js just recently introduced serverless/lambda functions to be integrated into the framework but they live in a separate folder and require a separate route structure. Remix integrates your API routes into the same router used by your application. API routes can be used for form submit, as webhooks, or as an open REST API. Remix is fully full stack and since Remix knows both your server and client code, it enables progressive enhancements and optimizes for the network tab / the request waterfall in a way that is truly more than just server-side rendering React.
+`statement: Coming from MERN, Remix provides insane quality-of-live improvements and an increased user experience out of the box. It is really hard to achieve the same with `
 
-Remix is full stack but it is also capable of running in places where your typical MERN stack or PHP website cannot run. Remix runs with Deno, Node.js, Netlify, Vercel, Cloudflare Workers and Pages, and much more. Remix runs everywhere.
+#### Jamstack
+
+In 2020, I built [my first real website](https://velapilates.de/) with Gatsby. Coming from MERN, the speed of the initial page load blew my mind! The philosophy behind [Jamstack](https://jamstack.org/) has changed over time but Gatsby's approach is to to server-side render React at build time - this is known as static-side generation (SSG). Jamstack heavily promotes the separation of frontend and backend.
+
+> Jamstack is an architectural approach that decouples the web experience layer from data and business logic, improving flexibility, scalability, performance, and maintainability.
+
+Retrieved from [jamstack.org](https://jamstack.org/#:~:text=Jamstack%20is%20an%20architectural%20approach%20that%20decouples%20the%20web%20experience%20layer%20from%20data%20and%20business%20logic%2C%20improving%20flexibility%2C%20scalability%2C%20performance%2C%20and%20maintainability.)
+
+For my first website (a pilates course platform), I chose Gatsby because I perceived the course data as static. However, for a business, I also required a backend to process the payments and provide admin functionalities. Obviously, coming from MERN, I chose Express, MongoDB, and Node.js. Since then, Gatsby and Next.js both added serverless functions to accomondate for the need for server-side logic. Unfortunately, one Gatsby application now consists of three environments: the client-side SPA, the serverless/lambda functions, and the build enviornment which runs on the server once during build time.
+
+Remix and Jamstack have different phiosophies about web development and aim to achieve different things. Similar to MERN, I think that Remix makes things just easier and hence improve the overall developer experience. One could definetly use Remix with a Jamstack mindset: add a CDN in front of your Remix website and add very long-lasting cache headers, on re-deploy burst the CDN cache and you got yourself static-site generation. Remix's philosophy is about providing levers that allow developers to target different key performance indicators.
+
+I was at Reactathon this year and Ryan Florence gave [a great talk](https://www.youtube.com/watch?v=95B8mnhzoCM) about "When To Fetch". Please watch the talk if you haven't. It really shows how much thought the Remix team puts into its APIs that allow you to use Remix to prioritize the key performance indicators of your choice. Not to say that the people behind Next.js and Gatsby don't do that but then we go back to the "web framework" part and my previous statement: Remix embraces the web platform and provides thoughful designed conventions, levers, and primitives for existing web APIs and standards. It feels less decoubled.
 
 ## Remix runs everywhere
 
-Remix is capable of running on long-running servers, serverless environments, and the edge. Hence, Remix is capable of adapting to your use case much better than any other framework. I believe Remix is currently the easiest way to build a simple REST API and deploy it to the edge.
+Remix is full stack but it is also capable of running in places where your typical MERN stack, LAMP stack, or Jamstack website cannot run. Remix runs with Deno, Node.js, Netlify, Vercel, Cloudflare Workers and Pages, and much more. Remix runs everywhere.
 
-The edge is one of the areas where I believe that Remix is really accelerating a trend by making the edge accessible to frontend and backend developers alike. I believe that Remix is the next evoluational step from everything we learned through the JamStack, SRR React frameworks, and SPAs. Remix combines serverless and edge environments, server-side capabilities, and the full power of client-side React in one framework. You can still use all JamStack third-party services and take advantage of lambda but you don't loose the server part, instead you get rid of frustratingly long build times of JamStack. So when I say "Remix runs everywhere", I virtually mean everywhere: your client-side app, your server-side logic, on long-running and serverless and edge environments, with Deno, Node.js, and cloudflare workers, with Netlify, Vercel, fly.io and much more. No other API nor web framework shows that kind of adaptability by also providing such a high-level abstraction.
+Remix is capable of running on long-running servers, serverless environments, and the edge. This alone provides so much flexibility. Remix is capable of adapting to your use case much better than any other framework. For instance, I believe Remix is currently the easiest way to deploy a simple REST API to the edge.
+
+Speaking of the edge. I believe the edge is one of the areas where Remix is curretnyl accelerating a trend. I believe that Remix is the next evoluational step from everything we learned through the Jamstack, SRR React frameworks, and SPAs. Remix combines serverless and edge environments, server-side capabilities, and the full power of client-side React in one framework. You can still use all Jamstack third-party services and take advantage of lambda but you don't loose the server part, instead you get rid of frustratingly long build times of Jamstack. So when I say "Remix runs everywhere", I virtually mean everywhere: your client-side app, your server-side logic, on long-running and serverless and edge environments, with Deno, Node.js, and cloudflare workers, with Netlify, Vercel, fly.io and much more. No other API nor web framework shows that kind of adaptability by also providing such a high-level abstraction.
 
 ## API-first
+
+Remix enables backend/API devs to work close to the frontend (touch the same codebase) or even enable backend devs to quickly add a frontend to their APIs.
 
 Remix can also be used to create standalone APIs or both a REST API and a web app **both through the same file-based router**. Hence, Remix is a framework to build for the web and provides the means to create integrated services that can have both client and server-side capabilities. This sets it apart from Next.js and Gatsby that would struggle to be used other than to build React apps.
 
@@ -61,17 +104,13 @@ Remix is full stack and has made me more productive through intuitive mental mod
 
 Conclusively, You can build RESTful APIs with Remix without ever adding a web UI. But you can also quickly add a UI to an existing API made with Remix. With Remix, you can easily deploy your APIs at the edge.
 
-## Abstraction layer
+## Database
 
-I am currently working as a frontend developer. It turns out bigger coorporations have separete teams for frontend and backend code.
+Do you remember earlier when I said Remix is full stack and kind of compared it to the MERN stack? Well, I conviniently left out that full stack usually includes the database layer. Remix does not offer a built-in database model or any other abstractions. Is Remix fully full stack if it has no opinions and utilities for the database layer?
 
-Remix enables frontend/web devs to handle the backend in JavaScript. Intuitive (HTTP/RESTful-ish) backend abstraction.
+Remix handles data mutations (actions) and data loading (loaders) insanely well. I was blown away when it finally clicked for me how HUGE Remix's nested routing and re-loading of data after mutations is for developer ergonimoics. No revalidation of data on the client needed. Remix will always load the latest changes after every mutation. Obviously, that just means Remix handles the dataflow between client and server well. No database layer so far.
 
-Remix enables backend/API devs to work close to the frontend (touch the same codebase) or even enable backend devs to quickly add a frontend to their APIs.
-
-- Remix enables frontend devs to touch the backend and for backend/API devs to build frontends for their APIs
-
-Remix apps thrive in microservice architectures where they fetch and aggregate data from different backends _on the server_ and implement the business logic before returning the data to the client (avoiding over-fetching as well). Remix apps can easily forward client-requests to other backends and act as adapters but without the complexity of client-side fetching.
+Prisma
 
 ## Router-first render-anything
 
@@ -79,63 +118,7 @@ Remix is a compiler for its underlying routing system. There has been much work 
 
 `twitterEmbed: https://twitter.com/crim_codes/status/1542684471195045889`
 
-## Levers
-
-## Progressive enhancement
-
-Support old environments while still ensure that new environments have the latest features.
-
-# Future trends
-
-Future trends and what attributes of Remix make it so promising for the future:
-
-## Edge
-
-I mentioned before that Remix runs everywhere. That includes the newest edge environemnts such as Deno Deploy, Cloudflare pages and workers, and Netlify edge functions. Compute on the edge is the latest development in cloud computing (after the success of serverless) and promises to greatly reduce round-trip times. I frimly believe that Remix is one of the reason why the edge has seen so much attention from web developers this year. Remix hardcore promotes platforms such as cloudflare workers and Deno deploy. Remix is accelerating the edge by making it easy for web developers to take advantage of the edge.
-
-## Real-Time
-
-Remix's fetch API implements server-sent events (alternative to webosckets) and it also easily integrable with websockets (like socket.io) through the express adapter.
-
-https://twitter.com/ryanflorence/status/1533437211714080768
-
-https://stackoverflow.com/questions/72192997/remix-how-to-add-websocket-to-my-project
-
-## VR/AR
-
-There is [a push](https://www.w3.org/TR/webxr/) to bring VR/AR to the web platform and the browser. A lot of [cool people](https://twitter.com/sarah_edo/status/813150071558651908) are working on it! Maybe will be as easy as integrating media queries in the CSS and progressive enhancement on the JavaScript-side. Either way, there will be more devices with different needs and requirements. Remix is built from the ground up to use the platform to progressively enhance experience.
-
-## 3D
-
-Same as for VR/AR, 3D is going to be a bigger thing in the future. More and more sites integrate 3D assets into their sites (check out the globe [on the stripe landing page](https://stripe.com/)). I believe Remix is going to be in a prime position to make 3D rendering efficient (network-wise) but also make it integrate nicely with existing code (we saw a great demo at Remix conf).
-
-## Offline
-
-I can imagine that in the future - even though everything is going to be more online - there will also be a greater need for local data (aka. offline) that is synched with the cloud. The annoying buzzword is fog computing... Let's just say because of distributed computing, peer-to-peer systems, privacy concerns, and performance reasons there might be times where data should be stored solely offline or in a hybrid fashion. I believe that the latest react-router changes and Remix show a lot of potential for a router that can work as an abstraction for offline, online, and hybrid data manipulation use-cases.
-
-## Data-driven and AI
-
-> "Data is the new (s)-oil"
-
--> I have to find a reference for that quote.
-
-Do you remember earlier when I said Remix is full stack and kind of compared it to the MERN stack? Well, I conviniently left out that full stack usually includes the database layer. Remix does not offer a built-in database model or any other abstractions. Is Remix fully full stack if it has no opinions and utilities for the database layer?
-
-Remix handles data mutations (actions) and data loading (loaders) insanely well. I was blown away when it finally clicked for me how HUGE Remix's nested routing and re-loading of data after mutations is for developer ergonimoics. No revalidation of data on the client needed. Remix will always load the latest changes after every mutation. Obviously, that just means Remix handles the dataflow between client and server well. No database layer so far.
-
-Prsima
-
-More and more websites drive growth through data-driven solutions (recommender systems, analytics) or integrate some sort of AI-based system (chat bots, search). Remix allows route-based loading of scripts (handle export), allows for server-side tracking, easy integration of cookie data and sessions that allow easy integrations with AI backends.
-
-https://twitter.com/swyx/status/1528906372917604352
-
-## Interconnected / (IoT, Microservices)
-
-Websites communicate with more and more third-party and micro services. Remix backend loaders and actions act as filters and abstraction layers that securely communicate with those services and keep them (and their secrets) away from the client. Avoid overfetching. Composition-based business logic.
-
-=> This is all work in progress and I would love to hear some feedback! Just some initial thoughts! :)
-
-# Conclusion
+## Conclusion
 
 `twitterEmbed: https://twitter.com/ryanflorence/status/1539039725029183489`
 
@@ -145,4 +128,4 @@ Remix is a full stack framework for the web and there is a lot more to it then O
 
 It's great to see how far Remix has come since its launch but its future is even more exciting. The team behind Remix frequently emphasizes that it has great plans for the future of Remix. I believe that Remix is greatly positioned to drive the future of the web and I hope I was able to convey my enthusiasm in this blog post.
 
-Take care & Happy coding!
+Take care & happy coding!

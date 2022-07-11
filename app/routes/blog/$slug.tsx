@@ -6,7 +6,7 @@ import { fetchMarkdownFile } from '~/actions/github/index.server';
 import { fetchMarkdownFileFs } from '~/actions/fs/index.server';
 import { MarkdownContainer } from '~/components/UI/markdown';
 import { CodeBlock } from '~/components/UI/markdown/pre';
-import { H1, H2, H3, P, ListItem, OrderedList, UnorderedList, Code } from '~/components/blog/markdown';
+import { H1, H2, H3, P, ListItem, OrderedList, UnorderedList, Code, H4 } from '~/components/blog/markdown';
 import { SectionHeading } from '~/components/UI/headings';
 import { MarkdownLinkWrapper } from '~/components/UI/links';
 import { getMetaTags, getISODate, getReadableDate } from '~/utilities';
@@ -93,6 +93,9 @@ const ArticlePage = () => {
           },
           h3({ node, children, ...props }) {
             return <H3 {...props}>{children}</H3>;
+          },
+          h4({ node, children, ...props }) {
+            return <H4 {...props}>{children}</H4>;
           },
           p({ node, children, ...props }) {
             return <P {...props}>{children}</P>;

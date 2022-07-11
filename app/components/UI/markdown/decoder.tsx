@@ -2,7 +2,8 @@ import type { FC, HTMLAttributes } from 'react';
 import { Children } from 'react';
 
 const twitterEmbedCode = 'twitterEmbed: ';
-const decoderCodes = [twitterEmbedCode];
+const statementCode = 'statement: ';
+const decoderCodes = [twitterEmbedCode, statementCode];
 
 /**
  * Decoder parses the children of a code element
@@ -13,11 +14,18 @@ const Decoder: FC<HTMLAttributes<HTMLElement>> = ({ children, ...props }) => {
   const child = childrenArray[0];
   if (child && typeof child == 'string' && child.startsWith(twitterEmbedCode)) {
     const twitterUrl = child.replace(twitterEmbedCode, '');
-    // eslint-disable-next-line jsx-a11y/anchor-has-content
     return (
       <blockquote className="twitter-tweet">
         <a href={twitterUrl}></a>
       </blockquote>
+    );
+  } else if (child && typeof child == 'string' && child.startsWith(statementCode)) {
+    const statement = child.replace(statementCode, '');
+    return (
+      <p className="flex items-center gap-4 p-4 rounded-md border border-primary">
+        <span className="text-primary text-4xl font-bold">🎯</span>
+        {statement}
+      </p>
     );
   }
 

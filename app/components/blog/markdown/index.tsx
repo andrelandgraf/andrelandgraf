@@ -22,6 +22,14 @@ const H2: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
 
 const H3: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
   return (
+    <h3 {...props} className="text-xl lg:text-2xl font-semibold text-secondary dark:text-primary">
+      {children}
+    </h3>
+  );
+};
+
+const H4: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
+  return (
     <h3 {...props} className="text-xl lg:text-2xl font-semibold">
       {children}
     </h3>
@@ -56,4 +64,4 @@ const Code: FC<HTMLAttributes<HTMLElement>> = ({ children, ...props }) => {
   );
 };
 
-export { H1, H2, H3, P, OrderedList, UnorderedList, ListItem, Code };
+export { H1, H2, H3, H4, P, OrderedList, UnorderedList, ListItem, Code };

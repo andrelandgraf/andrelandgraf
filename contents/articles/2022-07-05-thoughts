@@ -1,0 +1,51 @@
+---
+date: 2022-05-29
+title: Thoughts and Notes
+description: Thoughts and Notes
+categories: [JavaScript, AllThingsWeb]
+ignore: true
+---
+
+# Future trends
+
+Future trends and what attributes of Remix make it so promising for the future:
+
+## Edge
+
+I mentioned before that Remix runs everywhere. That includes the newest edge environemnts such as Deno Deploy, Cloudflare pages and workers, and Netlify edge functions. Compute on the edge is the latest development in cloud computing (after the success of serverless) and promises to greatly reduce round-trip times. I frimly believe that Remix is one of the reason why the edge has seen so much attention from web developers this year. Remix hardcore promotes platforms such as cloudflare workers and Deno deploy. Remix is accelerating the edge by making it easy for web developers to take advantage of the edge.
+
+## Real-Time
+
+Remix's fetch API implements server-sent events (alternative to webosckets) and it also easily integrable with websockets (like socket.io) through the express adapter.
+
+https://twitter.com/ryanflorence/status/1533437211714080768
+
+https://stackoverflow.com/questions/72192997/remix-how-to-add-websocket-to-my-project
+
+## VR/AR
+
+There is [a push](https://www.w3.org/TR/webxr/) to bring VR/AR to the web platform and the browser. A lot of [cool people](https://twitter.com/sarah_edo/status/813150071558651908) are working on it! Maybe will be as easy as integrating media queries in the CSS and progressive enhancement on the JavaScript-side. Either way, there will be more devices with different needs and requirements. Remix is built from the ground up to use the platform to progressively enhance experience.
+
+## 3D
+
+Same as for VR/AR, 3D is going to be a bigger thing in the future. More and more sites integrate 3D assets into their sites (check out the globe [on the stripe landing page](https://stripe.com/)). I believe Remix is going to be in a prime position to make 3D rendering efficient (network-wise) but also make it integrate nicely with existing code (we saw a great demo at Remix conf).
+
+## Offline
+
+I can imagine that in the future - even though everything is going to be more online - there will also be a greater need for local data (aka. offline) that is synched with the cloud. The annoying buzzword is fog computing... Let's just say because of distributed computing, peer-to-peer systems, privacy concerns, and performance reasons there might be times where data should be stored solely offline or in a hybrid fashion. I believe that the latest react-router changes and Remix show a lot of potential for a router that can work as an abstraction for offline, online, and hybrid data manipulation use-cases.
+
+## Data-driven and AI
+
+> "Data is the new (s)-oil"
+
+-> I have to find a reference for that quote.
+
+More and more websites drive growth through data-driven solutions (recommender systems, analytics) or integrate some sort of AI-based system (chat bots, search). Remix allows route-based loading of scripts (handle export), allows for server-side tracking, easy integration of cookie data and sessions that allow easy integrations with AI backends.
+
+https://twitter.com/swyx/status/1528906372917604352
+
+## Interconnected / (IoT, Microservices)
+
+Websites communicate with more and more third-party and micro services. Remix backend loaders and actions act as filters and abstraction layers that securely communicate with those services and keep them (and their secrets) away from the client. Avoid overfetching. Composition-based business logic.
+
+=> This is all work in progress and I would love to hear some feedback! Just some initial thoughts! :)
