@@ -2,7 +2,7 @@
 date: 2022-06-05
 title: How Remix is positioned to drive the future of the web
 description: Remix is a full stack web framework that both embraces web fundamentals and cutting-edge technologies. In this post, I want to summarize my own thoughts about why I believe that Remix is very well suited to drive the future of the web.
-categories: [Remix.run, AI/ML, edge computing, VR/AR, 3D, offline, IoT]
+categories: [Remix.run]
 ---
 
 Remix is a full stack web framework that both embraces web fundamentals and cutting-edge technologies. In this post, I want to summarize my own thoughts about why I believe that Remix is very well suited to be part of the future of the web and why it might even accelerate some trends.
