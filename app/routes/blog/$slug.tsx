@@ -74,7 +74,7 @@ const ArticlePage = () => {
   const { article } = useLoaderData<LoaderData>();
 
   return (
-    <article className="w-full flex flex-col gap-5">
+    <article className="w-full flex flex-col gap-5 leading-loose">
       <div className="flex flex-col gap-1">
         <H1>{article.frontmatter.title}</H1>
         <SectionHeading>

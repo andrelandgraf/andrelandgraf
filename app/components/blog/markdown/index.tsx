@@ -3,7 +3,7 @@ import { Decoder, CustomParagraph } from '~/components/UI/markdown';
 
 const H1: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
   return (
-    <h1 {...props} className="text-xl md:text-2xl lg:text-4xl xl:text-6xl text-secondary dark:text-primary font-bold">
+    <h1 {...props} className="text-3xl lg:text-4xl xl:text-6xl text-secondary dark:text-primary font-extrabold">
       {children}
     </h1>
   );
@@ -11,10 +11,7 @@ const H1: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
 
 const H2: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
   return (
-    <h2
-      {...props}
-      className="text-lg md:text-xl lg:text-2xl xl:text-4xl text-secondary dark:text-primary font-semibold mt-8"
-    >
+    <h2 {...props} className="text-2xl lg:text-3xl xl:text-4xl text-secondary dark:text-primary font-bold mt-4 lg:mt-8">
       {children}
     </h2>
   );
@@ -22,7 +19,7 @@ const H2: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
 
 const H3: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
   return (
-    <h3 {...props} className="text-xl lg:text-2xl font-semibold text-secondary dark:text-primary">
+    <h3 {...props} className="text-xl lg:text-2xl xl:text-3xl font-semibold text-secondary dark:text-primary">
       {children}
     </h3>
   );
@@ -30,7 +27,7 @@ const H3: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
 
 const H4: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
   return (
-    <h3 {...props} className="text-xl lg:text-2xl font-semibold">
+    <h3 {...props} className="text-lg lg:text-xl xl:text-2xl font-normal text-secondary dark:text-primary">
       {children}
     </h3>
   );
@@ -45,12 +42,12 @@ const UnorderedList: FC<HTMLAttributes<HTMLUListElement>> = ({ children }) => {
 };
 
 const ListItem: FC<HTMLAttributes<HTMLLIElement>> = ({ children }) => {
-  return <li className="pl-4 lg:mb-1 w-full text-lg lg:text-xl xl:text-2xl leading-loose font-light">{children}</li>;
+  return <li className="pl-4 lg:mb-1 w-full text-lg lg:text-xl xl:text-2xl font-light">{children}</li>;
 };
 
 const P: FC<HTMLAttributes<HTMLParagraphElement>> = ({ children, ...props }) => {
   return (
-    <CustomParagraph {...props} className="text-lg lg:text-xl xl:text-2xl leading-loose font-light">
+    <CustomParagraph {...props} className="text-lg lg:text-xl xl:text-2xl font-light">
       {children}
     </CustomParagraph>
   );
