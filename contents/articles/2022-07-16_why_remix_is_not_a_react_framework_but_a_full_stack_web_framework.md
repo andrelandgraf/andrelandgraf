@@ -84,6 +84,8 @@ Remix and Jamstack have different philosophies about web development and aim to 
 
 I was at Reactathon this year, and Ryan Florence gave [a great talk](https://www.youtube.com/watch?v=95B8mnhzoCM) about "When To Fetch". Please watch the talk if you haven't. It really shows how much thought the team behind Remix puts into its APIs that allow you to use Remix to prioritize the key performance indicators of your choice. Not to say that the people behind Next.js and Gatsby don't do that, but then we go back to the "web framework" part and my previous statement: Remix feels less decoupled from the web platform. There are a lot of different things to optimize your website for and Remix is all about providing levers so that we can choose what to optimize for. For me, this sets Remix apart from Jamstack.
 
+`statement: Remix is about providing levers to optimize for what's most important to you.`
+
 ### Remix runs everywhere
 
 Remix is full stack but it is also capable of running in places where your typical MERN stack, LAMP stack, or Jamstack website cannot run. Remix runs with Deno, Node.js, Netlify, Vercel, Cloudflare Workers and Pages, and much more. Remix runs everywhere.
