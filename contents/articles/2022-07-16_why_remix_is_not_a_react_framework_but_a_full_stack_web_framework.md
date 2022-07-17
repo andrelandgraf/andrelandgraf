@@ -90,7 +90,7 @@ Remix is full stack but it is also capable of running in places where your typic
 
 Remix runs on long-running servers, serverless environments, and the edge. This alone provides so much flexibility. Remix can adapt to your use case much better than other frameworks. For instance, I believe Remix is currently the easiest way to deploy a simple REST API to the edge. Speaking of the edge, I believe the edge is one of the areas where Remix is currently accelerating a trend by making it so accessible.
 
-`statement: Remix's ability to run anywhere adds to its flexibility. Remix can be used serverless, on a server, or even on the edge. Remix's adapters provide more levers to choose from.`
+`statement: Remix's ability to run anywhere adds to its flexibility. Remix's adapters let you choose a platform and environment based on your own requirements.`
 
 ### API-first
 
