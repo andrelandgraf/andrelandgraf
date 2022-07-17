@@ -74,7 +74,7 @@ const ArticlePage = () => {
   const { article } = useLoaderData<LoaderData>();
 
   return (
-    <article className="w-full flex flex-col gap-5 leading-loose">
+    <article className="w-full max-w-7xl flex flex-col gap-5 leading-loose">
       <div className="flex flex-col gap-1">
         <H1>{article.frontmatter.title}</H1>
         <SectionHeading>
@@ -82,7 +82,7 @@ const ArticlePage = () => {
         </SectionHeading>
       </div>
       <MarkdownContainer
-        className="flex flex-col gap-5 max-w-7xl"
+        className="w-full flex flex-col gap-5"
         source={article.markdown}
         components={{
           h1({ node, children, ...props }) {

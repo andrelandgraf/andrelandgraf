@@ -11,7 +11,7 @@ const H1: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
 
 const H2: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
   return (
-    <h2 {...props} className="text-2xl lg:text-3xl xl:text-4xl text-secondary dark:text-primary font-bold mt-4 lg:mt-8">
+    <h2 {...props} className="text-2xl lg:text-3xl xl:text-4xl text-secondary dark:text-primary font-bold mt-6 lg:mt-8">
       {children}
     </h2>
   );
@@ -19,7 +19,10 @@ const H2: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
 
 const H3: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
   return (
-    <h3 {...props} className="text-xl lg:text-2xl xl:text-3xl font-semibold text-secondary dark:text-primary">
+    <h3
+      {...props}
+      className="text-xl lg:text-2xl xl:text-3xl font-semibold text-secondary dark:text-primary mt-4 lg:mt-6"
+    >
       {children}
     </h3>
   );
@@ -27,7 +30,7 @@ const H3: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
 
 const H4: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
   return (
-    <h3 {...props} className="text-lg lg:text-xl xl:text-2xl font-normal text-secondary dark:text-primary">
+    <h3 {...props} className="text-lg lg:text-xl xl:text-2xl font-normal text-secondary dark:text-primary mt-2 lg:mt-4">
       {children}
     </h3>
   );

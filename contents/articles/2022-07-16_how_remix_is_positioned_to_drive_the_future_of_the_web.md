@@ -3,6 +3,7 @@ date: 2022-06-05
 title: How Remix is positioned to drive the future of the web
 description: Remix is a full stack web framework that both embraces web fundamentals and cutting-edge technologies. In this post, I want to summarize my own thoughts about why I believe that Remix is very well suited to drive the future of the web.
 categories: [Remix.run]
+ignore: true
 ---
 
 Remix is a full stack web framework that both embraces web fundamentals and cutting-edge technologies. In this post, I want to summarize my own thoughts about why I believe that Remix is very well suited to be part of the future of the web and why it might even accelerate some trends.
@@ -33,7 +34,7 @@ Web developers have always worked on both the client and the server. Think [LAMP
 
 Developing with Remix also has some similarties with PHP and Rails development. I remember having PHP files that included HTML, CSS, JavaScript, SQL, and PHP code. I would invoke database queries from within HTML. Straight-up madness that leads to crazy spaghetti but nicely co-located code. In Remix, API endpoints and request handlers (loaders & actions) live in the same file-based route modules as the routes' components (files in the `/routes` folder), giving me that same feeling of proximity of everything important. Not to mention that Remix promotes the usage of form elements to trigger data mutations. Much PHP vibes, very old school. Funny enough, this gave Remix the stigma of being a boomer framework. I would much rather phrase it this way: from a PHP/Rails perspective, Remix feels familiar but comes with all the advancements of the JavaScript ecosystem.
 
-`statement: I think Remix is a healthy combination of what works (the web platform) and new ideas, trends, and technologies.`
+`statement: Remix is a healthy combination of what works (the web platform) and new ideas, trends, and technologies.`
 
 ### The JavaScript perspective
 
