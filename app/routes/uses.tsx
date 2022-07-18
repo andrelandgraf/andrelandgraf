@@ -1,4 +1,4 @@
-import type { MetaFunction } from 'remix';
+import type { MetaFunction } from '@remix-run/node';
 import { PageHeading } from '~/components/UI/headings';
 
 export const meta: MetaFunction = () => {

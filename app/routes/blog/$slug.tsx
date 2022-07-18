@@ -1,5 +1,5 @@
-import type { LoaderFunction, MetaFunction, LinksFunction } from 'remix';
-import { useLoaderData } from 'remix';
+import type { LoaderFunction, MetaFunction, LinksFunction } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
 import { getPrivateEnvVars } from '~/config/env.server';
 import type { MarkdownFile } from '~/actions/github/index.server';
 import { fetchMarkdownFile } from '~/actions/github/index.server';
@@ -116,7 +116,11 @@ const ArticlePage = () => {
             return <CodeBlock {...props}>{children}</CodeBlock>;
           },
           a({ node, children, ...props }) {
-            return <MarkdownLinkWrapper {...props}>{children}</MarkdownLinkWrapper>;
+            return (
+              <MarkdownLinkWrapper {...props} className="font-normal">
+                {children}
+              </MarkdownLinkWrapper>
+            );
           },
         }}
       />

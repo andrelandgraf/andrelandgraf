@@ -1,5 +1,5 @@
-import type { MetaFunction, LoaderFunction } from 'remix';
-import { useLoaderData } from 'remix';
+import type { MetaFunction, LoaderFunction } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
 import { ButtonLink } from '~/components/UI/buttons';
 import { PageHeading, SectionHeading } from '~/components/UI/headings';
 import { getMetaTags } from '~/utilities';

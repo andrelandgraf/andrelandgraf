@@ -1,4 +1,4 @@
-import type { MetaFunction } from 'remix';
+import type { MetaFunction } from '@remix-run/node';
 import { PageHeading, SectionHeading } from '~/components/UI/headings';
 import { StyledLink } from '~/components/UI/links';
 import { getMetaTags } from '~/utilities';

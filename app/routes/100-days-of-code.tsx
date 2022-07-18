@@ -1,5 +1,5 @@
-import type { LoaderFunction, LinksFunction, MetaFunction } from 'remix';
-import { useLoaderData } from 'remix';
+import type { LoaderFunction, LinksFunction, MetaFunction } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
 import { getPrivateEnvVars } from '~/config/env.server';
 import type { MarkdownFile } from '~/actions/github/index.server';
 import { fetchMarkdownFiles } from '~/actions/github/index.server';

@@ -1,11 +1,11 @@
 import * as React from 'react';
-import type { LinksFunction, HeadersFunction, MetaFunction, LoaderFunction } from 'remix';
-import { useLoaderData } from 'remix';
-import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch, useLocation } from 'remix';
+import type { LinksFunction, HeadersFunction, MetaFunction, LoaderFunction } from '@remix-run/node';
+import { useLoaderData, Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch } from '@remix-run/react';
 import { IsomorphicNavProvider } from 'react-router-isomorphic-link';
 import Layout from '~/components/layout/layout';
 import { PageHeading } from '~/components/UI/headings';
 import { getMetaTags } from '~/utilities';
+import { getPublicEnvVars } from './config/env.server';
 
 import globalStylesUrl from '~/styles/global.css';
 
@@ -36,9 +36,15 @@ export const meta: MetaFunction = () => {
   });
 };
 
-export const loader: LoaderFunction = ({ request }) => {
+type LoaderData = {
+  host: string;
+  enableDownloadCVPDF: boolean;
+};
+
+export const loader: LoaderFunction = ({ request }): LoaderData => {
+  const { enableDownloadCVPDF } = getPublicEnvVars();
   const url = new URL(request.url);
-  return { host: url.host };
+  return { host: url.host, enableDownloadCVPDF };
 };
 
 /**
@@ -47,19 +53,19 @@ export const loader: LoaderFunction = ({ request }) => {
  * component for your app.
  */
 export default function App() {
-  const { host } = useLoaderData();
+  const { host, enableDownloadCVPDF } = useLoaderData<LoaderData>();
   return (
     <Document>
       <IsomorphicNavProvider host={host} useFinalSlash>
-        <AppContent />
+        <AppContent enableDownloadCVPDF={enableDownloadCVPDF} />
       </IsomorphicNavProvider>
     </Document>
   );
 }
 
-function AppContent() {
+function AppContent({ enableDownloadCVPDF }: { enableDownloadCVPDF: boolean }) {
   return (
-    <Layout>
+    <Layout showDownloadBtn={enableDownloadCVPDF}>
       <Outlet />
     </Layout>
   );

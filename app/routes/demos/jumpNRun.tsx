@@ -5,7 +5,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import type { LinksFunction } from 'remix';
+import type { LinksFunction } from '@remix-run/node';
 import { PageHeading } from '~/components/UI/headings';
 
 export const links: LinksFunction = () => {

@@ -1,4 +1,4 @@
-import type { MetaFunction, LinksFunction } from 'remix';
+import type { MetaFunction, LinksFunction } from '@remix-run/node';
 import Experience from '~/components/experience/experience';
 import Project from '~/components/project/project';
 import Skills from '~/components/skills/skills';

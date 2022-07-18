@@ -43,12 +43,9 @@ const StyledLink: FC<PropsWithChildren<LinkProps>> = ({ to, nav = false, classNa
       className={({ isActive }) =>
         `${getFocusClasses(true)} underline decoration-primary hover:decoration-secondary focus:decoration-secondary ${
           nav
-            ? 'text-xl xl:text-2xl 2xl:text-4xl decoration-8 underline-offset-4 hover:underline-offset-2 active:underline-offset-0'
+            ? 'text-lg xl:text-xl 2xl:text-2xl decoration-8 underline-offset-4 hover:underline-offset-2 active:underline-offset-0'
             : 'decoration-4 underline-offset-2 hover:underline-offset-1 active:underline-offset-0'
-        } font-bold ${isActive ? 'pointer-events-none decoration-darkPrimary' : ''} ${isomorphicClassName(
-          className,
-          isActive,
-        )}`
+        } ${isActive ? 'pointer-events-none decoration-darkPrimary' : ''} ${isomorphicClassName(className, isActive)}`
       }
     >
       {children}

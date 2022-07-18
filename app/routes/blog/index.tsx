@@ -1,10 +1,10 @@
-import type { LoaderFunction, MetaFunction } from 'remix';
-import { useLoaderData } from 'remix';
+import type { LoaderFunction, MetaFunction } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
 import { getPrivateEnvVars } from '~/config/env.server';
 import type { MarkdownFile } from '~/actions/github/index.server';
 import { fetchMarkdownFiles } from '~/actions/github/index.server';
 import { fetchMarkdownFilesFs } from '~/actions/fs/index.server';
-import { PageHeading, SectionHeading } from '~/components/UI/headings';
+import { PageHeading } from '~/components/UI/headings';
 import { getMetaTags, getISODate, getReadableDate } from '~/utilities';
 import { ButtonLink } from '~/components/UI/buttons';
 import { Tags } from '~/components/UI/tag';
