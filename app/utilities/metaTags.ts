@@ -36,6 +36,10 @@ const getMetaTags: (params: GetMetaTagsParams) => Record<string, string> = ({
     description: description,
     'og:description': description,
     'twitter:description': description,
+    'twitter:card': 'summary_large_image',
+    'twitter:site': '@andrelandgraf94',
+    'twitter:creator': '@andrelandgraf94',
+    'theme-color': 'rgb(94 234 212)',
     robots: noIndex ? 'noindex' : 'all',
     ...meta,
   };
