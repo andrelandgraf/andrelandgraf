@@ -22,6 +22,9 @@ export const meta: MetaFunction = ({ data }) => {
   return getMetaTags({
     title: data?.article.frontmatter.title || 'Blog',
     description: data?.article.frontmatter.description || 'This is my personal blog! Find a list of all my posts here!',
+    image: data?.article.frontmatter.imageUrl,
+    imageAlt: data?.article.frontmatter.imageAltText,
+    type: 'article',
   });
 };
 
@@ -30,6 +33,8 @@ type BlogArticleFrontmatter = {
   title: string;
   description: string;
   categories: string[];
+  imageUrl?: string;
+  imageAltText?: string;
 };
 
 const validateFrontMatter = (attributes: unknown): attributes is BlogArticleFrontmatter => {

@@ -8,6 +8,7 @@ interface GetMetaTagsParams {
   useCatchPhraseInTitle?: boolean;
   standaloneTitle?: boolean;
   noIndex?: boolean;
+  type?: 'website' | 'article';
   meta?: Record<string, string>;
 }
 
@@ -28,10 +29,12 @@ const getMetaTags: (params: GetMetaTagsParams) => Record<string, string> = ({
   useCatchPhraseInTitle = false,
   standaloneTitle = false,
   noIndex = false,
+  type = 'website',
 }) => {
   const metaTags: Record<string, string> = {
     title: getTitle(standaloneTitle, useCatchPhraseInTitle, title),
     'og:title': getTitle(standaloneTitle, useCatchPhraseInTitle, title),
+    'og:locale': 'en-US',
     'twitter:title': getTitle(standaloneTitle, useCatchPhraseInTitle, title),
     description: description,
     'og:description': description,
@@ -40,6 +43,7 @@ const getMetaTags: (params: GetMetaTagsParams) => Record<string, string> = ({
     'twitter:site': '@andrelandgraf94',
     'twitter:creator': '@andrelandgraf94',
     'theme-color': 'rgb(94 234 212)',
+    'og:type': type,
     robots: noIndex ? 'noindex' : 'all',
     ...meta,
   };
@@ -47,6 +51,8 @@ const getMetaTags: (params: GetMetaTagsParams) => Record<string, string> = ({
     metaTags.image = image;
     metaTags['og:image'] = image;
     metaTags['twitter:image'] = image;
+    metaTags['twitter:image:src'] = image;
+    metaTags['twitter:tile:image'] = image;
   }
   if (imageAlt) {
     metaTags['image:alt'] = imageAlt;
