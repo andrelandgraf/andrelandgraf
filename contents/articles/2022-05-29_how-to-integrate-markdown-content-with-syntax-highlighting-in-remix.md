@@ -235,7 +235,7 @@ Let's first install react-markdown:
 npm i react-markdown
 ```
 
-Now we have to alter the `remix.config.js` file as specified in the [remix.run documentation](https://remix.run/docs/en/v1/pages/gotchas#importing-esm-packages) and add all ESM packages that we want to use (that is react-markdown and all its dependencies):
+Now we have to alter the `remix.config.js` file as specified in the [remix.run documentation](https://remix.run/docs/en/v1/pages/gotchas#importing-esm-packages) and add all ESM packages that we want to use (that is `react-markdown` and all its dependencies):
 
 ```javascript
 /**
@@ -316,9 +316,9 @@ Some cool things you can do with custom React components:
 - A custom link component that handles external links differently
 - An optimized image component
 - Syntax highlighting for code and pre blocks
-- Custom codes that map to custom components to insert advertisments, marketing banners, etc.
+- Custom codes that map to custom components to insert advertisements, marketing banners, etc.
 
-react-markdown (using rehype-react under the hood) comes with a `components` property that allows us to map HTML elements to custom React components. Import the components you want to use and pass them to the `components` property:
+react-markdown (using `rehype-react` under the hood) comes with a `components` property that allows us to map HTML elements to custom React components. Import the components you want to use and pass them to the `components` property:
 
 ```tsx
 import ReactMarkdown from 'react-markdown';

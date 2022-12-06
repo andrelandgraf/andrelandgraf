@@ -124,30 +124,36 @@ Your application's process runs in some sort of environment. On localhost or an 
 
 We can identify the following virtual application environments:
 
-- Virtual machine (VM)
-- Container
-- V8 Isolate
+- Virtual machines (VM)
+- microVMs
+- Containers
+- V8 Isolates
 
-Virtual machines mostly include an operation system on their own. VMs boot up in minutes and are measured in Gigabytes.
+Please note that the container landscape is particularly fragmented. There are several different container technologies and standards. Not everything that uses a Docker image is a [Docker container](https://www.docker.com/resources/what-container/) ([1](https://fly.io/blog/docker-without-docker/)). For example, AWS Lambda uses [Firecracker](https://firecracker-microvm.github.io/) which creates so called microVMs that run on top of **KVM (Kernel-based Virtual Machine)**. These microVMs are specifically optimized for faster startup times and other serverless use cases.
 
-Containers include the language runtime of the programming language that should be executed. Containers boot up in milliseconds (may reach over a second) and are measured in Megabytes.
+Shout-out to [Brian LeRoux](https://twitter.com/brianleroux) for [pointing out](https://twitter.com/brianleroux/status/1599545856516321281) that MicroVMs behave differently then traditional containers.
 
-V8 Isolates are an V8 (JavaScript engine used in Chromium, Node.js, and Deno) mechanism and only include the code of your application in a very lightweight sandbox. V8 Isolates boot up in nanoseconds and are measured in Kilobytes (may reach a few Megabytes).
+So how do these application environments differ? I use the following intuition for these environments:
+
+- **Virtual machines** mostly include an operation system on their own. VMs boot up in minutes and are measured in Gigabytes.
+- **microVMs** virtualize the kernel to some extend but are more lightweight than VMs. KVMs boot up in milliseconds (may reach a few seconds) and are measured in Megabytes.
+- **(Docker) Containers** run on top of a host operating system. Usually, containers are measured in Megabytes and boot up in a few seconds.
+- **V8 Isolates** are an V8 (JavaScript engine used in Chromium, Node.js, and Deno) mechanism and only include the code of your application in a very lightweight sandbox. V8 Isolates boot up in nanoseconds and are measured in Kilobytes (may reach a few Megabytes).
 
 Different hosting environments utilize different application environment to orchestrate and run your application. Currently they usually map as follows:
 
-- Long-running server: **VM or container**
-- Serverless: **Container**
-- Edge: **Container or V8 Isolate**
+- Long-running server: **Generic (VM, MicroVM, Container)**
+- Serverless: **Container or MicroVM**
+- Edge: **V8 Isolate**
 
 Each Remix deployment target may map to several or one application environment:
 
-- Remix App Server: **VM or container**
-- Express Server: **VM or container**
-- Architect (AWS Lambda): **Container**
-- Fly.io: **Container**
-- Netlify: **Container**
-- Vercel: **Container**
+- Remix App Server: **Generic**
+- Express Server: **Generic**
+- Architect (AWS Lambda): **MicroVM**
+- Fly.io: **MicroVM** ([1](https://fly.io/blog/sandboxing-and-workload-isolation/))
+- Netlify: **MicroVM**
+- Vercel: **MicroVM**
 - Cloudflare Pages: **V8 Isolate**
 - Cloudflare Workers: **V8 Isolate**
 - Deno: **V8 Isolate**
