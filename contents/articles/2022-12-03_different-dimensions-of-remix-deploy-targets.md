@@ -1,15 +1,15 @@
 ---
 date: 2022-12-03
-title: Different Dimensions of Remix Deploy Targets
+title: Different dimensions of Remix deploy targets
 description: Remix is very flexible when it comes to deploying your application. In this article, we will explore the different dimensions of Remix deployment targets.
-categories: [Remix.run, Web Development]
+categories: [Remix.run, Deploy Targets]
 imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1670291051/andrelandgraf.dev/deployment-targets-table_mnjygi.png
 imageAltText: Table mapping Remix deployment targets to different dimensions
 ---
 
 ![Table mapping Remix deployment targets to different dimensions](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1670291051/andrelandgraf.dev/deployment-targets-table_mnjygi.png)
 
-Remix is very flexible when it comes to deploying your application. You can deploy your Remix app to a variety of platforms and environments. We can go as far as to say that Remix can run anywhere where JavaScript can run. In this article, we will explore different dimensions of Remix deployment targets.
+Remix is very flexible when it comes to deploying your application. You can deploy your Remix app to a variety of platforms and environments. We can go as far as to say that Remix can run anywhere where JavaScript can run. In this blog post, we will explore different dimensions of Remix deployment targets.
 
 ## Deployment Targets in Remix
 
