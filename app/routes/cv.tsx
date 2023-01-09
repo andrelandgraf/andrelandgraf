@@ -23,6 +23,14 @@ export const meta: MetaFunction = () => {
 
 const experiences = [
   <Experience
+    key="LinkedIn"
+    title="Software Engineer (frontend)"
+    description="Part of the advertiser productivity team working on campaign manager, working on improve the user experience for advertisers on LinkedIn."
+    fromTo="06/2022 – today"
+    location="Sunnyvale, CA, USA"
+    company="LinkedIn"
+  />,
+  <Experience
     key="MBRDNA"
     title="Software Engineer (external)"
     description="Design and implementation of HeyMercedes voice applications. Development of internal fullstack software solutions such as SDKs, admin panels, and more to enable customer personalization features."
