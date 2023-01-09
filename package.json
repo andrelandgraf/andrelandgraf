@@ -4,6 +4,7 @@
   "description": "My portfolio page!",
   "license": "",
   "scripts": {
+    "print:deps": "npx rmx-cli get-esm-packages",
     "build": "npm run build:css && npm run build:remix",
     "build:css": "npm run generate:css -- --minify",
     "build:remix": "cross-env NODE_ENV=production remix build",
@@ -15,23 +16,26 @@
     "start": "cross-env NODE_ENV=production netlify dev"
   },
   "dependencies": {
-    "@netlify/functions": "^0.10.0",
-    "@remix-run/netlify": "^1.4.3",
-    "@remix-run/react": "^1.4.3",
+    "@netlify/functions": "0.10.0",
+    "@remix-run/netlify": "1.4.3",
+    "@remix-run/react": "1.4.3",
     "dotenv": "^16.0.0",
     "front-matter": "^4.0.2",
     "prism-react-renderer": "^1.3.3",
     "react": "^18.2.0",
     "react-datalist-input": "^3.0.6",
     "react-dom": "^18.2.0",
-    "react-markdown": "^8.0.3",
     "react-router-isomorphic-link": "^0.0.7",
-    "remix": "^1.4.3",
-    "tiny-invariant": "^1.2.0"
+    "rehype-react": "6.2.1",
+    "remark-parse": "9.0.0",
+    "remark-rehype": "8.1.0",
+    "remix": "1.4.3",
+    "tiny-invariant": "^1.2.0",
+    "unified": "9.2.2"
   },
   "devDependencies": {
-    "@remix-run/dev": "^1.4.3",
-    "@remix-run/eslint-config": "^1.4.3",
+    "@remix-run/dev": "1.4.3",
+    "@remix-run/eslint-config": "1.4.3",
     "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
     "@typescript-eslint/eslint-plugin": "^5.4.0",

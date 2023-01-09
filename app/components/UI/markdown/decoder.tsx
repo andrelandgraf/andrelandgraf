@@ -1,6 +1,5 @@
 import type { FC, HTMLAttributes } from 'react';
 import { Children } from 'react';
-import { MarkdownContainer } from '.';
 
 const twitterEmbedCode = 'twitterEmbed: ';
 const statementCode = 'statement: ';
