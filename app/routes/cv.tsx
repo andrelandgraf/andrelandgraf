@@ -25,7 +25,7 @@ const experiences = [
   <Experience
     key="LinkedIn"
     title="Software Engineer (frontend)"
-    description="Part of the advertiser productivity team working on campaign manager, working on improve the user experience for advertisers on LinkedIn."
+    description="Part of the advertiser productivity team, improving the user experience for advertisers on LinkedIn's Campaign Manager platform."
     fromTo="06/2022 – today"
     location="Sunnyvale, CA, USA"
     company="LinkedIn"
