@@ -1,7 +1,7 @@
 ---
-date: 2023-07-01
+date: 2023-01-07
 title: Why you shouldn't use useActionData
-description:
+description: In this post, I want to discuss why I believe you should think twice before using action data over a redirect or session cookie.
 categories: [Remix.run]
 ---
 
@@ -53,10 +53,10 @@ The best part? This code works without JavaScript. When using Remix's `action` f
 
 Remix also supports returning a JSON response from an `action` function:
 
-```diff
+```tsx
 // todo/create.tsx route  module
 import type { ActionArgs } from '@remix-run/node';
-+import { json } from '@remix-run/node';
+import { json } from '@remix-run/node';
 import { Form } from '@remix-run/react';
 import { saveContact } from '~/db/contacts';
 
@@ -67,7 +67,7 @@ export async function action({ request }: ActionArgs) {
     throw new Response('Bad Request', { status: 400 });
   }
   await saveContact(email);
-+  return json({ success: true });
+  return json({ success: true });
 }
 ```
 
@@ -85,9 +85,7 @@ export default function Component() {
       <h1>Join email list</h1>
       <input name="email" type="email" required />
       <button type="submit">Join</button>
-      <p aria-live="polite">
-        {data?.success && "Joined!"}
-      <p>
+      <p aria-live="polite">{data?.success && 'Joined!'}</p>
     </Form>
   );
 }
@@ -162,9 +160,7 @@ export default function Component() {
       <h1>Join email list</h1>
       <input name="email" type="email" required />
       <button type="submit">Join</button>
-      <p aria-live="polite">
-        {data?.success && "Joined!"}
-      <p>
+      <p aria-live="polite">{data?.success && 'Joined!'}</p>
     </Form>
   );
 }
@@ -182,15 +178,13 @@ import { Form, useActionData, useTransition } from '@remix-run/react';
 export default function Component() {
   const data = useActionData<typeof action>();
   const transition = useTransition();
-  const isSubmitting = transition.state !== "idle";
+  const isSubmitting = transition.state !== 'idle';
   return (
     <Form action="/contact" method="post">
       <h1>Join email list</h1>
       <input name="email" type="email" required />
       <button type="submit">Join</button>
-      <p aria-live="polite">
-        {data?.success && !isSubmitting && "Joined!"}
-      <p>
+      <p aria-live="polite">{data?.success && !isSubmitting && 'Joined!'}</p>
     </Form>
   );
 }
