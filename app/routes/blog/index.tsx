@@ -1,5 +1,5 @@
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { Link, useLoaderData } from '@remix-run/react';
 import { getPrivateEnvVars } from '~/config/env.server';
 import type { MarkdownFile } from '~/actions/github/index.server';
 import { fetchMarkdownFiles } from '~/actions/github/index.server';
@@ -66,15 +66,19 @@ const BlogPage = () => {
       <PageHeading>My Blog Posts</PageHeading>
       {entries.map(({ frontmatter, slug }) => (
         <article className="flex flex-col gap-3 w-full lg:max-w-3xl" key={slug}>
-          <PageHeading asH2 className="text-secondary dark:text-primary">
-            {frontmatter.title}
-          </PageHeading>
+          <Link to={`/blog/${slug}`}>
+            <PageHeading asH2 className="text-secondary dark:text-primary">
+              {frontmatter.title}
+            </PageHeading>
+          </Link>
           <h3>
             <time dateTime={getISODate(frontmatter.date)}>{getReadableDate(frontmatter.date)}</time>
           </h3>
           <Tags tags={frontmatter.categories} className="flex gap-2" />
           <p>{frontmatter.description}</p>
-          <ButtonLink to={`/blog/${slug}`}>View Article</ButtonLink>
+          <ButtonLink to={`/blog/${slug}`} aria-label={`View Article ${frontmatter.title}`}>
+            View Article
+          </ButtonLink>
         </article>
       ))}
     </section>

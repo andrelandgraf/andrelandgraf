@@ -22,13 +22,13 @@ type ButtonLinkProps = PropsWithoutRef<
 const getClasses = (primary: boolean, className: string, disabled: boolean) => {
   // inherited by all buttons
   const base = `flex gap-2 justify-center items-center mobile:w-full transform motion-safe:active:translate-y-px text-center font-semibold mobile:text-xs shadow-lg rounded-lg px-4 py-2 leading-relaxed
-  ${disabled ? 'bg-gray-100 text-gray-700 pointer-events-none' : getFocusClasses()}`;
+  ${disabled ? 'bg-gray-300 text-gray-700 pointer-events-none' : getFocusClasses()}`;
   // for normal button => will be overriden below (not inherited like base)
   let style = ``;
   if (primary) {
     style = 'text-black bg-primary hover:bg-secondary';
   } else {
-    style = 'text-black bg-white hover:bg-secondary';
+    style = 'text-black bg-gray-100 dark:bg-white hover:bg-secondary';
   }
   // inherited + button type + custom
   return `${base} ${style} ${className}`;
