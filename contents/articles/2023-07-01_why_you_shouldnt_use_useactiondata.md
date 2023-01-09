@@ -5,7 +5,7 @@ description: In this post, I want to discuss why I believe you should carefully 
 categories: [Remix.run]
 ---
 
-One of my favorite things about Remix is its ability to perform data mutations. Remix encourages the use of forms to describe mutations in a declarative way. However, there is one hook that I just can't seem to get along with: `useActionData`. In this post, I want to discuss why I believe you should carefully consider whether to use action data over a redirect or session cookie.
+One of my favorite things about Remix is its ability to perform data mutations. Remix encourages the use of forms to describe mutations in a declarative way. However, there is one hook that I just can't seem to get along with: `useActionData`. In this post, I want to discuss why I believe you should carefully consider whether to use action data over a redirect with session cookie.
 
 ## Remix's mutation capabilities
 
@@ -45,13 +45,11 @@ export default function Component() {
 
 On the client, we declare our mutation via named input fields and Remix's `Form` component. No React state, callback, or `useEffect` needed!
 
-When a user clicks `Join`, Remix will prevent the browser's default behavior for us and initiate a fetch request to the specified `action`.
+When a user clicks `Join`, Remix will prevent the browser's default behavior and initiate a fetch request to the specified `action`.
 
 On the server, our `action` function handles incoming requests. Our code parses the form data, validates the user input, persists the data, and redirects the user to a success page.
 
 The best part? This code works even without JavaScript! When using Remix's `action` function and form components, you get progressive enhancement out of the box. By default, Remix can fall back to the browser's default behavior (of actually submitting a form).
-
-`statement: When used correctly, mutations in Remix work even when JavaScript is still loading, hydrating, has failed to load, or is disabled/not available.`
 
 ## Using useActionData
 
@@ -75,7 +73,7 @@ export async function action({ request }: ActionArgs) {
 }
 ```
 
-Instead of using a `redirect`, we use a JSON response. This allows us to access the data with the `useActionData` hook, similar to how you can access loader data with the `useLoaderData` hook:
+Instead of using a `redirect`, we use a JSON response. We can access the returned data with the `useActionData` hook, similar to how we access loader data with the `useLoaderData` hook:
 
 ```tsx
 import { Form, useActionData } from '@remix-run/react';
@@ -97,6 +95,10 @@ export default function Component() {
 
 When I first got started with Remix, I was convinced `useActionData` was the way to go for all my forms. I have since then changed my mind.
 
+A form submission creates a navigation to the action's route module. A redirect allows us to direct the user to any page after the action has been executed. Returning a JSON response instead means that we will stay on the action's route.
+
+This is a reasonable limitation. Unfortunately, when we take a closer look, it turns out with the limitation may create some pitfalls.
+
 ## Downsides of using action data
 
 In the following, I break down my concerns with using action data into three separate issues:
@@ -104,8 +106,6 @@ In the following, I break down my concerns with using action data into three sep
 - Form reusability
 - Breaking progressive enhancement
 - Fighting with action data persistence
-
-I will then go ahead and provide an alternative way of implementing session feedback with session cookies and loader data that solves the described concerns.
 
 Please note that the concerns and pitfalls discussed can be countered or avoided. The last point is also highly subjective. I am discussing these points only because I personally struggled with trying to make action data work before ultimately preferring to avoid it as much as possible.
 
@@ -115,13 +115,47 @@ Forms don't always live inside the route module component. A contact form can ea
 
 By submitting to the `/contact` route module, we also trigger a navigation to that page. That is the browser's default behavior for form submissions.
 
-Unfortunately, returning action data instead of a redirect Response prevents us from redirecting the user back to their current page.
+Unfortunately, returning action data instead of a redirect `Response` prevents us from redirecting the user back to their current page.
 
 It seems like we have to decide to either allow the form to be reusable or be able to return action data - not both.
 
+One solution to fix this issue is to use `useFetcher` instead, but this may break progressive enhancement...
+
 ### Breaking progressive enhancement
 
-`useFetcher` is a powerful hook that allows us to create submissions that don't trigger a page navigation. With `useFetcher`, we can even submit to resource routes (routes without a route component):
+`useFetcher` is a powerful hook that allows us to create submissions that don't trigger a page navigation.
+
+For instance, we can create a reusable contact form component like so:
+
+```tsx
+// reusable component used anywhere in our app
+import { useFetcher } from '@remix-run/react';
+
+export default function ContactForm() {
+  const fetcher = useFetcher();
+  return (
+    <fetcher.Form action="/contact" method="post">
+      <h1>Join email list</h1>
+      <input name="email" type="email" required />
+      <button type="submit">Join</button>
+      <p aria-live="polite">{fetcher.data?.success && 'Joined!'}</p>
+    </fetcher.Form>
+  );
+}
+```
+
+Now we can use the contact form throughout our application to let users join our email list. Since `fetcher.Form` doesn't trigger a page navigation, we won't need to redirect and can use the action data to communicate session feedback such as `Joined!` or `Already joined!`.
+
+`useFetcher` has many great use cases, but using it to submit to any route without triggering a navigation unfortunately breaks progressive enhancement.
+
+Without JavaScript, our `fetcher.Form` is just a form element. Upon submission, it will create a navigation to the resource route.
+
+- With JavaScript: A contact form submission keeps the user on the current route and correctly displays the action data.
+- Without JavaScript: Our contact form submission navigates the user to the contact route and does not display teh action data.
+
+In some cases this may be acceptable, but I personally don't like that we end up at two different routes. I don't think creating two different experiences like that - branching off - is maintainable. And unfortunately, it's hard to notice if one is not actively testing with JavaScript disabled.
+
+The problem becomes even more critical when submitting to a resource route (a route without a route component):
 
 ```tsx
 // resource route module /counter.tsx
@@ -150,11 +184,9 @@ export default function B() {
 }
 ```
 
-The ability to submit to any route without triggering a navigation provides a lot of flexibility. However, if the `action` returns action data instead of a `redirect`, then using a fetcher to submit to this action function will break progressive enhancement.
+With `useFetcher` we can submit to a resource route and receive the action data at our app's current location. However, if JavaScript is not enabled, fails to load, or is still loading, then such a submission will leave us stranded on a browser tab displaying JSON data on the screen.
 
-Without JavaScript, our `fetcher.Form` is just a form element. Upon submission, it will create a navigation to the resource route. If our action function returns data but no redirect, we will be left on a browser tab displaying JSON data on the screen.
-
-You might think: "This is not the fault of `useActionData` or `useFetcher().data`, but an issue for how you designed your app". My point is that most of Remix's features encourage progressive enhancement and emulate the browser's default behavior. They teach you as a developer for how to work with progressive enhancement in mind. However, using action data, `useFetcher`, and resource routes together deviates from the browser's default behavior - a pitfall that is hard to notice.
+You might think: "This is not the fault of `useActionData` or `useFetcher().data`, but an issue of how you use it". That's fair. My point is that most of Remix's features encourage progressive enhancement and emulate the browser's default behavior. Using action data and `useFetcher` together deviates from the browser's default behavior - a pitfall that is hard to notice.
 
 ### Fighting with action data persistence
 
@@ -164,27 +196,49 @@ What kind of data do we return from an action? A successful mutation revalidates
 
 I tried to make the following use cases work with action data:
 
-- Show a inline input error.
-- Render a global error message to the user.
+- Show an inline input error.
+- Render a global error message to the user that the user can discard.
 - Display a temporary toast success message and hide it after a timeout.
 
 I ran into a lot of issues trying to make action data work for these use cases. Mostly because of the way that action data persists until new action data is loaded (a new submission has successfully executed and returned new data).
 
-Anything we want to reset ourselves such as a temporary toast message or an error message that can be discarded require complicated React state and `useEffect` gymnastics.
+When managing fetch requests ourselves, then updating our React state to reset our application is quite straight forward.
+
+```tsx
+const onXClick = useCallback(() => setErrorMessage(''), []);
+```
+
+When working with action data, anything we want to reset ourselves such as a temporary toast message or an error message that can be discarded requires complicated React state and `useEffect` gymnastics.
 
 I dare you to implement a temporary toast message that pops-up if `useActionData` returns a `{ success: true }` JSON object! There are just so many edge cases that make this exercise highly complicated.
 
-To give you once example, if a new form submit returns the same action data, then we won't even notice that new action data has been received.
+Just to give one example:
+
+```tsx
+const fetcher = useFetcher();
+
+useEffect(() => {
+  if (fetcher.data?.success) {
+    showToastForMs('Success!', 5000);
+  }
+}, [fetcher.data]);
+```
+
+We display a success toast message if a new form submission returns `{ success: true }`.
+
+What do you think will happen if the submit the same form again and again receive `{ success: true }`?
+
+Action data persists and never resets. When receiving the same action data, then we won't even notice that new action data has been received. Our `useEffect` won't be triggered again.
 
 This is fixable of course. We can infer if we should reset our React state based on `useTransition().state` or `useFetcher().state`, but the resulting `useEffect` won't be pretty.
 
 Again, the described concerns are all solvable, but my point is: Remix lets us avoid complicated client-side state and `useEffect` shenanigans - one of the reasons I fancy it so much.
 
-Using action data
+Using action data:
 
-- prevents us from redirecting the user
-- may break progressive enhancement in combination with `useFetcher` and resource routes
-- introduces complicated client-side state management when using it to display temporary session feedback
+- Prevents us from redirecting the user.
+- May break progressive enhancement in combination with `useFetcher`.
+- Introduces complicated client-side state management when using it to display temporary session feedback.
 
 ## When to use action data
 
@@ -196,19 +250,20 @@ We can summarize that it is "save" to use action data when:
 
 ## Better alternative: session cookies
 
-Luckily, Remix provides an alternative way to communicate session feedback to the client. Instead of action data, we can use a session cookie and loader data!
+Luckily, Remix provides alternative ways to communicate session feedback to the client. I am a big fan of using a session cookie in combination with loader data!
 
 The [`flash` function](https://remix.run/docs/en/v1/utils/sessions#sessionflashkey-value) allows us to write something to the session cookie for one read only.
 
-We can easily write to the cookie in our `action` function using `flash` and immediately after that read from the cookie in a `loader` function - this will effectively remove the flashed data from the cookie already. We can redirect in our `action` function and return the session state as part of our loader data: win, win.
+We can write to the cookie in our `action` function using `flash`, **redirect** the user to any route, and in the following loader revalidation immediately read from the cookie in a `loader` function and return the session state from there.
 
-This allows us to:
+When using session cookies, we can redirect in our `action` function and return the session state as part of our loader data: win, win.
 
-- Use redirects to keep progressive enhancement in mind.
-- Display temporary ("flashing") action data via loader data.
+## Conclusion
 
-Now we can easily submit to resource routes, reuse our forms, and avoid some of the state and `useEffect` complexity when displaying session feedback to users.
+Using action data comes with hidden pitfalls. When used with the `Form` component, it breaks form reusability. When used with `useFetcher`, then we might created different branches in our application or break progressive enhancement altogether. I also think that using action data for form feedback is surprisingly complicated as there are many edge cases to consider.
 
-I love that Remix provides us with different tools to do the same things. If action data works for you, then please don't let this blog post bother you! I hope I was able to raise some concerns for why `useActionData` might not always be the best way to go when working on mutations.
+When used correctly, `useActionData` works jst fine and might be more convenient to implement than a session cookie. Like always, there are pros and cons to each approach.
+
+I hope I was able to raise some awareness of the potential pitfalls of `useActionData`!
 
 Cheers and happy coding!
