@@ -95,9 +95,7 @@ export default function Component() {
 
 When I first got started with Remix, I was convinced `useActionData` was the way to go for all my forms. I have since then changed my mind.
 
-A form submission creates a navigation to the action's route module. A redirect allows us to direct the user to any page after the action has been executed. Returning a JSON response instead means that we will stay on the action's route.
-
-This is a reasonable limitation. Unfortunately, when we take a closer look, it turns out with the limitation may create some pitfalls.
+A form submission creates a navigation to the action's route module. A redirect allows us to direct the user to any page after the action has been executed. Returning a JSON response instead means that we will stay on the action's route. This is a reasonable limitation. Unfortunately, when we take a closer look, it turns out the limitation may create some pitfalls.
 
 ## Downsides of using action data
 
@@ -146,14 +144,14 @@ export default function ContactForm() {
 
 Now we can use the contact form throughout our application to let users join our email list. Since `fetcher.Form` doesn't trigger a page navigation, we won't need to redirect and can use the action data to communicate session feedback such as `Joined!` or `Already joined!`.
 
-`useFetcher` has many great use cases, but using it to submit to any route without triggering a navigation unfortunately breaks progressive enhancement.
+`useFetcher` has many great use cases, but using it to submit to any route without triggering a navigation unfortunately breaks progressive enhancement. Without JavaScript, our `fetcher.Form` is just a form element. Upon submission, it will create a navigation to the resource route.
 
-Without JavaScript, our `fetcher.Form` is just a form element. Upon submission, it will create a navigation to the resource route.
+This creates two branches in our app's experience:
 
 - With JavaScript: A contact form submission keeps the user on the current route and correctly displays the action data.
-- Without JavaScript: Our contact form submission navigates the user to the contact route and does not display teh action data.
+- Without JavaScript: Our contact form submission navigates the user to the contact route and does not display the action data.
 
-In some cases this may be acceptable, but I personally don't like that we end up at two different routes. I don't think creating two different experiences like that - branching off - is maintainable. And unfortunately, it's hard to notice if one is not actively testing with JavaScript disabled.
+In some cases this may be acceptable, but I personally don't like that we end up at two different routes. I don't think creating two different experiences like that is maintainable. And unfortunately, it's hard to notice if one is not actively testing with JavaScript disabled.
 
 The problem becomes even more critical when submitting to a resource route (a route without a route component):
 
@@ -226,7 +224,7 @@ useEffect(() => {
 
 We display a success toast message if a new form submission returns `{ success: true }`.
 
-What do you think will happen if the submit the same form again and again receive `{ success: true }`?
+What do you think happens if we submit the same form again and the `action` function again returns `{ success: true }`?
 
 Action data persists and never resets. When receiving the same action data, then we won't even notice that new action data has been received. Our `useEffect` won't be triggered again.
 
@@ -246,7 +244,7 @@ We can summarize that it is "save" to use action data when:
 
 - The form and `action` are in the same route module.
 - The form is not reused across different routes.
-- Accept that the action data persists on the page until a new submission has been successfully be executed.
+- Accept that the action data persists on the page until a new submission has executed.
 
 ## Better alternative: session cookies
 
@@ -260,7 +258,7 @@ When using session cookies, we can redirect in our `action` function and return 
 
 ## Conclusion
 
-Using action data comes with hidden pitfalls. When used with the `Form` component, it breaks form reusability. When used with `useFetcher`, then we might created different branches in our application or break progressive enhancement altogether. I also think that using action data for form feedback is surprisingly complicated as there are many edge cases to consider.
+Using action data comes with hidden pitfalls. When used with the `Form` component, action data breaks form reusability. When used with `useFetcher`, then we might create branches in our application experience or break progressive enhancement altogether. I also think that using action data for form feedback is surprisingly complicated as there are many edge cases to consider.
 
 When used correctly, `useActionData` works jst fine and might be more convenient to implement than a session cookie. Like always, there are pros and cons to each approach.
 
