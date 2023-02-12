@@ -3,6 +3,8 @@ date: 2023-02-11
 title: A process for solving React take-home exercises
 description: Take-home can be intimidating, especially for those new to the job market. In this blog post, I want to guide you through my process for solving React take-home exercises.
 categories: [React, Interview Prep]
+imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1676234337/andrelandgraf.dev/take-home-exercises_hr145l.png
+imageAltText: Solving React take-home exercises - from zero to hero.
 ---
 
 Take-home exercises are a common part of the interview process. They can be intimidating, especially for those new to the job market and trying to break into tech. In this blog post, I want to guide you through my process for solving React/frontend take-home exercises.
