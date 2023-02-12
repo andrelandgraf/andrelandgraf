@@ -1,4 +1,5 @@
 import type { LoaderFunction, MetaFunction, LinksFunction } from '@remix-run/node';
+import { redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { getPrivateEnvVars } from '~/config/env.server';
 import type { MarkdownFile } from '~/actions/github/index.server';
@@ -53,12 +54,23 @@ type LoaderData = {
   article: MarkdownFile<BlogArticleFrontmatter>;
 };
 
-export const loader: LoaderFunction = async ({ params }): Promise<LoaderData> => {
+const redirects: Record<string, string | undefined> = {
+  '2023-07-01_why_you_shouldnt_use_useactiondata': '2023-01-07_why_you_shouldnt_use_useactiondata',
+};
+
+export const loader: LoaderFunction = async ({ params }): Promise<LoaderData | Response> => {
   const { githubAccessToken, githubRepoAPIUrl, readContentFrom } = getPrivateEnvVars();
   const { slug } = params;
 
   if (!slug) {
     throw Error('No article specified');
+  }
+
+  if (Object.keys(redirects).includes(slug)) {
+    const newSlug = redirects[slug];
+    if (newSlug) {
+      return redirect(`/blog/${newSlug}`);
+    }
   }
 
   const mdFilePromise =

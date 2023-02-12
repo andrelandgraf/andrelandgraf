@@ -3,7 +3,6 @@ date: 2023-01-07
 title: Why you shouldn't use useActionData
 description: In this post, I want to discuss why I believe you should carefully consider whether to use action data.
 categories: [Remix.run]
-ignore: true
 ---
 
 One of my favorite things about Remix is its ability to perform data mutations. Remix encourages the use of forms to describe mutations in a declarative way. However, there is one hook that I just can't seem to get along with: `useActionData`. In this post, I want to discuss why I believe you should carefully consider whether to use action data.
