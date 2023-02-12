@@ -36,16 +36,28 @@ const H4: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
   );
 };
 
-const OrderedList: FC<HTMLAttributes<HTMLOListElement>> = ({ children }) => {
-  return <ol className="list-inside list-decimal">{children}</ol>;
+const OrderedList: FC<HTMLAttributes<HTMLOListElement>> = ({ children, ...props }) => {
+  return (
+    <ol className="list-inside list-decimal" {...props}>
+      {children}
+    </ol>
+  );
 };
 
-const UnorderedList: FC<HTMLAttributes<HTMLUListElement>> = ({ children }) => {
-  return <ul className="list-disc list-inside">{children}</ul>;
+const UnorderedList: FC<HTMLAttributes<HTMLUListElement>> = ({ children, ...props }) => {
+  return (
+    <ul className="list-disc list-inside" {...props}>
+      {children}
+    </ul>
+  );
 };
 
-const ListItem: FC<HTMLAttributes<HTMLLIElement>> = ({ children }) => {
-  return <li className="pl-4 lg:mb-1 w-full text-lg lg:text-xl xl:text-2xl font-light">{children}</li>;
+const ListItem: FC<HTMLAttributes<HTMLLIElement>> = ({ children, ...props }) => {
+  return (
+    <li className="pl-4 lg:mb-1 w-full text-lg lg:text-xl xl:text-2xl font-light" {...props}>
+      {children}
+    </li>
+  );
 };
 
 const P: FC<HTMLAttributes<HTMLParagraphElement>> = ({ children, ...props }) => {
