@@ -220,6 +220,8 @@ Let’s use an example take-home exercise to apply the process. We will use a pr
 
 To get started, fork this [CodeSandbox](https://codesandbox.io/s/contact-form-react-exercise-lbvsod) to create your own environment.
 
+I want to add one disclaimer before getting started. The [CodeSandbox](https://codesandbox.io/s/contact-form-react-exercise-lbvsod) contains some bad code. The added bad practices are intended pitfalls to be fixed during the take-home exercise. Since we won't address all issues in this blog post, I wanted to highlight that these pitfalls exist.
+
 ### WHAT DO I HAVE TO DO?
 
 First, get a feeling for the exercise and existing code. Do the following tasks in whatever order feels natural to you:
