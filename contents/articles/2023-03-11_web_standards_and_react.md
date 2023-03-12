@@ -17,9 +17,7 @@ React is an amazing tool, and I owe much of my career to it. I learned React in 
 
 My team and I picked up React and worked on [an app for teachers to publish and grade multiple-choice homework](https://github.com/andreweinkoetz/high5-learning-frontend).
 
-I spent way too much time on the project. Luckily, we got rewarded with good grades.
-
-But more importantly, I got hooked (not a React hooks pun, I started with React a few months before [hooks were introduced](https://www.youtube.com/watch?v=dpw9EHDh2bM&t=4s)).
+I spent way too much time on the project. Luckily, we got rewarded with good grades. But more importantly, I got hooked (not a React hooks pun, I started with React a few months before [hooks were introduced](https://www.youtube.com/watch?v=dpw9EHDh2bM&t=4s)).
 
 React fit beautifully into my mental model of programming. Coming from a theoretical CS background, creating classes and functions to return UI felt natural. Where HTML and CSS felt weird and quirky, React felt intuitive and easy to learn.
 
@@ -35,7 +33,7 @@ Above all things, React allowed me to ignore the complexity of the web platform.
 
 A few years later Ryan Florence and Michael Jackson started tweeting about Remix. I loved the early content on the Remix YouTube channel, so I bought a license and joined the Remix Discord server.
 
-Over the summer of 2019, I spent a lot of time learning Remix and following the discussions in the Remix Discord. It was perfect timing for me as I had some free time and was eager to try out something new.
+Over the summer of 2021, I spent a lot of time learning Remix and following the discussions in the Remix Discord. It was perfect timing for me as I had some free time and was eager to try out something new.
 
 The early days in the Remix Discord server were awesome. I learned a lot by reading through the discussions of so many knowledgeable and passionate developers.
 
@@ -78,8 +76,6 @@ function CreateTodo() {
 This works just fine. However, with a bit of refactoring, we can use the web platform directly:
 
 ```javascript
-import { useState } from 'react';
-
 function CreateTodo() {
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -150,7 +146,7 @@ For me, #useThePlatform came at the right time. I was motivated to learn more ab
 
 The rise of full stack web frameworks such as Next.js, Remix, SvelteKit and others seemed to have motivated more people to do the same.
 
-It might be a coincidence, but it's really cool to see that the new React documentation on beta.reactjs.org seem to emphasize the web platform as well. For instance, the new documentation promotes the `FormData` API for [reading input values on submit](https://beta.reactjs.org/reference/react-dom/components/input#reading-the-input-values-when-submitting-a-form).
+It might be a coincidence, but it's really cool to see that the new React docs seem to emphasize the web platform as well. For instance, the new documentation promotes the `FormData` API for [reading input values on submit](https://beta.reactjs.org/reference/react-dom/components/input#reading-the-input-values-when-submitting-a-form).
 
 ## Conclusion
 
