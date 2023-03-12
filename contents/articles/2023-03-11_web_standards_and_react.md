@@ -1,7 +1,7 @@
 ---
 date: 2023-03-11
-title: My experience with web standards and React
-description: Why I am learning web standards and doing less with React.
+title: My experience learning React, web standards, and Remix
+description: In this blog post, I am sharing my story of learning React, web standards, and Remix, and answer the question why I actively try to use less React.
 categories: [React, Remix.run]
 imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1678651924/andrelandgraf.dev/how-react-made-me-a-web-dev_hi1nwx.png
 imageAltText: Circle showing the relationship between moving fast, quick results, positive feedback, and growing motivation. Moving fast enables quick results which results in positive feedback, which in turn motivates to keep moving fast.
@@ -9,7 +9,7 @@ imageAltText: Circle showing the relationship between moving fast, quick results
 
 `twitterEmbed: https://twitter.com/brophdawg11/status/1587103251723337729`
 
-You might have seen the #useThePlatform hashtag on Twitter. People usually add the hashtag when discussing embracing the web platform and using native web APIs whenever possible. In this blog post, I want to share my story of learning React and web and browser APIs.
+You might have seen the #useThePlatform hashtag on Twitter. People usually add the hashtag when discussing embracing the web platform and using native web APIs whenever possible. In this blog post, I want to share my story of learning React, Web APIs, and Remix.
 
 ## My React journey
 
@@ -130,7 +130,7 @@ function CreateTodo() {
 }
 ```
 
-Remix encourages me to use less React hooks and state, and I now try to actively reflect before reaching for React hooks. Is there a Web API I could use instead? Maybe I can move this code to the server instead?
+Remix encourages me to use less React state. I now try to actively reflect before reaching for React hooks. Is there a Web API I could use instead? Maybe I can move this code to the server instead?
 
 Of course, React hooks are still useful. This example is meant to illustrate how using the web platform can safe us from writing unnecessary code. Once our use case becomes more complex, we might reach for React hooks again.
 
