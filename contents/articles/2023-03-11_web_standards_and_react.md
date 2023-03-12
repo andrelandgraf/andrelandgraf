@@ -9,7 +9,7 @@ imageAltText: Circle showing the relationship between moving fast, quick results
 
 `twitterEmbed: https://twitter.com/brophdawg11/status/1587103251723337729`
 
-You might have seen the #useThePlatform hashtag on Twitter. People usually add the hashtag when discussing embracing the web platform and using native web APIs whenever possible. In this blog post, I want to share my experience with web standards and React.
+You might have seen the #useThePlatform hashtag on Twitter. People usually add the hashtag when discussing embracing the web platform and using native web APIs whenever possible. In this blog post, I want to share my story of learning React and web and browser APIs.
 
 ## My React journey
 
@@ -17,7 +17,9 @@ React is an amazing tool, and I owe much of my career to it. I learned React in 
 
 My team and I picked up React and worked on [an app for teachers to publish and grade multiple-choice homework](https://github.com/andreweinkoetz/high5-learning-frontend).
 
-I spent way too much time on the project. Luckily, we got rewarded with good grades. But more importantly, I got hooked (not literally, this was a few months before [hooks were introduced](https://www.youtube.com/watch?v=dpw9EHDh2bM&t=4s)).
+I spent way too much time on the project. Luckily, we got rewarded with good grades.
+
+But more importantly, I got hooked (not a React hooks pun, I started with React a few months before [hooks were introduced](https://www.youtube.com/watch?v=dpw9EHDh2bM&t=4s)).
 
 React fit beautifully into my mental model of programming. Coming from a theoretical CS background, creating classes and functions to return UI felt natural. Where HTML and CSS felt weird and quirky, React felt intuitive and easy to learn.
 
@@ -33,36 +35,133 @@ A few years later Ryan Florence and Michael Jackson started tweeting about Remix
 
 Over the summer of 2019, I spent a lot of time learning Remix and following the discussions in the Remix Discord. It was perfect timing for me as I had some free time and was eager to try out something new.
 
-The early days in the Remix Discord server were awesome. I learned a lot by reading through the discussions of so many knowledgeable and passionate devs.
+The early days in the Remix Discord server were awesome. I learned a lot by reading through the discussions of so many knowledgeable and passionate developers.
 
-It turns out that many of the problems I solved with React could actually be solved with less code by using the web platform directly. But more importantly, I got introduced to many tools of the web platform that had great synergy with React.
+It turns out that many of the problems I solved with React could actually be solved with less code by using the web platform directly.
+
+Previously, I would write mutations like this:
+
+```javascript
+import { useState } from 'react';
+
+function CreateTodo() {
+  // Handle form data with React
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await fetch('/api/todos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title,
+        description,
+      }),
+    });
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" value={title} onChange={(event) => setTitle(event.target.value)} />
+      <input type="text" value={description} onChange={(event) => setDescription(event.target.value)} />
+      <button type="submit">Create</button>
+    </form>
+  );
+}
+```
+
+This works just fine. However, with a bit of refactoring, we can use the web platform directly:
+
+```javascript
+import { useState } from 'react';
+
+function CreateTodo() {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+    // Use FormData to handle form data
+    const formData = new FormData(form);
+
+    await fetch('/api/todos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: formData.get('title'),
+        description: formData.get('description'),
+      }),
+    });
+    // Use HTML form element to reset form
+    form.reset();
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" name="title" />
+      <input type="text" name="description" />
+      <button type="submit">Create</button>
+    </form>
+  );
+}
+```
+
+Especially for larger forms, this may safe us from writing a lot of boilerplate code.
+
+With Remix we can go even further and declare the mutation declaratively:
+
+```javascript
+import { Form } from '@remix-run/react';
+
+function CreateTodo() {
+  return (
+    <Form method="post" action="/todos">
+      <input type="text" name="title" />
+      <input type="text" name="description" />
+      <button type="submit">Create</button>
+    </Form>
+  );
+}
+```
+
+Remix encourages me to use less React hooks and state.
+
+I now try to actively reflect before reaching for React hooks. Is there a Web API I could use instead? Maybe I can move this code to the server instead?
+
+Remix allowed me to get back to the web platform and use the tools it provides.
+
+But more importantly, I got introduced to many tools of the web platform that have great synergies with React.
 
 ## React and the web platform
 
-React is an abstraction for building composable UIs. With React DOM, React applies the abstraction to the web platform. However,the web platform not only includes the client-side, but also of the server-side. A web app is always a combination of client-side and server-side code.
+React is an abstraction for building composable UIs. With React DOM, React applies the abstraction to the web platform. However, there is a lot more to building web apps than just rendering states to the DOM.
 
-Even if we don't have access to it, our React app is hosted somewhere on a server. The same way serverless functions still use a server under-the-hood, so does our React app.
+For instance, a web app always consists of a server and a client.
 
-I am a big fan of the movement of full stack web frameworks that reintroduce access to the server-side. Remix provided a perfect gateway into this world for me. Remix allowed me to unlock so many more tools of the web platform such as cookies, server-side redirects, caching headers, and more that I previously had no access to with the SPA + REST API architecture.
+Our React app is hosted somewhere. The same way serverless functions use a server under the hood, so does our React app.
+
+I am excited to see full stack web frameworks reintroduce access to the underlying web server. Remix allowed me to unlock so many tools of the web platform such as cookies, server-side redirects, caching headers, and more that I previously had no access to with the SPA + REST API architecture.
 
 ## #useThePlatform
 
-For me, #useThePlatform came at the right time. I was motivated to learn more about the web platform and I was able to apply it in my daily work.
+For me, #useThePlatform came at the right time. I was motivated to learn more about the web platform and enhance my React apps by taking advantage of the full stack of the web platform.
 
 The rise of full stack web frameworks such as Next.js, Remix, SvelteKit and others seemed to have motivated more people to do the same.
 
-It might be a coincidence, but it's really cool to see that the new React documentation on beta.reactjs.org seem to emphasize the web platform way more. For instance, the new documentation promotes the `FormData` API for [reading input values on submit](https://beta.reactjs.org/reference/react-dom/components/input#reading-the-input-values-when-submitting-a-form).
+It might be a coincidence, but it's really cool to see that the new React documentation on beta.reactjs.org seem to emphasize the web platform as well. For instance, the new documentation promotes the `FormData` API for [reading input values on submit](https://beta.reactjs.org/reference/react-dom/components/input#reading-the-input-values-when-submitting-a-form).
 
 ## Conclusion
 
-React is an amazing tool. I use it for many things that are probably better solved outside of React. I wouldn't say my path into web development was the most efficient, but it worked for me.
+React is an amazing tool. I value that React allowed me to solve so many problems solely with React. By reducing the complexity for me as a beginner, React allowed me to move faster, get immediate results, and stay motivated.
 
-I now try to actively reflect before reaching for React's hooks. Maybe there is another way to solve the problem? Maybe I can move this code to the server instead?
+It's great to see that full stack frameworks add more tools for us to use when building web apps with React.
 
-However, I still value the fact that React allowed me to solve so many problems solely with React. By reducing the complexity for me as a beginner, React allowed me to move faster, get immediate results, and stay motivated.
+With React Server Component, it seems that React also has plans to take advantage of the full stack of the web platform in new ways.
 
-I am excited to see more #useThePlatform content and I am super excited for the future of the web, React, and Remix.
-
-The React team is working on React Server Components for a long time. It is another sign that React is embracing the full stack of the web platform. It's going to be exciting to see how they will integrate with Web APIs on the server.
+I am excited to see what the future holds for React and the web platform.
 
 Happy coding!
