@@ -3,6 +3,7 @@ date: 2023-01-07
 title: When to use serverless
 description: In this post, I want to answer the question when you might want to avoid serverless for your web applications.
 categories: [App Deployment]
+ignore: true
 ---
 
 Serverless is a powerful cloud computing model used to tackle scale. By now, serverless is more mature than ever, but it may also be overprescribed. In this post, I want to discuss when to use serverless and when it may do more harm than good.
