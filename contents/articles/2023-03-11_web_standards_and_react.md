@@ -130,23 +130,19 @@ function CreateTodo() {
 }
 ```
 
-Remix encourages me to use less React hooks and state.
+Remix encourages me to use less React hooks and state, and I now try to actively reflect before reaching for React hooks. Is there a Web API I could use instead? Maybe I can move this code to the server instead?
 
-I now try to actively reflect before reaching for React hooks. Is there a Web API I could use instead? Maybe I can move this code to the server instead?
+Of course, React hooks are still useful. This example is meant to illustrate how using the web platform can safe us from writing unnecessary code. Once our use case becomes more complex, we might reach for React hooks again.
 
-Remix allowed me to get back to the web platform and use the tools it provides.
+You can totally argue this is over-engineering. But I like to think of it as a way to keep my code simple and to avoid writing unnecessary code. And most importantly, this approach allows me to learn more about the web platform.
 
-But more importantly, I got introduced to many tools of the web platform that have great synergies with React.
+Remix allowed me to get back to the web platform and use the tools it provides. But more importantly, I got introduced to many tools of the web platform that have great synergies with React.
 
 ## React and the web platform
 
-React is an abstraction for building composable UIs. With React DOM, React applies the abstraction to the web platform. However, there is a lot more to building web apps than just rendering states to the DOM.
+React is an abstraction for building composable UIs. With React DOM, React applies the abstraction to the web platform. However, there is a lot more to building web apps than just rendering states to the DOM. For instance, a web app always consists of a server and a client.
 
-For instance, a web app always consists of a server and a client.
-
-Our React app is hosted somewhere. The same way serverless functions use a server under the hood, so does our React app.
-
-I am excited to see full stack web frameworks reintroduce access to the underlying web server. Remix allowed me to unlock so many tools of the web platform such as cookies, server-side redirects, caching headers, and more that I previously had no access to with the SPA + REST API architecture.
+Our React app is hosted somewhere. The same way serverless functions use a server under the hood, so does our React app. I am excited to see full stack web frameworks reintroduce access to the underlying web server. This eases access to many tools of the web platform such as cookies, server-side redirects, caching headers, and more.
 
 ## #useThePlatform
 
