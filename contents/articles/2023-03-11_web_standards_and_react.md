@@ -29,6 +29,8 @@ I used much of the following summer to go through React and JavaScript content f
 
 Above all things, React allowed me to ignore the complexity of the web platform. Instead of trying to learn different web and browser APIs all at once, I turned every problem I encountered into a React problem. This allowed me to get good at one thing and move fast. Something that turned out to be very rewarding.
 
+![Circle showing the relationship between moving fast, quick results, positive feedback, and growing motivation. Moving fast enables quick results which results in positive feedback, which in turn motivates to keep moving fast.](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1678608694/andrelandgraf.dev/how-react-made-me-a-web-dev_dfxxwk.png)
+
 ## Back to the web platform
 
 A few years later Ryan Florence and Michael Jackson started tweeting about Remix. I loved the early content on the Remix YouTube channel, so I bought a license and joined the Remix Discord server.
