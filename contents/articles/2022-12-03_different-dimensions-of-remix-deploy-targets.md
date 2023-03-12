@@ -11,7 +11,7 @@ imageAltText: Table mapping Remix deployment targets to different dimensions
 
 Remix is very flexible when it comes to deploying your application. You can deploy your Remix app to a variety of platforms and environments. We can go as far as to say that Remix can run anywhere where JavaScript can run. In this blog post, we will explore different dimensions of Remix deployment targets.
 
-## Deployment Targets in Remix
+## Deployment targets in Remix
 
 When creating a new Remix app with `npx create-remix@latest`, we have to select a deployment target. These are hosting provider and JavaScript runtime specific targets. The Remix team provides an adapter package and starter project for each listed deployment target.
 
