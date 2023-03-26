@@ -105,7 +105,7 @@ Coming from MERN, it is mind-blowing to see how much functionality we can get ou
 
 When owning the full stack of the web platform, we have access to all the tools the web platform provides.
 
-When deciding if something should be implemented on the client or on the server, we should always consider the trade-offs. Some things are better off implemented on the server and some other things that can simply not be done on the client. Having access to both sides of the web platform gives us the flexibility to make the right decision.
+When deciding if something should be implemented on the client or on the server, we should always consider the trade-offs. Some things are better off implemented on the server and some other things can simply not be done on the client. Having access to both sides of the web platform gives us the flexibility to make the right decision.
 
 For instance, when using large libraries or doing heavy computations, it might be better to implement them on the server to avoid bloating the client bundle.
 
