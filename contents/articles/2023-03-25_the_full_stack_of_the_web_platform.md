@@ -1,7 +1,7 @@
 ---
 date: 2023-03-25
 title: Taking advantage of the full stack of the web platform
-description: In this article, I explain what I mean by the full stack of the web platform and why having access to both the client and server runtime matters.
+description: In this article, I explain in more detail what I mean by the full stack of the web platform. I make a case that having access to both the client and server runtime matters.
 categories: [React, Remix.run, Web Development]
 imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1679795914/andrelandgraf.dev/full-stack-of-web-platform_ykh5pg.png
 imageAltText: A diagram showcasing the different tools the web platform offers across the client and the server. On the client, the web platform provides standards such as HTML, CSS, and JavaScript and APIs such as the DOM and browser APIs. On the server, we have access to the HTTP request-response cycle and server-only capabilities of HTTP.
@@ -9,9 +9,7 @@ imageAltText: A diagram showcasing the different tools the web platform offers a
 
 ![A diagram showcasing the different tools the web platform offers across the client and the server. On the client, the web platform provides standards such as HTML, CSS, and JavaScript and APIs such as the DOM and browser APIs. On the server, we have access to the HTTP request-response cycle and server-only capabilities of HTTP.](https://res.cloudinary.com/andre-landgraf/image/upload/v1679795914/andrelandgraf.dev/full-stack-of-web-platform_ykh5pg.png)
 
-I previously wrote about [how Remix is a full stack web framework](blog/2022-07-16_why_remix_is_not_a_react_framework_but_a_full_stack_web_framework). I argued that Remix gives you access to the full stack of the web platform.
-
-In this article, I want to explain in more detail what I mean by the full stack of the web platform. I want to make a case that having access to both the client and server runtime matters.
+I previously wrote about [how Remix is a full stack web framework](blog/2022-07-16_why_remix_is_not_a_react_framework_but_a_full_stack_web_framework). I argued that Remix gives you access to the full stack of the web platform. In this article, I want to explain in more detail what I mean by the full stack of the web platform. I want to make a case that having access to both the client and server runtime matters.
 
 ## Websites and web servers
 
@@ -21,8 +19,9 @@ Let's start by reviewing the architecture of the web platform.
 
 The web is a distributed platform and works on a client-server model.
 
-- Websites are a collection of files that are hosted on web servers. - Web browsers request resources over the internet from web servers.
-- Web servers respond with the requested resources.
+- Websites are a collection of files that are hosted on web servers.
+- Web browsers request resources over the internet from web servers.
+- Web servers respond with the requested resources (or other HTTP responses).
 
 It doesn't matter which tech stack we use to build our app, there will always be a web server, even if we don't have access to it.
 
@@ -62,13 +61,15 @@ Full stack is an overloaded term. When talking about web apps, full stack usuall
 
 MERN apps involve both a client-side React app and a standalone Express.js REST or GraphQL API server. Similarly, Jamstack promotes client-side apps that fetch data from REST and GraphQL APIs.
 
-Both architectures are clearly full stack. Conclusively, an application can be a full stack app without having a web server, however, without access to the full stack of the web platform.
+Both architectures are clearly full stack. Conclusively, an application can be a full stack app without having a web server.
+
+That's where I want to emphasize the difference between full stack (has a frontend and a backend) and having access to the full stack of the web platform (owning the client and the web server runtime).
 
 This is a subtle but important distinction. A MERN or Jamstack app - when serving the frontend React SPA from a third-party CDN - has no access to the web server that receives the document requests.
 
 Of course, this is not a problem if we don't need the tools available on the server or if the CDN provides configuration options for the tools we need. However, configuration options do not provide the same level of control as implementing the underlying runtime ourselves.
 
-## Full stack apps with access to the server
+## Full stack apps + web server
 
 MERN is not opinionated about how to serve the client-side React app. We can choose to serve the app from a third-party CDN or from our own web server.
 
@@ -111,8 +112,6 @@ For instance, when using large libraries or doing heavy computations, it might b
 ## X + web server
 
 I think it is important to understand that we don't have to give up anything when owning the full stack of the web platform. Especially when using the latest web frameworks, we basically get access to the web server for free.
-
-## Hosting options
 
 It might have been different a few years ago, but deploying a web server today is as simple as deploying static files to a CDN.
 
