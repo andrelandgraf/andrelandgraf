@@ -1,104 +1,127 @@
 ---
 date: 2023-03-25
-title: Using the full stack of the web platform
-description: What is the full stack of the web platform and why does it matter?
+title: Taking advantage of the full stack of the web platform
+description: In this article, I explain what I mean by the full stack of the web platform and why having access to both the client and server runtime matters.
 categories: [React, Remix.run, Web Development]
-imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1679782741/andrelandgraf.dev/full-stack-of-web-platform_hajxuw.png
-imageAltText: A diagram showcasing client-server communication. A client requests a resource from a server. The server responds with the resource.
+imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1679795914/andrelandgraf.dev/full-stack-of-web-platform_ykh5pg.png
+imageAltText: A diagram showcasing the different tools the web platform offers across the client and the server. On the client, the web platform provides standards such as HTML, CSS, and JavaScript and APIs such as the DOM and browser APIs. On the server, we have access to the HTTP request-response cycle and server-only capabilities of HTTP.
 ---
 
-I previously wrote about [how Remix is a full stack framework for the web](blog/2022-07-16_why_remix_is_not_a_react_framework_but_a_full_stack_web_framework). In this article, I want to explain what the full stack of the web is and why I believe it matters to understand what the full stack of the web is.
+![A diagram showcasing the different tools the web platform offers across the client and the server. On the client, the web platform provides standards such as HTML, CSS, and JavaScript and APIs such as the DOM and browser APIs. On the server, we have access to the HTTP request-response cycle and server-only capabilities of HTTP.](https://res.cloudinary.com/andre-landgraf/image/upload/v1679795914/andrelandgraf.dev/full-stack-of-web-platform_ykh5pg.png)
+
+I previously wrote about [how Remix is a full stack web framework](blog/2022-07-16_why_remix_is_not_a_react_framework_but_a_full_stack_web_framework). I argued that Remix gives you access to the full stack of the web platform.
+
+In this article, I want to explain in more detail what I mean by the full stack of the web platform. I want to make a case that having access to both the client and server runtime matters.
 
 ## Websites and web servers
 
-If we generalize a bunch, we can say that a website is a collection of files served by a web server. Browsers are clients that request resources from web servers.
+Let's start by reviewing the architecture of the web platform.
 
-![A diagram showcasing client-server communication. A client requests a resource from a server. The server responds with the resource.](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1679782741/andrelandgraf.dev/full-stack-of-web-platform_hajxuw.png)
+![A diagram showcasing the client-server model. A client requests a resource from a server. The server responds with the resource.](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1679795190/andrelandgraf.dev/client-server-model_rotjin.png)
 
-It doesn't matter what stack you use to build a website or web app, it will always build on top of the client-server architecture of the web platform.
+The web is a distributed platform and works on a client-server model.
+
+- Websites are a collection of files that are hosted on web servers. - Web browsers request resources over the internet from web servers.
+- Web servers respond with the requested resources.
+
+It doesn't matter which tech stack we use to build our app, there will always be a web server, even if we don't have access to it.
 
 ## The tools of the web platform
 
 The web platform consists of protocols, standards, and APIs that we use to build our applications.
 
-On the client, we may use DOM and browser APIs, HTML, CSS, and JavaScript to build our user interfaces. On the server, we use the web's Fetch API and the HTTP protocol to communicate with the client.
+The browser implements the web platform's standards and APIs and lets us write HTML, CSS, and JavaScript to build user interfaces. We further use the DOM and browser APIs to interact with the browser.
 
-The web platform offers tools on both the client and the server.
+On the web server, we handle incoming HTTP requests. The web server controls the request-response cycle and can use the HTTP protocol to communicate with the client.
+
+We can summarize that the web platform always includes a client and a server and that both have access to different tools of the web platform.
 
 ## Giving up the server
 
-The web platform has always included a web server. However, when building out an application, we can always give up control of the web server and use a third-party service to host our application.
+The web platform has always included a web server. However, when building an application, we can make the decision to give up control of the web server and use third-party services to host our application.
 
-Client-side React apps (such as [Create React App](https://create-react-app.dev/)) consist only of static files and don't need to be hosted on a web server. A third-party CDN (Content Delivery Network) is sufficient to host the files.
+For instance, client-side React apps (such as [Create React App](https://create-react-app.dev/)) consist only of static files and can be hosted on a CDN (Content Delivery Network).
 
-![Diagram showcasing a React app running on a browser being served by a third-party CDN.](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1679784116/andrelandgraf.dev/client-side-react-via-cdn_xm1vn7.png).
+![Diagram showcasing a React app running on a browser being served by a third-party CDN.](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1679799531/andrelandgraf.dev/client-side-react-via-cdn_eidpxt.png).
 
-For any required backend capabilities, we can also implement a GraphQL or REST API server. These are backend servers, but do not have to be hosted on a web server. We can use a third-party service to host our API server. We see this kind of architecture when using the [MERN (MongoDB, Express, React, Node) stack](https://www.mongodb.com/mern-stack).
+When hosting a React app on a CDN, we give up control of the web server. It's now the CDN who is in charge of serving our app!
 
-![Diagram showcasing a React app served by a third-party CDN communicating with an Express.js backend connected to a MongoDB database.](https://res.cloudinary.com/andre-landgraf/image/upload/v1679784376/andrelandgraf.dev/full-stack-mern-app_yioyrc.png).
+There are many reasons why a big part of the industry decided to give up control of the web server and focus on client-side-only apps. As always, it comes down to trade-offs.
 
-Similarly, [Jamstack](https://jamstack.org/) promotes the usage of third-party providers to replace traditional web servers.
+## Client-side-heavy apps
 
-![A diagram showcasing the Jamstack architecture. Third-party CDNs, CMSs, and APIs are used. The web app only consists of a frontend connected to these third-party services.](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1679783629/andrelandgraf.dev/jamstack-architecture_o70ffh.png)
+Popular architectures such as the [Jamstack](https://jamstack.org/) or [MERN (MongoDB, Express, React, Node)](https://www.mongodb.com/mern-stack) promote the implementation of client-side React apps that fetch data from REST and GraphQL APIs.
 
-In both cases, we are giving up control of the web server and missing out on the tools of the web platform that are available on the server.
+![Diagram showcasing the Jamstack and MERN architectures. In both cases, a React app is served by a third-party CDN communicating with backend APIs.](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1679797361/andrelandgraf.dev/jamstack-and-mern_mmtkqy.png).
+
+When focusing on client-side-heavy apps, we might decide to give up the tools of the web server as we focus on the client runtime.
 
 ## Full stack apps
 
-Full stack is a broad term. In the context of web apps, the full stack usually refers to the client, the server, and potentially a database.
+Full stack is an overloaded term. When talking about web apps, full stack usually refers to the fact that both the client and the server are implemented as part of the same app.
 
-Jamstack and MERN stack apps are full stack applications. However, when implementations give up control of the web server, they are missing out on the tools of the web platform that are available on the server.
+MERN apps involve both a client-side React app and a standalone Express.js REST or GraphQL API server. Similarly, Jamstack promotes client-side apps that fetch data from REST and GraphQL APIs.
 
-In this case, these full stack apps do not have access to the full stack of the web platform.
+Both architectures are clearly full stack. Conclusively, an application can be a full stack app without having a web server, however, without access to the full stack of the web platform.
 
-![A diagram showcasing a full stack web app that consists of a web frontend, a backend running on the web server, and a database.](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1679784628/andrelandgraf.dev/a-full-stack-web-app_jhdcup.png)
+This is a subtle but important distinction. A MERN or Jamstack app - when serving the frontend React SPA from a third-party CDN - has no access to the web server that receives the document requests.
 
-This is a subtle but important distinction. A MERN-app - when serving the frontend React SPA from a third-party CDN - has no access to the web server that receives the requests for the files of the frontend.
+Of course, this is not a problem if we don't need the tools available on the server or if the CDN provides configuration options for the tools we need. However, configuration options do not provide the same level of control as implementing the underlying runtime ourselves.
 
-Of course, this is not a problem if we don't need the tools of the web platform that are available on the server. However, tools such as HTTP caching headers, cookies, and HTTP redirects can be very useful.
+## Full stack apps with access to the server
 
-## Full stack web apps
+MERN is not opinionated about how to serve the client-side React app. We can choose to serve the app from a third-party CDN or from our own web server.
 
-Our MERN app can be refactored to serve the frontend from the Express.js backend which then is promoted from standalone API backend to a web server with API capabilities.
+Promoting our standalone Express.js API server to a web server is as simple as adding a single line of code to our Express.js app:
 
 ```javascript
 app.use(express.static(path.join(__dirname, '../client/build')));
 ```
 
-Just like that, we regain access to the tools of the web platform that are available on the server. Now we can add middlewares to the Express.js backend to add HTTP caching headers, cookies, and HTTP redirects.
+Just like that, we use Express.js to serve our React app. From here, we can regain access to the tools of the web platform that are available on the server.
+
+`statement: By implementing our own web server, we gain access to the full stack of the web platform.`
+
+For instance, we could add Express.js middlewares to add HTTP caching headers, work with cookies, and utilize HTTP redirects.
 
 ## You can't not have a framework
 
 In 2014, Ryan Florence wrote a [blog post](https://blog.ryanflorence.com/you-cant-not-have-a-framework.html) titled "You can't not have a framework".
 
-If we try to use React's latest features without a framework, we end up building our own custom one. There is no way around it (we can't not have a framework).
+Imagine we continue to build our MERN app without a framework. We would have to implement a lot of boilerplate code to reach the same level of functionality as today's frameworks provide.
+
+Even worse, if we try to use React's latest features without a framework, we end up building our own custom framework! There is no way around it, we can't not have a framework.
 
 ## Full stack web frameworks
 
-Full stack web frameworks are a new category of frameworks that span across both the client and the frontend and give us access to the tools of the web server. They usually control our app's build process, routing, and runtime.
+Full stack web frameworks are a new category of frameworks that span across both the client and the frontend.
 
-Full stack web frameworks provide a lot of functionality out of the box that go far beyond rendering React on the server. Kent C. Dodds calls these framworks [the web's next transition](https://www.epicweb.dev/the-webs-next-transition).
+Full stack web frameworks offer tons of functionality out of the box to build great user experiences. Also, features such as client-server type inference and code co-location provide an amazing developer experience. Kent C. Dodds calls these frameworks [the web's next transition](https://www.epicweb.dev/the-webs-next-transition).
 
-![Diagram showcasing a Next.js and a Remix.run application that span across the full stack of the web platform.](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1679785492/andrelandgraf.dev/nextjs-remix-full-stack-examples_x1ns9y.png)
+Coming from MERN, it is mind-blowing to see how much functionality we can get out of the box with a full stack web framework and how much boilerplate we can avoid. But most importantly, in the context of this article, these frameworks give us access to the tools of the web server.
 
 ## Owning the full stack of the web platform
 
-When owing the full stack of the web platform, we have access to all the tools the web platform provides. This usually allows us to build more performant and flexible applications.
+When owning the full stack of the web platform, we have access to all the tools the web platform provides.
 
-Instead of having to do everything on the client, we can span across the full stack of the web platform.
+When deciding if something should be implemented on the client or on the server, we should always consider the trade-offs. Some things are better off implemented on the server and some other things that can simply not be done on the client. Having access to both sides of the web platform gives us the flexibility to make the right decision.
+
+For instance, when using large libraries or doing heavy computations, it might be better to implement them on the server to avoid bloating the client bundle.
 
 ## X + web server
 
-We don't have to give anything up in return for owning the web server. When using the latest web frameworks, we basically get the web server for free, while still enjoying the benefits of React, easy hosting solutions, and third-party services.
+I think it is important to understand that we don't have to give up anything when owning the full stack of the web platform. Especially when using the latest web frameworks, we basically get access to the web server for free.
 
-It might have been different a few years ago, but today, hosting and maintaining a web server using one of the latest web frameworks is a breeze.
+## Hosting options
 
-Today's hosting providers provide amazing developer experiences and make it easy to deploy our apps to the edge, serverless functions, or a traditional web server. You can refer to [this blog post](https://andre-landgraf.dev/blog/2022-12-03_different-dimensions-of-remix-deploy-targets) about the sheer amount of hosting options for apps built with Remix.
+It might have been different a few years ago, but deploying a web server today is as simple as deploying static files to a CDN.
+
+Today's hosting providers provide amazing developer experiences and make it easy to deploy to the edge, serverless functions, or traditional web servers.
 
 ## Conclusion
 
-Apps can be full stack web apps without having access to the full stack of the web platform. However, it is the access to the full stack of the web platform that allows us to access all the tools of the web platform.
+The full stack of the web platform includes the client (web browser) and server (web server). Websites and web apps have always been full stack; however, we saw a shift in the industry towards client-side-only apps.
 
-The web server is half of the web platform and lets us access tools of the web that the client has no access to. When giving up control of the web server, we loose access to these tools.
+Client-side-only apps, together with a standalone backend are still full stack apps. However, they do not provide access to the web server. Giving up control of the web server means missing out on the tools of the web platform that are available on the server.
 
-The latest web frameworks span across the full stack of the web platform and give us access to the tools of the web server.
+Remix and Next.js make working with a web server as easy as working with a client-side React app. Conclusively, there is no reason to give up control of the web server anymore. Instead, the latest frameworks let us take advantage of the full stack of the web platform.
