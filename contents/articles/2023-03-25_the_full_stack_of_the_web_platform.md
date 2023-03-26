@@ -23,15 +23,16 @@ The web is a distributed platform and works on a client-server model.
 - Web browsers request resources over the internet from web servers.
 - Web servers respond with the requested resources (or other HTTP responses).
 
-It doesn't matter which tech stack we use to build our app, there will always be a web server, even if we don't have access to it.
+When building for the web, it always comes down to the client-server model. We can't build a web application without a client and a server.
+
+`statement: It doesn't matter which tech stack we use to build our app, there will always be a web server, even if we don't have access to it.`
 
 ## The tools of the web platform
 
-The web platform consists of protocols, standards, and APIs that we use to build our applications.
+The web platform consists of protocols, standards, and APIs that we use to build our applications. Since the web platform is a distributed system where the client and server are separate entities, we have access to different tools on the client and server.
 
-The browser implements the web platform's standards and APIs and lets us write HTML, CSS, and JavaScript to build user interfaces. We further use the DOM and browser APIs to interact with the browser.
-
-On the web server, we handle incoming HTTP requests. The web server controls the request-response cycle and can use the HTTP protocol to communicate with the client.
+- The browser implements the web platform's standards and APIs and lets us write HTML, CSS, and JavaScript to build user interfaces. We further use the DOM and browser APIs to interact with the browser.
+- On the web server, we handle incoming HTTP requests. The web server controls the request-response cycle and can use the HTTP protocol to communicate with the client.
 
 We can summarize that the web platform always includes a client and a server and that both have access to different tools of the web platform.
 
@@ -79,11 +80,9 @@ Promoting our standalone Express.js API server to a web server is as simple as a
 app.use(express.static(path.join(__dirname, '../client/build')));
 ```
 
-Just like that, we use Express.js to serve our React app. From here, we can regain access to the tools of the web platform that are available on the server.
+Just like that, we use Express.js to serve our React app. From here, we can regain access to the tools of the web platform that are available on the server. For instance, we could add Express.js middlewares to add HTTP caching headers, work with cookies, and utilize HTTP redirects.
 
 `statement: By implementing our own web server, we gain access to the full stack of the web platform.`
-
-For instance, we could add Express.js middlewares to add HTTP caching headers, work with cookies, and utilize HTTP redirects.
 
 ## You can't not have a framework
 
