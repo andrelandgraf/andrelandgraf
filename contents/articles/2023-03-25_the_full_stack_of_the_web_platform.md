@@ -29,9 +29,9 @@ When building for the web, it always comes down to the client-server model. We c
 
 ## The tools of the web platform
 
-The web platform consists of protocols, standards, and APIs that we use to build our applications. Since the web platform is a distributed system where the client and server are separate entities, we have access to different tools on the client and server.
+The web platform consists of protocols, standards, and APIs that we use to build our applications. Since the web platform is a distributed system where the client and server are separate entities with different responsibilities, we have access to different tools on the client and server.
 
-- The browser implements the web platform's standards and APIs and lets us write HTML, CSS, and JavaScript to build user interfaces. We further use the DOM and browser APIs to interact with the browser.
+- Browsers parse HTML and CSS to render our UI to the screen. We further have access to the DOM and browser APIs to enhance the user experience with JavaScript.
 - On the web server, we handle incoming HTTP requests. The web server controls the request-response cycle and can use the HTTP protocol to communicate with the client.
 
 We can summarize that the web platform always includes a client and a server and that both have access to different tools of the web platform.
@@ -58,17 +58,17 @@ When focusing on client-side-heavy apps, we might decide to give up the tools of
 
 ## Full stack apps
 
-Full stack is an overloaded term. When talking about web apps, full stack usually refers to the fact that both the client and the server are implemented as part of the same app.
+Full stack is an overloaded term. When talking about web apps, full stack usually refers to an application that consists both a of client and a server environment.
 
 MERN apps involve both a client-side React app and a standalone Express.js REST or GraphQL API server. Similarly, Jamstack promotes client-side apps that fetch data from REST and GraphQL APIs.
 
-Both architectures are clearly full stack. Conclusively, an application can be a full stack app without having a web server.
+Both architectures are clearly full stack. Conclusively, an application can be a full stack app without a web server.
 
 That's where I want to emphasize the difference between full stack (has a frontend and a backend) and having access to the full stack of the web platform (owning the client and the web server runtime).
 
 This is a subtle but important distinction. A MERN or Jamstack app - when serving the frontend React SPA from a third-party CDN - has no access to the web server that receives the document requests.
 
-Of course, this is not a problem if we don't need the tools available on the server or if the CDN provides configuration options for the tools we need. However, configuration options do not provide the same level of control as implementing the underlying runtime ourselves.
+Of course, this is not a problem if we don't need the tools available on the server or if the CDN provides configuration options for the tools we need. However, maybe it's time to reconsider the trade-offs of giving up the web server.
 
 ## Full stack apps + web server
 
@@ -104,9 +104,15 @@ Coming from MERN, it is mind-blowing to see how much functionality we can get ou
 
 When owning the full stack of the web platform, we have access to all the tools the web platform provides.
 
+The web server provides access to the HTTP request object. On incoming request, we can determine the user's language, light/dark mode preference, and more. We also have access to HTTP cookies and redirects to manage user sessions.
+
+These tools allow us to enhance the user experience, avoid unnecessary network requests, and improve the performance of our application.
+
 When deciding if something should be implemented on the client or on the server, we should always consider the trade-offs. Some things are better off implemented on the server and some other things can simply not be done on the client. Having access to both sides of the web platform gives us the flexibility to make the right decision.
 
-For instance, when using large libraries or doing heavy computations, it might be better to implement them on the server to avoid bloating the client bundle.
+For instance, when using large libraries, it might be better to use them on the server to avoid bloating the client bundle.
+
+Or when fetching data, we might want to fetch data on the server to filter out unused fields before sending the data to the client to avoid overfetching.
 
 ## X + web server
 
@@ -118,8 +124,8 @@ Today's hosting providers provide amazing developer experiences and make it easy
 
 ## Conclusion
 
-The full stack of the web platform includes the client (web browser) and server (web server). Websites and web apps have always been full stack; however, we saw a shift in the industry towards client-side-only apps.
+The full stack of the web platform includes the client (web browser) and server (web server). Websites and web apps have always been full stack; however, we saw a shift in the industry towards focusing on the client runtime.
 
-Client-side-only apps, together with a standalone backend are still full stack apps. However, they do not provide access to the web server. Giving up control of the web server means missing out on the tools of the web platform that are available on the server.
+Giving up control of the web server means missing out on the tools of the web platform that are available on the server.
 
-Remix and Next.js make working with a web server as easy as working with a client-side React app. Conclusively, there is no reason to give up control of the web server anymore. Instead, the latest frameworks let us take advantage of the full stack of the web platform.
+Today's full stack web frameworks, such as Remix and Next.js, make working with a web server as easy as working with a client-side React app. Conclusively, there is no reason to give up control of the web server anymore. Instead, the latest frameworks let us take advantage of the full stack of the web platform.
