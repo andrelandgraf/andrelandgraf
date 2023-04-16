@@ -7,7 +7,7 @@ imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v
 imageAltText: A diagram showcasing the different tools the web platform offers across the client and the server. On the client, the web platform provides standards such as HTML, CSS, and JavaScript and APIs such as the DOM and browser APIs. On the server, we have access to the HTTP request-response cycle and server-only capabilities of HTTP.
 ---
 
-![A diagram showcasing the different tools the web platform offers across the client and the server. On the client, the web platform provides standards such as HTML, CSS, and JavaScript and APIs such as the DOM and browser APIs. On the server, we have access to the HTTP request-response cycle and server-only capabilities of HTTP.](https://res.cloudinary.com/andre-landgraf/image/upload/v1679795914/andrelandgraf.dev/full-stack-of-web-platform_ykh5pg.png)
+![A diagram showcasing the different tools the web platform offers across the client and the server. On the client, the web platform provides standards such as HTML, CSS, and JavaScript and APIs such as the DOM and browser APIs. On the server, we have access to the HTTP request-response cycle and server-only capabilities of HTTP.](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1679795914/andrelandgraf.dev/full-stack-of-web-platform_ykh5pg.png)
 
 I previously wrote about [how Remix is a full stack web framework](blog/2022-07-16_why_remix_is_not_a_react_framework_but_a_full_stack_web_framework). I argued that Remix gives you access to the full stack of the web platform. In this article, I want to explain in more detail what I mean by the full stack of the web platform. I want to make a case that having access to both the client and server runtime matters.
 
@@ -94,7 +94,7 @@ Even worse, if we try to use React's latest features without a framework, we end
 
 ## Full stack web frameworks
 
-Full stack web frameworks are a new category of frameworks that span across both the client and the frontend.
+Full stack web frameworks are a new category of frameworks that span across both the browser and the server runtime.
 
 Full stack web frameworks offer tons of functionality out of the box to build great user experiences. Also, features such as client-server type inference and code co-location provide an amazing developer experience. Kent C. Dodds calls these frameworks [the web's next transition](https://www.epicweb.dev/the-webs-next-transition).
 
