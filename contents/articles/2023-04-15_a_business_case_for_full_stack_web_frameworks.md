@@ -255,8 +255,6 @@ Taking the median across all locations and runtimes, the full stack web apps (Re
 
 Conclusively, a migration to a full stack web framework can improve the performance of your app significantly. Deploying server-side rendering and streaming (which comes out of the box) alone may provide performance benefits. Fetching data on the server further significantly improves the performance.
 
-When considering that
-
 ## Limitations
 
 A business case should always take your own organization's structure, use cases, current stacks, and infrastructure into account.
@@ -278,5 +276,3 @@ Conclusively, this business case should be used as a blueprint or baseline to co
 You can learn more about web vitals on the [web.dev](https://web.dev/vitals/) website.
 
 You can read more about the benefits of owning the full stack of the web platform in this blog post: "[The full stack of the web platform](blog/2023-03-25_the_full_stack_of_the_web_platform.md)".
-
-I discuss the benefits of full stack web frameworks in more detail in "[The time to go full stack is now!](blog/2023-03-26_the_time_to_go_full_stack_is_now.md)".
