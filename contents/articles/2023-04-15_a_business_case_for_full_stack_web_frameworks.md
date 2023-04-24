@@ -4,7 +4,7 @@ title: A business case for today's full stack web frameworks
 description: Today's full stack web frameworks like Next.js and Remix provide application developers with primitives, conventions, and levers to build better web apps faster. This blog post lays out a business case for moving from a client-side SPA architecture to a full stack web framework.
 categories: [React, Next.js, Remix.run, Web Development]
 imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1682302824/andrelandgraf.dev/screenshot-web-page-test-lcp-client-side-vs-full-stack-apps.png
-imageAlt: A screenshot of a diagram from WebPageTest results comparing different client-only and full stack app implementations. The full stack app implementations have lower Largest Contentful Paint (LCP) values.
+imageAltText: A screenshot of a diagram from WebPageTest results comparing different client-only and full stack app implementations. The full stack app implementations have lower Largest Contentful Paint (LCP) values.
 ---
 
 ## Motivation
@@ -173,7 +173,15 @@ Full stack web frameworks provide access to the web server. They naturally imple
 
 Today's full stack web frameworks allow the frontend team to own the decision what data to fetch without the need to introduce GraphQL to all downstream services or to maintain a separate BFF API server environment.
 
-When fetching data for 80 movies, the client-only SPA fetches 15.3kB of data. When filtering the data on the server, the payload size is reduced to 3kB.
+For example, when only fetching the `id`, `title`, and `poster_path` attributes, the payload size is reduced from 15.3kB to 3kB for 80 movies (minified and gzipped).
+
+```typescript
+type Movie = {
+  id: number;
+  title: string;
+  poster_path: string;
+};
+```
 
 When applying the same optimization to all data fetching requests, the Largest Contentful Paint (LCP) time on localhost was reduced by 0.2 seconds on average.
 
