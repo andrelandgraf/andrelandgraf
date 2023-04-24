@@ -33,7 +33,9 @@ This business case compares two React applications. One client-only single-page 
 
 ![A diagram comparing a SPA architecture to a full stack web app](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1682282664/andrelandgraf.dev/client-side-vs-full-stack-framework_dgepoy.png)
 
-Both apps use the same component structure to render a list of movies fetched from [The Movie Database (TMDB) API](https://developers.themoviedb.org/3/getting-started/introduction).
+Both apps use the same component structure to render a list of movies fetched from [The Movie Database (TMDB) API](https://developers.themoviedb.org/3/getting-started/introduction). Both apps fetch 80 movies across different categories.
+
+As visible in the screenshot below, the page content mostly contains of the movie images and some added text.
 
 ![Screenshot of demo movies app showing an overview page of popular movies](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1681611558/andrelandgraf.dev/movies-app-screenshot_i8ifkc.png)
 
