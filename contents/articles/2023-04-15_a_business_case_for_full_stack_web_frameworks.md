@@ -9,11 +9,11 @@ imageAltText: A screenshot of a diagram from WebPageTest results comparing diffe
 
 ## Motivation
 
-Benjamin Franklin coined the phrase "time is money" and this phrase is still true today. Web performance directly impacts key business metrics such as bounce rates, engagement, conversions, page views, satisfaction, and revenue \[[1](https://developer.mozilla.org/en-US/docs/Learn/Performance/why_web_performance#improve_conversion_rates), [2](https://wpostats.com/)\].
+Benjamin Franklin coined the phrase "time is money" which is still true today. Web performance directly impacts key business metrics such as bounce rates, engagement, conversions, page views, satisfaction, and revenue \[[1](https://developer.mozilla.org/en-US/docs/Learn/Performance/why_web_performance#improve_conversion_rates), [2](https://wpostats.com/)\].
 
 Google reported that a half-second delay in page load time can result in a 20% drop in traffic \[[1](http://glinden.blogspot.com/2006/11/marissa-mayer-at-web-20.html)\]. A study by Renault shows that it is worth optimizing until the largest contentful paint (LCP) reaches below one second \[[1](https://web.dev/renault/)\].
 
-Walmart saw a 2% increase in conversion rate for every one second improvement in page load time \[[1](https://www.cloudflare.com/learning/performance/more/website-performance-conversion-rates), [2](https://www.slideshare.net/devonauerswald/walmart-pagespeedslide)\]. Similarly, Mobify reports a 1.11% increase in conversion for each 100ms improvement \[[1](https://www.cloudflare.com/learning/performance/more/website-performance-conversion-rates)\].
+Walmart saw a 2% increase in conversion rate for every one-second improvement in page load time \[[1](https://www.cloudflare.com/learning/performance/more/website-performance-conversion-rates), [2](https://www.slideshare.net/devonauerswald/walmart-pagespeedslide)\]. Similarly, Mobify reports a 1.11% increase in conversion for each 100ms improvement \[[1](https://www.cloudflare.com/learning/performance/more/website-performance-conversion-rates)\].
 
 Slow websites surpass attention spans and break the flow state. This negatively impacts the user experience and perception of time \[[1](https://www.smashingmagazine.com/2015/09/why-performance-matters-the-perception-of-time/)\].
 
@@ -31,15 +31,15 @@ This business case compares two React applications. One client-only single-page 
 
 Both apps use the same component structure to render a list of movies fetched from [The Movie Database (TMDB) API](https://developers.themoviedb.org/3/getting-started/introduction). Both apps fetch 80 movies across different categories.
 
-As visible in the screenshot below, the page content mostly contains of the movie images and some added text.
+As visible in the screenshot below, the page content mostly contains of movie images, titles, and some additional information.
 
 ![Screenshot of demo movies app showing an overview page of popular movies](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto,w_800/v1681611558/andrelandgraf.dev/movies-app-screenshot_i8ifkc.png)
 
-When working on a client-side only SPA, we have limited control over the web platform. We can only control the browser runtime and the client-side app. All API requests leave the control zone and are handled by third-party APIs. This means our web performance depends on other teams, departments, and companies.
+When working on a client-side-only SPA, we have limited control over the web platform. We can only control the browser runtime and the client-side app. All API requests leave the control zone and are handled by third-party APIs. This means our web performance depends on other teams, departments, and companies.
 
 ![A diagram showing the control zone when working on a client-only SPA. The control zone includes the browser runtime and client-only app. It also includes the requests made from the frontend. However, all API requests leave the control zone and are handled by third-party APIs.](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto,w_500/v1682282727/andrelandgraf.dev/control-zone-client-side-spa_ct4ldm.png)
 
-We argue that the full stack app unlocks the tools of the backend of the web platform. We further can access to a BFF (backend for frontend) environment that allows us to fetch data on the server and forward it to the client.
+We argue that the full stack app unlocks the tools of the backend of the web platform. With access to a server environment, we naturally implement the BFF (backend for frontend) pattern. We gain control over a server runtime and can use it to optimize the web performance.
 
 ### Methodology
 
@@ -56,13 +56,13 @@ The sections are:
 5. Move JavaScript to the server
 6. Caching
 
-Each section compares the full stack and the SPA implementations by using the browser developer tools and lab tests of [core web vitals](https://web.dev/user-centric-performance-metrics/#important-metrics-to-measure). Each section contains a summary of the findings and documents how the measurements were taken.
+Each section compares the full stack and the SPA implementations through lab tests of [core web vitals](https://web.dev/user-centric-performance-metrics/#important-metrics-to-measure).
 
 For each section, a new version of the full stack app was created and compared to the client-side SPA. The new version was further compared to the previous version. This allows us to see the impact of each change.
 
-Lab tests of web vitals were conducted to measure the performance of the apps. The lab tests were conducted for mobile both on localhost and by using [PageSpeed Insights](https://pagespeed.web.dev/) and [WebPageTest](https://www.webpagetest.org/). For all comparisons, five runs were conducted and the median was used as the result.
+Lab tests of web vitals were conducted to measure the performance of the apps. The lab tests were conducted for mobile both on localhost and by using [PageSpeed Insights](https://pagespeed.web.dev/) and [WebPageTest](https://www.webpagetest.org/). For all comparisons, five runs were conducted, and the median was used as the result.
 
-For every comparison, the client-only SPA was run five times again to ensure the measurements are taken at the same time. In total, the client-only SPA performance was measured on 20 runs on PageSpeed Insights and five runs on localhost.
+For every comparison, the client-only SPA was rerun five times to ensure the measurements were taken at the same time. In total, the client-only SPA performance was measured on 20 runs on PageSpeed Insights and five runs on localhost.
 
 The full stack app was run five times for five different versions on localhost (20 runs in total) and additionally five times each for eight different versions on PageSpeed Insights (40 runs in total).
 
@@ -107,7 +107,7 @@ A comparison on WebPageTest between the client-only SPA (1) and the full stack a
 
 ### Server-side data fetching
 
-During the initial page load, Remix and Next.js server-side render the page. Both frameworks allow to fetch data on the server before rendering the page. This allows us to render dynamic content on the server before sending the HTML to the client.
+During the initial page load, Remix and Next.js server-side render the page. Both frameworks allow fetching data on the server before rendering the page. This allows us to render dynamic content on the server before sending the HTML to the client.
 
 The client-only SPA and version 2 of the full stack app use client-side data fetching with `react-query`. Here, the data fetching can only happen after the JavaScript bundle has been loaded and executed on the client. React renders an initial loading state until the data is available.
 
@@ -129,7 +129,7 @@ When comparing the lab tests from this and the previous section, you may notice 
 
 Overfetching happens if an application fetches more data than it requires. Overfetching increases the payload size and leads to slower load times, especially on mobile networks such as 3G.
 
-For instance, when rendering movie cards on a movie overview page,
+For instance, the app renders the following `MovieCard` component for each movie:
 
 ```javascript
 export function MovieCard({ id, title, imageProps }) {
@@ -171,7 +171,7 @@ Overfetching can be avoided by filtering the data on the server before forwardin
 
 Full stack web frameworks provide access to the web server. They naturally implement the BFF (backend for frontend) pattern \[[1](https://remix.run/docs/en/main/guides/bff)\] and allow us to fetch on the server and filter out unnecessary data before forwarding it to the client.
 
-Today's full stack web frameworks allow the frontend team to own the decision what data to fetch without the need to introduce GraphQL to all downstream services or to maintain a separate BFF API server environment.
+Today's full stack web frameworks allow the frontend team to own the decision of what data to fetch without the need to introduce GraphQL to all downstream services or to maintain a separate BFF API server environment.
 
 For example, when only fetching the `id`, `title`, and `poster_path` attributes, the payload size is reduced from 15.3kB to 3kB for 80 movies (minified and gzipped).
 
@@ -193,7 +193,7 @@ Moving large libraries to the server can reduce the size of the client bundle. T
 
 For instance, when moving the data fetching to the server, we can remove the `react-query` dependency from the client bundle. This reduces the bundle size by 12kb (minified and gzipped) \[[1](https://bundlephobia.com/package/@tanstack/react-query@4.29.3)\].
 
-Similarly, we can could move our GraphQL client or any other large library to the server and instead forward the data to the client using the full stack web framework's data fetching API.
+Similarly, we could move our GraphQL client or any other large library to the server and instead forward the data to the client using the full stack web framework's data fetching API.
 
 ### Moving JavaScript to the server
 
@@ -229,13 +229,13 @@ There are several caching strategies that can be implemented on the server.
 
 Version 5 of the full stack web app adds HTTP caching headers to the data fetching requests for the movies data and movie database config object.
 
-The movie database config is further not user-specific and also stored in-memory on the server.
+The movie database config is further not user-specific and stored in memory on the server.
 
 Mostly, caching may improve performance for repeat visits. However, in-memory caching and caching via CDN can also improve the performance of the first visit.
 
 ![Screenshot of the visual comparison on WebPageTest showing how using caching reduces the Largest Contentful Paint by another ca. 0.1 seconds](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1682300794/andrelandgraf.dev/screenshot-web-page-test-client-only-spa-vs-full-stack-apps-with-and-without-caching.png)
 
-In this example, the performance improvements are rather small \[[1](https://www.webpagetest.org/video/compare.php?tests=230424_AiDcZ8_QK%2C230424_BiDcRF_QQ%2C230424_AiDcZT_QM&thumbSize=150&ival=500&end=visual)\]. In a real-world application, the performance improvements can be more significant.
+In this example, the performance improvements are rather small \[[1](https://www.webpagetest.org/video/compare.php?tests=230424_AiDcZ8_QK%2C230424_BiDcRF_QQ%2C230424_AiDcZT_QM&thumbSize=150&ival=500&end=visual)\]. In a real-world application, the performance improvements may be more significant.
 
 ## Summary
 
@@ -259,9 +259,9 @@ When considering that
 
 ## Limitations
 
-A business case should always be take your own organization's structure, use cases, current stacks, and infrastructure into account.
+A business case should always take your own organization's structure, use cases, current stacks, and infrastructure into account.
 
-This business case compares a client-only SPA with a full stack web app. Downstream services are assumed to be owned by other teams or departments. Conclusively, most of the arguments base on the assumption that the frontend team does not currently own the web server or a BFF API server environment.
+This business case compares a client-only SPA with a full stack web app. Downstream services are assumed to be owned by other teams or departments. Conclusively, most of the arguments are based on the assumption that the frontend team does not currently own the web server or a BFF API server environment.
 
 The measurements in this business case are based on lab tests. Lab tests can be used as a baseline to compare different implementations. However, they do not reflect the real-world performance of your app.
 
