@@ -11,15 +11,11 @@ imageAlt: A screenshot of a diagram from WebPageTest results comparing different
 
 Benjamin Franklin coined the phrase "time is money" and this phrase is still true today. Web performance directly impacts key business metrics such as bounce rates, engagement, conversions, page views, satisfaction, and revenue \[[1](https://developer.mozilla.org/en-US/docs/Learn/Performance/why_web_performance#improve_conversion_rates), [2](https://wpostats.com/)\].
 
-Google reported that a half-second delay in page load time can result in a 20% drop in traffic \[[1](http://glinden.blogspot.com/2006/11/marissa-mayer-at-web-20.html)\].
+Google reported that a half-second delay in page load time can result in a 20% drop in traffic \[[1](http://glinden.blogspot.com/2006/11/marissa-mayer-at-web-20.html)\]. A study by Renault shows that it is worth optimizing until the largest contentful paint (LCP) reaches below one second \[[1](https://web.dev/renault/)\].
 
 Walmart saw a 2% increase in conversion rate for every one second improvement in page load time \[[1](https://www.cloudflare.com/learning/performance/more/website-performance-conversion-rates), [2](https://www.slideshare.net/devonauerswald/walmart-pagespeedslide)\]. Similarly, Mobify reports a 1.11% increase in conversion for each 100ms improvement \[[1](https://www.cloudflare.com/learning/performance/more/website-performance-conversion-rates)\].
 
 Slow websites surpass attention spans and break the flow state. This negatively impacts the user experience and perception of time \[[1](https://www.smashingmagazine.com/2015/09/why-performance-matters-the-perception-of-time/)\].
-
-The impact of web performance does not only matter for very bad performance. Even small improvements can have a significant impact on business metrics.
-
-A study by Renault shows that it is worth optimizing until the largest contentful paint (LCP) reaches below one second \[[1](https://web.dev/renault/)\].
 
 Optimizing web performance is not trivial and conflicts with other goals. Web apps provide highly dynamic and personalized experiences and make heavy usage of image and video content. Today's web apps are powered by thousands of lines of code and megabytes of content and data. Optimizing these highly dynamic applications is a challenging task, especially considering the fast pace of today's product development cycles.
 
