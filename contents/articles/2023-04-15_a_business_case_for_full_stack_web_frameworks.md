@@ -27,17 +27,17 @@ Utilizing today's full stack web frameworks can improve the developer experience
 
 This business case compares two React applications. One client-only single-page application (SPA) and one full stack web application.
 
-![A diagram comparing a SPA architecture to a full stack web app](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1682282664/andrelandgraf.dev/client-side-vs-full-stack-framework_dgepoy.png)
+![A diagram comparing a SPA architecture to a full stack web app](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto,w_800/v1682282664/andrelandgraf.dev/client-side-vs-full-stack-framework_dgepoy.png)
 
 Both apps use the same component structure to render a list of movies fetched from [The Movie Database (TMDB) API](https://developers.themoviedb.org/3/getting-started/introduction). Both apps fetch 80 movies across different categories.
 
 As visible in the screenshot below, the page content mostly contains of the movie images and some added text.
 
-![Screenshot of demo movies app showing an overview page of popular movies](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1681611558/andrelandgraf.dev/movies-app-screenshot_i8ifkc.png)
+![Screenshot of demo movies app showing an overview page of popular movies](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto,w_800/v1681611558/andrelandgraf.dev/movies-app-screenshot_i8ifkc.png)
 
 When working on a client-side only SPA, we have limited control over the web platform. We can only control the browser runtime and the client-side app. All API requests leave the control zone and are handled by third-party APIs. This means our web performance depends on other teams, departments, and companies.
 
-![A diagram showing the control zone when working on a client-only SPA. The control zone includes the browser runtime and client-only app. It also includes the requests made from the frontend. However, all API requests leave the control zone and are handled by third-party APIs.](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1682282727/andrelandgraf.dev/control-zone-client-side-spa_ct4ldm.png)
+![A diagram showing the control zone when working on a client-only SPA. The control zone includes the browser runtime and client-only app. It also includes the requests made from the frontend. However, all API requests leave the control zone and are handled by third-party APIs.](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto,w_500/v1682282727/andrelandgraf.dev/control-zone-client-side-spa_ct4ldm.png)
 
 We argue that the full stack app unlocks the tools of the backend of the web platform. We further can access to a BFF (backend for frontend) environment that allows us to fetch data on the server and forward it to the client.
 
