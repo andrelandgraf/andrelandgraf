@@ -1,7 +1,7 @@
 ---
 date: 2023-04-15
 title: A business case for today's full stack web frameworks
-description: Today's full stack web frameworks like Next.js and Remix provide application developers with primitives, conventions, and levers to build better web apps faster. This blog post lays out a business case for moving from a client-side SPA architecture to a full stack web framework.
+description: Today's full stack web frameworks like Next.js and Remix provide application developers with primitives, conventions, and levers to build better web apps faster. This blog post outlines a business case for moving from a client-side SPA architecture to a full stack web framework.
 categories: [React, Next.js, Remix.run, Web Development]
 imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1682302824/andrelandgraf.dev/screenshot-web-page-test-lcp-client-side-vs-full-stack-apps.png
 imageAltText: A screenshot of a diagram from WebPageTest results comparing different client-only and full stack app implementations. The full stack app implementations have lower Largest Contentful Paint (LCP) values.
@@ -11,11 +11,11 @@ imageAltText: A screenshot of a diagram from WebPageTest results comparing diffe
 
 Benjamin Franklin coined the phrase "time is money" which is still true today. Web performance directly impacts key business metrics such as bounce rates, engagement, conversions, page views, satisfaction, and revenue \[[1](https://developer.mozilla.org/en-US/docs/Learn/Performance/why_web_performance#improve_conversion_rates), [2](https://wpostats.com/)\].
 
-Google reported that a half-second delay in page load time can result in a 20% drop in traffic \[[1](http://glinden.blogspot.com/2006/11/marissa-mayer-at-web-20.html)\]. A study by Renault shows that it is worth optimizing until the largest contentful paint (LCP) reaches below one second \[[1](https://web.dev/renault/)\].
+Google reported that a half-second delay in page load time can result in a 20% drop in traffic \[[3](http://glinden.blogspot.com/2006/11/marissa-mayer-at-web-20.html)\]. A study by Renault shows that it is worth optimizing until the largest contentful paint (LCP) reaches below one second \[[4](https://web.dev/renault/)\].
 
-Walmart saw a 2% increase in conversion rate for every one-second improvement in page load time \[[1](https://www.cloudflare.com/learning/performance/more/website-performance-conversion-rates), [2](https://www.slideshare.net/devonauerswald/walmart-pagespeedslide)\]. Similarly, Mobify reports a 1.11% increase in conversion for each 100ms improvement \[[1](https://www.cloudflare.com/learning/performance/more/website-performance-conversion-rates)\].
+Walmart saw a 2% increase in conversion rate for every one-second improvement in page load time \[[5](https://www.cloudflare.com/learning/performance/more/website-performance-conversion-rates), [6](https://www.slideshare.net/devonauerswald/walmart-pagespeedslide)\]. Similarly, Mobify reports a 1.11% increase in conversion for each 100ms improvement \[[5](https://www.cloudflare.com/learning/performance/more/website-performance-conversion-rates)\].
 
-Slow websites surpass attention spans and break the flow state. This negatively impacts the user experience and perception of time \[[1](https://www.smashingmagazine.com/2015/09/why-performance-matters-the-perception-of-time/)\].
+Slow websites surpass attention spans and break the flow state. This negatively impacts the user experience and perception of time \[[7](https://www.smashingmagazine.com/2015/09/why-performance-matters-the-perception-of-time/)\].
 
 Optimizing web performance is not trivial and conflicts with other goals. Web apps provide highly dynamic and personalized experiences and make heavy usage of image and video content. Today's web apps are powered by thousands of lines of code and megabytes of content and data. Optimizing these highly dynamic applications is a challenging task, especially considering the fast pace of today's product development cycles.
 
@@ -52,7 +52,7 @@ The sections are:
 1. Server-side rendering (SSR) and streaming
 2. Server-side data fetching
 3. Avoid overfetching
-4. Use libraries to the server
+4. Move libraries to the server
 5. Move JavaScript to the server
 6. Caching
 
@@ -60,13 +60,13 @@ Each section compares the full stack and the SPA implementations through lab tes
 
 For each section, a new version of the full stack app was created and compared to the client-side SPA. The new version was further compared to the previous version. This allows us to see the impact of each change.
 
-Lab tests of web vitals were conducted to measure the performance of the apps. The lab tests were conducted for mobile both on localhost and by using [PageSpeed Insights](https://pagespeed.web.dev/) and [WebPageTest](https://www.webpagetest.org/). For all comparisons, five runs were conducted, and the median was used as the result.
+Lab tests of web vitals were conducted to measure the performance of the apps. The lab tests were conducted simulating mobile devices via [Google Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/), [PageSpeed Insights](https://pagespeed.web.dev/) and [WebPageTest](https://www.webpagetest.org/). For all comparisons, five runs were conducted, and the median was used as the result.
 
 For every comparison, the client-only SPA was rerun five times to ensure the measurements were taken at the same time. In total, the client-only SPA performance was measured on 20 runs on PageSpeed Insights and five runs on localhost.
 
 The full stack app was run five times for five different versions on localhost (20 runs in total) and additionally five times each for eight different versions on PageSpeed Insights (40 runs in total).
 
-All lab tests are documented in this [spreadsheet](https://res.cloudinary.com/andre-landgraf/raw/upload/v1682302186/andrelandgraf.dev/Client-side_vs._full_stack_React_apps_web_vital_tests_1_kjv695.xlsx).
+All lab tests are documented in this [spreadsheet](https://docs.google.com/spreadsheets/d/1Pt2FP9lN0xYvvm3tyLoXhlC8jKyyh86FxuBtbryr1Nk/?usp=sharing).
 
 All app versions are listed below:
 
@@ -123,7 +123,7 @@ The Time to Interactive (TTI) was also improved from 3.7 seconds to 2.6 seconds.
 
 ![Screenshot of the visual comparison on WebPageTest showing how using server-side data fetching reduces the Largest Contentful Paint by another 0.5 seconds](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1682297735/andrelandgraf.dev/screenshot-web-page-test-client-only-spa-vs-full-stack-apps-with-client-or-server-data-fetching.png)
 
-When comparing the lab tests from this and the previous section, you may notice that the performance varies between different runs. There are a lot of factors that influence the performance of a web app. However, the full stack apps consistently outperformed the client-only SPA as visible in the average results \[[1](https://res.cloudinary.com/andre-landgraf/raw/upload/v1682288744/andrelandgraf.dev/Client-side_vs._full_stack_React_apps_web_vital_tests_u3kw4s.xlsx)\].
+When comparing the lab tests from this and the previous section, you may notice that the performance varies between different runs. There are a lot of factors that influence the performance of a web app. However, the full stack apps consistently outperformed the client-only SPA as visible in [the average results](https://docs.google.com/spreadsheets/d/1Pt2FP9lN0xYvvm3tyLoXhlC8jKyyh86FxuBtbryr1Nk/?usp=sharing)\].
 
 ### Avoiding overfetching
 
@@ -169,7 +169,7 @@ type Movie = {
 
 Overfetching can be avoided by filtering the data on the server before forwarding it to the client or by using a query language such as GraphQL to only fetch what is needed.
 
-Full stack web frameworks provide access to the web server. They naturally implement the BFF (backend for frontend) pattern \[[1](https://remix.run/docs/en/main/guides/bff)\] and allow us to fetch on the server and filter out unnecessary data before forwarding it to the client.
+Full stack web frameworks provide access to the web server. They naturally implement the BFF (backend for frontend) pattern \[[8](https://remix.run/docs/en/main/guides/bff)\] and allow us to fetch on the server and filter out unnecessary data before forwarding it to the client.
 
 Today's full stack web frameworks allow the frontend team to own the decision of what data to fetch without the need to introduce GraphQL to all downstream services or to maintain a separate BFF API server environment.
 
@@ -191,7 +191,7 @@ The real world performance impact of this optimization depends on the type and a
 
 Moving large libraries to the server can reduce the size of the client bundle. This can improve the performance of your app by reducing the amount of data that needs to be transferred over the network.
 
-For instance, when moving the data fetching to the server, we can remove the `react-query` dependency from the client bundle. This reduces the bundle size by 12kb (minified and gzipped) \[[1](https://bundlephobia.com/package/@tanstack/react-query@4.29.3)\].
+For instance, when moving the data fetching to the server, we can remove the `react-query` dependency from the client bundle. This reduces the bundle size by 12kb (minified and gzipped) \[[9](https://bundlephobia.com/package/@tanstack/react-query@4.29.3)\].
 
 Similarly, we could move our GraphQL client or any other large library to the server and instead forward the data to the client using the full stack web framework's data fetching API.
 
@@ -235,7 +235,7 @@ Mostly, caching may improve performance for repeat visits. However, in-memory ca
 
 ![Screenshot of the visual comparison on WebPageTest showing how using caching reduces the Largest Contentful Paint by another ca. 0.1 seconds](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1682300794/andrelandgraf.dev/screenshot-web-page-test-client-only-spa-vs-full-stack-apps-with-and-without-caching.png)
 
-In this example, the performance improvements are rather small \[[1](https://www.webpagetest.org/video/compare.php?tests=230424_AiDcZ8_QK%2C230424_BiDcRF_QQ%2C230424_AiDcZT_QM&thumbSize=150&ival=500&end=visual)\]. In a real-world application, the performance improvements may be more significant.
+In this example, the performance improvements are rather small \[[10](https://www.webpagetest.org/video/compare.php?tests=230424_AiDcZ8_QK%2C230424_BiDcRF_QQ%2C230424_AiDcZT_QM&thumbSize=150&ival=500&end=visual)\]. In a real-world application, the performance improvements may be more significant.
 
 ## Summary
 
@@ -245,7 +245,7 @@ Depending on your application, avoidance of overfetching, moving libraries to th
 
 This business case compares client-only SPAs deployed on global CDNs with full stack web apps deployed in different regions and globally on the edge. The comparison further includes lab tests using different full stack web frameworks (Next.js and Remix). The lab tests were conducted on localhost, PageSpeed Insights, and WebPageTest. The full stack apps were deployed on long-running servers, serverless, and edge runtimes.
 
-In all cases, the full stack web apps outperform the client-only SPAs \[[1](https://www.webpagetest.org/video/compare.php?tests=230424_AiDc85_2TT%2C230424_AiDc4M_2TV%2C230424_AiDc41_2TW%2C230424_BiDcJQ_2T5%2C230424_AiDcGW_2TX)\].
+In all cases, the full stack web apps outperform the client-only SPAs \[[11](https://www.webpagetest.org/video/compare.php?tests=230424_AiDc85_2TT%2C230424_AiDc4M_2TV%2C230424_AiDc41_2TW%2C230424_BiDcJQ_2T5%2C230424_AiDcGW_2TX)\].
 
 ![Screenshot of the Largest Contentful Paint results of one WebPageTest visual comparison between different SPA and full stack versions](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1682302824/andrelandgraf.dev/screenshot-web-page-test-lcp-client-side-vs-full-stack-apps.png)
 
