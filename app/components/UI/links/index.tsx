@@ -1,6 +1,6 @@
 import type { AnchorHTMLAttributes, FC, PropsWithChildren } from 'react';
-import type { IsomorphicLinkProps } from 'react-router-isomorphic-link';
-import { IsomorphicLink, isomorphicClassName } from 'react-router-isomorphic-link';
+import type { IsomorphicLinkProps } from 'remix-isomorphic-link';
+import { IsomorphicLink, isomorphicClassName } from 'remix-isomorphic-link';
 import { getAriaClasses, getFocusClasses } from '~/utilities';
 
 type UnstyledLinkProps = {

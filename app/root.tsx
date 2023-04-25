@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { LinksFunction, HeadersFunction, MetaFunction, LoaderFunction } from '@remix-run/node';
 import { useLoaderData, Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch } from '@remix-run/react';
-import { IsomorphicNavProvider } from 'react-router-isomorphic-link';
+import { IsomorphicNavProvider } from 'remix-isomorphic-link';
 import Layout from '~/components/layout/layout';
 import { PageHeading } from '~/components/UI/headings';
 import { getMetaTags } from '~/utilities';
@@ -56,7 +56,7 @@ export default function App() {
   const { host, enableDownloadCVPDF } = useLoaderData<LoaderData>();
   return (
     <Document>
-      <IsomorphicNavProvider host={host} useFinalSlash>
+      <IsomorphicNavProvider host={host} openOutgoingAsBlank useTrailingSlash>
         <AppContent enableDownloadCVPDF={enableDownloadCVPDF} />
       </IsomorphicNavProvider>
     </Document>

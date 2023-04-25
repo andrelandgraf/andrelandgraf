@@ -25,11 +25,11 @@
     "react": "^18.2.0",
     "react-datalist-input": "^3.0.6",
     "react-dom": "^18.2.0",
-    "react-router-isomorphic-link": "^0.0.7",
     "rehype-react": "6.2.1",
     "remark-parse": "9.0.0",
     "remark-rehype": "8.1.0",
     "remix": "1.4.3",
+    "remix-isomorphic-link": "^1.1.0",
     "tiny-invariant": "^1.2.0",
     "unified": "9.2.2"
   },
