@@ -21,19 +21,19 @@ Optimizing web performance is not trivial and conflicts with other goals. Web ap
 
 Today's full stack web frameworks can be used to build state-of-the-art web apps. They provide application developers with primitives, conventions, and levers to build better web apps faster. Utilizing today's full stack web frameworks can improve the developer experience and productivity. The provided control over the web platform can further be used to build more performant user experiences.
 
-This article documents a performance-based business case to go full stack and showcase how today's full stack web frameworks can be used to improve the performance of a client-only single-page application (SPA) architecture.
+This article documents a performance-based business case to go full stack and showcases how today's full stack web frameworks can improve performance by utilizing the tools of the web platform.
 
 ## Performance-based business case
 
-This business case compares the performance of client-only SPAs deployed on global CDNs with full stack web apps deployed on long-running server, serverless, and edge runtimes. The comparison includes lab tests using Lighthouse, PageSpeed Insights, and WebPageTest. Across the board, the full stack web apps outperformed the client-only SPAs.
+This business case compares the performance of client-only single-page applications (SPAs) deployed on global CDNs with full stack web apps deployed on long-running server, serverless, and edge runtimes. The comparison includes lab tests using Lighthouse, PageSpeed Insights, and WebPageTest.
 
-For instance, in this [one test run from WebPageTest](https://www.webpagetest.org/video/compare.php?tests=230424_AiDc85_2TT%2C230424_AiDc4M_2TV%2C230424_AiDc41_2TW%2C230424_BiDcJQ_2T5%2C230424_AiDcGW_2TX), both the Remix and Next.js apps outperformed the SPA counterparts.
+Across the board, the full stack web apps outperformed the client-only SPAs. For instance, [this test run from WebPageTest](https://www.webpagetest.org/video/compare.php?tests=230424_AiDc85_2TT%2C230424_AiDc4M_2TV%2C230424_AiDc41_2TW%2C230424_BiDcJQ_2T5%2C230424_AiDcGW_2TX) showcases how both a Remix and a Next.js app outperform their SPA counterparts.
 
 ![Screenshot of the Largest Contentful Paint results of one WebPageTest visual comparison between different SPA and full stack versions](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1682302824/andrelandgraf.dev/screenshot-web-page-test-lcp-client-side-vs-full-stack-apps.png)
 
 ![Screenshot of the Time to Interactive results of one WebPageTest visual comparison between different SPA and full stack versions](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1682302824/andrelandgraf.dev/screenshot-web-page-test-tti-client-side-vs-full-stack-apps.png)
 
-All tests were conducted using the different implementations of the same demo app.
+The apps used in this business case are demo applications.
 
 ### The demo app
 
@@ -43,13 +43,15 @@ As visible in the screenshot below, the page content mostly contains of movie im
 
 ![Screenshot of demo movies app showing an overview page of popular movies](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto,w_800/v1681611558/andrelandgraf.dev/movies-app-screenshot_i8ifkc.png)
 
+The demo app only has one route. This business case only focused on lab test performance of the initial page load.
+
 ### Measurements
 
 Lab tests of [web vitals](https://web.dev/user-centric-performance-metrics/#important-metrics-to-measure) were conducted to measure the performance of the apps. The lab tests simulate mobile devices via [Google Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/), [PageSpeed Insights](https://pagespeed.web.dev/) and [WebPageTest](https://www.webpagetest.org/).
 
 For all comparisons, five runs were conducted, and the median is used as the result. All performed lab tests are documented in this [spreadsheet](https://docs.google.com/spreadsheets/d/1Pt2FP9lN0xYvvm3tyLoXhlC8jKyyh86FxuBtbryr1Nk/?usp=sharing).
 
-The lab tests focused on the four web vitals First Contentful Paint (FCP), Largest Contentful Paint (LCP), Total Blocking Time (TBT), and Speed Index. The measurements for FCP, LCP and the speed index are in seconds. The measurements TBT are displayed in milliseconds.
+The lab tests focus on the four web vitals First Contentful Paint (FCP), Largest Contentful Paint (LCP), Total Blocking Time (TBT), and Speed Index. FCP, LCP and the Speed Index are measured in seconds, TBT in milliseconds.
 
 You can learn more about the different web vitals on the [web.dev](https://web.dev/vitals/) website.
 

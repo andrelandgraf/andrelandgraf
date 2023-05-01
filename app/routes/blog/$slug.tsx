@@ -141,6 +141,7 @@ const ArticlePage = () => {
           },
         }}
       />
+      <div className="text-green text-red"></div>
     </article>
   );
 };
