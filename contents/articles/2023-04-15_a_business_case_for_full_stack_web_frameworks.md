@@ -917,20 +917,18 @@ When utilizing a full stack web framework to run JavaScript on the server, we st
 
 ## Summary
 
-Using a full stack web framework can significantly improve the performance. Employing server-side rendering and streaming, data filtering, moving JavaScript and third-party libraries to the server, and adding caching can heavily improve the performance of your app. Conclusively, a migration to a full stack web framework can improve the performance of your app significantly.
+This article documents lab tests of different full stack web app implementations and compares them to client-side-only SPAs. The test runs include deployments to different regions, runtime environments, and server-side optimizations.
 
-## Limitations and next steps
+This business case shows that using a full stack web framework can significantly improve the performance. Employing server-side rendering and streaming, data filtering, moving JavaScript and third-party libraries to the server, and adding caching can heavily improve the performance of your app. Conclusively, a migration to a full stack web framework can improve the performance of your app significantly.
+
+## Limitations
 
 This business case compares a client-only SPA with a full stack web app. Downstream services are assumed to be owned by other teams or departments. Conclusively, most of the arguments are based on the assumption that the frontend team does not currently own the web server or a BFF API server environment.
 
-The measurements in this business case are based on lab tests. Lab tests can be used as a baseline to compare different implementations. However, they do not reflect the real-world performance of your app.
+The measurements in this business case are based on lab tests. Lab tests can be used as a baseline to compare different implementations. However, they do not reflect the real-world performance of your app. A more accurate way to measure the performance of your app is to run A/B tests in production.
 
-A more accurate way to measure the performance of your app is to run A/B tests in production. This allows you to measure the performance of your app in real-world conditions.
+Running A/B tests allows you to measure the performance of your app in real-world conditions. On the other side, A/B tests are more complex to set up. They require that you deploy a production environment using the full stack web framework. An iterative business case could make use of lab tests to achieve initial buy-in and then use A/B tests to measure the performance of a full stack app MVP in production.
 
-On the other side, A/B tests are more complex to set up. They require that you deploy a production environment using the full stack web framework.
-
-An iterative business case could make use of lab tests to achieve initial buy-in and then use A/B tests to measure the performance of a full stack app MVP in production.
-
-In this business case, the full stack apps consistently outperformed the client-only SPA as visible in [the average results](https://docs.google.com/spreadsheets/d/1Pt2FP9lN0xYvvm3tyLoXhlC8jKyyh86FxuBtbryr1Nk/?usp=sharing)\]. However, it should be noted that the scope and depth of this business case can only serve as a starting point for further analysis. The results of this blog post only show that today's full stack web frameworks can be used to improve performance. However, that doesn't mean that they are the one-size-fits-all solution.
+It should also be noted that the scope and depth of this business case can only serve as a starting point for further analysis. The results should only be used to argue that today's full stack web frameworks can be used to improve performance. However, that doesn't mean that they are the one-size-fits-all solution.
 
 Conclusively, this business case should be used as a blueprint or baseline to conduct a personalized business case in your own organization, using your own applications and infrastructure.
