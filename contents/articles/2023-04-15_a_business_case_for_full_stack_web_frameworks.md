@@ -27,23 +27,21 @@ This article documents a performance-based business case to go full stack and sh
 
 This business case compares the performance of client-only single-page applications (SPAs) deployed on global CDNs with full stack web apps deployed on long-running server, serverless, and edge runtimes. The comparison includes lab tests using Lighthouse, PageSpeed Insights, and WebPageTest.
 
-Across the board, the full stack web apps outperformed the client-only SPAs. For instance, [this test run from WebPageTest](https://www.webpagetest.org/video/compare.php?tests=230424_AiDc85_2TT%2C230424_AiDc4M_2TV%2C230424_AiDc41_2TW%2C230424_BiDcJQ_2T5%2C230424_AiDcGW_2TX) showcases how both a Remix and a Next.js app outperform their SPA counterparts.
+Across the board, the full stack web apps outperform the client-only SPAs. For instance, [this test run from WebPageTest](https://www.webpagetest.org/video/compare.php?tests=230424_AiDc85_2TT%2C230424_AiDc4M_2TV%2C230424_AiDc41_2TW%2C230424_BiDcJQ_2T5%2C230424_AiDcGW_2TX) showcases how both a Remix and a Next.js app outperform their SPA counterparts.
 
 ![Screenshot of the Largest Contentful Paint results of one WebPageTest visual comparison between different SPA and full stack versions](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1682302824/andrelandgraf.dev/screenshot-web-page-test-lcp-client-side-vs-full-stack-apps.png)
 
 ![Screenshot of the Time to Interactive results of one WebPageTest visual comparison between different SPA and full stack versions](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1682302824/andrelandgraf.dev/screenshot-web-page-test-tti-client-side-vs-full-stack-apps.png)
 
-The apps used in this business case are demo applications.
-
 ### The demo app
 
-A demo application was developed to conduct this business case. All implementations (client-only, Remix, Next.js) use the same component structure to render a grid of 80 movies fetched from [The Movie Database (TMDB) API](https://developers.themoviedb.org/3/getting-started/introduction).
+The apps used in this business case are demo applications. All implementations (client-only, Remix, Next.js) use the same component structure to render a grid of 80 movies fetched from [The Movie Database (TMDB) API](https://developers.themoviedb.org/3/getting-started/introduction).
 
 As visible in the screenshot below, the page content mostly contains of movie images, titles, and some additional information.
 
 ![Screenshot of demo movies app showing an overview page of popular movies](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto,w_800/v1681611558/andrelandgraf.dev/movies-app-screenshot_i8ifkc.png)
 
-The demo app only has one route. This business case only focused on lab test performance of the initial page load.
+The demo app only has one route. This business case only focuses on the lab test performance of the initial page load.
 
 ### Measurements
 
@@ -59,7 +57,7 @@ You can learn more about the different web vitals on the [web.dev](https://web.d
 
 For this section, the client-only SPA is deployed on [render.com](https://render.com/) on a global CDN. The implementation can be found here: [(1) Client-only SPA](https://github.com/andrelandgraf/movies-react-spa).
 
-The full stack web app uses Remix.run with the Express.js adapter and runs on a long-running server on render.com (Oregon, US). The implementation can be found here: [Full stack app using Remix with Express.js](https://github.com/andrelandgraf/movies-react-full-stack-app/tree/with-http-and-memory-caching).
+The full stack web app uses Remix with the Express.js adapter and runs on a long-running server on render.com (Oregon, US). The implementation can be found here: [Full stack app using Remix with Express.js](https://github.com/andrelandgraf/movies-react-full-stack-app/tree/with-http-and-memory-caching).
 
 #### Lighthouse
 
@@ -102,9 +100,7 @@ Five Lighthouse runs were conducted for both the client-side-only SPA and the Re
 </table>
 ```
 
-As visible in the results, the regionally deployed full stack web app outperformed the client-only SPA in all four web vital measurements.
-
-It can be noted that the Largest Contentful Paint significantly improved by 6.3 seconds when running this test on Lighthouse.
+As visible in the results, the regionally deployed full stack web app outperforms the client-only SPA in all four web vital measurements. It can be noted that the Largest Contentful Paint significantly improves by 6.3 seconds.
 
 #### PageSpeed Insights
 
@@ -145,7 +141,7 @@ This lab test was conducted using PageSpeed Insights (Mobile). Five test runs we
 </table>
 ```
 
-As visible in the results, the regionally deployed full stack web app outperformed the client-only SPA in all four web vital measurements.
+As visible in the results, the regionally deployed full stack web app outperforms the client-only SPA in all four web vital measurements.
 
 #### WebPageTest
 
@@ -188,19 +184,17 @@ Five test runs were conducted for both the client-side-only SPA and the Remix ap
 </table>
 ```
 
-As visible in the results, the regionally deployed full stack web app outperformed the client-only SPA in all four web vital measurements.
-
-It can be noted that the Largest Contentful Paint and the Speed Index improved by over 2 seconds each.
+As visible in the results, the regionally deployed full stack web app outperforms the client-only SPA in all four web vital measurements. It can be noted that the Largest Contentful Paint and the Speed Index improved by over 2 seconds each.
 
 ### Lab test 2: Regionally deployed Remix app on serverless function
 
 For this section, the client-only SPA is deployed on [Vercel](https://vercel.com/) on a global CDN. The implementation can be found here: [(1) Client-only SPA](https://github.com/andrelandgraf/movies-react-spa).
 
-The full stack web app uses Remix.run with the Vercel adapter and runs on a serverless function on Vercel. The implementation can be found here: [Full stack app using Remix on Vercel](https://github.com/andrelandgraf/movies-react-full-stack-app/tree/everything-on-vercel).
+The full stack web app uses Remix with the Vercel adapter and runs on a serverless function on Vercel. The implementation can be found here: [Full stack app using Remix on Vercel](https://github.com/andrelandgraf/movies-react-full-stack-app/tree/everything-on-vercel).
 
 #### PageSpeed Insights with function in Washington, US (iad1)
 
-This lab test was conducted using PageSpeed Insights (Mobile). The serverless function on Vercel was deployed in Washington, US (iad1).
+This lab test was conducted using PageSpeed Insights (Mobile). The serverless function on Vercel is deployed in Washington, US (iad1).
 
 Five test runs were conducted for both the client-side-only SPA and the Remix app and the medium was taken.
 
@@ -239,13 +233,13 @@ Five test runs were conducted for both the client-side-only SPA and the Remix ap
 </table>
 ```
 
-As visible in the results, the regionally deployed full stack web app outperformed the client-only SPA in all but the Largest Contentful Paint metrics.
+As visible in the results, the regionally deployed full stack web app has a better FCP, TBT and Speed Index. However, the client-only SPA shows a better medium LCP.
 
-The full stack web app had a medium of 1.2 seconds higher than the client-side-only SPA, presumably because the regionally deployed full stack app was deployed in a region further away.
+The full stack web app shows a LCP that is 1.2 seconds higher than the LCP of the client-side-only SPA, presumably because the regionally deployed full stack app is located further away.
 
 #### PageSpeed Insights with function in San Francisco, US (sfo1)
 
-This lab test was conducted using PageSpeed Insights (Mobile). The serverless function on Vercel was deployed in San Francisco, US (sfo1).
+This lab test was conducted using PageSpeed Insights (Mobile). The serverless function on Vercel is deployed in San Francisco, US (sfo1).
 
 Five test runs were conducted for both the client-side-only SPA and the Remix app and the medium was taken.
 
@@ -284,7 +278,7 @@ Five test runs were conducted for both the client-side-only SPA and the Remix ap
 </table>
 ```
 
-As visible in the results, the regionally deployed full stack web app outperformed the client-only SPA in all four web vital measurements.
+As visible in the results, the regionally deployed full stack web app outperforms the client-only SPA in all four web vital measurements.
 
 ### Lab test 3: Regionally deployed Next.js app on serverless function
 
@@ -333,9 +327,7 @@ Five test runs were conducted for both the client-side-only SPA and the Next.js 
 </table>
 ```
 
-As visible in the results, the regionally deployed full stack web app outperformed the client-only SPA in all but the Largest Contentful Paint metrics.
-
-The full stack web app had a medium of 0.3 seconds higher than the client-side-only SPA, presumably because the regionally deployed full stack app was deployed in a region further away. This matches the results from the same test setup using Remix.
+As visible in the results, the regionally deployed full stack web app outperforms the client-only SPA in all but LCP. The worse LCP score can be explained by the distance to the serverless function. This matches the results from the same test setup using Remix.
 
 #### PageSpeed Insights with function in San Francisco, US (sfo1)
 
@@ -378,9 +370,7 @@ Five test runs were conducted for both the client-side-only SPA and the Next.js 
 </table>
 ```
 
-As visible in the results, the regionally deployed full stack web app outperformed the client-only SPA in all four web vital measurements.
-
-The Largest Contentful Paint was significantly improved by 3.7 seconds.
+As visible in the results, the regionally deployed full stack web app outperforms the client-only SPA in all four web vital measurements. The LCP is significantly improved by 3.7 seconds.
 
 ### Lab test 4: Globally deployed Remix app on Vercel edge network
 
@@ -427,7 +417,7 @@ This lab test was conducted using PageSpeed Insights (Mobile). Five test runs we
 </table>
 ```
 
-As visible in the results, the regionally deployed full stack web app outperformed the client-only SPA in all four web vital measurements.
+As visible in the results, the regionally deployed full stack web app outperforms the client-only SPA in all four web vital measurements.
 
 ### Lab test 5: Globally deployed Next.js app on Vercel edge network
 
@@ -474,7 +464,7 @@ This lab test was conducted using PageSpeed Insights (Mobile). Five test runs we
 </table>
 ```
 
-As visible in the results, the regionally deployed full stack web app outperformed the client-only SPA in all four web vital measurements.
+As visible in the results, the regionally deployed full stack web app outperforms the client-only SPA in all four web vital measurements.
 
 ### Summary of lab tests
 
@@ -482,9 +472,7 @@ Using a full stack web framework can have significant performance improvements o
 
 The documented lab tests were run both on [render.com](https://render.com/) and [Vercel](https://vercel.com/) and across different regions (Oregon, Washington, San Francisco) and different runtimes (long-running server, serverless, edge) to achieve diverse results.
 
-Depending on runtime, region, and version, the full stack apps showed different performance results. However, the full stack apps outperformed the client-only SPA.
-
-The client-side SPA showed faster Largest Contentful Paint measurements when the full stack app was deployed to a region further away (Washington).
+Depending on runtime, region, and version, the full stack apps showed different performance results. However, the full stack apps outperformed the client-only SPA in most cases. The client-side SPA only showed faster LCP measurements when the full stack app was deployed to a region further away (Washington). There is an opportunity to further investigate performance-improvements in this case.
 
 Taking the average of the averages (medium of medium) across the different test runs using Remix (long-running server, serverless Washington, serverless San Francisco, edge), we can document the following results.
 
@@ -563,34 +551,31 @@ Taking the average of the averages (medium of medium) across the different test 
 ## Background
 
 Client-side-only SPAs consist of static files that can be hosted on a content delivery network (CDN). The static files are downloaded by the browser and rendered in the browser runtime.
+Client-only SPA architectures give up control over the web server environment to focus on the browser runtime.
 
 Full stack web apps run both on the client and a server environment. They give developers control over the request response flows and handling of the incoming HTTP requests.
 
 ![A diagram comparing a client-only SPA to a full stack web app](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto,w_800/v1682282664/andrelandgraf.dev/client-side-vs-full-stack-framework_dgepoy.png)
 
-Client-only SPA architectures give up control over the web server environment to focus on the browser runtime.
-
-![A diagram showing the control zone when working on a client-only SPA. The control zone includes the browser runtime and client-only app. It also includes the requests made from the frontend. However, all API requests leave the control zone and are handled by third-party APIs.](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto,w_500/v1682282727/andrelandgraf.dev/control-zone-client-side-spa_ct4ldm.png)
-
 Downstream services and third-party APIs are used to provide data and functionality. The client-side app is responsible for fetching data from the APIs and rendering it in the browser.
 
 In bigger organizations, downstream services and APIs are likely owned by other teams, departments, and suppliers. All API requests leave the frontend team’s control zone and are handled by third parties. Conclusively, the performance of the client-only SPA is dependent on the priorities and decisions of third parties.
 
-We can replace the client-only SPA with a full stack web app by using a full stack web framework like Next.js or Remix.
+![A diagram showing the control zone when working on a client-only SPA. The control zone includes the browser runtime and client-only app. It also includes the requests made from the frontend. However, all API requests leave the control zone and are handled by third-party APIs.](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto,w_500/v1682282727/andrelandgraf.dev/control-zone-client-side-spa_ct4ldm.png)
 
-Using a full stack app unlocks the tools of the backend of the web platform. With access to a server environment, we naturally implement the BFF (backend for frontend) pattern. We gain control over a server runtime and can use it to optimize the web performance.
+We can replace the client-only SPA with a full stack web app by using a full stack web framework like Next.js or Remix. Using a full stack app unlocks the tools of the backend of the web platform. With access to a server environment, we naturally implement the BFF (backend for frontend) pattern. We gain control over a server runtime and can use it to optimize the web performance.
 
 You can read more about the benefits of owning the full stack of the web platform in this blog post: "[The full stack of the web platform](blog/2023-03-25_the_full_stack_of_the_web_platform.md)".
 
 ## Building the business case
 
-The full stack web app used in this business case was iteratively developed and improved. The following section walks you through the step-by-step improvements which were conducted. Each section enhances the full stack web app and adds further performance optimizations. The final version was then used in the lab tests presented in the previous sections.
+The full stack web app used in this business case was iteratively developed and improved. The following section walks you through the step-by-step improvements which were conducted. Each section enhances the full stack web app and adds further performance optimizations. The final version is then used in the lab tests presented in the previous sections.
 
 ### Step-by-step improvements
 
 For this section, the client-only SPA is deployed on [render.com](https://render.com/) on a global CDN. The implementation can be found here: [(1) Client-only SPA](https://github.com/andrelandgraf/movies-react-spa).
 
-The full stack web app uses Remix.run with the Express.js adapter and runs on a long-running server on render.com (Oregon, US). The implementation can be found here: [Full stack app using Remix with Express.js](https://github.com/andrelandgraf/movies-react-full-stack-app).
+The full stack web app uses Remix with the Express.js adapter and runs on a long-running server on render.com (Oregon, US). The implementation can be found here: [Full stack app using Remix with Express.js](https://github.com/andrelandgraf/movies-react-full-stack-app).
 
 The `main` branch includes all performance optimizations. The following branches include the performance optimizations step by step:
 
@@ -646,9 +631,9 @@ Five Lighthouse runs were conducted for both the client-side-only SPA and the Re
 
 Today's full stack web frameworks provide server-side rendering (SSR) and streaming with [React 18](https://react.dev/blog/2022/03/29/react-v18) out of the box.
 
-Server-side rendering allows us to pre-render the HTML on the server and send it to the client. This allows the client to render the HTML immediately and display the content to the user. With server-side rendering, we don't need to wait for the JavaScript to load and execute on the client before the content is displayed.
+Server-side rendering allows us to pre-render the HTML on the server and send it to the client. This allows the client to display the HTML immediately. With server-side rendering, we don't need to wait for JavaScript to load and execute on the client before the content is displayed.
 
-HTTP streaming is a technique that allows the server to stream data to the client. This can be used to send data to the client as it becomes available, rather than waiting for the entire response to be ready. This can improve the performance of your app by reducing the amount of time that the client needs to wait for data.
+HTTP streaming is a technique that allows the server to stream data to the client. This can be used to send data to the client as it becomes available, rather than waiting for the entire response to be ready. React 18 implements streaming together with server-side rendering to optimize the performance.
 
 In this first step, the full stack web app still employs client-side data fetching. So far, we only server-side render the loading states and fetch the movies once React has re-hydrated on the client. This version of the full stack web app serves as the baseline.
 
@@ -705,7 +690,7 @@ Five Lighthouse runs were conducted for both the client-side-only SPA and the Re
 
 During the initial page load, Remix and Next.js server-side render the page. Both frameworks provide primitives and conventions to fetch data on the server. This allows us to render dynamic content on the server before sending the HTML to the client.
 
-The client-only SPA and version 2 of the full stack app use client-side data fetching with `react-query`. Here, the data fetching can only happen after the JavaScript bundle has been loaded and executed on the client. React renders an initial loading state until the data is available.
+The client-only SPA uses `react-query` to fetch data on the client. With client-side data fetching, the data fetching can only happen after the JavaScript bundle has been loaded and executed on the client. React renders an initial loading state until the data is available.
 
 Server-side data fetching can improve web vitals by fetching data before the client-side JavaScript bundle is loaded and executed. By doing so, we avoid further client-server request round trips.
 
@@ -764,7 +749,7 @@ Five Lighthouse runs were conducted for both the client-side-only SPA and the Re
 </table>
 ```
 
-Note that the Largest Contentful Paint was significantly improved. The LCP improved by 3.1 seconds compared to the previous full stack app version.
+Note that the LCP improves by 3.1 seconds compared to the previous full stack app version.
 
 #### Walkthrough
 
@@ -785,9 +770,7 @@ export function MovieCard({ id, title, imageProps }) {
 }
 ```
 
-We have to fetch the movie `id`, `title`, and `poster_path` attributes for each movie.
-
-By default, the TMDB API returns the following data for every movie:
+We have to fetch the movie `id`, `title`, and `poster_path` attributes for each movie. By default, the TMDB API returns the following data for every movie:
 
 ```typescript
 type Movie = {
@@ -810,11 +793,7 @@ type Movie = {
 
 Overfetching can be avoided by filtering the data on the server before forwarding it to the client or by using a query language such as GraphQL to only fetch what is needed.
 
-Full stack web frameworks provide access to the web server. They naturally implement the BFF pattern \[[8](https://remix.run/docs/en/main/guides/bff)\] and allow us to fetch on the server and filter out unnecessary data before forwarding it to the client.
-
-Today's full stack web frameworks allow the frontend team to own the decision of what data to fetch without the need to introduce GraphQL to all downstream services or to maintain a separate BFF API server environment.
-
-For example, when only fetching the `id`, `title`, and `poster_path` attributes, the payload size is reduced from 15.3kB to 3kB for 80 movies (minified and gzipped).
+Full stack web frameworks provide access to the web server. They naturally implement the BFF pattern \[[8](https://remix.run/docs/en/main/guides/bff)\] and allow us to fetch on the server and filter out unnecessary data before forwarding it to the client. For example, when only fetching the `id`, `title`, and `poster_path` attributes, the payload size is reduced from 15.3kB to 3kB for 80 movies (minified and gzipped).
 
 ```typescript
 type Movie = {
@@ -873,9 +852,7 @@ Five Lighthouse runs were conducted for both the client-side-only SPA and the Re
 
 When having control over the web server, you can implement caching strategies. This can improve the performance of your app by reducing the amount of data that needs to be transferred over the network.
 
-Caching can be used to reduce request waterfalls introduced by data dependencies.
-
-There are several caching strategies that can be implemented on the server.
+Caching can be used to reduce request waterfalls introduced by data dependencies. There are several caching strategies that can be implemented on the server.
 
 - HTTP caching headers
 - In-memory caching
@@ -891,7 +868,7 @@ This enhancements happened as side-effects while moving the data fetching to the
 
 ### Moving libraries to the server
 
-Moving large libraries to the server can reduce the size of the client bundle. This can improve the performance of your app by reducing the amount of data that needs to be transferred over the network.
+Using third-party libraries on the server can reduce the size of the client bundle. This can improve the performance of your app by reducing the amount of data that needs to be transferred over the network.
 
 For instance, when moving the data fetching to the server, we can remove the `react-query` dependency from the client bundle. This reduces the bundle size by 12kb (minified and gzipped) \[[9](https://bundlephobia.com/package/@tanstack/react-query@4.29.3)\].
 
@@ -899,7 +876,7 @@ Similarly, we could move our GraphQL client or any other large library to the se
 
 ### Moving JavaScript to the server
 
-Moving JavaScript to the server can reduce the size of the client bundle. This can improve the performance of your app by reducing the amount of data that needs to be transferred over the network.
+Moving our own JavaScript to the server can reduce the size of the client bundle. This can improve the performance of the app by reducing the amount of data that needs to be transferred over the network.
 
 Servers are also generally more powerful than client devices. This means that they can perform more complex computations faster.
 
@@ -921,16 +898,14 @@ When utilizing a full stack web framework to run JavaScript on the server, we st
 
 This article documents lab tests of different full stack web app implementations and compares them to client-side-only SPAs. The test runs include deployments to different regions, runtime environments, and server-side optimizations.
 
-This business case shows that using a full stack web framework can significantly improve the performance. Employing server-side rendering and streaming, data filtering, moving JavaScript and third-party libraries to the server, and adding caching can heavily improve the performance of your app. Conclusively, a migration to a full stack web framework can improve the performance of your app significantly.
+This business case shows that using a full stack web framework can significantly improve the performance. Full stack web apps provide access to the backend of the web platform which provides us more tools we can use to make better trade-offs.
+
+We can employ server-side rendering and streaming, avoid overfetching, execute JavaScript and third-party libraries, and add caching to improve the performance. Conclusively, a migration to a full stack web framework provides developers with the tools required to solve the performance-problems of today.
 
 ## Limitations
 
 This business case compares a client-only SPA with a full stack web app. Downstream services are assumed to be owned by other teams or departments. Conclusively, most of the arguments are based on the assumption that the frontend team does not currently own the web server or a BFF API server environment.
 
-The measurements in this business case are based on lab tests. Lab tests can be used as a baseline to compare different implementations. However, they do not reflect the real-world performance of your app. A more accurate way to measure the performance of your app is to run A/B tests in production.
+The measurements in this business case are based on lab tests. Lab tests can be used as a baseline to compare different implementations. However, they do not reflect the real-world performance of your app. A more accurate way to measure the performance of your app is to run A/B tests in production. Running A/B tests allows you to measure the performance of your app in real-world conditions. On the other side, A/B tests are more complex to set up. They require that you deploy a production environment using the full stack web framework.
 
-Running A/B tests allows you to measure the performance of your app in real-world conditions. On the other side, A/B tests are more complex to set up. They require that you deploy a production environment using the full stack web framework. An iterative business case could make use of lab tests to achieve initial buy-in and then use A/B tests to measure the performance of a full stack app MVP in production.
-
-It should also be noted that the scope and depth of this business case can only serve as a starting point for further analysis. The results should only be used to argue that today's full stack web frameworks can be used to improve performance. However, that doesn't mean that they are the one-size-fits-all solution.
-
-Conclusively, this business case should be used as a blueprint or baseline to conduct a personalized business case in your own organization, using your own applications and infrastructure.
+An iterative business case could make use of lab tests to achieve initial buy-in and then use A/B tests to measure the performance of a full stack app MVP in production. Hence, the scope and depth of this business case can only serve as a starting point for further analysis. The results should only be used to argue that its worth running experiments and evaluating potential performance wins. Conclusively, this business case should be used as a blueprint or baseline to conduct a personalized business case in your own organization, using your own applications and infrastructure.
