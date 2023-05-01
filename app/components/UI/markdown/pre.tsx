@@ -55,6 +55,9 @@ const CodeBlock: FC<HTMLAttributes<HTMLPreElement>> = ({ children }) => {
   const className = codeElement?.props?.className || '';
   const code = codeElement.props.children[0] || '';
   const lang = getLanguageFromClassName(className);
+  if (lang === 'table') {
+    return <div dangerouslySetInnerHTML={{ __html: code }} />;
+  }
   invariant(isLanguageSupported(lang), `lang is required for codeblock ${code}`);
   return (
     <div className="w-full">
