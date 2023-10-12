@@ -1,6 +1,0 @@
-node_modules
-/.cache
-/netlify/functions/server
-/.netlify
-/public/build
-package-lock.json

@@ -4,18 +4,18 @@ Hey there! Thanks for visiting my GitHub profile. 🙋‍♂️
 
 ## About me
 
-Hey there! I am a Software Engineer from Germany with a master's degree in Information Systems. Currently, I am located in the Bay Area, CA, and I am pursuing a master's degree in Computer Science. I am passionate about web technologies and programming. I love to create software solutions and to engage with people about software development. Thank you very much for stopping by! Have an awesome day!
+I am a web dev from Germany with master's degrees in Information Systems and Computer Science. I am located in the Bay Area, CA, and I am working as a Software Engineer at LinkedIn! I am passionate about all things web and love learning, writing, and speaking about all things web. In my free time, I tutor up-and-coming developers, attend and organize tech meetups, and build cool web apps.
 
 Please hit me up on [Twitter](https://twitter.com/AndreLandgraf94) or [LinkedIn](https://www.linkedin.com/in/andre-landgraf/) to get in touch!
 
-I am also the developer and maintainer of:
+Find my blog and more about me at [andre-landgraf.dev](https://www.andre-landgraf.dev).
 
-- [Particular.Cloud](https://particular.cloud) - Localize your application and reach more people.
-- [Flash Me](https://flash-me.fly.dev/) - Learn through rehearsal. Create and study with flashcards online.
-- [velapilates.de](https://www.velapilates.de) - Your pilates online studio.
-- [react-datalist-input](https://www.npmjs.com/package/react-datalist-input) - An React combobox component with ease-of-use in mind, which I open sourced on npm.
+## Notable projects
 
-You can follow this link - [andre-landgraf.dev](https://www.andre-landgraf.dev) - to my personal website for more information!
+I am the developer and maintainer of:
+
+- [velapilates.de](https://www.velapilates.de) - Your German pilates online studio.
+- [react-datalist-input](https://www.npmjs.com/package/react-datalist-input) - A React combobox component with ease-of-use in mind.
 
 ## Uses
 
@@ -38,6 +38,8 @@ My first ever npm package! I created react-datalist-input both to learn more abo
 => [react-datalist-input](https://github.com/andrelandgraf/react-datalist-input)
 
 #### react-plain-datalist-input
+
+**Deprecated**
 
 A non-styled version of react-datalist-input. When I created react-datalist-input, I bundled a css file with it. The plain version comes without the css file and does support server-side-rendering and static-site-generation. You can find the package [here on npm](https://www.npmjs.com/package/react-plain-datalist-input). 🚀
 
@@ -69,9 +71,7 @@ Flash Me is developed with React, TypeScript, Tailwind Css, and [Remix](https://
 
 #### andrelandgraf
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8a32237e-e6d6-4567-aaf0-e518810a1061/deploy-status)](https://app.netlify.com/sites/andre-landgraf/deploys)
-
-My personal website! It is hosted on Netlify! 💚
+My personal website!
 
 It uses React, TypeScript, Tailwind CSS, and [Remix](https://remix.run) and also includes the README.md that you are currently reading!
 
@@ -143,13 +143,3 @@ Some exercises that helped me prepare for my exam in discrete structures.
 => [graph-theory](https://github.com/andrelandgraf/graph-theory)
 => [gale-shapley-algorithm](https://github.com/andrelandgraf/gale-shapley-algorithm)
 
-## Contact
-
-I love to chat about tech & IT! Please hit me up on Twitter or LinkedIn! You can find me here:
-
-- [Twitter](https://twitter.com/AndreLandgraf94) - @andrelandgraf94
-- [LinkedIn](https://www.linkedin.com/in/andre-landgraf/)
-- [Instagram](https://www.instagram.com/andre.fullstack/) - andre.fullstack
-- [StackOverflow](https://stackoverflow.com/users/6331985/andre)
-- [npm](https://www.npmjs.com/settings/andrelandgraf/packages)
-- [Medium](https://andrelandgraf.medium.com/)

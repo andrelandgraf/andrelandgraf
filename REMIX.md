@@ -1,61 +1,32 @@
-# Welcome to Remix!
+# Remix
 
-- [Remix Docs](https://remix.run/docs)
+This directory is a brief example of a [Remix](https://remix.run/docs) site that can be deployed to Vercel with zero configuration.
 
-## Netlify Setup
+## Deploy Your Own
 
-1. Install the [Netlify CLI](https://www.netlify.com/products/dev/):
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/remix&template=remix)
 
-```sh
-npm i -g netlify-cli
-```
+_Live Example: https://remix-run-template.vercel.app_
 
-2. Sign up and log in to Netlify:
+You can also deploy using the [Vercel CLI](https://vercel.com/cli):
 
 ```sh
-  netlify login
-```
-
-3. Create a new site:
-
-```sh
-  netlify init
-```
-
-4. You'll need to tell Netlify to use Node 14, as at the time of writing Netlify uses Node 12 by [default](https://docs.netlify.com/functions/build-with-javascript/#runtime-settings)
-
-```sh
-  netlify env:set AWS_LAMBDA_JS_RUNTIME nodejs14.x
+npm i -g vercel
+vercel
 ```
 
 ## Development
 
-You will be running two processes during development when using Netlify as your server.
-
-- Your Netlify server in one
-- The Remix development server in another
+To run your Remix app locally, make sure your project's local dependencies are installed:
 
 ```sh
-# in one tab
-$ npm run dev:netlify
-
-# in another
-$ npm run dev
+npm install
 ```
 
-Open up [http://localhost:3000](http://localhost:3000), and you should be ready to go!
-
-If you'd rather run everything in a single tab, you can look at [concurrently](https://npm.im/concurrently) or similar tools to run both processes in one tab.
-
-## Deployment
-
-There are two ways to deploy your app to Netlify, you can either link your app to your git repo and have it auto deploy changes to Netlify, or you can deploy your app manually. If you've followed the setup instructions already, all you need to do is run this:
+Afterwards, start the Remix development server like so:
 
 ```sh
-$ npm run build
-# preview deployment
-$ netlify deploy
-
-# production deployment
-$ netlify deploy --prod
+npm run dev
 ```
+
+Open up [http://localhost:3000](http://localhost:3000) and you should be ready to go!

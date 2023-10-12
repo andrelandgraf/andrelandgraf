@@ -1,6 +1,8 @@
 node_modules
+.vscode/settings.json
+
 /.cache
-/netlify/functions/server
-/.netlify
+/build
 /public/build
-package-lock.json
+.env
+/prisma/dev.db

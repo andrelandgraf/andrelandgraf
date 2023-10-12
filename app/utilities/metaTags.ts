@@ -1,6 +1,8 @@
+import type { MetaFunction } from '@vercel/remix';
+
 import { images } from './images';
 
-interface GetMetaTagsParams {
+type GetMetaTagsParams = {
   title?: string;
   description?: string;
   image?: string;
@@ -10,7 +12,7 @@ interface GetMetaTagsParams {
   noIndex?: boolean;
   type?: 'website' | 'article';
   meta?: Record<string, string>;
-}
+};
 
 const getTitle = (standaloneTitle: boolean, useCatchPhraseInTitle: boolean, title: string) =>
   standaloneTitle
@@ -20,7 +22,7 @@ const getTitle = (standaloneTitle: boolean, useCatchPhraseInTitle: boolean, titl
     : `${title} | Andre Landgraf`;
 
 // return a list of all meta tags for a route's meta function
-const getMetaTags: (params: GetMetaTagsParams) => Record<string, string> = ({
+const getMetaTags: (params: GetMetaTagsParams) => ReturnType<MetaFunction> = ({
   title = 'Andre Landgraf',
   description = 'A tech enthusiast and student who loves to develop fullstack software solutions.',
   image = images.resumeImage.src,
@@ -31,33 +33,34 @@ const getMetaTags: (params: GetMetaTagsParams) => Record<string, string> = ({
   noIndex = false,
   type = 'website',
 }) => {
-  const metaTags: Record<string, string> = {
-    title: getTitle(standaloneTitle, useCatchPhraseInTitle, title),
-    'og:title': getTitle(standaloneTitle, useCatchPhraseInTitle, title),
-    'og:locale': 'en-US',
-    'twitter:title': getTitle(standaloneTitle, useCatchPhraseInTitle, title),
-    description: description,
-    'og:description': description,
-    'twitter:description': description,
-    'twitter:card': 'summary_large_image',
-    'twitter:site': '@andrelandgraf94',
-    'twitter:creator': '@andrelandgraf94',
-    'theme-color': 'rgb(94 234 212)',
-    'og:type': type,
-    robots: noIndex ? 'noindex' : 'all',
-    ...meta,
-  };
-  if (image) {
-    metaTags.image = image;
-    metaTags['og:image'] = image;
-    metaTags['twitter:image'] = image;
-    metaTags['twitter:image:src'] = image;
-    metaTags['twitter:tile:image'] = image;
-  }
-  if (imageAlt) {
-    metaTags['image:alt'] = imageAlt;
-    metaTags['og:image:alt'] = imageAlt;
-    metaTags['twitter:image:alt'] = imageAlt;
+  const metaTags = [
+    { title: getTitle(standaloneTitle, useCatchPhraseInTitle, title) },
+    { name: 'og:title', content: getTitle(standaloneTitle, useCatchPhraseInTitle, title) },
+    { name: 'og:locale', content: 'en-US' },
+    { name: 'twitter:title', content: getTitle(standaloneTitle, useCatchPhraseInTitle, title) },
+    { name: 'description', content: description },
+    { name: 'og:description', content: description },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:site', content: '@andrelandgraf94' },
+    { name: 'twitter:creator', content: '@andrelandgraf94' },
+    { name: 'theme-color', content: 'rgb(94 234 212)' },
+    { name: 'og:type', content: type },
+    { name: 'robots', content: noIndex ? 'noindex' : 'all' },
+  ];
+  if (image && imageAlt) {
+    metaTags.push(
+      { name: 'image', content: image },
+      { name: 'og:image', content: image },
+      { name: 'twitter:image', content: image },
+      { name: 'twitter:image:src', content: image },
+      { name: 'twitter:tile:image', content: image },
+    );
+    metaTags.push(
+      { name: 'image:alt', content: imageAlt },
+      { name: 'og:image:alt', content: imageAlt },
+      { name: 'twitter:image:alt', content: imageAlt },
+    );
   }
   return metaTags;
 };
