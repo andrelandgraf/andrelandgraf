@@ -1,7 +1,14 @@
+import type { HeadersFunction } from '@remix-run/node';
 import { Outlet } from '@remix-run/react';
 
 import { StyledLink } from '~/components/links';
 import { images } from '~/utilities/images';
+
+export const headers: HeadersFunction = () => {
+  return {
+    'cache-control': 'public, max-age=3600',
+  };
+};
 
 export default function Component() {
   return (

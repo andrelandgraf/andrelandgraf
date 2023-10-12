@@ -1,6 +1,7 @@
-import type { ActionResult } from '../ActionResult';
 import parseFrontMatter from 'front-matter';
 import invariant from 'tiny-invariant';
+
+import type { ActionResult } from '../ActionResult';
 
 enum FetchMarkdownFileResState {
   fileNotFound = 'file_not_found',
@@ -13,7 +14,7 @@ enum FetchMarkdownFileResState {
 type MarkdownFile<FrontMatter> = {
   slug: string;
   markdown: string;
-  frontmatter: FrontMatter & Record<string, unknown>;
+  frontmatter: FrontMatter;
 };
 
 const getContentPath = (url: string, slug: string): string => {

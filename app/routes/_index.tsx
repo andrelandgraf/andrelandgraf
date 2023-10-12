@@ -1,4 +1,4 @@
-import type { LinksFunction } from '@remix-run/node';
+import type { HeadersFunction, LinksFunction, MetaFunction } from '@remix-run/node';
 import type { LinkProps } from '@remix-run/react';
 import { Link } from '@remix-run/react';
 import clsx from 'clsx';
@@ -8,8 +8,23 @@ import { useEffect, useRef } from 'react';
 import { ButtonLink } from '~/components/buttons';
 import indexStyles from '~/styles/index.css';
 import { images } from '~/utilities/images';
+import { getMetaTags } from '~/utilities/metaTags';
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: indexStyles }];
+
+export const headers: HeadersFunction = () => {
+  return {
+    'cache-control': 'public, max-age=3600',
+  };
+};
+
+export const meta: MetaFunction = () => {
+  return getMetaTags({
+    title: 'Homepage',
+    description:
+      'Hey there, this is my personal website & blog. I use this site to try out new things, share my knowledge, and document my journey. I hope you find something useful here!',
+  });
+};
 
 function onScrollTrigger(target: HTMLElement, options?: IntersectionObserverInit) {
   const observer = new IntersectionObserver((entries, observer) => {

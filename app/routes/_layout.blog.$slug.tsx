@@ -1,5 +1,5 @@
 import type { LinksFunction, LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
-import { redirect } from '@remix-run/node';
+import { json, redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 
 import { fetchMarkdownFileFs } from '~/actions/fs/index.server';
@@ -79,7 +79,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
     throw Error(`Error (${status}) ${state}: Failed to fetch blog articles.`);
   }
 
-  return { article };
+  return json({ article });
 }
 
 export default function Component() {
