@@ -3,6 +3,8 @@ import type { MetaFunction } from '@remix-run/node';
 import { PageHeading } from '~/components/headings';
 import { getMetaTags } from '~/utilities/metaTags';
 
+export const config = { runtime: 'edge' };
+
 export const meta: MetaFunction = () => {
   return getMetaTags({
     title: 'Uses',

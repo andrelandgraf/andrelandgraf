@@ -9,6 +9,8 @@ import { useEffect, useRef, useState } from 'react';
 
 import { PageHeading } from '~/components/headings';
 
+export const config = { runtime: 'edge' };
+
 export const links: LinksFunction = () => {
   return [
     { rel: 'preconnect', href: 'https://fonts.googleapis.com' },

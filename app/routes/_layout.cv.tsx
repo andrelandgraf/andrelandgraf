@@ -6,6 +6,8 @@ import { StyledLink } from '~/components/links';
 import resumeStylesUrl from '~/styles/resume.css';
 import { getMetaTags } from '~/utilities/metaTags';
 
+export const config = { runtime: 'edge' };
+
 export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: resumeStylesUrl }];
 };

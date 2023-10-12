@@ -5,6 +5,8 @@ import { PageHeading, SectionHeading } from '~/components/headings';
 import { StyledLink } from '~/components/links';
 import { getMetaTags } from '~/utilities/metaTags';
 
+export const config = { runtime: 'edge' };
+
 export const meta: MetaFunction = () => {
   return getMetaTags({
     title: 'Tutoring',

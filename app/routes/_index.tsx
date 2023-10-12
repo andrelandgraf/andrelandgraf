@@ -10,6 +10,8 @@ import indexStyles from '~/styles/index.css';
 import { images } from '~/utilities/images';
 import { getMetaTags } from '~/utilities/metaTags';
 
+export const config = { runtime: 'edge' };
+
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: indexStyles }];
 
 export const headers: HeadersFunction = () => {
