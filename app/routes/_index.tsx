@@ -60,7 +60,7 @@ export default function Component() {
   return (
     <main className="w-full h-[100vh] bg-black">
       <Scene>
-        <Frame className="frame-one text-center font-mono overflow-hidden">
+        <Frame className="frame-one h-[100vh] text-center font-mono overflow-hidden">
           <div className="h-[100vh] whitespace-normal overflow-hidden lg:whitespace-nowrap flex flex-col items-center justify-center gap-4 lg:gap-8">
             <h1 className="frame-one-heading text-6xl lg:text-9xl text-allThingsWebPurple font-extrabold">
               All Things Web
@@ -75,7 +75,7 @@ export default function Component() {
             <Star key={i} {...star} />
           ))}
         </Frame>
-        <Frame className="frame-two text-center font-mono">
+        <Frame className="frame-two h-[100vh] text-center font-mono">
           <div className="h-[100vh] mx-4 lg:mx-[10vw] flex items-center justify-center flex-col-reverse lg:flex-row gap-16 lg:gap-[10vw]">
             <div className="lg:max-w-[40vw] flex flex-col items-center justify-center gap-4 lg:gap-8">
               <h2 className="text-4xl lg:text-8xl text-packtOrange font-extrabold">
@@ -100,13 +100,13 @@ export default function Component() {
               </ButtonLink>
             </div>
             <img
-              className="lg:w-[30vw] max-h-[50vh] lg:max-h-[60vh] shadow-lg shadow-black"
+              className="lg:w-[30vw] max-h-[20vh] lg:max-h-[60vh] shadow-lg shadow-black"
               src={images.bookCoverImage.src}
               alt={images.bookCoverImage.alt}
             />
           </div>
         </Frame>
-        <Frame className="frame-three text-center font-mono" id="tutoring">
+        <Frame className="frame-three h-[100vh] text-center font-mono" id="tutoring">
           <div className="h-[100vh] mx-4 lg:mx-[10vw] flex items-center justify-center flex-col-reverse lg:flex-row gap-16 lg:gap-[10vw]">
             <img
               className="max-w-[80vw] max-h-[40vh] lg:w-[30vw] shadow-lg shadow-black"
@@ -134,17 +134,17 @@ export default function Component() {
           </div>
         </Frame>
         <Frame
-          className="h-[100vh] frame-four text-center font-mono flex items-center justify-center flex-col gap-16 lg:gap-[10vh]"
+          className="h-[100vh] frame-four text-center font-mono flex items-center justify-center flex-col gap-8 lg:gap-[10vh]"
           id="meetups"
         >
-          <div className="lg:max-w-[800px] flex flex-col items-center justify-center gap-4 lg:gap-8">
-            <h1 className="text-2xl lg:text-4xl text-white font-bold">Meetups</h1>
-            <h1 className="text-white">
+          <div className="mx-4 lg:max-w-[800px] flex flex-col items-center justify-center gap-4 lg:gap-8">
+            <h2 className="text-2xl lg:text-4xl text-white font-bold">Meetups</h2>
+            <p className="text-white">
               Join us in person or virtually! I help organizing the Remix Bay Area meetup and I tutor up-and-coming devs
               every Monday on Zoom!
-            </h1>
+            </p>
           </div>
-          <div className="mx-4 lg:mx-[10vw] flex items-center justify-center flex-col lg:flex-row gap-16 lg:gap-[10vh]">
+          <div className="mx-4 lg:mx-[10vw] flex items-center justify-center flex-col lg:flex-row gap-8 lg:gap-[10vh]">
             <Link
               aria-label="Remix Bay Area Meetup"
               target="_blank"
@@ -205,7 +205,7 @@ function Frame({ children, className, ...props }: FrameProps) {
     return onScrollTrigger(sectionRef.current, { threshold: 0.84 });
   }, []);
   return (
-    <section {...props} ref={sectionRef} className={clsx('frame relative w-full h-[100vh]', className)}>
+    <section {...props} ref={sectionRef} className={clsx('frame relative w-full', className)}>
       {children}
     </section>
   );
