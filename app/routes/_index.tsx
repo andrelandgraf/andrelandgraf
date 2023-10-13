@@ -63,19 +63,20 @@ export default function Component() {
     <main className="w-full h-[100vh] bg-black">
       <Scene>
         <Frame className="frame-one h-[100vh] text-center font-mono overflow-hidden">
+          {stars.map((star, i) => (
+            <Star key={i} {...star} />
+          ))}
           <div className="h-[100vh] whitespace-normal overflow-hidden lg:whitespace-nowrap flex flex-col items-center justify-center gap-4 lg:gap-8">
             <h1 className="frame-one-heading text-6xl lg:text-9xl text-allThingsWebPurple font-extrabold">
               All Things Web
             </h1>
             <p className="frame-one-subheading text-2xl lg:text-4xl text-allThingsWebOrange font-extrabold">
-              Web Dev, Talks, <SubHeadingLink to="#tutoring">Tutoring</SubHeadingLink>,{' '}
+              Web Dev, <SubHeadingLink to="#talks">Talks</SubHeadingLink>,{' '}
+              <SubHeadingLink to="#tutoring">Tutoring</SubHeadingLink>,{' '}
               <SubHeadingLink to="/blog">Blog Posts</SubHeadingLink>,{' '}
               <SubHeadingLink to="#meetups">Meetups</SubHeadingLink>, and more. <br />
             </p>
           </div>
-          {stars.map((star, i) => (
-            <Star key={i} {...star} />
-          ))}
         </Frame>
         <Frame className="frame-two h-[100vh] text-center font-mono">
           <div className="h-[100vh] mx-4 lg:mx-[10vw] flex items-center justify-center flex-col-reverse lg:flex-row gap-16 lg:gap-[10vw]">
@@ -133,6 +134,19 @@ export default function Component() {
                 for HTML, CSS, and JavaScript tutoring!
               </p>
             </div>
+          </div>
+        </Frame>
+        <Frame className="h-[100vh] text-center font-mono" id="talks">
+          <div className="h-[100vh] w-full flex items-center justify-center flex-col gap-16">
+            <div className="mx-4 lg:max-w-[800px] flex flex-col items-center justify-center gap-4 lg:gap-8">
+              <h2 className="text-2xl lg:text-4xl text-white font-bold">Talks Playlist</h2>
+            </div>
+            <iframe
+              className="w-full max-w-[1024px] aspect-video"
+              src="https://www.youtube-nocookie.com/embed/videoseries?si=CMtx60tnTjTqIAUY&amp;controls=0&amp;list=PLdOXo8FX5YBRDh5uSYOsDIIXJaBtvVm51"
+              title="YouTube video player with playlist"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            ></iframe>
           </div>
         </Frame>
         <Frame
