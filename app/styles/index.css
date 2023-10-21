@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'Andre Handwriting';
+  src: url(/AndreHandwriting.ttf) format('truetype');
+}
+
+.handwritten {
+  font-family: 'Andre Handwriting', 'Brush Script MT';
+}
+
 .scene {
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;

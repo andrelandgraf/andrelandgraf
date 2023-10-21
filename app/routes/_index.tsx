@@ -85,6 +85,16 @@ export default function Component() {
                 <SubHeadingLink to="/blog">Blog Posts</SubHeadingLink>,{' '}
                 <SubHeadingLink to="#meetups">Meetups</SubHeadingLink>, and more. <br />
               </p>
+              <div className="frame-one-subheading flex lg:flex-col items-center justify-center transform rotate-6 absolute top-8 lg:right-8">
+                <img
+                  alt={images.resumeImage.alt}
+                  src={images.resumeImage.src}
+                  className="w-10 lg:w-24 rounded-full mr-4 lg:mb-4"
+                  width={images.resumeImage.width}
+                  height={images.resumeImage.height}
+                />
+                <p className="handwritten font-extrabold text-4xl text-primary">By Andre Landgraf</p>
+              </div>
             </div>
           </Frame>
           <Frame className="frame-two h-[100vh] text-center font-mono">
@@ -112,10 +122,11 @@ export default function Component() {
                 </ButtonLink>
               </div>
               <img
-                className="object-contain max-h-[20vh] lg:max-w-[30vw] lg:max-h-[60vh] shadow-lg shadow-black"
+                className="max-w-[40vw] lg:max-w-[30vw] shadow-lg shadow-black"
                 src={images.bookCoverImage.src}
                 alt={images.bookCoverImage.alt}
                 height={images.bookCoverImage.height}
+                width={images.bookCoverImage.width}
               />
             </div>
           </Frame>
@@ -126,6 +137,7 @@ export default function Component() {
                 src={images.allThingsWebCoverImage.src}
                 alt={images.allThingsWebCoverImage.alt}
                 width={images.allThingsWebCoverImage.width}
+                height={images.allThingsWebCoverImage.height}
               />
               <div className="lg:max-w-[40vw] flex flex-col items-center justify-center gap-4 lg:gap-8">
                 <h2 className="text-4xl lg:text-8xl text-allThingsWebOrange font-extrabold">All Things Web</h2>
@@ -156,7 +168,7 @@ export default function Component() {
                 className="w-full max-w-[1024px] aspect-video"
                 src="https://www.youtube-nocookie.com/embed/videoseries?si=CMtx60tnTjTqIAUY&amp;controls=0&amp;list=PLdOXo8FX5YBRDh5uSYOsDIIXJaBtvVm51"
                 title="YouTube video player with playlist"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               ></iframe>
             </div>
           </Frame>
@@ -184,6 +196,7 @@ export default function Component() {
                   src={images.remixBayAreaCoverImage.src}
                   alt={images.remixBayAreaCoverImage.alt}
                   width={images.remixBayAreaCoverImage.width}
+                  height={images.remixBayAreaCoverImage.height}
                 />
               </Link>
               <Link
@@ -198,6 +211,7 @@ export default function Component() {
                   src={images.allThingsWebCoverImage.src}
                   alt={images.allThingsWebCoverImage.alt}
                   width={images.allThingsWebCoverImage.width}
+                  height={images.allThingsWebCoverImage.height}
                 />
               </Link>
             </div>
