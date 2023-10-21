@@ -70,11 +70,11 @@ export default function Component() {
       />
 
       <main className="w-full h-[100vh] bg-black">
+        {stars.map((star, i) => (
+          <Star key={i} {...star} />
+        ))}
         <Scene>
           <Frame className="frame-one h-[100vh] text-center font-mono overflow-hidden">
-            {stars.map((star, i) => (
-              <Star key={i} {...star} />
-            ))}
             <div className="h-[100vh] whitespace-normal overflow-hidden lg:whitespace-nowrap flex flex-col items-center justify-center gap-4 lg:gap-8">
               <h1 className="frame-one-heading text-6xl lg:text-9xl text-allThingsWebPurple font-extrabold">
                 All Things Web
@@ -112,18 +112,20 @@ export default function Component() {
                 </ButtonLink>
               </div>
               <img
-                className="object-contain w-400px lg:w-800px max-h-[20vh] lg:max-w-[30vw] lg:max-h-[60vh] shadow-lg shadow-black"
+                className="object-contain max-h-[20vh] lg:max-w-[30vw] lg:max-h-[60vh] shadow-lg shadow-black"
                 src={images.bookCoverImage.src}
                 alt={images.bookCoverImage.alt}
+                height={images.bookCoverImage.height}
               />
             </div>
           </Frame>
           <Frame className="frame-three h-[100vh] text-center font-mono" id="tutoring">
             <div className="h-[100vh] mx-4 lg:mx-[10vw] flex items-center justify-center flex-col-reverse lg:flex-row gap-16 lg:gap-[10vw]">
               <img
-                className="w-[800px] max-w-[80vw] max-h-[40vh] lg:max-w-[30vw] shadow-lg shadow-black"
+                className="max-w-[80vw] max-h-[40vh] lg:max-w-[min(30vw,800px)] shadow-lg shadow-black"
                 src={images.allThingsWebCoverImage.src}
                 alt={images.allThingsWebCoverImage.alt}
+                width={images.allThingsWebCoverImage.width}
               />
               <div className="lg:max-w-[40vw] flex flex-col items-center justify-center gap-4 lg:gap-8">
                 <h2 className="text-4xl lg:text-8xl text-allThingsWebOrange font-extrabold">All Things Web</h2>
@@ -178,9 +180,10 @@ export default function Component() {
                 className="shadow-lg shadow-black hover:transform-gpu hover:scale-105 transition-all duration-300 ease-in-out"
               >
                 <img
-                  className="w-[800px] max-w-[80vw] max-h-[40vh] lg:w-[30vw]"
+                  className="max-w-[80vw] max-h-[40vh] lg:max-w-[min(30vw,800px)]"
                   src={images.remixBayAreaCoverImage.src}
                   alt={images.remixBayAreaCoverImage.alt}
+                  width={images.remixBayAreaCoverImage.width}
                 />
               </Link>
               <Link
@@ -191,9 +194,10 @@ export default function Component() {
                 className="shadow-lg shadow-black hover:transform-gpu hover:scale-105 transition-all duration-300 ease-in-out"
               >
                 <img
-                  className="w-[800px] max-w-[80vw] max-h-[40vh] lg:max-w-[30vw]"
+                  className="max-w-[80vw] max-h-[40vh] lg:max-w-[min(30vw,800px)]"
                   src={images.allThingsWebCoverImage.src}
                   alt={images.allThingsWebCoverImage.alt}
+                  width={images.allThingsWebCoverImage.width}
                 />
               </Link>
             </div>
