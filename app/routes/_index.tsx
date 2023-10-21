@@ -112,7 +112,7 @@ export default function Component() {
                 </ButtonLink>
               </div>
               <img
-                className="lg:w-[30vw] max-h-[20vh] lg:max-h-[60vh] shadow-lg shadow-black"
+                className="object-contain w-400px lg:w-800px max-h-[20vh] lg:max-w-[30vw] lg:max-h-[60vh] shadow-lg shadow-black"
                 src={images.bookCoverImage.src}
                 alt={images.bookCoverImage.alt}
               />
@@ -121,7 +121,7 @@ export default function Component() {
           <Frame className="frame-three h-[100vh] text-center font-mono" id="tutoring">
             <div className="h-[100vh] mx-4 lg:mx-[10vw] flex items-center justify-center flex-col-reverse lg:flex-row gap-16 lg:gap-[10vw]">
               <img
-                className="max-w-[80vw] max-h-[40vh] lg:w-[30vw] shadow-lg shadow-black"
+                className="w-[800px] max-w-[80vw] max-h-[40vh] lg:max-w-[30vw] shadow-lg shadow-black"
                 src={images.allThingsWebCoverImage.src}
                 alt={images.allThingsWebCoverImage.alt}
               />
@@ -178,7 +178,7 @@ export default function Component() {
                 className="shadow-lg shadow-black hover:transform-gpu hover:scale-105 transition-all duration-300 ease-in-out"
               >
                 <img
-                  className="max-w-[80vw] max-h-[40vh] lg:w-[30vw]"
+                  className="w-[800px] max-w-[80vw] max-h-[40vh] lg:w-[30vw]"
                   src={images.remixBayAreaCoverImage.src}
                   alt={images.remixBayAreaCoverImage.alt}
                 />
@@ -191,7 +191,7 @@ export default function Component() {
                 className="shadow-lg shadow-black hover:transform-gpu hover:scale-105 transition-all duration-300 ease-in-out"
               >
                 <img
-                  className="max-w-[80vw] max-h-[40vh] lg:w-[30vw]"
+                  className="w-[800px] max-w-[80vw] max-h-[40vh] lg:max-w-[30vw]"
                   src={images.allThingsWebCoverImage.src}
                   alt={images.allThingsWebCoverImage.alt}
                 />
