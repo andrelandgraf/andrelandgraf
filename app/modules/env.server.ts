@@ -1,8 +1,6 @@
 import invariant from 'tiny-invariant';
 
-type PublicEnvVars = {
-  enableDownloadCVPDF: boolean;
-};
+type PublicEnvVars = {};
 
 type PrivateEnvVars = PublicEnvVars & {
   readContentFrom: 'locale' | 'production';
@@ -10,14 +8,10 @@ type PrivateEnvVars = PublicEnvVars & {
   githubRepoAPIUrl: string;
 };
 
-const DEV_FETCH_FROM = 'locale';
-const ENABLE_DOWNLOAD_CV_PDF = false;
+const DEV_FETCH_FROM = 'production';
 
 export function getPublicEnvVars(): PublicEnvVars {
-  const enableDownloadCVPDF = ENABLE_DOWNLOAD_CV_PDF;
-  return {
-    enableDownloadCVPDF,
-  };
+  return {};
 }
 
 export function getPrivateEnvVars(): PrivateEnvVars {
