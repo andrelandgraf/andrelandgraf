@@ -63,7 +63,7 @@ export default function Component() {
       <PageHeading>My Blog Posts</PageHeading>
       {entries.map(({ frontmatter, slug }) => (
         <article className="flex flex-col gap-3 w-full lg:max-w-3xl" key={slug}>
-          <Link to={`/blog/${slug}`}>
+          <Link to={`/blog/${slug}`} prefetch="intent">
             <PageHeading asH2 className="text-secondary dark:text-primary">
               {frontmatter.title}
             </PageHeading>
@@ -73,7 +73,7 @@ export default function Component() {
           </h3>
           <Tags tags={frontmatter.categories} className="flex gap-2" />
           <p>{frontmatter.description}</p>
-          <ButtonLink to={`/blog/${slug}`} aria-label={`View Article ${frontmatter.title}`}>
+          <ButtonLink to={`/blog/${slug}`} aria-label={`View Article ${frontmatter.title}`} prefetch="intent">
             View Article
           </ButtonLink>
         </article>

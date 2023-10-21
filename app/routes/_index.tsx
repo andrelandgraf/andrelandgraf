@@ -207,6 +207,7 @@ export default function Component() {
 function SubHeadingLink({ className = '', children, ...props }: LinkProps) {
   return (
     <Link
+      prefetch="intent"
       {...props}
       className={clsx(
         'underline decoration-text-allThingsWebOrange hover:text-allThingsWebPurple focus:text-allThingsWebPurple',
