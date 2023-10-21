@@ -1,4 +1,4 @@
-import type { MetaFunction } from '@remix-run/node';
+import { json, type MetaFunction } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 
 import { fetchMarkdownFilesFs } from '~/actions/fs/index.server';
@@ -52,7 +52,7 @@ export async function loader() {
   const entries = files.sort((a, b) => {
     return new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime();
   });
-  return { entries };
+  return json({ entries }, { headers: { 'cache-control': 'public, max-age=3600' } });
 }
 
 export default function Component() {

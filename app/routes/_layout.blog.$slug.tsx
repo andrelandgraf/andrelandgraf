@@ -79,7 +79,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
     throw Error(`Error (${status}) ${state}: Failed to fetch blog articles.`);
   }
 
-  return json({ article });
+  return json({ article }, { headers: { 'cache-control': 'public, max-age=3600' } });
 }
 
 export default function Component() {
