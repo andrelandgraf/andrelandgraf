@@ -2,7 +2,7 @@ import type { HTMLAttributes } from 'react';
 
 export function Tag({ children, className = '', ...props }: HTMLAttributes<HTMLSpanElement>) {
   return (
-    <span {...props} className={`p-1 rounded-lg bg-darkPrimary text-white text-xs lg:text-sm ${className}`}>
+    <span {...props} className={`p-1 rounded-lg bg-teal-900 text-white text-xs lg:text-sm ${className}`}>
       {children}
     </span>
   );

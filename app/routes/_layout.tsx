@@ -22,6 +22,8 @@ export default function Component() {
               className="w-60 xl:w-64 2xl:w-72 rounded-md"
               src={images.resumeImage.src}
               alt={images.resumeImage.alt}
+              width={images.resumeImage.width}
+              height={images.resumeImage.height}
             />
             <div className="flex flex-col gap-5">
               <h2 className="font-bold text-2xl xl:text-4xl 2xl:text-6xl">Andre Landgraf</h2>
