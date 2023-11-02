@@ -1,6 +1,6 @@
-import type { ActionResult } from '../ActionResult';
+import type { ActionResult } from '../../../types';
 
-enum GithubAuthTokenResState {
+export enum GithubAuthTokenResState {
   codeRequired = 'code_required',
   verifyError = 'verify_error',
   internalError = 'internal_error',
@@ -9,7 +9,7 @@ enum GithubAuthTokenResState {
 
 type HeadersWithAuthorization = Headers;
 
-async function getGitHubAuthToken(
+export async function getGitHubAuthToken(
   clientId: string,
   clientSecret: string,
   forUser = true,
@@ -60,7 +60,3 @@ async function getGitHubAuthToken(
     return [500, GithubAuthTokenResState.internalError, undefined];
   }
 }
-
-export { GithubAuthTokenResState };
-
-export default getGitHubAuthToken;

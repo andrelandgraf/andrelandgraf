@@ -1,11 +1,11 @@
 import { json, type MetaFunction } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 
-import { fetchMarkdownFilesFs } from '~/actions/fs/index.server';
-import { fetchMarkdownFiles } from '~/actions/github/index.server';
 import { ButtonLink } from '~/components/buttons';
 import { PageHeading } from '~/components/headings';
 import { Tags } from '~/components/tags';
+import { fetchMarkdownFilesFs } from '~/modules/blog/fs/fetchMarkdownFiles.server';
+import { fetchMarkdownFiles } from '~/modules/blog/github/fetchMarkdownFiles.server';
 import { getPrivateEnvVars } from '~/modules/env.server';
 import { getISODate, getReadableDate } from '~/utilities/dates';
 import { getMetaTags } from '~/utilities/metaTags';
@@ -13,7 +13,7 @@ import { getMetaTags } from '~/utilities/metaTags';
 export const meta: MetaFunction = () => {
   return getMetaTags({
     title: 'Blog',
-    description: 'I love to write about all things web.',
+    description: 'Check out my blog posts. I write about all things web development.',
   });
 };
 

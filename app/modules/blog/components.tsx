@@ -1,80 +1,124 @@
-import type { FC, HTMLAttributes } from 'react';
+import clsx from 'clsx';
+import type { HTMLAttributes } from 'react';
 
-import { CustomParagraph, Decoder } from '~/components/markdown';
+export function Container({ children }: HTMLAttributes<HTMLElement>) {
+  return children;
+}
 
-const H1: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
+type HeadingProps = HTMLAttributes<HTMLHeadingElement> & {
+  level?: number;
+};
+
+export function H1({ children, ...props }: HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h1 {...props} className="text-3xl lg:text-4xl xl:text-6xl text-secondary dark:text-primary font-extrabold">
       {children}
     </h1>
   );
-};
+}
 
-const H2: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
+export function Heading({ children, level = 2, ...props }: HeadingProps) {
+  if (level === 1 || level === 2) {
+    return (
+      <h2
+        {...props}
+        className="text-2xl lg:text-3xl xl:text-4xl text-secondary dark:text-primary font-bold mt-6 lg:mt-8"
+      >
+        {children}
+      </h2>
+    );
+  }
+  if (level === 3) {
+    return (
+      <h3
+        {...props}
+        className="text-xl lg:text-2xl xl:text-3xl font-semibold text-secondary dark:text-primary mt-4 lg:mt-6"
+      >
+        {children}
+      </h3>
+    );
+  }
+  if (level === 4) {
+    return (
+      <h4
+        {...props}
+        className="text-lg lg:text-xl xl:text-2xl font-normal text-secondary dark:text-primary mt-2 lg:mt-4"
+      >
+        {children}
+      </h4>
+    );
+  }
   return (
-    <h2 {...props} className="text-2xl lg:text-3xl xl:text-4xl text-secondary dark:text-primary font-bold mt-6 lg:mt-8">
+    <h5 className="text-lg lg:text-xl xl:text-2xl" {...props}>
       {children}
-    </h2>
+    </h5>
   );
+}
+
+type ListProps = HTMLAttributes<HTMLElement> & {
+  ordered?: boolean;
 };
 
-const H3: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
-  return (
-    <h3
-      {...props}
-      className="text-xl lg:text-2xl xl:text-3xl font-semibold text-secondary dark:text-primary mt-4 lg:mt-6"
-    >
-      {children}
-    </h3>
-  );
-};
-
-const H4: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
-  return (
-    <h3 {...props} className="text-lg lg:text-xl xl:text-2xl font-normal text-secondary dark:text-primary mt-2 lg:mt-4">
-      {children}
-    </h3>
-  );
-};
-
-const OrderedList: FC<HTMLAttributes<HTMLOListElement>> = ({ children, ...props }) => {
-  return (
-    <ol className="list-inside list-decimal" {...props}>
-      {children}
-    </ol>
-  );
-};
-
-const UnorderedList: FC<HTMLAttributes<HTMLUListElement>> = ({ children, ...props }) => {
+export function List({ children, ordered, ...props }: ListProps) {
+  if (ordered) {
+    return (
+      <ol className="list-inside list-decimal" {...props}>
+        {children}
+      </ol>
+    );
+  }
   return (
     <ul className="list-disc list-inside" {...props}>
       {children}
     </ul>
   );
-};
+}
 
-const ListItem: FC<HTMLAttributes<HTMLLIElement>> = ({ children, ...props }) => {
+export function ListItem({ children, ...props }: HTMLAttributes<HTMLLIElement>) {
   return (
     <li className="pl-4 lg:mb-1 w-full text-lg lg:text-xl xl:text-2xl font-light" {...props}>
       {children}
     </li>
   );
-};
+}
 
-const P: FC<HTMLAttributes<HTMLParagraphElement>> = ({ children, ...props }) => {
+export function Paragraph({ children, ...props }: HTMLAttributes<HTMLParagraphElement>) {
   return (
-    <CustomParagraph {...props} className="text-lg lg:text-xl xl:text-2xl font-light">
+    <p {...props} className="text-lg lg:text-xl xl:text-2xl font-light">
       {children}
-    </CustomParagraph>
+    </p>
   );
-};
+}
 
-const Code: FC<HTMLAttributes<HTMLElement>> = ({ children, ...props }) => {
+export function Table({ children, ...props }: HTMLAttributes<HTMLTableElement>) {
   return (
-    <Decoder {...props} className="text-base font-mono p-1 bg-gray-200 dark:bg-gray-800 rounded-lg">
-      {children}
-    </Decoder>
+    <div>
+      <table {...props} className="border-collapse">
+        {children}
+      </table>
+    </div>
   );
+}
+
+export function TH({ children, ...props }: HTMLAttributes<HTMLTableCellElement>) {
+  return (
+    <th {...props} className="p-2 border border-gray-300">
+      {children}
+    </th>
+  );
+}
+
+type TDProps = HTMLAttributes<HTMLTableCellElement> & {
+  color?: 'green' | 'red' | 'default';
 };
 
-export { Code, H1, H2, H3, H4, ListItem, OrderedList, P, UnorderedList };
+export function TD({ children, color = 'default', ...props }: TDProps) {
+  return (
+    <td
+      {...props}
+      className={clsx('p-2 border border-gray-300', color === 'green' && 'text-green', color === 'red' && 'text-red')}
+    >
+      {children}
+    </td>
+  );
+}

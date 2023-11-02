@@ -1,21 +1,18 @@
-import parseFrontMatter from 'front-matter';
+import Markdoc from '@markdoc/markdoc';
+import yaml from 'js-yaml';
 import invariant from 'tiny-invariant';
 
-import type { ActionResult } from '../ActionResult';
+import type { ActionResult, MarkdocFile } from '~/types';
 
-enum FetchMarkdownFileResState {
+import { config } from '../config';
+
+export enum FetchMarkdownFileResState {
   fileNotFound = 'file_not_found',
   fileFrontmatterMissing = 'file_frontmatter_missing',
   fileIgnored = 'file_ignored',
   internalError = 'internal_error',
   success = 'success',
 }
-
-type MarkdownFile<FrontMatter> = {
-  slug: string;
-  markdown: string;
-  frontmatter: FrontMatter;
-};
 
 const getContentPath = (url: string, slug: string): string => {
   let fileName = slug;
@@ -25,16 +22,13 @@ const getContentPath = (url: string, slug: string): string => {
   return `${url}/${fileName}.md`;
 };
 
-async function fetchMarkdownFile<FrontMatter>(
+export async function fetchMarkdownFile<FrontMatter>(
   accessToken: string,
   path: string,
   slug = '',
   hasValidFrontMatter: (attributes: unknown) => attributes is FrontMatter & Record<string, unknown>,
-): Promise<ActionResult<FetchMarkdownFileResState, MarkdownFile<FrontMatter>>> {
-  console.debug('fetchArticle called');
-
+): Promise<ActionResult<FetchMarkdownFileResState, MarkdocFile<FrontMatter>>> {
   const contentUrl = getContentPath(path, slug);
-  console.debug(`resolved url ${contentUrl}`);
 
   const headers = new Headers();
   headers.set('Accept', 'application/vnd.github.v3.raw');
@@ -55,22 +49,18 @@ async function fetchMarkdownFile<FrontMatter>(
   }
 
   const textContent = await response.text();
-  const { attributes, body } = parseFrontMatter(textContent);
-
+  const ast = Markdoc.parse(textContent);
+  const frontmatter = ast.attributes.frontmatter ? yaml.load(ast.attributes.frontmatter) : {};
+  if (frontmatter && typeof frontmatter === 'object' && 'ignore' in frontmatter && frontmatter.ignore) {
+    return [404, FetchMarkdownFileResState.fileIgnored, undefined];
+  }
   try {
-    invariant(hasValidFrontMatter(attributes), `File ${contentUrl} is missing frontmatter attributes`);
+    invariant(hasValidFrontMatter(frontmatter), `File ${contentUrl} is missing frontmatter attributes`);
   } catch (error: any) {
     console.error(error);
     return [500, FetchMarkdownFileResState.fileFrontmatterMissing, undefined];
   }
 
-  if (attributes.ignore) {
-    return [404, FetchMarkdownFileResState.fileIgnored, undefined];
-  }
-
-  return [200, FetchMarkdownFileResState.success, { slug, frontmatter: attributes, markdown: body }];
+  const content = Markdoc.transform(ast, config);
+  return [200, FetchMarkdownFileResState.success, { slug, frontmatter, content }];
 }
-
-export type { MarkdownFile };
-
-export { fetchMarkdownFile, FetchMarkdownFileResState };

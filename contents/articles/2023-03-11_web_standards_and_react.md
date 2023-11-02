@@ -7,7 +7,7 @@ imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v
 imageAltText: Circle showing the relationship between moving fast, quick results, positive feedback, and growing motivation. Moving fast enables quick results which results in positive feedback, which in turn motivates to keep moving fast.
 ---
 
-`twitterEmbed: https://twitter.com/brophdawg11/status/1587103251723337729`
+{% tweet url="https://twitter.com/brophdawg11/status/1587103251723337729" /%}
 
 You might have seen the #useThePlatform hashtag on Twitter. People usually add the hashtag when discussing embracing the web platform and using native web APIs whenever possible. In this blog post, I want to share my story of learning React, Web APIs, and Remix.
 

@@ -65,40 +65,32 @@ This lab test was conducted on a MacBook Pro in Cupertino, California using Ligh
 
 Five Lighthouse runs were conducted for both the client-side-only SPA and the Remix app and the medium was taken.
 
-```table
-<table class="border-collapse">
-  <tr>
-    <th class="p-2 border border-gray-300">Web Vitals</th>
-    <th class="p-2 border border-gray-300">Client-only SPA</th>
-    <th class="p-2 border border-gray-300">Full Stack App</th>
-    <th class="p-2 border border-gray-300 font-bold">Difference</th>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">FCP</td>
-    <td class="p-2 border border-gray-300">1.4</td>
-    <td class="p-2 border border-gray-300">1.3</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.1</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">LCP</td>
-    <td class="p-2 border border-gray-300">8.4</td>
-    <td class="p-2 border border-gray-300">2.1</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-6.3</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">TBT</td>
-    <td class="p-2 border border-gray-300">140</td>
-    <td class="p-2 border border-gray-300">60</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-80</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">Speed Index</td>
-    <td class="p-2 border border-gray-300">1.9</td>
-    <td class="p-2 border border-gray-300">1.6</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.3</td>
-  </tr>
-</table>
-```
+{% table %}
+* Web Vitals
+* Client-only SPA
+* Full Stack App
+* Difference
+---
+* FCP
+* 1.4
+* 1.3
+* -0.1 {% color="green" %}
+---
+* LCP
+* 8.4
+* 2.1
+* -6.3 {% color="green" %}
+---
+* TBT
+* 140
+* 60
+* -80 {% color="green" %}
+---
+* Speed Index
+* 1.9
+* 1.6
+* -0.3 {% color="green" %}
+{% /table %}
 
 As visible in the results, the regionally deployed full stack web app outperforms the client-only SPA in all four web vital measurements. It can be noted that the Largest Contentful Paint significantly improves by 6.3 seconds.
 
@@ -106,40 +98,32 @@ As visible in the results, the regionally deployed full stack web app outperform
 
 This lab test was conducted using PageSpeed Insights (Mobile). Five test runs were conducted for both the client-side-only SPA and the Remix app and the medium was taken.
 
-```table
-<table class="border-collapse">
-  <tr>
-    <th class="p-2 border border-gray-300">Web Vitals</th>
-    <th class="p-2 border border-gray-300">Client-only SPA</th>
-    <th class="p-2 border border-gray-300">Full Stack App</th>
-    <th class="p-2 border border-gray-300 font-bold">Difference</th>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">FCP</td>
-    <td class="p-2 border border-gray-300">1.3</td>
-    <td class="p-2 border border-gray-300">1</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.3</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">LCP</td>
-    <td class="p-2 border border-gray-300">7.1</td>
-    <td class="p-2 border border-gray-300">6.5</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.6</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">TBT</td>
-    <td class="p-2 border border-gray-300">280</td>
-    <td class="p-2 border border-gray-300">170</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-110</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">Speed Index</td>
-    <td class="p-2 border border-gray-300">2.5</td>
-    <td class="p-2 border border-gray-300">1.9</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.6</td>
-  </tr>
-</table>
-```
+{% table %}
+* Web Vitals
+* Client-only SPA
+* Full Stack App
+* Difference
+---
+* FCP
+* 1.3
+* 1
+* -0.3 {% color="green" %}
+---
+* LCP
+* 7.1
+* 6.5
+* -0.6 {% color="green" %}
+---
+* TBT
+* 280
+* 170
+* -110 {% color="green" %}
+---
+* Speed Index
+* 2.5
+* 1.9
+* -0.6 {% color="green" %}
+{% /table %}
 
 As visible in the results, the regionally deployed full stack web app outperforms the client-only SPA in all four web vital measurements.
 
@@ -149,40 +133,32 @@ This lab test was conducted using WebPageTest (Mobile). The requests were perfor
 
 Five test runs were conducted for both the client-side-only SPA and the Remix app and the medium was taken.
 
-```table
-<table class="border-collapse">
-  <tr>
-    <th class="p-2 border border-gray-300">Web Vitals</th>
-    <th class="p-2 border border-gray-300">Client-only SPA</th>
-    <th class="p-2 border border-gray-300">Full Stack App</th>
-    <th class="p-2 border border-gray-300 font-bold">Difference</th>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">FCP</td>
-    <td class="p-2 border border-gray-300">2.256</td>
-    <td class="p-2 border border-gray-300">2.198</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.058</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">LCP</td>
-    <td class="p-2 border border-gray-300">6.228</td>
-    <td class="p-2 border border-gray-300">3.699</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-2.529</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">TBT</td>
-    <td class="p-2 border border-gray-300">591</td>
-    <td class="p-2 border border-gray-300">0</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-591</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">Speed Index</td>
-    <td class="p-2 border border-gray-300">4.824</td>
-    <td class="p-2 border border-gray-300">2.542</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-2.282</td>
-  </tr>
-</table>
-```
+{% table %}
+* Web Vitals
+* Client-only SPA
+* Full Stack App
+* Difference
+---
+* FCP
+* 2.256
+* 2.198
+* -0.058 {% color="green" %}
+---
+* LCP
+* 6.228
+* 3.699
+* -2.529 {% color="green" %}
+---
+* TBT
+* 591
+* 0
+* -591 {% color="green" %}
+---
+* Speed Index
+* 4.824
+* 2.542
+* -2.282 {% color="green" %}
+{% /table %}
 
 As visible in the results, the regionally deployed full stack web app outperforms the client-only SPA in all four web vital measurements. It can be noted that the Largest Contentful Paint and the Speed Index improved by over 2 seconds each.
 
@@ -198,40 +174,32 @@ This lab test was conducted using PageSpeed Insights (Mobile). The serverless fu
 
 Five test runs were conducted for both the client-side-only SPA and the Remix app and the medium was taken.
 
-```table
-<table class="border-collapse">
-  <tr>
-    <th class="p-2 border border-gray-300">Web Vitals</th>
-    <th class="p-2 border border-gray-300">Client-only SPA</th>
-    <th class="p-2 border border-gray-300">Full Stack App</th>
-    <th class="p-2 border border-gray-300 font-bold">Difference</th>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">FCP</td>
-    <td class="p-2 border border-gray-300">1.4</td>
-    <td class="p-2 border border-gray-300">1.1</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.3</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">LCP</td>
-    <td class="p-2 border border-gray-300">5.8</td>
-    <td class="p-2 border border-gray-300">7</td>
-    <td class="p-2 border border-gray-300 font-bold text-red">1.2</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">TBT</td>
-    <td class="p-2 border border-gray-300">430</td>
-    <td class="p-2 border border-gray-300">210</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-220</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">Speed Index</td>
-    <td class="p-2 border border-gray-300">1.9</td>
-    <td class="p-2 border border-gray-300">1.5</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.4</td>
-  </tr>
-</table>
-```
+{% table %}
+* Web Vitals
+* Client-only SPA
+* Full Stack App
+* Difference
+---
+* FCP
+* 1.4
+* 1.1
+* -0.3 {% color="green" %}
+---
+* LCP
+* 5.8
+* 7
+* 1.2 {% color="red" %}
+---
+* TBT
+* 430
+* 210
+* -220 {% color="green" %}
+---
+* Speed Index
+* 1.9
+* 1.5
+* -0.4 {% color="green" %}
+{% /table %}
 
 As visible in the results, the regionally deployed full stack web app has a better FCP, TBT and Speed Index. However, the client-only SPA shows a better medium LCP.
 
@@ -243,40 +211,32 @@ This lab test was conducted using PageSpeed Insights (Mobile). The serverless fu
 
 Five test runs were conducted for both the client-side-only SPA and the Remix app and the medium was taken.
 
-```table
-<table class="border-collapse">
-  <tr>
-    <th class="p-2 border border-gray-300">Web Vitals</th>
-    <th class="p-2 border border-gray-300">Client-only SPA</th>
-    <th class="p-2 border border-gray-300">Full Stack App</th>
-    <th class="p-2 border border-gray-300 font-bold">Difference</th>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">FCP</td>
-    <td class="p-2 border border-gray-300">1.4</td>
-    <td class="p-2 border border-gray-300">1.4</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.4</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">LCP</td>
-    <td class="p-2 border border-gray-300">8</td>
-    <td class="p-2 border border-gray-300">8</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-1</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">TBT</td>
-    <td class="p-2 border border-gray-300">480</td>
-    <td class="p-2 border border-gray-300">480</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-220</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">Speed Index</td>
-    <td class="p-2 border border-gray-300">2</td>
-    <td class="p-2 border border-gray-300">2</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.6</td>
-  </tr>
-</table>
-```
+{% table %}
+* Web Vitals
+* Client-only SPA
+* Full Stack App
+* Difference
+---
+* FCP
+* 1.4
+* 1.4
+* -0.4 {% color="green" %}
+---
+* LCP
+* 8
+* 8
+* -1 {% color="green" %}
+---
+* TBT
+* 480
+* 480
+* -220 {% color="green" %}
+---
+* Speed Index
+* 2
+* 2
+* -0.6 {% color="green" %}
+{% /table %}
 
 As visible in the results, the regionally deployed full stack web app outperforms the client-only SPA in all four web vital measurements.
 
@@ -292,40 +252,32 @@ This lab test was conducted using PageSpeed Insights (Mobile). The serverless fu
 
 Five test runs were conducted for both the client-side-only SPA and the Next.js app and the medium was taken.
 
-```table
-<table class="border-collapse">
-  <tr>
-    <th class="p-2 border border-gray-300">Web Vitals</th>
-    <th class="p-2 border border-gray-300">Client-only SPA</th>
-    <th class="p-2 border border-gray-300">Full Stack App</th>
-    <th class="p-2 border border-gray-300 font-bold">Difference</th>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">FCP</td>
-    <td class="p-2 border border-gray-300">1.4</td>
-    <td class="p-2 border border-gray-300">0.9</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.5</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">LCP</td>
-    <td class="p-2 border border-gray-300">5.8</td>
-    <td class="p-2 border border-gray-300">6.1</td>
-    <td class="p-2 border border-gray-300 font-bold text-red">0.3</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">TBT</td>
-    <td class="p-2 border border-gray-300">430</td>
-    <td class="p-2 border border-gray-300">260</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-170</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">Speed Index</td>
-    <td class="p-2 border border-gray-300">1.9</td>
-    <td class="p-2 border border-gray-300">1.5</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.4</td>
-  </tr>
-</table>
-```
+{% table %}
+* Web Vitals
+* Client-only SPA
+* Full Stack App
+* Difference
+---
+* FCP
+* 1.4
+* 0.9
+* -0.5 {% color="green" %}
+---
+* LCP
+* 5.8
+* 6.1
+* 0.3 {% color="red" %}
+---
+* TBT
+* 430
+* 260
+* -170 {% color="green" %}
+---
+* Speed Index
+* 1.9
+* 1.5
+* -0.4 {% color="green" %}
+{% /table %}
 
 As visible in the results, the regionally deployed full stack web app outperforms the client-only SPA in all but LCP. The worse LCP score can be explained by the distance to the serverless function. This matches the results from the same test setup using Remix.
 
@@ -335,40 +287,32 @@ This lab test was conducted using PageSpeed Insights (Mobile). The serverless fu
 
 Five test runs were conducted for both the client-side-only SPA and the Next.js app and the medium was taken.
 
-```table
-<table class="border-collapse">
-  <tr>
-    <th class="p-2 border border-gray-300">Web Vitals</th>
-    <th class="p-2 border border-gray-300">Client-only SPA</th>
-    <th class="p-2 border border-gray-300">Full Stack App</th>
-    <th class="p-2 border border-gray-300 font-bold">Difference</th>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">FCP</td>
-    <td class="p-2 border border-gray-300">1.4</td>
-    <td class="p-2 border border-gray-300">0.9</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.5</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">LCP</td>
-    <td class="p-2 border border-gray-300">8</td>
-    <td class="p-2 border border-gray-300">4.3</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-3.7</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">TBT</td>
-    <td class="p-2 border border-gray-300">480</td>
-    <td class="p-2 border border-gray-300">280</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-200</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">Speed Index</td>
-    <td class="p-2 border border-gray-300">2</td>
-    <td class="p-2 border border-gray-300">1.7</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.3</td>
-  </tr>
-</table>
-```
+{% table %}
+* Web Vitals
+* Client-only SPA
+* Full Stack App
+* Difference
+---
+* FCP
+* 1.4
+* 0.9
+* -0.5 {% color="green" %}
+---
+* LCP
+* 8
+* 4.3
+* -3.7 {% color="green" %}
+---
+* TBT
+* 480
+* 280
+* -200 {% color="green" %}
+---
+* Speed Index
+* 2
+* 1.7
+* -0.3 {% color="green" %}
+{% /table %}
 
 As visible in the results, the regionally deployed full stack web app outperforms the client-only SPA in all four web vital measurements. The LCP is significantly improved by 3.7 seconds.
 
@@ -382,40 +326,32 @@ The full stack web app uses Next.js with React Server Components runs on a serve
 
 This lab test was conducted using PageSpeed Insights (Mobile). Five test runs were conducted for both the client-side-only SPA and the Next.js app and the medium was taken.
 
-```table
-<table class="border-collapse">
-  <tr>
-    <th class="p-2 border border-gray-300">Web Vitals</th>
-    <th class="p-2 border border-gray-300">Client-only SPA</th>
-    <th class="p-2 border border-gray-300">Full Stack App</th>
-    <th class="p-2 border border-gray-300 font-bold">Difference</th>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">FCP</td>
-    <td class="p-2 border border-gray-300">1.4</td>
-    <td class="p-2 border border-gray-300">1</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.4</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">LCP</td>
-    <td class="p-2 border border-gray-300">7.8</td>
-    <td class="p-2 border border-gray-300">7.1</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.7</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">TBT</td>
-    <td class="p-2 border border-gray-300">370</td>
-    <td class="p-2 border border-gray-300">220</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-150</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">Speed Index</td>
-    <td class="p-2 border border-gray-300">2</td>
-    <td class="p-2 border border-gray-300">1.4</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.6</td>
-  </tr>
-</table>
-```
+{% table %}
+* Web Vitals
+* Client-only SPA
+* Full Stack App
+* Difference
+---
+* FCP
+* 1.4
+* 1
+* -0.4 {% color="green" %}
+---
+* LCP
+* 7.8
+* 7.1
+* -0.7 {% color="green" %}
+---
+* TBT
+* 370
+* 220
+* -150 {% color="green" %}
+---
+* Speed Index
+* 2
+* 1.4
+* -0.6 {% color="green" %}
+{% /table %}
 
 As visible in the results, the regionally deployed full stack web app outperforms the client-only SPA in all four web vital measurements.
 
@@ -429,40 +365,32 @@ The full stack web app uses Next.js with React Server Components runs on a serve
 
 This lab test was conducted using PageSpeed Insights (Mobile). Five test runs were conducted for both the client-side-only SPA and the Next.js app and the medium was taken.
 
-```table
-<table class="border-collapse">
-  <tr>
-    <th class="p-2 border border-gray-300">Web Vitals</th>
-    <th class="p-2 border border-gray-300">Client-only SPA</th>
-    <th class="p-2 border border-gray-300">Full Stack App</th>
-    <th class="p-2 border border-gray-300 font-bold">Difference</th>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">FCP</td>
-    <td class="p-2 border border-gray-300">1.4</td>
-    <td class="p-2 border border-gray-300">1</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.4</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">LCP</td>
-    <td class="p-2 border border-gray-300">7.8</td>
-    <td class="p-2 border border-gray-300">6.1</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-1.7</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">TBT</td>
-    <td class="p-2 border border-gray-300">370</td>
-    <td class="p-2 border border-gray-300">270</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-100</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">Speed Index</td>
-    <td class="p-2 border border-gray-300">2</td>
-    <td class="p-2 border border-gray-300">1.7</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.3</td>
-  </tr>
-</table>
-```
+{% table %}
+* Web Vitals
+* Client-only SPA
+* Full Stack App
+* Difference
+---
+* FCP
+* 1.4
+* 1
+* -0.4 {% color="green" %}
+---
+* LCP
+* 7.8
+* 6.1
+* -1.7 {% color="green" %}
+---
+* TBT
+* 370
+* 270
+* -100 {% color="green" %}
+---
+* Speed Index
+* 2
+* 1.7
+* -0.3 {% color="green" %}
+{% /table %}
 
 As visible in the results, the regionally deployed full stack web app outperforms the client-only SPA in all four web vital measurements.
 
@@ -476,77 +404,61 @@ Depending on runtime, region, and version, the full stack apps showed different 
 
 Taking the average of the averages (medium of medium) across the different test runs using Remix (long-running server, serverless Washington, serverless San Francisco, edge), we can document the following results.
 
-```table
-<table class="border-collapse">
-  <tr>
-    <th class="p-2 border border-gray-300">Web Vitals</th>
-    <th class="p-2 border border-gray-300">Client-only SPA</th>
-    <th class="p-2 border border-gray-300">Remix</th>
-    <th class="p-2 border border-gray-300 font-bold">Difference</th>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">FCP</td>
-    <td class="p-2 border border-gray-300">1.4</td>
-    <td class="p-2 border border-gray-300">1</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.4</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">LCP</td>
-    <td class="p-2 border border-gray-300">7.8</td>
-    <td class="p-2 border border-gray-300">7</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.8</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">TBT</td>
-    <td class="p-2 border border-gray-300">400</td>
-    <td class="p-2 border border-gray-300">215</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-185</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">Speed Index</td>
-    <td class="p-2 border border-gray-300">2</td>
-    <td class="p-2 border border-gray-300">1.45</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.55</td>
-  </tr>
-</table>
-```
+{% table %}
+* Web Vitals
+* Client-only SPA
+* Remix
+* Difference
+---
+* FCP
+* 1.4
+* 1
+* -0.4 {% color="green" %}
+---
+* LCP
+* 7.8
+* 7
+* -0.8 {% color="green" %}
+---
+* TBT
+* 400
+* 215
+* -185 {% color="green" %}
+---
+* Speed Index
+* 2
+* 1.45
+* -0.55 {% color="green" %}
+{% /table %}
 
 Taking the average of the averages (medium of medium) across the different test runs using Next.js (serverless Washington, serverless San Francisco, edge), we can document the following results.
 
-```table
-<table class="border-collapse">
-  <tr>
-    <th class="p-2 border border-gray-300">Web Vitals</th>
-    <th class="p-2 border border-gray-300">Client-only SPA</th>
-    <th class="p-2 border border-gray-300">Next.js</th>
-    <th class="p-2 border border-gray-300 font-bold">Difference</th>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">FCP</td>
-    <td class="p-2 border border-gray-300">1.4</td>
-    <td class="p-2 border border-gray-300">0.9</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.5</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">LCP</td>
-    <td class="p-2 border border-gray-300">7.8</td>
-    <td class="p-2 border border-gray-300">6.1</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-1.7</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">TBT</td>
-    <td class="p-2 border border-gray-300">400</td>
-    <td class="p-2 border border-gray-300">270</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-130</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">Speed Index</td>
-    <td class="p-2 border border-gray-300">2</td>
-    <td class="p-2 border border-gray-300">1.7</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.3</td>
-  </tr>
-</table>
-```
+{% table %}
+* Web Vitals
+* Client-only SPA
+* Next.js
+* Difference
+---
+* FCP
+* 1.4
+* 0.9
+* -0.5 {% color="green" %}
+---
+* LCP
+* 7.8
+* 6.1
+* -1.7 {% color="green" %}
+---
+* TBT
+* 400
+* 270
+* -130 {% color="green" %}
+---
+* Speed Index
+* 2
+* 1.7
+* -0.3 {% color="green" %}
+{% /table %}
 
 ## Background
 
@@ -592,40 +504,32 @@ This lab test was conducted on a MacBook Pro in Cupertino, California using Ligh
 
 Five Lighthouse runs were conducted for both the client-side-only SPA and the Remix app and the medium was taken.
 
-```table
-<table class="border-collapse">
-  <tr>
-    <th class="p-2 border border-gray-300">Web Vitals</th>
-    <th class="p-2 border border-gray-300">Client-only SPA</th>
-    <th class="p-2 border border-gray-300">Full Stack App</th>
-    <th class="p-2 border border-gray-300 font-bold">Difference</th>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">FCP</td>
-    <td class="p-2 border border-gray-300">1.4</td>
-    <td class="p-2 border border-gray-300">1.4</td>
-    <td class="p-2 border border-gray-300 font-bold">0</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">LCP</td>
-    <td class="p-2 border border-gray-300">8.4</td>
-    <td class="p-2 border border-gray-300">7.1</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-1.3</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">TBT</td>
-    <td class="p-2 border border-gray-300">140</td>
-    <td class="p-2 border border-gray-300">150</td>
-    <td class="p-2 border border-gray-300 font-bold text-red">10</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">Speed Index</td>
-    <td class="p-2 border border-gray-300">1.9</td>
-    <td class="p-2 border border-gray-300">1.6</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.3</td>
-  </tr>
-</table>
-```
+{% table %}
+* Web Vitals
+* Client-only SPA
+* Full Stack App
+* Difference
+---
+* FCP
+* 1.4
+* 1.4
+* 0
+---
+* LCP
+* 8.4
+* 7.1
+* -1.3 {% color="green" %}
+---
+* TBT
+* 140
+* 150
+* 10 {% color="red" %}
+---
+* Speed Index
+* 1.9
+* 1.6
+* -0.3 {% color="green" %}
+{% /table %}
 
 #### Walkthrough
 
@@ -651,40 +555,32 @@ This lab test was conducted on a MacBook Pro in Cupertino, California using Ligh
 
 Five Lighthouse runs were conducted for both the client-side-only SPA and the Remix app and the medium was taken.
 
-```table
-<table class="border-collapse">
-  <tr>
-    <th class="p-2 border border-gray-300">Web Vitals</th>
-    <th class="p-2 border border-gray-300">Client-only SPA</th>
-    <th class="p-2 border border-gray-300">Full Stack App</th>
-    <th class="p-2 border border-gray-300 font-bold">Difference</th>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">FCP</td>
-    <td class="p-2 border border-gray-300">1.4</td>
-    <td class="p-2 border border-gray-300">1.4</td>
-    <td class="p-2 border border-gray-300 font-bold">0</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">LCP</td>
-    <td class="p-2 border border-gray-300">8.4</td>
-    <td class="p-2 border border-gray-300">6.9</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-1.5</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">TBT</td>
-    <td class="p-2 border border-gray-300">140</td>
-    <td class="p-2 border border-gray-300">100</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-40</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">Speed Index</td>
-    <td class="p-2 border border-gray-300">1.9</td>
-    <td class="p-2 border border-gray-300">1.9</td>
-    <td class="p-2 border border-gray-300 font-bold">0</td>
-  </tr>
-</table>
-```
+{% table %}
+* Web Vitals
+* Client-only SPA
+* Full Stack App
+* Difference
+---
+* FCP
+* 1.4
+* 1.4
+* 0
+---
+* LCP
+* 8.4
+* 6.9
+* -1.5 {% color="green" %}
+---
+* TBT
+* 140
+* 100
+* -40 {% color="green" %}
+---
+* Speed Index
+* 1.9
+* 1.9
+* 0
+{% /table %}
 
 #### Walkthrough
 
@@ -714,40 +610,32 @@ This lab test was conducted on a MacBook Pro in Cupertino, California using Ligh
 
 Five Lighthouse runs were conducted for both the client-side-only SPA and the Remix app and the medium was taken.
 
-```table
-<table class="border-collapse">
-  <tr>
-    <th class="p-2 border border-gray-300">Web Vitals</th>
-    <th class="p-2 border border-gray-300">Client-only SPA</th>
-    <th class="p-2 border border-gray-300">Full Stack App</th>
-    <th class="p-2 border border-gray-300 font-bold">Difference</th>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">FCP</td>
-    <td class="p-2 border border-gray-300">1.4</td>
-    <td class="p-2 border border-gray-300">1.3</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.1</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">LCP</td>
-    <td class="p-2 border border-gray-300">8.4</td>
-    <td class="p-2 border border-gray-300">3.8</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-4.6</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">TBT</td>
-    <td class="p-2 border border-gray-300">140</td>
-    <td class="p-2 border border-gray-300">100</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-40</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">Speed Index</td>
-    <td class="p-2 border border-gray-300">1.9</td>
-    <td class="p-2 border border-gray-300">1.5</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.4</td>
-  </tr>
-</table>
-```
+{% table %}
+* Web Vitals
+* Client-only SPA
+* Full Stack App
+* Difference
+---
+* FCP
+* 1.4
+* 1.3
+* -0.1 {% color="green" %}
+---
+* LCP
+* 8.4
+* 3.8
+* -4.6 {% color="green" %}
+---
+* TBT
+* 140
+* 100
+* -40 {% color="green" %}
+---
+* Speed Index
+* 1.9
+* 1.5
+* -0.4 {% color="green" %}
+{% /table %}
 
 Note that the LCP improves by 3.1 seconds compared to the previous full stack app version.
 
@@ -813,40 +701,32 @@ This lab test was conducted on a MacBook Pro in Cupertino, California using Ligh
 
 Five Lighthouse runs were conducted for both the client-side-only SPA and the Remix app and the medium was taken.
 
-```table
-<table class="border-collapse">
-  <tr>
-    <th class="p-2 border border-gray-300">Web Vitals</th>
-    <th class="p-2 border border-gray-300">Client-only SPA</th>
-    <th class="p-2 border border-gray-300">Full Stack App</th>
-    <th class="p-2 border border-gray-300 font-bold">Difference</th>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">FCP</td>
-    <td class="p-2 border border-gray-300">1.4</td>
-    <td class="p-2 border border-gray-300">1.3</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.1</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">LCP</td>
-    <td class="p-2 border border-gray-300">8.4</td>
-    <td class="p-2 border border-gray-300">2.1</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-6.3</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">TBT</td>
-    <td class="p-2 border border-gray-300">140</td>
-    <td class="p-2 border border-gray-300">60</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-80</td>
-  </tr>
-  <tr>
-    <td class="p-2 border border-gray-300">Speed Index</td>
-    <td class="p-2 border border-gray-300">1.9</td>
-    <td class="p-2 border border-gray-300">1.6</td>
-    <td class="p-2 border border-gray-300 font-bold text-green">-0.3</td>
-  </tr>
-</table>
-```
+{% table %}
+* Web Vitals
+* Client-only SPA
+* Full Stack App
+* Difference
+---
+* FCP
+* 1.4
+* 1.3
+* -0.1 {% color="green" %}
+---
+* LCP
+* 8.4
+* 2.1
+* -6.3 {% color="green" %}
+---
+* TBT
+* 140
+* 60
+* -80 {% color="green" %}
+---
+* Speed Index
+* 1.9
+* 1.6
+* -0.3 {% color="green" %}
+{% /table %}
 
 #### Walkthrough
 

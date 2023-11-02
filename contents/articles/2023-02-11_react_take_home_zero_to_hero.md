@@ -332,7 +332,9 @@ If you over-engineer things, you will make it harder for yourself to change thin
 
 Start very simple and get it to work first. Once it works, we can make it more pretty (if necessary).
 
-`statement: Keep it simple and make it work. Do not over-complicate things and don't add premature abstractions.`
+{% statement %}
+Keep it simple and make it work. Do not over-complicate things and don't add premature abstractions.
+{% /statement %}
 
 Maybe I sound a bit harsh here. I have lost countless of hours trying to fix my stupid over-engineered code. I have learned the hard way that you should start easy and do one thing at a time. I know how hard this is but please be better than me! 😉
 
@@ -610,7 +612,9 @@ Instead of asking for how to solve it one particular way, just ask Google how to
 
 It turns out there is an input attribute called `type` which can be set to "email". This way we can avoid implementing a regular expression.
 
-`statement: It's always a good idea to search for a web standard or web API to solve your problems before trying to solve it with React.`
+{% statement %}
+It's always a good idea to search for a web standard or web API to solve your problems before trying to solve it with React.
+{% /statement %}
 
 1. Add the static markup HTML
 
@@ -808,7 +812,9 @@ Great, it looks like our app now behaves as expected and we were able to solve t
 
 Please note that using a regular expression would have also been a valid implementation. When possible, we should take advantage of the web platform and avoid reinventing the wheel. However, just a note, that if you want to use a different implementation, that is great as well! This is just one out of many implementations.
 
-`statement: When in doubt, search for an existing browser API to solve your problem.`
+{% statement %}
+When in doubt, search for an existing browser API to solve your problem.
+{% /statement %}
 
 ##### Task 3
 

@@ -25,7 +25,9 @@ The web is a distributed platform and works on a client-server model.
 
 When building for the web, it always comes down to the client-server model. We can't build a web application without a client and a server.
 
-`statement: It doesn't matter which tech stack we use to build our app, there will always be a web server, even if we don't have access to it.`
+{% statement %}
+It doesn't matter which tech stack we use to build our app, there will always be a web server, even if we don't have access to it.
+{% /statement %}
 
 ## The tools of the web platform
 
@@ -82,7 +84,9 @@ app.use(express.static(path.join(__dirname, '../client/build')));
 
 Just like that, we use Express.js to serve our React app. From here, we can regain access to the tools of the web platform that are available on the server. For instance, we could add Express.js middlewares to add HTTP caching headers, work with cookies, and utilize HTTP redirects.
 
-`statement: By implementing our own web server, we gain access to the full stack of the web platform.`
+{% statement %}
+By implementing our own web server, we gain access to the full stack of the web platform.
+{% /statement %}
 
 ## You can't not have a framework
 

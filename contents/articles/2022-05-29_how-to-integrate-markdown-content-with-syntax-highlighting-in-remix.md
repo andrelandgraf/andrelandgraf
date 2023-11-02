@@ -167,7 +167,7 @@ export default function ArticleComponent() {
 
 Awesome! We are able to fetch Markdown files from a remote origin and load them into our React components! 🎉 So how do we transform the Markdown string into HTML?
 
-`twitterEmbed: https://twitter.com/tannerlinsley/status/1527752952768696320`
+{% tweet url="https://twitter.com/tannerlinsley/status/1527752952768696320" /%}
 
 Parsing Markdown is not straightforward. Even the pros of the industry sometimes struggle with it. It's quite a rabbit hole.
 

@@ -1,19 +1,19 @@
-import type { ActionResult } from '../ActionResult';
-import type { MarkdownFile } from './fetchMarkdownFile';
-import { fetchFileItems, FetchFileItemsResState } from './fetchFileItems';
-import { fetchMarkdownFile, FetchMarkdownFileResState } from './fetchMarkdownFile';
+import type { ActionResult, MarkdocFile } from '~/types';
 
-enum FetchMarkdownFilesResState {
+import { fetchFileItems, FetchFileItemsResState } from './fetchFileItems.server';
+import { fetchMarkdownFile, FetchMarkdownFileResState } from './fetchMarkdownFile.server';
+
+export enum FetchMarkdownFilesResState {
   directoryNotFound = 'directory_not_found',
   internalError = 'internal_error',
   success = 'success',
 }
 
-async function fetchMarkdownFiles<FrontMatter>(
+export async function fetchMarkdownFiles<FrontMatter>(
   accessToken: string,
   directoryUrl: string,
   hasValidFrontMatter: (attributes: unknown) => attributes is FrontMatter & Record<string, unknown>,
-): Promise<ActionResult<FetchMarkdownFilesResState, MarkdownFile<FrontMatter>[]>> {
+): Promise<ActionResult<FetchMarkdownFilesResState, MarkdocFile<FrontMatter>[]>> {
   console.debug('fetchMarkdownFiles called');
 
   const [status, state, items] = await fetchFileItems(accessToken, directoryUrl);
@@ -27,7 +27,7 @@ async function fetchMarkdownFiles<FrontMatter>(
     ];
   }
 
-  const mdFiles: MarkdownFile<FrontMatter>[] = [];
+  const mdFiles: MarkdocFile<FrontMatter>[] = [];
   for (const item of items) {
     const [fetchStatus, fetchState, file] = await fetchMarkdownFile(
       accessToken,
@@ -46,5 +46,3 @@ async function fetchMarkdownFiles<FrontMatter>(
   }
   return [200, FetchMarkdownFilesResState.success, mdFiles];
 }
-
-export { fetchMarkdownFiles, FetchMarkdownFilesResState };

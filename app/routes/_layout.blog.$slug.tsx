@@ -2,13 +2,15 @@ import type { LinksFunction, LoaderFunctionArgs, MetaFunction } from '@remix-run
 import { json, redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 
-import { fetchMarkdownFileFs } from '~/actions/fs/index.server';
-import { fetchMarkdownFile } from '~/actions/github/index.server';
+import { CodeBlock } from '~/components/codeBlock';
 import { SectionHeading } from '~/components/headings';
 import { MarkdownLinkWrapper } from '~/components/links';
-import { MarkdownContainer } from '~/components/markdown';
-import { CodeBlock } from '~/components/markdown/pre';
-import { Code, H1, H2, H3, H4, ListItem, OrderedList, P, UnorderedList } from '~/modules/blog/components';
+import { MarkdownContainer } from '~/components/markdown/renderer';
+import { Quote, Statement } from '~/components/texts';
+import { TweetEmbed } from '~/components/tweetEmbed';
+import { Container, H1, Heading, List, ListItem, Paragraph, Table, TD, TH } from '~/modules/blog/components';
+import { fetchMarkdownFileFs } from '~/modules/blog/fs/fetchMarkdownFile.server';
+import { fetchMarkdownFile } from '~/modules/blog/github/fetchMarkdownFile.server';
 import { getPrivateEnvVars } from '~/modules/env.server';
 import { useTwitterEmbeds } from '~/modules/twitter-embeds';
 import syntaxHighlightingStylesUrl from '~/styles/code.css';
@@ -96,48 +98,23 @@ export default function Component() {
       </div>
       <MarkdownContainer
         className="w-full flex flex-col gap-5"
-        source={article.markdown}
+        content={article.content}
         components={{
-          h1({ node, children, ...props }) {
-            return <H1 {...props}>{children}</H1>;
-          },
-          h2({ node, children, ...props }) {
-            return <H2 {...props}>{children}</H2>;
-          },
-          h3({ node, children, ...props }) {
-            return <H3 {...props}>{children}</H3>;
-          },
-          h4({ node, children, ...props }) {
-            return <H4 {...props}>{children}</H4>;
-          },
-          p({ node, children, ...props }) {
-            return <P {...props}>{children}</P>;
-          },
-          ol({ node, children, ...props }) {
-            return <OrderedList {...props}>{children}</OrderedList>;
-          },
-          ul({ node, children, ...props }) {
-            return <UnorderedList {...props}>{children}</UnorderedList>;
-          },
-          li({ node, children, ...props }) {
-            return <ListItem {...props}>{children}</ListItem>;
-          },
-          code({ node, children, ...props }) {
-            return <Code {...props}>{children}</Code>;
-          },
-          pre({ node, children, ...props }) {
-            return <CodeBlock {...props}>{children}</CodeBlock>;
-          },
-          a({ node, children, ...props }) {
-            return (
-              <MarkdownLinkWrapper {...props} className="font-normal">
-                {children}
-              </MarkdownLinkWrapper>
-            );
-          },
+          Container,
+          Heading,
+          Paragraph,
+          List,
+          ListItem,
+          CodeBlock,
+          Link: MarkdownLinkWrapper,
+          TweetEmbed,
+          Statement,
+          Quote,
+          Table,
+          TH,
+          TD,
         }}
       />
-      <div className="text-green text-red"></div>
     </article>
   );
 }

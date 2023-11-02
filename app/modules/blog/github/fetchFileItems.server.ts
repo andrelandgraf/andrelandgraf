@@ -1,6 +1,6 @@
-import type { ActionResult } from '../ActionResult';
+import type { ActionResult } from '../../../types';
 
-enum FetchFileItemsResState {
+export enum FetchFileItemsResState {
   directoryNotFound = 'directory_not_found',
   internalError = 'internal_error',
   success = 'success',
@@ -23,14 +23,14 @@ type FileItem = {
   path: string;
 };
 
-interface GithubContentResponse extends GitHubFileObject {
+type GithubContentResponse = GitHubFileObject & {
   entries: GitHubFileObject[];
-}
+};
 
 /**
  * fetches meta data about files without content from a given directory
  */
-async function fetchFileItems(
+export async function fetchFileItems(
   accessToken: string,
   directoryUrl: string,
 ): Promise<ActionResult<FetchFileItemsResState, FileItem[]>> {
@@ -62,7 +62,3 @@ async function fetchFileItems(
 
   return [200, FetchFileItemsResState.success, files];
 }
-
-export type { FileItem };
-
-export { fetchFileItems, FetchFileItemsResState };

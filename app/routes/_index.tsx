@@ -53,13 +53,6 @@ export default function Component() {
     t: Math.random() * 100,
     r: Math.random() * 100,
   }));
-  useEffect(() => {
-    const onScroll = (e: Event) => {
-      console.log(e);
-    };
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  });
   return (
     <>
       <PageTransitionProgressBar
