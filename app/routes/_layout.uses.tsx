@@ -233,7 +233,7 @@ const things = [
 
 export default function Component() {
   return (
-    <div className="flex flex-col gap-10">
+    <main className="flex flex-col gap-10">
       <PageHeading>My Tech Stack</PageHeading>
       <ul className="rounded-md flex flex-col lg:flex-row lg:flex-wrap gap-10 p-10 dark:bg-gray-800">
         {things.map((thing) => (
@@ -243,6 +243,6 @@ export default function Component() {
           </li>
         ))}
       </ul>
-    </div>
+    </main>
   );
 }

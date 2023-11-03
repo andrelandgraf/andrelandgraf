@@ -319,7 +319,7 @@ export default function Component() {
   }, [hard, audio]);
 
   return (
-    <div className="flex flex-col gap-10 w-full font-gamified">
+    <main className="flex flex-col gap-10 w-full font-gamified">
       <PageHeading>Jump n Run</PageHeading>
       <div className="flex flex-col gap-5">
         <section className="ml-2 flex flex-col lg:flex-row gap-5 lg:gap-10">
@@ -342,6 +342,6 @@ export default function Component() {
           <canvas ref={ref} className="rounded-md border-4 border-black max-w-full" width="800" height="300"></canvas>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

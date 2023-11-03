@@ -23,7 +23,7 @@ const games = [
 
 export default function Component() {
   return (
-    <div className="flex flex-col gap-10 lg:gap-16 w-full lg:max-w-5xl">
+    <main className="flex flex-col gap-10 lg:gap-16 w-full lg:max-w-5xl">
       <PageHeading>Demos</PageHeading>
       <section className="w-full flex flex-col gap-5 lg:gap-8">
         <SectionHeading>Games</SectionHeading>
@@ -37,6 +37,6 @@ export default function Component() {
           ))}
         </ul>
       </section>
-    </div>
+    </main>
   );
 }

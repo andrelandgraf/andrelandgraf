@@ -137,7 +137,7 @@ const educations = [
 
 export default function Component() {
   return (
-    <div className="flex flex-col gap-10 lg:gap-16 w-full lg:max-w-5xl">
+    <main className="flex flex-col gap-10 lg:gap-16 w-full lg:max-w-5xl">
       <PageHeading>Resume</PageHeading>
       <section className="w-full flex flex-col gap-5 lg:gap-8">
         <SectionHeadingWithIcon id="experience" icon={<GroupSvg />}>
@@ -157,7 +157,7 @@ export default function Component() {
         </SectionHeadingWithIcon>
         {educations}
       </section>
-    </div>
+    </main>
   );
 }
 

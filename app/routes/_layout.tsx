@@ -7,7 +7,7 @@ import { images } from '~/utilities/images';
 
 export const headers: HeadersFunction = () => {
   return {
-    'cache-control': 'public, max-age=3600',
+    'cache-control': 'public, max-age=7200',
   };
 };
 
@@ -52,9 +52,9 @@ export default function Component() {
             </div>
           </div>
         </header>
-        <main className="pb-20">
+        <div className="pb-20">
           <Outlet />
-        </main>
+        </div>
         <footer className="absolute bottom-0 p-5 w-full flex justify-center items-center">
           <small>Andre Landgraf © {new Date().getFullYear()}</small>
         </footer>

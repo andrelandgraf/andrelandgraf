@@ -16,7 +16,7 @@ export const meta: MetaFunction = () => {
 
 export default function TutoringPage() {
   return (
-    <div className="flex flex-col gap-10 w-full max-w-2xl">
+    <main className="flex flex-col gap-10 w-full max-w-2xl">
       <PageHeading>Tutoring</PageHeading>
       <p>
         By chance, I got in contact with a lovely crowd of{' '}
@@ -36,6 +36,6 @@ export default function TutoringPage() {
       <ButtonLink to="https://www.meetup.com/all-things-web-react-html-css-javascript-tutoring/" primary>
         Join the Meetup Group
       </ButtonLink>
-    </div>
+    </main>
   );
 }

@@ -1,24 +1,46 @@
 import type { NavLinkProps as RemixNavLinkProps } from '@remix-run/react';
 import { NavLink } from '@remix-run/react';
 import clsx from 'clsx';
-import type { AnchorHTMLAttributes } from 'react';
+import type { AnchorHTMLAttributes, ReactNode } from 'react';
 
 import { getAriaClasses, getFocusClasses } from '~/utilities/ariaClasses';
 
 type UnstyledLinkProps = {
+  children: ReactNode;
   outline?: 'normal' | 'small' | 'none';
 } & RemixNavLinkProps;
 
 export type LinkProps = {
+  children: ReactNode;
   nav?: boolean;
   className?: string;
 } & Omit<UnstyledLinkProps, 'className'>;
 
-export function UnstyledLink({ to, outline = 'small', children, className = '', ...props }: UnstyledLinkProps) {
+export function UnstyledLink({ to, outline = 'small', style, children, className = '', ...props }: UnstyledLinkProps) {
+  if (typeof to === 'string' && to.startsWith('#')) {
+    return (
+      <a
+        {...props}
+        href={to}
+        style={
+          typeof style === 'function' ? style({ isActive: false, isPending: false, isTransitioning: false }) : style
+        }
+        className={clsx(
+          outline === 'none' ? undefined : getAriaClasses(outline === 'small'),
+          typeof className === 'function'
+            ? className({ isActive: false, isPending: false, isTransitioning: false })
+            : className,
+        )}
+      >
+        {children}
+      </a>
+    );
+  }
   return (
     <NavLink
       {...props}
       to={to}
+      style={style}
       className={(params) =>
         clsx(
           outline === 'none' ? undefined : getAriaClasses(outline === 'small'),

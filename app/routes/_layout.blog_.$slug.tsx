@@ -11,6 +11,7 @@ import { TweetEmbed } from '~/components/tweetEmbed';
 import { Container, H1, Heading, List, ListItem, Paragraph, Table, TD, TH } from '~/modules/blog/components';
 import { fetchMarkdownFileFs } from '~/modules/blog/fs/fetchMarkdownFile.server';
 import { fetchMarkdownFile } from '~/modules/blog/github/fetchMarkdownFile.server';
+import { validateFrontMatter } from '~/modules/blog/validation.server';
 import { getPrivateEnvVars } from '~/modules/env.server';
 import { useTwitterEmbeds } from '~/modules/twitter-embeds';
 import syntaxHighlightingStylesUrl from '~/styles/code.css';
@@ -29,27 +30,6 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     imageAlt: data?.article.frontmatter.imageAltText,
     type: 'article',
   });
-};
-
-type BlogArticleFrontmatter = {
-  date: string;
-  title: string;
-  description: string;
-  categories: string[];
-  imageUrl?: string;
-  imageAltText?: string;
-};
-
-const validateFrontMatter = (attributes: unknown): attributes is BlogArticleFrontmatter => {
-  return (
-    !!attributes &&
-    typeof attributes !== 'function' &&
-    typeof attributes === 'object' &&
-    typeof (attributes as any)['title'] === 'string' &&
-    typeof (attributes as any)['description'] === 'string' &&
-    Array.isArray((attributes as any)['categories']) &&
-    typeof (attributes as any)['date'] === 'object'
-  );
 };
 
 const redirects: Record<string, string | undefined> = {
