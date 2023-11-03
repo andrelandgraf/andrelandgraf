@@ -1,23 +1,36 @@
+import { Link, type LinkProps } from '@remix-run/react';
+import clsx from 'clsx';
 import type { HTMLAttributes } from 'react';
 
-export function Tag({ children, className = '', ...props }: HTMLAttributes<HTMLSpanElement>) {
+import { getFocusClasses } from '~/utilities/ariaClasses';
+
+export function Tag({ children, className = '', ...props }: LinkProps) {
   return (
-    <span {...props} className={`p-1 rounded-lg bg-teal-900 text-white text-xs lg:text-sm ${className}`}>
+    <Link
+      {...props}
+      className={clsx(
+        'p-1 rounded-lg bg-teal-900 hover:bg-teal-800 focus:bg-teal-800 text-white text-xs lg:text-sm',
+        getFocusClasses(true),
+        className,
+      )}
+    >
       {children}
-    </span>
+    </Link>
   );
 }
 
-type TagsProps = HTMLAttributes<HTMLParagraphElement> & {
+type TagsProps = HTMLAttributes<HTMLUListElement> & {
   tags: string[];
 };
 
 export function Tags({ tags, children, ...props }: TagsProps) {
   return (
-    <p {...props}>
+    <ul {...props}>
       {tags.map((tag) => (
-        <Tag key={tag}>{tag}</Tag>
+        <li key={tag}>
+          <Tag to={`?tag=${tag}`}>{tag}</Tag>
+        </li>
       ))}
-    </p>
+    </ul>
   );
 }
