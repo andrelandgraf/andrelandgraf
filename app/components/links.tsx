@@ -1,5 +1,5 @@
-import type { LinkProps as RemixLinkProps, NavLinkProps as RemixNavLinkProps } from '@remix-run/react';
-import { Link, NavLink } from '@remix-run/react';
+import type { NavLinkProps as RemixNavLinkProps } from '@remix-run/react';
+import { NavLink } from '@remix-run/react';
 import clsx from 'clsx';
 import type { AnchorHTMLAttributes } from 'react';
 
@@ -65,9 +65,9 @@ export function MarkdownLinkWrapper({ href = '/404', children, ...props }: Ancho
   );
 }
 
-export function SkipToContentLink({ children, ...props }: RemixLinkProps) {
+export function SkipToContentLink({ children, ...props }: AnchorHTMLAttributes<HTMLAnchorElement>) {
   return (
-    <Link
+    <a
       {...props}
       className={clsx(
         'sr-only focus:not-sr-only transition p-3 -translate-y-16 focus:translate-y-0',
@@ -75,6 +75,6 @@ export function SkipToContentLink({ children, ...props }: RemixLinkProps) {
       )}
     >
       {children}
-    </Link>
+    </a>
   );
 }

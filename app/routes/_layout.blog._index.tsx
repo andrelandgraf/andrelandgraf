@@ -94,21 +94,16 @@ export default function Component() {
           <p>
             {entries.length} blog posts found. Filter by tag or <StyledLink to="/blog">show all</StyledLink>
           </p>
-          <SkipToContentLink className="sr-only focus:not-sr-only" to="#first-post">
+          <SkipToContentLink className="sr-only focus:not-sr-only" href="#article-list">
             Skip to article
           </SkipToContentLink>
           <Tags title="All tags" tags={tags} className="flex gap-2" />
         </nav>
       </div>
-      <ul className="flex flex-col gap-10" title="Articles">
+      <ul id="article-list" className="flex flex-col gap-10" title="Articles">
         {entries.map(({ frontmatter, slug }, index) => (
           <article className="flex flex-col gap-3 w-full lg:max-w-3xl" key={slug}>
-            <Link
-              id={index === 0 ? 'first-post' : undefined}
-              to={`/blog/${slug}`}
-              prefetch="intent"
-              className={getFocusClasses(true)}
-            >
+            <Link to={`/blog/${slug}`} prefetch="intent" className={getFocusClasses(true)}>
               <PageHeading asH2 className="text-secondary dark:text-primary">
                 {frontmatter.title}
               </PageHeading>
