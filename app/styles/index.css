@@ -9,7 +9,7 @@
 
 .scene {
   scroll-behavior: smooth;
-  scroll-snap-type: y;
+  scroll-snap-type: y proximity;
 }
 
 .frame-one {

@@ -93,10 +93,10 @@ export default function Component() {
           <Frame className="frame-two h-[100vh] text-center font-mono">
             <div className="h-[100vh] mx-4 lg:mx-[10vw] flex items-center justify-center flex-col-reverse lg:flex-row gap-16 lg:gap-[10vw]">
               <div className="lg:max-w-[40vw] flex flex-col items-center justify-center gap-4 lg:gap-8">
-                <h2 className="text-4xl lg:text-8xl text-packtOrange font-extrabold">
+                <h2 className="text-2xl lg:text-4xl text-packtOrange font-extrabold">
                   Full Stack Web Development with Remix
                 </h2>
-                <p className="text-2xl lg:text-4xl text-white font-bold">
+                <p className="text-xl lg:text-2xl text-white font-bold">
                   Learn how to build better React apps and progressively enhance the user experience with my favorite
                   web framework!
                 </p>
@@ -133,8 +133,8 @@ export default function Component() {
                 height={images.allThingsWebCoverImage.height}
               />
               <div className="lg:max-w-[40vw] flex flex-col items-center justify-center gap-4 lg:gap-8">
-                <h2 className="text-4xl lg:text-8xl text-allThingsWebOrange font-extrabold">All Things Web</h2>
-                <p className="text-2xl lg:text-4xl text-white font-bold">
+                <h2 className="text-2xl lg:text-4xl text-allThingsWebOrange font-extrabold">All Things Web</h2>
+                <p className="text-xl lg:text-2xl text-white font-bold">
                   Join us on{' '}
                   <SubHeadingLink target="_blank" rel="noopener noreferrer" to="https://discord.gg/TVAKCyKX6K">
                     Discord
@@ -171,7 +171,7 @@ export default function Component() {
           >
             <div className="mx-4 lg:max-w-[800px] flex flex-col items-center justify-center gap-4 lg:gap-8">
               <h2 className="text-2xl lg:text-4xl text-white font-bold">Meetups</h2>
-              <p className="text-white">
+              <p className="text-white text-xl lg:text-2xl">
                 Join us in person or virtually! I help organizing the Remix Bay Area meetup and I tutor up-and-coming
                 devs every Monday on Zoom!
               </p>
@@ -240,7 +240,7 @@ function Frame({ children, className, ...props }: FrameProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!sectionRef.current) return;
-    return onScrollTrigger(sectionRef.current, { threshold: 0.84 });
+    return onScrollTrigger(sectionRef.current, { threshold: 0.5 });
   }, []);
   return (
     <section {...props} ref={sectionRef} className={clsx('frame relative w-full', className)}>
