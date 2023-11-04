@@ -88,7 +88,7 @@ export default function Component() {
             Filter blog posts by tag, <StyledLink to="/blog">show all</StyledLink> or{' '}
             <StyledLink to="#ask">ask a question</StyledLink>.
           </p>
-          <Tags title="All tags" tags={tags} className="flex gap-2" />
+          <Tags title="All tags" tags={tags} />
         </nav>
       </div>
       <Form method="GET" action="/blog/ask" className="flex flex-row gap-2 relative">

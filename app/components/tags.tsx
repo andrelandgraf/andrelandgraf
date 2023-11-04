@@ -9,7 +9,7 @@ export function Tag({ children, className = '', ...props }: LinkProps) {
     <Link
       {...props}
       className={clsx(
-        'p-1 rounded-lg bg-teal-900 hover:bg-teal-800 focus:bg-teal-800 text-white text-xs lg:text-sm',
+        'p-1 rounded-lg bg-teal-900 hover:bg-teal-800 focus:bg-teal-800 text-white whitespace-nowrap text-xs lg:text-sm',
         getFocusClasses(true),
         className,
       )}
@@ -23,9 +23,9 @@ type TagsProps = HTMLAttributes<HTMLUListElement> & {
   tags: string[];
 };
 
-export function Tags({ tags, children, ...props }: TagsProps) {
+export function Tags({ tags, children, className, ...props }: TagsProps) {
   return (
-    <ul {...props}>
+    <ul {...props} className={clsx('flex gap-2 flex-wrap', className)}>
       {tags.map((tag) => (
         <li key={tag}>
           <Tag to={`?tag=${tag}`}>{tag}</Tag>

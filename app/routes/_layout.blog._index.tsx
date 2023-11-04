@@ -22,7 +22,7 @@ export default function Component() {
           <h3>
             <time dateTime={getISODate(frontmatter.date)}>{getReadableDate(frontmatter.date)}</time>
           </h3>
-          <Tags tags={frontmatter.categories} className="flex gap-2" />
+          <Tags tags={frontmatter.categories} />
           <p>{frontmatter.description}</p>
           <ButtonLink to={`/blog/${slug}`} aria-label={`View Article ${frontmatter.title}`} prefetch="intent">
             View Article
