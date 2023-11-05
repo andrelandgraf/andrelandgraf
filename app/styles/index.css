@@ -7,17 +7,11 @@
   font-family: 'Andre Handwriting', 'Brush Script MT';
 }
 
-.scene {
-  scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
-}
-
 .frame-one {
   background-image: linear-gradient(to right, black);
 }
 
 .frame-two {
-  opacity: 0;
   background-image: linear-gradient(to top, #000000 0%, #1d1715 51%, #3f3f3c 100%);
 }
 
@@ -30,7 +24,6 @@
 }
 
 .frame {
-  scroll-snap-align: start;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -40,6 +33,7 @@
 .frame-one-heading {
   width: 100%;
   overflow: hidden;
+  animation: typeIn 2s steps(28) forwards;
   @media (min-width: 1024px) {
     width: 0;
   }
@@ -47,18 +41,7 @@
 
 .frame-one-subheading {
   opacity: 0;
-}
-
-.frame-one.observed .frame-one-heading {
-  animation: typeIn 2s steps(28) forwards;
-}
-
-.frame-one.observed .frame-one-subheading {
   animation: 2s fadeIn 1s forwards;
-}
-
-.frame-two.observed {
-  animation: fadeIn 4s forwards;
 }
 
 .star {
