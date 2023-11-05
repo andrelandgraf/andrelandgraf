@@ -1,6 +1,5 @@
 import type { HeadersFunction, LinksFunction, MetaFunction } from '@remix-run/node';
 import type { LinkProps } from '@remix-run/react';
-import { Link } from '@remix-run/react';
 import clsx from 'clsx';
 import type { HTMLAttributes } from 'react';
 
@@ -87,7 +86,8 @@ export default function Component() {
                 rel="noopener noreferrer"
                 to="https://www.amazon.com/Full-Stack-Development-Remix-production-ready/dp/1801075298"
                 overrides={{
-                  colorClassName: 'text-white bg-packtOrange',
+                  colorClassName:
+                    'text-white bg-packtOrange transform hover:scale-[102%] transition-all duration-200 ease-in-out',
                   focusRingColorClassName: 'focus:ring-white',
                   hoverRingColorClassName: 'hover:ring-white',
                   textSizeClassName: 'text-2xl lg:text-4xl',
@@ -159,12 +159,16 @@ export default function Component() {
             </p>
           </div>
           <div className="mx-4 lg:mx-[10vw] flex items-center justify-center flex-col lg:flex-row gap-8 lg:gap-[10vh]">
-            <Link
+            <UnstyledLink
               aria-label="Remix Bay Area Meetup"
               target="_blank"
               rel="noopener noreferrer"
               to="https://www.meetup.com/remix-bay-area/"
-              className="shadow-lg shadow-black hover:transform-gpu hover:scale-105 transition-all duration-300 ease-in-out"
+              outline="none"
+              className={clsx(
+                'shadow-lg shadow-black hover:transform-gpu hover:scale-105 transition-all duration-300 ease-in-out',
+                getFocusClasses(true, 'focus-visible:ring-allThingsWebPurple'),
+              )}
             >
               <img
                 className="max-w-[80vw] max-h-[40vh] lg:max-w-[min(30vw,800px)]"
@@ -173,13 +177,17 @@ export default function Component() {
                 width={images.remixBayAreaCoverImage.width}
                 height={images.remixBayAreaCoverImage.height}
               />
-            </Link>
-            <Link
+            </UnstyledLink>
+            <UnstyledLink
               aria-label="All Things Web, HTML, CSS, and JavaScript tutoring meetup"
               target="_blank"
               rel="noopener noreferrer"
               to="https://www.meetup.com/all-things-web-react-html-css-javascript-tutoring/"
-              className="shadow-lg shadow-black hover:transform-gpu hover:scale-105 transition-all duration-300 ease-in-out"
+              outline="none"
+              className={clsx(
+                'shadow-lg shadow-black hover:transform-gpu hover:scale-105 transition-all duration-300 ease-in-out',
+                getFocusClasses(true, 'focus-visible:ring-allThingsWebPurple'),
+              )}
             >
               <img
                 className="max-w-[80vw] max-h-[40vh] lg:max-w-[min(30vw,800px)]"
@@ -188,7 +196,7 @@ export default function Component() {
                 width={images.allThingsWebCoverImage.width}
                 height={images.allThingsWebCoverImage.height}
               />
-            </Link>
+            </UnstyledLink>
           </div>
         </Frame>
       </main>
