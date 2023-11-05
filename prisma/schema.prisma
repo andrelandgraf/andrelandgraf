@@ -1,0 +1,29 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [vector]
+}
+
+model Article {
+  id           String                       @id @default(cuid())
+  slug         String
+  date         DateTime
+  title        String
+  description  String
+  categories   String[]
+  imageUrl     String?
+  imageAltText String?
+  markdown     String
+  embedding    Unsupported("vector(1536)")?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([title])
+  @@unique([slug])
+}

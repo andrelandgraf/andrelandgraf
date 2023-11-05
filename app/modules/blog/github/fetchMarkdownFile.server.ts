@@ -48,8 +48,8 @@ export async function fetchMarkdownFile<FrontMatter>(
     return [response.status, FetchMarkdownFileResState.internalError, undefined];
   }
 
-  const textContent = await response.text();
-  const ast = Markdoc.parse(textContent);
+  const markdown = await response.text();
+  const ast = Markdoc.parse(markdown);
   const frontmatter = ast.attributes.frontmatter ? yaml.load(ast.attributes.frontmatter) : {};
   if (frontmatter && typeof frontmatter === 'object' && 'ignore' in frontmatter && frontmatter.ignore) {
     return [404, FetchMarkdownFileResState.fileIgnored, undefined];
@@ -62,5 +62,5 @@ export async function fetchMarkdownFile<FrontMatter>(
   }
 
   const content = Markdoc.transform(ast, config);
-  return [200, FetchMarkdownFileResState.success, { slug, frontmatter, content }];
+  return [200, FetchMarkdownFileResState.success, { slug, frontmatter, content, markdown }];
 }

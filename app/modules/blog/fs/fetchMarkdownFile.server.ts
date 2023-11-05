@@ -30,8 +30,8 @@ export async function fetchMarkdownFileFs<FrontMatter>(
   if (!file) {
     return [500, FetchMarkdownFileResState.fileNotFound, undefined];
   }
-  const str = file.toString();
-  const ast = Markdoc.parse(str);
+  const markdown = file.toString();
+  const ast = Markdoc.parse(markdown);
   const frontmatter = ast.attributes.frontmatter ? yaml.load(ast.attributes.frontmatter) : {};
   try {
     invariant(hasValidFrontMatter(frontmatter), `File ${slug} is missing frontmatter information`);
@@ -48,6 +48,7 @@ export async function fetchMarkdownFileFs<FrontMatter>(
       slug,
       frontmatter,
       content,
+      markdown,
     },
   ];
 }

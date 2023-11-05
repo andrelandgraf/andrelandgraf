@@ -9,6 +9,7 @@ import { MarkdownContainer } from '~/components/markdown/renderer';
 import { Quote, Statement } from '~/components/texts';
 import { TweetEmbed } from '~/components/tweetEmbed';
 import { Container, H1, Heading, List, ListItem, Paragraph, Table, TD, TH } from '~/modules/blog/components';
+import { fetchArticle } from '~/modules/blog/db/fetchArticle.server';
 import { fetchMarkdownFileFs } from '~/modules/blog/fs/fetchMarkdownFile.server';
 import { fetchMarkdownFile } from '~/modules/blog/github/fetchMarkdownFile.server';
 import { validateFrontMatter } from '~/modules/blog/validation.server';
@@ -53,6 +54,8 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
   const mdFilePromise =
     readContentFrom === 'production'
+      ? fetchArticle(slug)
+      : readContentFrom === 'github'
       ? fetchMarkdownFile(githubAccessToken, `${githubRepoAPIUrl}/contents/articles`, slug, validateFrontMatter)
       : fetchMarkdownFileFs(`./contents/articles`, slug, validateFrontMatter);
 

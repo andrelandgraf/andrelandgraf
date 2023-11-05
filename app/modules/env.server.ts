@@ -1,7 +1,7 @@
 import invariant from 'tiny-invariant';
 
 type PrivateEnvVars = {
-  readContentFrom: 'locale' | 'production';
+  readContentFrom: 'locale' | 'github' | 'production';
   githubAccessToken: string;
   githubRepoAPIUrl: string;
   openAIKey: string;

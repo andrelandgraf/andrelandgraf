@@ -5,5 +5,6 @@ export type ActionResult<State, ResponseBody> = [status: number, state: State, r
 export type MarkdocFile<FrontMatter> = {
   slug: string;
   content: RenderableTreeNode;
+  markdown: string;
   frontmatter: FrontMatter;
 };

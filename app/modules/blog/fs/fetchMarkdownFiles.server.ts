@@ -33,8 +33,8 @@ async function fetchMarkdownFilesFs<FrontMatter>(
       if (!file) {
         return [500, FetchMarkdownFilesResState.internalError, undefined];
       }
-      const str = file.toString();
-      const ast = Markdoc.parse(str);
+      const markdown = file.toString();
+      const ast = Markdoc.parse(markdown);
       const frontmatter = ast.attributes.frontmatter ? yaml.load(ast.attributes.frontmatter) : {};
       if (frontmatter && typeof frontmatter === 'object' && 'ignore' in frontmatter && frontmatter.ignore) {
         continue;
@@ -51,6 +51,7 @@ async function fetchMarkdownFilesFs<FrontMatter>(
         slug: entry.name.replace('.md', '').replace('index', ''),
         frontmatter,
         content,
+        markdown,
       });
     }
   }

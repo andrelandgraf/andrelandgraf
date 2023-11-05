@@ -7,6 +7,7 @@ import { Textarea } from '~/components/forms';
 import { PageHeading } from '~/components/headings';
 import { SkipToContentLink, StyledLink } from '~/components/links';
 import { Tags } from '~/components/tags';
+import { fetchArticles } from '~/modules/blog/db/fetchArticles.server';
 import { fetchMarkdownFilesFs } from '~/modules/blog/fs/fetchMarkdownFiles.server';
 import { fetchMarkdownFiles } from '~/modules/blog/github/fetchMarkdownFiles.server';
 import { validateFrontMatter } from '~/modules/blog/validation.server';
@@ -41,6 +42,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   const mdFilesPromise =
     readContentFrom === 'production'
+      ? fetchArticles()
+      : readContentFrom === 'github'
       ? fetchMarkdownFiles(githubAccessToken, `${githubRepoAPIUrl}/contents/articles`, validateFrontMatter)
       : fetchMarkdownFilesFs(`./contents/articles`, validateFrontMatter);
 
