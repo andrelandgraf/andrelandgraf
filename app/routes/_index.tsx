@@ -6,8 +6,10 @@ import type { HTMLAttributes } from 'react';
 import { useEffect, useRef } from 'react';
 
 import { ButtonLink } from '~/components/buttons';
+import { UnstyledLink } from '~/components/links';
 import { PageTransitionProgressBar } from '~/components/progress';
 import indexStyles from '~/styles/index.css';
+import { getFocusClasses } from '~/utilities/ariaClasses';
 import { images } from '~/utilities/images';
 import { getMetaTags } from '~/utilities/metaTags';
 
@@ -215,18 +217,21 @@ export default function Component() {
   );
 }
 
-function SubHeadingLink({ className = '', children, ...props }: LinkProps) {
+function SubHeadingLink({ className = '', children, to, ...props }: LinkProps) {
   return (
-    <Link
+    <UnstyledLink
+      to={to}
       prefetch="intent"
+      outline="none"
       {...props}
       className={clsx(
         'underline decoration-text-allThingsWebOrange hover:text-allThingsWebPurple focus:text-allThingsWebPurple',
         className,
+        getFocusClasses(true, 'focus-visible:ring-allThingsWebPurple'),
       )}
     >
       {children}
-    </Link>
+    </UnstyledLink>
   );
 }
 
