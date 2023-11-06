@@ -10,7 +10,7 @@ datasource db {
 }
 
 model Article {
-  id           String                       @id @default(cuid())
+  id           String                         @id @default(cuid())
   slug         String
   date         DateTime
   title        String
@@ -19,11 +19,19 @@ model Article {
   imageUrl     String?
   imageAltText String?
   markdown     String
-  embedding    Unsupported("vector(1536)")?
+  embeddings   ArticleEmbedding[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@unique([title])
   @@unique([slug])
+}
+
+model ArticleEmbedding {
+  id        String   @id @default(cuid())
+  articleId String
+  article   Article  @relation(fields: [articleId], references: [id])
+  embedding Unsupported("vector(1536)")?
+  chunkIndex Int @default(0)
 }

@@ -1,6 +1,13 @@
+import { getPrivateEnvVars } from '~/modules/env.server';
+import { fetchEmbedding, FetchEmbeddingResState, MAX_CONTENT_LENGTH } from '~/modules/openAI/fetchOpenAI';
+
 import { fetchMarkdownFilesFs, FetchMarkdownFilesResState } from '../app/modules/blog/fs/fetchMarkdownFiles.server';
 import { validateFrontMatter } from '../app/modules/blog/validation.server';
 import { db } from '../app/modules/db.server';
+
+const OVERRIDE_EMBEDDINGS = true;
+
+const { openAIKey } = getPrivateEnvVars();
 
 console.log('reading articles from fs...');
 const [status, state, files] = await fetchMarkdownFilesFs(`./contents/articles`, validateFrontMatter);
@@ -29,8 +36,8 @@ for (const file of files) {
   if (typeof file.content !== 'object') {
     throw new Error(`file ${file.slug} content must be of type JSON`);
   }
-  console.log(`upserting article ${file.slug}...`);
-  await db.article.upsert({
+  console.log(`upserting article ${file.slug} with content length ${file.markdown.length}...`);
+  const article = await db.article.upsert({
     create: {
       slug: file.slug,
       title: file.frontmatter.title,
@@ -54,6 +61,49 @@ for (const file of files) {
       slug: file.slug,
     },
   });
+
+  const prev = articles.find((article) => article.slug === file.slug);
+  if (!prev || OVERRIDE_EMBEDDINGS || prev.markdown !== file.markdown) {
+    // Split markdown into MAX_CONTENT_LENGTH (8191) chunks
+    const chunks = [];
+    let chunk = '';
+    for (const char of file.markdown) {
+      if (chunk.length === MAX_CONTENT_LENGTH['text-embedding-ada-002']) {
+        chunks.push(chunk);
+        chunk = '';
+      }
+      chunk += char;
+    }
+
+    // Delete all embeddings for this article
+    await db.articleEmbedding.deleteMany({
+      where: { articleId: article.id },
+    });
+
+    // Get embeddings for each chunk
+    const embeddings = [];
+    for (const chunk of chunks) {
+      const [status, state, embedding] = await fetchEmbedding({
+        content: chunk,
+        openAIKey,
+      });
+      if (state !== FetchEmbeddingResState.success || !embedding) {
+        throw new Error(`(${status}) fetchEmbeddings error: ${state}`);
+      }
+      embeddings.push(embedding);
+    }
+
+    for (let i = 0; i < embeddings.length; i++) {
+      const embedding = embeddings[i];
+      // Create then update to generate uuid via Prisma
+      const articleEmbedding = await db.articleEmbedding.create({
+        data: { chunkIndex: i, article: { connect: { id: article.id } } },
+      });
+      await db.$executeRaw`
+      UPDATE "ArticleEmbedding" SET "embedding" = ${embedding}::vector WHERE "id" = ${articleEmbedding.id};
+    `;
+    }
+  }
 }
 
 console.log('done');

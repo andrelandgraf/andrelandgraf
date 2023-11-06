@@ -2,13 +2,8 @@ import type { LinksFunction, LoaderFunctionArgs, MetaFunction } from '@remix-run
 import { json, redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 
-import { CodeBlock } from '~/components/codeBlock';
 import { SectionHeading } from '~/components/headings';
-import { MarkdownLinkWrapper } from '~/components/links';
-import { MarkdownContainer } from '~/components/markdown/renderer';
-import { Quote, Statement } from '~/components/texts';
-import { TweetEmbed } from '~/components/tweetEmbed';
-import { Container, H1, Heading, List, ListItem, Paragraph, Table, TD, TH } from '~/modules/blog/components';
+import { BlogMarkdownContainer, H1 } from '~/modules/blog/components';
 import { fetchArticle } from '~/modules/blog/db/fetchArticle.server';
 import { fetchMarkdownFileFs } from '~/modules/blog/fs/fetchMarkdownFile.server';
 import { fetchMarkdownFile } from '~/modules/blog/github/fetchMarkdownFile.server';
@@ -64,7 +59,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
     throw Error(`Error (${status}) ${state}: Failed to fetch blog articles.`);
   }
 
-  return json({ article }, { headers: { 'cache-control': 'public, max-age=3600' } });
+  return json({ article }, { headers: { 'cache-control': 'public, max-age=7200' } });
 }
 
 export default function Component() {
@@ -79,25 +74,7 @@ export default function Component() {
           <time dateTime={getISODate(article.frontmatter.date)}>{getReadableDate(article.frontmatter.date)}</time>
         </SectionHeading>
       </div>
-      <MarkdownContainer
-        className="w-full flex flex-col gap-5"
-        content={article.content}
-        components={{
-          Container,
-          Heading,
-          Paragraph,
-          List,
-          ListItem,
-          CodeBlock,
-          Link: MarkdownLinkWrapper,
-          TweetEmbed,
-          Statement,
-          Quote,
-          Table,
-          TH,
-          TD,
-        }}
-      />
+      <BlogMarkdownContainer className="w-full flex flex-col gap-5" content={article.content} />
     </article>
   );
 }

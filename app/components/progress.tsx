@@ -16,7 +16,7 @@ type PageTransitionProgressBarProps = {
 export function PageTransitionProgressBar({
   toColor = 'from-primary',
   fromColor = 'to-secondary',
-  toColorDark = 'dark:from-darkPrimary',
+  toColorDark = 'dark:from-primaryAccent',
   fromColorDark = 'dark:to-secondary',
 }: PageTransitionProgressBarProps) {
   const ref = useRef<HTMLDivElement>(null);

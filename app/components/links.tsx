@@ -68,7 +68,7 @@ export function StyledLink({ to, nav = false, className = '', children, ...props
           {
             'text-lg xl:text-xl 2xl:text-2xl decoration-4 underline-offset-4 hover:underline-offset-2': nav,
             'decoration-4 underline-offset-2 hover:underline-offset-1 ': !nav,
-            'decoration-darkPrimary': isActive,
+            'decoration-primaryAccent': isActive,
           },
           className,
         )

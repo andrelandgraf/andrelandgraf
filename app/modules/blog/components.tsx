@@ -1,5 +1,11 @@
+import type { RenderableTreeNode } from '@markdoc/markdoc';
 import clsx from 'clsx';
 import type { HTMLAttributes } from 'react';
+
+import { MarkdownLinkWrapper } from '~/components/links';
+import { CodeBlock, MarkdownContainer } from '~/components/markdown/renderer';
+import { Quote, Statement } from '~/components/texts';
+import { TweetEmbed } from '~/components/tweetEmbed';
 
 export function Container({ children }: HTMLAttributes<HTMLElement>) {
   return children;
@@ -11,7 +17,7 @@ type HeadingProps = HTMLAttributes<HTMLHeadingElement> & {
 
 export function H1({ children, ...props }: HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <h1 {...props} className="text-3xl lg:text-4xl xl:text-6xl text-secondary dark:text-primary font-extrabold">
+    <h1 {...props} className="text-3xl lg:text-4xl xl:text-6xl text-primaryDark dark:text-primary font-extrabold">
       {children}
     </h1>
   );
@@ -120,5 +126,33 @@ export function TD({ children, color = 'default', ...props }: TDProps) {
     >
       {children}
     </td>
+  );
+}
+
+type BlogMarkdownContainerProps = HTMLAttributes<HTMLElement> & {
+  content: RenderableTreeNode;
+};
+
+export function BlogMarkdownContainer({ content, ...props }: BlogMarkdownContainerProps) {
+  return (
+    <MarkdownContainer
+      {...props}
+      content={content}
+      components={{
+        Container,
+        Heading,
+        Paragraph,
+        List,
+        ListItem,
+        CodeBlock: CodeBlock,
+        Link: MarkdownLinkWrapper,
+        TweetEmbed: TweetEmbed,
+        Statement: Statement,
+        Quote: Quote,
+        Table,
+        TH,
+        TD,
+      }}
+    />
   );
 }

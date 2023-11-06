@@ -74,38 +74,40 @@ export default function Component() {
   const { entries, tag, tags } = useLoaderData<typeof loader>();
 
   return (
-    <section className="flex flex-col gap-10 w-full lg:max-w-3xl">
-      <div className="flex flex-col gap-2">
-        <PageHeading>
-          {question
-            ? 'Ask me about All Things Web'
-            : tag && entries.length
-            ? `All Things ${tag}`
-            : 'All Things Web Blog Posts'}
-        </PageHeading>
-        <nav className="w-full flex flex-col gap-2">
-          <SkipToContentLink className="sr-only focus:not-sr-only" href="#content">
-            Skip to content
-          </SkipToContentLink>
-          <p>
-            Filter blog posts by tag, <StyledLink to="/blog">show all</StyledLink> or{' '}
-            <StyledLink to="#ask">ask a question</StyledLink>.
-          </p>
-          <Tags title="All tags" tags={tags} />
-        </nav>
+    <section className="flex flex-col gap-10 w-full">
+      <div className="flex flex-col gap-10 w-full lg:max-w-3xl">
+        <div className="flex flex-col gap-2">
+          <PageHeading>
+            {question
+              ? 'Ask me about All Things Web'
+              : tag && entries.length
+              ? `All Things ${tag}`
+              : 'All Things Web Blog Posts'}
+          </PageHeading>
+          <nav className="w-full flex flex-col gap-2">
+            <SkipToContentLink className="sr-only focus:not-sr-only" href="#content">
+              Skip to content
+            </SkipToContentLink>
+            <p>
+              Filter blog posts by tag, <StyledLink to="/blog">show all</StyledLink> or{' '}
+              <StyledLink to="#ask">ask a question</StyledLink>.
+            </p>
+            <Tags title="All tags" tags={tags} />
+          </nav>
+        </div>
+        <Form method="GET" action="/blog/ask" className="flex flex-row gap-2 relative">
+          <Textarea
+            defaultValue={question || undefined}
+            name="question"
+            placeholder="Why is Remix a full stack web framework?"
+            label="All content at your fingertips. Ask a question about all things web."
+            id="ask"
+          />
+          <button className={clsx(getFocusClasses(true), 'absolute bottom-2 right-2')} type="submit">
+            » Ask
+          </button>
+        </Form>
       </div>
-      <Form method="GET" action="/blog/ask" className="flex flex-row gap-2 relative">
-        <Textarea
-          defaultValue={question || undefined}
-          name="question"
-          placeholder="Why is Remix a full stack web framework?"
-          label="All content at your fingertips. Ask a question about all things web."
-          id="ask"
-        />
-        <button className={clsx(getFocusClasses(true), 'absolute bottom-2 right-2')} type="submit">
-          » Ask
-        </button>
-      </Form>
       <main id="content">
         <Outlet />
       </main>

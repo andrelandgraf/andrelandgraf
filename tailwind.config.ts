@@ -8,7 +8,9 @@ export default {
       colors: {
         primary: 'rgb(94 234 212)', // teal-300
         secondary: 'rgb(45 212 191)', // teal-400
-        darkPrimary: 'rgb(20 184 166)', // teal-500
+        primaryAccent: 'rgb(20 184 166)', // teal-500
+        primaryDark: 'rgb(19 78 74)', // teal-900
+        primaryDarkAccent: 'rgb(17 94 89)', // teal-800
         red: '#ff0000',
         orange: '#ff9a00',
         yellow: '#d0de21',
