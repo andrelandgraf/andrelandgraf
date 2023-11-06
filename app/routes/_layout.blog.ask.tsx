@@ -128,7 +128,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export default function Component() {
   const { markdownReply, matches } = useLoaderData<typeof loader>();
   return (
-    <div className="w-full flex flex-col lg:flex-row items-center lg:items-start gap-10">
+    <div className="w-full flex flex-col lg:flex-row items-center lg:items-stretch gap-10">
       <article className="w-full lg:max-w-3xl border-primary leading-loose p-4 rounded-md bg-teal-100 dark:bg-teal-900 text-gray-800 dark:text-white">
         <BlogMarkdownContainer className="w-full flex flex-col gap-4" content={markdownReply} />
       </article>
