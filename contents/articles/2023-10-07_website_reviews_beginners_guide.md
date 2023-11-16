@@ -7,11 +7,11 @@ imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v
 imageAltText: Website Reviews - A beginner's guide by Andre Landgraf
 ---
 
-Reviewing websites is the process of analyzing different aspects of a website. You can review your own site to find issues and improve it or review the sites of others to learn or give constructive feedback. Like a quality PR review, there is a lot to reviewing websites. You can review the overall user experience, the design, the content, the code, the performance, the site’s accessibility, the SEO, and more. In this short article, I want to provide you with a simple step-by-step guide to get started with website reviews.
+Reviewing websites is the process of analyzing different aspects of a website. You can review your own site to find issues and improve it, or review the sites of others to learn or give constructive feedback. Like a quality PR review, there is a lot to reviewing websites. You can review the overall user experience, the design, the content, the code, the performance, the site’s accessibility, the SEO, and more. In this short article, I want to provide you with a simple step-by-step guide to get started with website reviews.
 
 ## The process
 
-The goal of following a process is to divide the work into manageable tasks and conquer each task individually. Especially when new to programming, everything all at once may seem overwhelming, but you will realize that it is not that hard once you break it down into smaller pieces.
+The goal of following a process is to divide the work into manageable tasks and conquer each task individually. Especially when new to programming, everything all at once may seem overwhelming, but it gets easier when you break it down into smaller pieces.
 
 The process I follow when reviewing websites is as follows:
 
