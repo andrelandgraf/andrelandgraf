@@ -2,7 +2,7 @@
 date: 2022-07-16
 title: Why Remix is not a React framework but a full stack web framework
 description: It's intuitive to compare Remix to Next.js and Gatsby and to treat it as a React framework. In this post, I want to summarize my own thoughts about why I believe that Remix deserves the title of a full stack web framework.
-categories: [Remix.run]
+categories: [Remix.run, Beginner Friendly]
 ---
 
 It's intuitive to compare Remix to Next.js and Gatsby and to treat it as a React framework. The team behind Remix has done its best to objectively compare Remix to Next.js [in this blog post](https://remix.run/blog/remix-vs-next). However, the Remix team also stresses that Remix is not a React framework but a 🌟 full stack web framework 🌟 - an important distinction. In this post, I want to summarize my own thoughts about why I believe that Remix deserves the title of a full stack web framework.

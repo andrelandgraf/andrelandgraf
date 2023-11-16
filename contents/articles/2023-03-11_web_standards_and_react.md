@@ -2,7 +2,7 @@
 date: 2023-03-11
 title: My experience learning React, web standards, and Remix
 description: In this blog post, I am sharing my story of learning React, web standards, and Remix, and answer the question why I actively try to use less React.
-categories: [React, Remix.run]
+categories: [React, Remix.run, Beginner Friendly]
 imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1678651924/andrelandgraf.dev/how-react-made-me-a-web-dev_hi1nwx.png
 imageAltText: Circle showing the relationship between moving fast, quick results, positive feedback, and growing motivation. Moving fast enables quick results which results in positive feedback, which in turn motivates to keep moving fast.
 ---
