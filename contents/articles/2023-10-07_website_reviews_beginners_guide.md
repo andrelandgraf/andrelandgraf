@@ -22,7 +22,7 @@ The process I follow when reviewing websites is as follows:
 - Check the Network tab
 - Review the code
 
-You don't have to go through all the steps to give a valuable review. For your personal site, you may want to do that, but for a peer review, you can just focus on some specific areas. I advise you to start with the first step, but you could really start anywhere. Let's go through each step in more detail.
+The order of the steps doesn't really matter, but I like to start with the user experience and then move on to the more technical aspects. You also don't have to go through all the steps. For your personal site, you may want to do so, but for a peer review, you can focus on some specific areas. You may learn the most by inspecting the code on cool sites, but each step can help to give constructive feedback. Let's go through each step in more detail.
 
 ## Review the website from the perspective of a first-time visitor
 
