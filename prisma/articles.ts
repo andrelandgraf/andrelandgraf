@@ -62,6 +62,7 @@ for (const file of files) {
     },
   });
 
+  console.log(`creating article ${file.slug} embeddings...`);
   const prev = articles.find((article) => article.slug === file.slug);
   if (!prev || OVERRIDE_EMBEDDINGS || prev.markdown !== file.markdown) {
     // Split markdown into MAX_CONTENT_LENGTH (8191) chunks
@@ -96,11 +97,14 @@ for (const file of files) {
     for (let i = 0; i < embeddings.length; i++) {
       const embedding = embeddings[i];
       // Create then update to generate uuid via Prisma
+      console.log(`creating article ${file.slug} embedding ${i}...`);
       const articleEmbedding = await db.articleEmbedding.create({
         data: { chunkIndex: i, article: { connect: { id: article.id } } },
       });
+      console.log(`updating article ${file.slug} embedding ${i}...`);
+      const vectorQuery = `[${embedding.join(',')}]`;
       await db.$executeRaw`
-      UPDATE "ArticleEmbedding" SET "embedding" = ${embedding}::vector WHERE "id" = ${articleEmbedding.id};
+      UPDATE "ArticleEmbedding" SET "embedding" = ${vectorQuery}::vector WHERE "id" = ${articleEmbedding.id};
     `;
     }
   }
