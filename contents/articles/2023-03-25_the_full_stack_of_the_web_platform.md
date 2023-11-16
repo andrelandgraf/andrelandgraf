@@ -3,7 +3,7 @@ date: 2023-03-25
 title: Taking advantage of the full stack of the web platform
 description: In this article, I explain in more detail what I mean by the full stack of the web platform. I make a case that having access to both the client and server runtime matters.
 categories: [React, Remix.run, Web Development]
-imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1679795914/andrelandgraf.dev/full-stack-of-web-platform_ykh5pg.png
+imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1679795914/andrelandgraf.dev/full-stack-of-web-platform_ykh5pg
 imageAltText: A diagram showcasing the different tools the web platform offers across the client and the server. On the client, the web platform provides standards such as HTML, CSS, and JavaScript and APIs such as the DOM and browser APIs. On the server, we have access to the HTTP request-response cycle and server-only capabilities of HTTP.
 ---
 

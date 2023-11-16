@@ -3,7 +3,7 @@ date: 2023-04-15
 title: A business case for today's full stack web frameworks
 description: Today's full stack web frameworks like Next.js and Remix provide application developers with primitives, conventions, and levers to build more performant web apps. This blog post outlines a business case for going full stack from a client-only SPA architecture.
 categories: [React, Next.js, Remix.run, Web Development]
-imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1682302824/andrelandgraf.dev/screenshot-web-page-test-lcp-client-side-vs-full-stack-apps.png
+imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1682302824/andrelandgraf.dev/screenshot-web-page-test-lcp-client-side-vs-full-stack-apps
 imageAltText: A screenshot of a diagram from WebPageTest results comparing different client-only and full stack app implementations. The full stack app implementations have lower Largest Contentful Paint (LCP) values.
 ---
 

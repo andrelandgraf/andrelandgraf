@@ -3,7 +3,7 @@ date: 2022-12-03
 title: Different dimensions of Remix deploy targets
 description: Remix is very flexible when it comes to deploying your application. In this article, we will explore the different dimensions of Remix deployment targets.
 categories: [Remix.run, App Deployment]
-imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1670291051/andrelandgraf.dev/deployment-targets-table_mnjygi.png
+imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1670291051/andrelandgraf.dev/deployment-targets-table_mnjygi
 imageAltText: Table mapping Remix deployment targets to different dimensions
 ---
 
