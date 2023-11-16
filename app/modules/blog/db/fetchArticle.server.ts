@@ -28,6 +28,8 @@ export async function fetchArticle(
       description: article.description,
       date: article.date.toISOString(),
       categories: article.categories,
+      imageUrl: article.imageUrl || undefined,
+      imageAltText: article.imageAltText || undefined,
     },
     content,
     markdown: article.markdown,
