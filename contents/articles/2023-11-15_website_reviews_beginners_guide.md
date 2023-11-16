@@ -26,7 +26,7 @@ The order of the steps doesn't really matter, but I like to start with the user 
 
 ## Review the website from the perspective of a first-time visitor
 
-Reviewing the site from the perspective of a first-time visitor is a great way to take a step back and focus on what's most important: the user experience. Make sure to open the website in a guest or incognito window to make sure you are not logged in, have an empty cache, and no browser extensions running.
+Reviewing the site from the perspective of a first-time visitor will help you to take a step back and focus on what's most important: the user experience. Make sure to open the website in a guest or incognito window to make sure you are not logged in, have an empty cache, and no browser extensions running.
 
 When reviewing the website, ask yourself questions like:
 
@@ -38,7 +38,7 @@ You can then use the answers to these questions to give feedback on the overall 
 
 ## Utilize reporting tools to get objective data
 
-There are some great tools out there that can help you get objective data about the website. For example, you can use [Lighthouse](https://developers.google.com/web/tools/lighthouse) to get a report on the performance, accessibility, SEO, and more. You can also use [Web.dev](https://web.dev/measure/) and [WebPageTest](https://www.webpagetest.org/) for additional insights. These tools are great for getting actionable feedback. Additionally, you can get more actionable feedback on accessibility from accessibility-specific tools like [WAVE](https://wave.webaim.org/extension/).
+There are some great tools out there that can help you get objective data about a website. [Lighthouse](https://developers.google.com/web/tools/lighthouse), [Web.dev](https://web.dev/measure/) and [WebPageTest](https://www.webpagetest.org/) provide reports on performance, accessibility, SEO, and more. These tools are great for getting actionable feedback. Additionally, you can use specialized tools like [WAVE](https://wave.webaim.org/extension/) to get additional reports on accessibility.
 
 I recommend you start with Lighthouse. You can run a Lighthouse report from you Chrome DevTools by navigating to the Lighthouse tab and clicking the Generate report button. Read through the report, focus on one issue at a time, and try to understand the issue and how to fix it. Don't be shy about using Google for more information about the issue. For example, if Lighthouse suggests to use smaller images, you can Google "how to optimize images for the web"! 🤓
 
@@ -46,11 +46,11 @@ Side note: Optimizing images can have a huge impact on your site’s performance
 
 ## Test on different devices and browsers
 
-A great way to detect issues is to test the website on different devices and browsers. At a minimum, use your mobile phone and your computer. You can also use the [Chrome DevTools](https://developer.chrome.com/docs/devtools/) to test on different screen sizes. Finally, make sure to test on all three major browsers: Chrome, Firefox, and Safari and their mobile counterparts. Switching to landscape mode on your phone is also a great way to detect issues.
+A great way to detect issues is to test the website on different devices and browsers. At a minimum, use your mobile phone and your computer. You can also use the [Chrome DevTools](https://developer.chrome.com/docs/devtools/) to test on different screen sizes. Finally, make sure to test on all three major browsers: Chrome, Firefox, and Safari and their mobile counterparts. Switching to landscape mode on your phone can also uncover additional layout issues.
 
 ## Use screen readers and keyboard navigation
 
-Screen readers are tools that read the content of a website out loud. They are used by people with visual impairments. Screen reader users may navigate your site using keyboard navigation. Keyboard navigation is also used by people with motor impairments or for productivity reasons. Testing the website with a screen reader and keyboard navigation is a great way to detect accessibility issues.
+Screen readers are tools that read the content of a website out loud. They are used by people with visual impairments. Screen reader users may navigate your site using keyboard navigation. Keyboard navigation is also used by people with motor impairments or for productivity reasons. Testing the website with a screen reader and keyboard navigation will help you detect accessibility issues.
 
 ### Using keyboard navigation
 
@@ -67,15 +67,15 @@ Navigate the page without using your mouse and ensure all elements are focusable
 
 ### Working with screen readers
 
-There are many different screen readers out there. I recommend you start with [NVDA](https://www.nvaccess.org/) on Windows and [VoiceOver](https://www.apple.com/accessibility/mac/vision/) on macOS. On a Mac, you can enable VoiceOver in your system or browser settings. Once enabled, VoiceOver announces the currently focused element and reads the page's content out loud.
+There are many different screen readers out there. I recommend you start with [NVDA](https://www.nvaccess.org/) on Windows and [VoiceOver](https://www.apple.com/accessibility/mac/vision/) on macOS. On a Mac, you can enable VoiceOver in your system settings. Once enabled, VoiceOver announces the currently focused element and reads the page's content out loud.
 
-A screen reader is a great way to detect missing labels, alt texts, and other accessibility issues. Working with a screen reader may feel overwhelming initially, but it is a great way to create empathy for screen reader users.
+Using screen readers may feel overwhelming initially, but it is a great way to create empathy for screen reader users. It will help you understand how image alt texts, input labels, and other accessibility features come into play.
 
 You can find more information about keyboard navigation and screen readers in the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Glossary/Screen_reader). You can also find information about web accessibility in general in the  [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA).
 
 ### Network tab
 
-The Network tab of your browser's developer tools is a great way to get insights into the performance of your website. It shows you all the requests the browser makes to load the page. You can see the size of each request, the time it took to load, and more. You can also see the size of your assets.
+Use the Network tab of your browser's developer tools to get insights into the performance of your website. The Network tab shows you all the requests the browser makes to load the page. You can see the size of each request, the time it took to load, and more. You can also see the size of your assets.
 
 Investigating the requests in the Network tab is a great way to identify request waterfalls, large assets, and other performance issues. All website requests must first download the HTML document, which then references other assets like CSS and JavaScript files. The browser then downloads these assets and executes the JavaScript. The JavaScript may then make additional requests to load data from an API. This is called a request waterfall.
 
