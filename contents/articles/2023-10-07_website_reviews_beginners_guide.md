@@ -7,7 +7,7 @@ imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v
 imageAltText: Website Reviews - A beginner's guide by Andre Landgraf
 ---
 
-Reviewing websites is the process of giving constructive feedback to yourself or your peers on the quality of a website. It is a great way to learn and improve your skills as a developer. Like a quality PR review, there is a lot to reviewing websites. You can give feedback on the overall user experience, the design, the content, the code, the performance, the accessibility, the SEO, and more. In this short article, I want to provide you with a simple step-by-step guide to get started with website reviews.
+Reviewing websites is the process of analyzing different aspects of a website. You can review your own site to find issues and improve it or review the sites of others to learn or give constructive feedback. Like a quality PR review, there is a lot to reviewing websites. You can review the overall user experience, the design, the content, the code, the performance, the site’s accessibility, the SEO, and more. In this short article, I want to provide you with a simple step-by-step guide to get started with website reviews.
 
 ## The process
 

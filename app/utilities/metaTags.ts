@@ -27,7 +27,6 @@ const getMetaTags: (params: GetMetaTagsParams) => ReturnType<MetaFunction> = ({
   description = 'A tech enthusiast and student who loves to develop fullstack software solutions.',
   image = images.resumeImage.src,
   imageAlt = images.resumeImage.alt,
-  meta = {},
   useCatchPhraseInTitle = false,
   standaloneTitle = false,
   noIndex = false,
