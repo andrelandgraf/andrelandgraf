@@ -5,7 +5,7 @@ import { fetchMarkdownFilesFs, FetchMarkdownFilesResState } from '../app/modules
 import { validateFrontMatter } from '../app/modules/blog/validation.server';
 import { db } from '../app/modules/db.server';
 
-const OVERRIDE_EMBEDDINGS = true;
+const OVERRIDE_EMBEDDINGS = false;
 
 const { openAIKey } = getPrivateEnvVars();
 
