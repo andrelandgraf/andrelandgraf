@@ -22,7 +22,7 @@ The process I follow when reviewing websites is as follows:
 - Check the Network tab
 - Review the code
 
-The order of the steps doesn't really matter, but I like to start with the user experience and then move on to the more technical aspects. You also don't have to go through all the steps. For your personal site, you may want to do so, but for a peer review, you can focus on some specific areas. You may learn the most by inspecting the code on cool sites, but each step can help to give constructive feedback. Let's go through each step in more detail.
+The order of the steps doesn't really matter, but I like to start with the user experience and then move on to the more technical aspects. You also don't have to go through all the steps. For your personal site, you may want to do so, but for a peer review, you can focus on some specific areas. You may learn the most by inspecting the code on cool sites, but each step can help to give constructive feedback.
 
 ## Review the website from the perspective of a first-time visitor
 
@@ -34,13 +34,13 @@ When reviewing the website, ask yourself questions like:
 - What does it want me to do?
 - What is the first thing I see?
 
-You can then use the answers to these questions to give feedback on the overall user experience. For example, if the website is an online course website but the first call to action is a link to the blog, you can give feedback on that.
+You can then use the answers to these questions to give feedback on the overall user experience. For example, if the website is an online course website but the first call to action is a link to the blog, you can give feedback on that. Maybe the first call to action should be a link to the course catalog or a sign-up form.
 
 ## Utilize reporting tools to get objective data
 
 There are some great tools out there that can help you get objective data about a website. [Lighthouse](https://developers.google.com/web/tools/lighthouse), [Web.dev](https://web.dev/measure/) and [WebPageTest](https://www.webpagetest.org/) provide reports on performance, accessibility, SEO, and more. These tools are great for getting actionable feedback. Additionally, you can use specialized tools like [WAVE](https://wave.webaim.org/extension/) to get additional reports on accessibility.
 
-I recommend you start with Lighthouse. You can run a Lighthouse report from you Chrome DevTools by navigating to the Lighthouse tab and clicking the Generate report button. Read through the report, focus on one issue at a time, and try to understand the issue and how to fix it. Don't be shy about using Google for more information about the issue. For example, if Lighthouse suggests to use smaller images, you can Google "how to optimize images for the web"! 🤓
+I recommend you start with Lighthouse. You can run a Lighthouse report from your Chrome DevTools by navigating to the Lighthouse tab and clicking the Generate report button. Read through the report, focus on one issue at a time, and try to understand the issue and how to fix it. Don't be shy about using Google for more information about the issue. For example, if Lighthouse suggests to use smaller images, you can Google "how to optimize images for the web"! 🤓
 
 Side note: Optimizing images can have a huge impact on your site’s performance. The [Largest Contentful Paint (LCP)](https://web.dev/articles/lcp) often heavily depends on your images. However, managing responsive images can also get complicated. I personally use [Cloudinary](https://cloudinary.com/) for image hosting on this site, which automatically optimizes images and serves the right image size based on the device. [unpic](https://unpic.pics) is also a great package (and starting point) to help you optimize your images. Definitely don't shy away from using packages and services to help you with this!
 
