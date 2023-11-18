@@ -13,6 +13,7 @@ import { fetchMarkdownFiles } from '~/modules/blog/github/fetchMarkdownFiles.ser
 import { validateFrontMatter } from '~/modules/blog/validation.server';
 import { getPrivateEnvVars } from '~/modules/env.server';
 import { getFocusClasses } from '~/utilities/ariaClasses';
+import { images } from '~/utilities/images';
 import { getMetaTags } from '~/utilities/metaTags';
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
@@ -77,13 +78,24 @@ export default function Component() {
     <section className="flex flex-col gap-10 w-full">
       <div className="flex flex-col gap-10 w-full lg:max-w-3xl">
         <div className="flex flex-col gap-2">
-          <PageHeading>
-            {question
-              ? 'Ask me about All Things Web'
-              : tag && entries.length
-              ? `All Things ${tag}`
-              : 'All Things Web Blog Posts'}
-          </PageHeading>
+          <div className="flex flex-row gap-2">
+            <PageHeading>
+              {question
+                ? 'Ask me about All Things Web'
+                : tag && entries.length
+                ? `All Things ${tag}`
+                : 'All Things Web Blog Posts'}
+            </PageHeading>
+            <a title="RSS feed" href="https://andrelandgraf.dev/blog/rss" target="_blank" rel="noopener noreferrer">
+              <img
+                className="w-6 h-6 object-contain"
+                src={images.rssLogoImage.src}
+                alt={images.rssLogoImage.alt}
+                width={images.rssLogoImage.width}
+                height={images.rssLogoImage.height}
+              />
+            </a>
+          </div>
           <nav className="w-full flex flex-col gap-2">
             <SkipToContentLink className="sr-only focus:not-sr-only" href="#content">
               Skip to content
