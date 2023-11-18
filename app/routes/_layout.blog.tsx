@@ -19,7 +19,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   if (data?.tag && data?.entries.length) {
     return getMetaTags({
       title: `${data.tag} | Blog`,
-      description: `Check out my blog posts about ${data.tag}.`,
+      description: `Hey there! I write about all things web development. Check out my blog posts about ${data.tag}.`,
     });
   }
   if (data?.tag && !data?.entries.length) {
@@ -30,7 +30,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   }
   return getMetaTags({
     title: 'Blog',
-    description: 'Check out my blog posts. I write about all things web development.',
+    description: 'Hey there! I write about all things web development. Check out my blog posts.',
   });
 };
 
