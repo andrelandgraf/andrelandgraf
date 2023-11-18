@@ -6,7 +6,10 @@ import { Link, useLoaderData } from '@remix-run/react';
 import { ButtonLink } from '~/components/buttons';
 import { BlogMarkdownContainer } from '~/modules/blog/components';
 import { config } from '~/modules/blog/config';
+import { articleToMarkdocFile } from '~/modules/blog/db/fetchArticle.server';
 import { fetchClosestArticles, getContentOfChunkIndex } from '~/modules/blog/db/fetchArticles.server';
+import type { BlogArticleFrontmatter } from '~/modules/blog/validation.server';
+import { db } from '~/modules/db.server';
 import { getPrivateEnvVars } from '~/modules/env.server';
 import {
   type Conversation,
@@ -14,6 +17,7 @@ import {
   fetchOpenAI,
   FetchOpenAIResState,
 } from '~/modules/openAI/fetchOpenAI';
+import type { MarkdocFile } from '~/types';
 import { getFocusClasses } from '~/utilities/ariaClasses';
 import { getMetaTags } from '~/utilities/metaTags';
 
@@ -32,6 +36,23 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   if (!question || typeof question !== 'string') {
     return redirect('/blog');
+  }
+
+  const questionAndAnswer = await db.questionAndAnswer.findUnique({
+    where: { question },
+    include: {
+      recommendedArticles: true,
+    },
+  });
+  if (questionAndAnswer) {
+    const replyAst = Markdoc.parse(questionAndAnswer.answerMarkdown);
+    const markdownReply = Markdoc.transform(replyAst, config);
+
+    const matches: MarkdocFile<BlogArticleFrontmatter>[] = questionAndAnswer.recommendedArticles.map((article) =>
+      articleToMarkdocFile(article, markdownReply),
+    );
+
+    return json({ markdownReply, matches }, { headers: { 'cache-control': 'public, max-age=7200' } });
   }
 
   const [, embedsState, matches] = await fetchClosestArticles({ openAIKey, content: question });
@@ -112,12 +133,20 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const data = await response.json();
   const firstChoice = data.choices[0];
   const content = firstChoice?.message?.content;
-  if (!content) {
+  if (!content || typeof content !== 'string') {
     return json(
       { markdownReply: 'Sorry, something went wrong. Please try again later.', matches },
       { headers: { 'cache-control': 'public, max-age=7200' } },
     );
   }
+
+  await db.questionAndAnswer.create({
+    data: {
+      question,
+      answerMarkdown: content,
+      recommendedArticles: { connect: matches.map((match) => ({ id: match.articleId })) },
+    },
+  });
 
   const replyAst = Markdoc.parse(content);
   const markdownReply = Markdoc.transform(replyAst, config);

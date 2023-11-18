@@ -1,8 +1,13 @@
-import { fetchArticles } from '~/modules/blog/db/fetchArticles.server';
-import type { BlogArticleFrontmatter } from '~/modules/blog/validation.server';
-import type { MarkdocFile } from '~/types';
+import { db } from '~/modules/db.server';
 
-function generateRSS(articles: MarkdocFile<BlogArticleFrontmatter>[]) {
+type RSSArticles = {
+  slug: string;
+  date: Date;
+  title: string;
+  description: string;
+};
+
+function generateRSS(articles: RSSArticles[]) {
   return `<?xml version="1.0" encoding="UTF-8"?>
     <rss version="2.0">
     <channel>
@@ -13,10 +18,10 @@ function generateRSS(articles: MarkdocFile<BlogArticleFrontmatter>[]) {
     ${articles
       .map((article) => {
         return `<item>
-        <title>${article.frontmatter.title}</title>
-        <description>${article.frontmatter.description}</description>
+        <title>${article.title}</title>
+        <description>${article.description}</description>
         <link>https://andrelandgraf.dev/blog/${article.slug}</link>
-        <pubDate>${new Date(article.frontmatter.date).toUTCString()}</pubDate>
+        <pubDate>${new Date(article.date).toUTCString()}</pubDate>
         </item>`;
       })
       .join('\n')}
@@ -25,10 +30,17 @@ function generateRSS(articles: MarkdocFile<BlogArticleFrontmatter>[]) {
 }
 
 export async function loader() {
-  const [status, state, articles] = await fetchArticles();
-  if (status !== 200 || !articles) {
-    throw Error(`Error (${status}) ${state}: Failed to fetch blog articles.`);
-  }
+  const articles = await db.article.findMany({
+    select: {
+      slug: true,
+      date: true,
+      title: true,
+      description: true,
+    },
+    orderBy: {
+      date: 'desc',
+    },
+  });
   return new Response(generateRSS(articles), {
     headers: {
       'content-type': 'application/rss+xml',

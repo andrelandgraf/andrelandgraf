@@ -5,13 +5,13 @@ generator client {
 
 datasource db {
   provider   = "postgresql"
-  url  	= env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  url        = env("DATABASE_URL")
+  directUrl  = env("DIRECT_URL")
   extensions = [vector]
 }
 
 model Article {
-  id           String                         @id @default(cuid())
+  id           String             @id @default(cuid())
   slug         String
   date         DateTime
   title        String
@@ -21,6 +21,7 @@ model Article {
   imageAltText String?
   markdown     String
   embeddings   ArticleEmbedding[]
+  relatedQuestions QuestionAndAnswer[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -30,9 +31,22 @@ model Article {
 }
 
 model ArticleEmbedding {
-  id        String   @id @default(cuid())
-  articleId String
-  article   Article  @relation(fields: [articleId], references: [id])
-  embedding Unsupported("vector(1536)")?
-  chunkIndex Int @default(0)
+  id         String                       @id @default(cuid())
+  articleId  String
+  article    Article                      @relation(fields: [articleId], references: [id])
+  embedding  Unsupported("vector(1536)")?
+  chunkIndex Int                          @default(0)
+}
+
+model QuestionAndAnswer {
+  id             String @id @default(cuid())
+  question       String 
+  answerMarkdown String
+  recommendedArticles Article[]
+  verified       Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([question])
 }

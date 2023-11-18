@@ -1,4 +1,6 @@
+import type { RenderableTreeNode } from '@markdoc/markdoc';
 import Markdoc from '@markdoc/markdoc';
+import type { Article } from '@prisma/client';
 
 import { db } from '~/modules/db.server';
 import type { ActionResult, MarkdocFile } from '~/types';
@@ -12,16 +14,11 @@ export enum FetchArticleResState {
   success = 'success',
 }
 
-export async function fetchArticle(
-  slug: string,
-): Promise<ActionResult<FetchArticleResState, MarkdocFile<BlogArticleFrontmatter>>> {
-  const article = await db.article.findUnique({ where: { slug } });
-  if (!article) {
-    return [404, FetchArticleResState.fileNotFound, undefined];
-  }
-  const ast = Markdoc.parse(article.markdown);
-  const content = Markdoc.transform(ast, config);
-  const data = {
+export function articleToMarkdocFile(
+  article: Article,
+  content: RenderableTreeNode,
+): MarkdocFile<BlogArticleFrontmatter> {
+  return {
     slug: article.slug,
     frontmatter: {
       title: article.title,
@@ -34,5 +31,17 @@ export async function fetchArticle(
     content,
     markdown: article.markdown,
   };
-  return [200, FetchArticleResState.success, data];
+}
+
+export async function fetchArticle(
+  slug: string,
+): Promise<ActionResult<FetchArticleResState, MarkdocFile<BlogArticleFrontmatter>>> {
+  const article = await db.article.findUnique({ where: { slug } });
+  if (!article) {
+    return [404, FetchArticleResState.fileNotFound, undefined];
+  }
+  const ast = Markdoc.parse(article.markdown);
+  const content = Markdoc.transform(ast, config);
+
+  return [200, FetchArticleResState.success, articleToMarkdocFile(article, content)];
 }

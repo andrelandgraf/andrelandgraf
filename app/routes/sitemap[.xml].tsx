@@ -1,6 +1,4 @@
-import { fetchArticles } from '~/modules/blog/db/fetchArticles.server';
-import type { BlogArticleFrontmatter } from '~/modules/blog/validation.server';
-import type { MarkdocFile } from '~/types';
+import { db } from '~/modules/db.server';
 
 function getUrlElementWithDate(url: string, date: string) {
   return `<url>
@@ -9,7 +7,7 @@ function getUrlElementWithDate(url: string, date: string) {
         </url>`;
 }
 
-function generateSiteMap(articles: MarkdocFile<BlogArticleFrontmatter>[]) {
+function generateSiteMap(articles: { slug: string; date: Date }[], questions: { question: string }[]) {
   return `<?xml version="1.0" encoding="UTF-8"?>
         <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
             ${getUrlElementWithDate('https://andrelandgraf.dev', new Date().toISOString())}
@@ -19,7 +17,16 @@ function generateSiteMap(articles: MarkdocFile<BlogArticleFrontmatter>[]) {
                 (article) =>
                   `${getUrlElementWithDate(
                     `https://andrelandgraf.dev/blog/${article.slug}`,
-                    article.frontmatter.date,
+                    article.date.toISOString(),
+                  )}`,
+              )
+              .join('\n')}
+            ${questions
+              .map(
+                (question) =>
+                  `${getUrlElementWithDate(
+                    `https://andrelandgraf.dev/blog/ask?question=${encodeURIComponent(question.question)}`,
+                    new Date().toISOString(),
                   )}`,
               )
               .join('\n')}
@@ -32,11 +39,22 @@ function generateSiteMap(articles: MarkdocFile<BlogArticleFrontmatter>[]) {
 }
 
 export async function loader() {
-  const [status, state, articles] = await fetchArticles();
-  if (status !== 200 || !articles) {
-    throw Error(`Error (${status}) ${state}: Failed to fetch blog articles.`);
-  }
-  return new Response(generateSiteMap(articles), {
+  const questionAnswerQuery = db.questionAndAnswer.findMany({
+    select: {
+      question: true,
+    },
+    where: {
+      verified: true,
+    },
+  });
+  const articlesQuery = db.article.findMany({
+    select: {
+      slug: true,
+      date: true,
+    },
+  });
+  const [articles, questions] = await Promise.all([articlesQuery, questionAnswerQuery]);
+  return new Response(generateSiteMap(articles, questions), {
     headers: {
       'content-type': 'application/xml',
     },
