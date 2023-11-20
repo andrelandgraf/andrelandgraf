@@ -22,6 +22,10 @@ export default {
         allThingsWebPurple: '#D13ABD',
         allThingsWebOrange: '#EEBD89',
       },
+      maxWidth: {
+        wide: '1920px',
+        ultraWide: '2400px',
+      },
       fontFamily: {
         gamified: ['"Press Start 2P"', 'cursive'],
       },
@@ -30,6 +34,14 @@ export default {
          * sometimes its nice to say: mobileOnly: without needing to reset it with md:...
          */
         mobile: { max: '639px' },
+        /**
+         * for very big screens
+         */
+        wide: { min: '1920px' },
+        /**
+         * for very very big screens
+         */
+        ultraWide: { min: '2400px' },
       },
     },
   },

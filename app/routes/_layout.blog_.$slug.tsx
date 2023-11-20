@@ -67,7 +67,7 @@ export default function Component() {
   const { article } = useLoaderData<typeof loader>();
 
   return (
-    <article className="w-full max-w-7xl flex flex-col gap-5 leading-loose">
+    <article className="w-full max-w-7xl flex flex-col wide:m-auto gap-5 leading-loose">
       <div className="flex flex-col gap-1">
         <H1>{article.frontmatter.title}</H1>
         <SectionHeading>

@@ -75,7 +75,7 @@ export default function Component() {
   const { entries, tag, tags } = useLoaderData<typeof loader>();
 
   return (
-    <section className="flex flex-col gap-10 w-full">
+    <section className="flex flex-col gap-10 w-full wide:items-center">
       <div className="flex flex-col gap-10 w-full lg:max-w-3xl">
         <div className="flex flex-col gap-2">
           <div className="flex flex-row gap-2">
