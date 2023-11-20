@@ -3,7 +3,7 @@ date: 2023-11-19
 title: How to tame the unknown (and anything else)
 description: TypeScript is a powerful tool to help us write better code. However, it can sometimes also get in the way, especially on the boundaries of the application where we interact with untyped data. In this article, I want to show you how to quickly narrow types and validate unknown and any.
 
-categories: [Web Development, TypeScript, Remix]
+categories: [Web Development, TypeScript]
 ---
 
 TypeScript is a powerful tool to help us write better code. However, it can sometimes also get in the way, especially on the boundaries of the application where we interact with untyped data. In this article, I want to show you how to quickly narrow types and validate `unknown` and `any`.
@@ -20,32 +20,25 @@ Examples of type narrowing:
 
 ## Why `unknown` and `any` exist
 
-On the boundaries of the application, we often interact with untyped data. For example, we may receive data from an API, parse data from local storage, or read data from a cookie. TypeScript doesn't know the data type, so it assigns the `unknown` or `any` type to it.
-
-Example of a `loader` function fetching data from an API:
+On the boundaries of the application, we often interact with untyped data. For example, we may receive data from an API, parse data from local storage, or read data from a cookie. TypeScript doesn't know the data type, so it assigns the `unknown` or `any` type to it:
 
 ```typescript
-import type { LoaderFunctionArgs } from '@remix-run/node';
-
-export async function loader({ request }: LoaderFunctionArgs) {
+export async function fetchPokemon() {
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/piakchu`);
   const pokemon = await res.json(); // pokemon typed as any
   return { pokemon };
 }
 ```
 
-When we observe `any` and `unknown` in our code, it is our job as developers to turn them into known types. This can be annoying sometimes, but it ensures that our code remains safe and predictable.
+The return type of `res.json()` can only be determined at runtime. For example, the API may return a `Pokemon` object or an error object. TypeScript can only infer the type of `pokemon` as `any`. When we observe `any` and `unknown` in our code, it is our job as developers to turn them into known types. This can be annoying sometimes, but it ensures that our code remains safe and predictable.
 
 ## Why union types exist
 
-Similarly, union types exist because TypeScript doesn't know the exact type of a variable. For example, we may have a variable that can either be a `string` or `null`. For example, a URL search parameter may or may not exist:
+Similarly, union types exist because TypeScript doesn't know the exact type of a variable. For example, a URL search parameter may or may not exist, so it can either be of type `string` or `null`.
 
 ```typescript
-// route pokemon?name=piakchu
-import type { LoaderFunctionArgs } from '@remix-run/node';
-
-export async function loader({ request }: LoaderFunctionArgs) {
-  const name = new URL(request.url).searchParams.get('name'); // name typed as string | null
+export async function fetchPokemon(searchParams: SearchParams) {
+  const name = searchParams.get('name'); // name typed as string | null
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
   const pokemon = await res.json(); // pokemon typed as any
   return { pokemon };
@@ -53,6 +46,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 ```
 
 When we observe a union type like `string | null | undefined` in our code, it is our job to narrow the type to a specific type if needed.
+
+Note that union types are super powerful and can be used for many things. Here, we only focus on the case where TypeScript assigns a union type to a variable because it doesn't know the exact type, and we want to narrow the type to a specific type.
 
 ## Why typecasting with `as` is not the best solution
 
@@ -65,8 +60,8 @@ type Pokemon = {
   weight: number;
 };
 
-export async function loader({ request }: LoaderFunctionArgs) {
-  const name = new URL(request.url).searchParams.get('name') as string; // name type is now string
+export async function fetchPokemon(searchParams: SearchParams) {
+  const name = searchParams.get('name') as string; // name type is now string
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
   const pokemon = (await res.json()) as Pokemon; // pokemon type is now Pokemon
   return { pokemon };
@@ -84,7 +79,7 @@ Similarly, if we use typecasting to turn `pokemon` into a `Pokemon` type, we ign
 }
 ```
 
-In case of an error, the typecasting results in runtime errors and unexpected behavior:
+In case of an error, our current code results runtime errors and unexpected behavior:
 
 ```tsx
 function PokemonCard({ pokemon }: Pokemon) {
@@ -100,7 +95,7 @@ function PokemonCard({ pokemon }: Pokemon) {
 }
 ```
 
-Instead of blindly typecasting, we should validate the data when we cannot be certain that the data is correct. Verifying unknown data makes our code more robust and avoids unexpected failures. Let's take a look at some ways to verify data.
+Instead of blindly typecasting, we should validate data that enters our application. This does not only satisfy TypeScript but also makes our code more robust and avoids unexpected failures. Let's take a look at some ways to verify data.
 
 ## Truthiness (not falsy) assertion
 
@@ -113,11 +108,11 @@ type Pokemon = {
   weight: number;
 };
 
-export async function loader({ request }: LoaderFunctionArgs) {
-  const name = new URL(request.url).searchParams.get('name'); // name typed as string | null
+export async function fetchPokemon(searchParams: SearchParams) {
+  const name = searchParams.get('name'); // name typed as string | null
   if(!name) {
     // name is null
-    throw new Response('Not found', { status: 404 });
+    throw new Error('Not found');
   }
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`); // name is string
   const pokemon = (await res.json());
@@ -125,9 +120,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 ```
 
-TypeScript is smart enough to infer the type of `name` as a string after the `if` statement. We successfully narrow the type of `name` from `string | null` to `string`.
-
-Notice that validating `name` also made our code more robust. If the user removes the `name` query parameter from the URL, we throw a 404 error, potentially displaying a 404 page. By validating `name`, we avoid unexpected runtime errors and gain the ability to handle errors gracefully - communicating to the user what exactly went wrong.
+TypeScript is smart enough to infer the type of `name` as a string after the `if` statement. We successfully narrow the type of `name` from `string | null` to `string`. Notice that this also makes our code more robust. If the user removes the `name` query parameter from the URL, we throw a 404 response, potentially displaying a 404 page. By validating `name`, we avoid unexpected runtime errors and gain the ability to handle errors gracefully - communicating to the user what exactly went wrong.
 
 {% statement %}
 By narrowing types, we force ourselves to consider edge cases and handle them gracefully.
@@ -186,21 +179,21 @@ type Pokemon = {
   weight: number;
 };
 
-export async function loader({ request }: LoaderFunctionArgs) {
-  const name = new URL(request.url).searchParams.get('name'); // name typed as string | null
+export async function fetchPokemon(searchParams: SearchParams) {
+  const name = searchParams.get('name'); // name typed as string | null
   if(!name) {
     // name is null
-    throw new Response('Not found', { status: 404 });
+    throw new Error('Not found');
   }
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`); // name is string
   if(!res.ok) {
     // best practice to check response before parsing to JSON
-    throw new Response(res.statusText, { status: res.status });
+    throw new Error(res.statusText);
   }
   const data = await res.json();
   if(!isPokemon(data)) {
     // data is not a Pokemon
-    throw new Response('Not found', { status: 404 });
+    throw new Error('Not found');
   }
   return { pokemon }; // pokemon is typed as Pokemon
 }
@@ -208,7 +201,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 Just like that, we successfully narrowed the type of `pokemon` from `any` to `Pokemon`! We also significantly enhanced the error handling of our app. From here, we could add additional checks to verify the specific errors for more detailed error handling.
 
-Can you guess how we could use type predicates to verify arrays or nested objects? Maybe we create an `inPokemonArray` type predicate to verify an array of `Pokemon` objects? You get the idea!
+Can you guess how we could use type predicates to verify arrays or nested objects? For arrays, we could create an `inPokemonArray` type predicate to verify an array of `Pokemon` objects, looping over `isPokemon` calls, returning `true` if each item is a pokemon. You get the idea!
 
 ## Helpful packages
 
@@ -225,23 +218,23 @@ const pokemonSchema = z.object({
   weight: z.number(),
 });
 
-export async function loader({ request }: LoaderFunctionArgs) {
-  const name = new URL(request.url).searchParams.get('name'); // name typed as string | null
+export async function fetchPokemon(searchParams: SearchParams) {
+  const name = searchParams.get('name'); // name typed as string | null
   if(!name) {
     // name is null
-    throw new Response('Not found', { status: 404 });
+    throw new Error('Not found');
   }
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`); // name is string
   if(!res.ok) {
     // best practice to check response before parsing to JSON
-    throw new Response(res.statusText, { status: res.status });
+    throw new Error(res.statusText);
   }
   const data = await res.json();
   try {
     const pokemon = pokemonSchema.parse(data);
   } catch (error) {
     // data is not a Pokemon
-    throw new Response('Not found', { status: 404 });
+    throw new Error('Not found');
   }
   return { pokemon }; // pokemon is typed as Pokemon
 }
