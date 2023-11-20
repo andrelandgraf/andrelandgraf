@@ -20,7 +20,7 @@ Examples of type narrowing:
 
 ## Why `unknown` and `any` exist
 
-On the boundaries of the application, we often interact with untyped data. For example, we may receive data from an API, parse data from local storage, or read data from a cookie. TypeScript doesn't know the data type, so it assigns the `unknown` or `any` type to it:
+On the boundaries of the application, we often interact with untyped data. For example, we may receive data from an API, parse data from local storage, or read data from a cookie. TypeScript assigns the `unknown` or `any` type as it can't determine what the shape of the return value will be:
 
 ```typescript
 export async function fetchPokemon() {
@@ -47,7 +47,7 @@ export async function fetchPokemon(searchParams: SearchParams) {
 
 When we observe a union type like `string | null | undefined` in our code, it is our job to narrow the type to a specific type if needed.
 
-Note that union types are super powerful and can be used for many things. Here, we only focus on the case where TypeScript assigns a union type to a variable because it doesn't know the exact type, and we want to narrow the type to a specific type.
+Note that union types are super powerful and can be used for many things. Here, we only focus on the case where TypeScript assigns a union type to a variable because it doesn't know the exact type, and we want to narrow the type to be specific.
 
 ## Why typecasting with `as` is not the best solution
 
@@ -79,7 +79,7 @@ Similarly, if we use typecasting to turn `pokemon` into a `Pokemon` type, we ign
 }
 ```
 
-In case of an error, our current code results runtime errors and unexpected behavior:
+In case of an error, our current code then results in runtime errors and unexpected behavior:
 
 ```tsx
 function PokemonCard({ pokemon }: Pokemon) {
@@ -120,7 +120,7 @@ export async function fetchPokemon(searchParams: SearchParams) {
 }
 ```
 
-TypeScript is smart enough to infer the type of `name` as a string after the `if` statement. We successfully narrow the type of `name` from `string | null` to `string`. Notice that this also makes our code more robust. If the user removes the `name` query parameter from the URL, we throw a 404 response, potentially displaying a 404 page. By validating `name`, we avoid unexpected runtime errors and gain the ability to handle errors gracefully - communicating to the user what exactly went wrong.
+TypeScript is smart enough to infer the type of `name` as a string after the `if` statement. We successfully narrow the type of `name` from `string | null` to `string`. Notice that this also makes our code more robust. If the user removes the `name` query parameter from the URL, we throw a 404 error, potentially displaying a 404 page. By validating `name`, we avoid unexpected runtime errors and gain the ability to handle errors gracefully - communicating to the user what exactly went wrong.
 
 {% statement %}
 By narrowing types, we force ourselves to consider edge cases and handle them gracefully.
@@ -135,8 +135,10 @@ Primitives can also be verified using the `typeof` operator:
 ```typescript
 const weight = pokemon.weight;
 if(typeof weight !== 'number') {
+  // weight is not a number
   throw new Error('Weight is not a number');
 }
+// weight is a number
 ```
 
 `typeof` checks are great as they also work when the variable is typed as `unknown` or `any`.
@@ -151,7 +153,7 @@ function isPokemon(pokemon: unknown): pokemon is Pokemon {
 }
 ```
 
-It's up to us to decide what makes a Pokemon a Pokemon. For example, we could say that a Pokemon is an object with a `name` property of type `string`, a `height` property of type `number`, and a `weight` property of type `number`:
+It's up to us to decide what makes a pokemon a `Pokemon`. For example, we could say that a `Pokemon` is an object with a `name` property of type `string`, a `height` property of type `number`, and a `weight` property of type `number`:
 
 ```typescript
 function isPokemon(pokemon: unknown): pokemon is Pokemon {
@@ -205,9 +207,11 @@ Can you guess how we could use type predicates to verify arrays or nested object
 
 ## Helpful packages
 
+There are some great validation tools out there! My two favorites are zod and tiny-invariant.
+
 ### zod
 
-There are some great validation tools out there! To validate complex data structures, you may want to check out [zod](https://zod.dev/). With zod, you can create schemas to validate data against.
+To validate complex data structures, you may want to check out [zod](https://zod.dev/). With zod, you can create schemas to validate data against:
 
 ```typescript
 import { z } from 'zod';
@@ -232,11 +236,11 @@ export async function fetchPokemon(searchParams: SearchParams) {
   const data = await res.json();
   try {
     const pokemon = pokemonSchema.parse(data);
+    return { pokemon }; // pokemon is typed as Pokemon
   } catch (error) {
     // data is not a Pokemon
     throw new Error('Not found');
   }
-  return { pokemon }; // pokemon is typed as Pokemon
 }
 ```
 
