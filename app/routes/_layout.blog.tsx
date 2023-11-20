@@ -86,7 +86,7 @@ export default function Component() {
                 ? `All Things ${tag}`
                 : 'All Things Web Blog Posts'}
             </PageHeading>
-            <a title="RSS feed" href="/blog/rss.xml">
+            <a title="RSS feed" href="/blog/rss">
               <img
                 className="w-6 h-6 object-contain"
                 src={images.rssLogoImage.src}
