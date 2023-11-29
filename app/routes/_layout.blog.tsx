@@ -76,9 +76,9 @@ export default function Component() {
 
   return (
     <section className="flex flex-col gap-10 w-full wide:items-center">
-      <div className="flex flex-col gap-10 w-full lg:max-w-3xl">
-        <div className="flex flex-col gap-2">
-          <div className="flex flex-row gap-2">
+      <div className="flex flex-col gap-10 w-full lg:max-w-3xl wide:max-w-5xl wide:items-center">
+        <div className="w-full flex flex-col gap-2">
+          <div className="w-full flex flex-row gap-2">
             <PageHeading>
               {question
                 ? 'Ask me about All Things Web'
@@ -101,13 +101,16 @@ export default function Component() {
               Skip to content
             </SkipToContentLink>
             <p>
-              Filter blog posts by tag, <StyledLink to="/blog">show all</StyledLink> or{' '}
-              <StyledLink to="#ask">ask a question</StyledLink>.
+              Filter blog posts by tag,{' '}
+              <StyledLink to="/blog" preventScrollReset>
+                show all
+              </StyledLink>{' '}
+              or <StyledLink to="#ask">ask a question</StyledLink>.
             </p>
             <Tags title="All tags" tags={tags} />
           </nav>
         </div>
-        <Form method="GET" action="/blog/ask" className="flex flex-row gap-2 relative">
+        <Form method="GET" action="/blog/ask" className="flex flex-row gap-2 relative w-full" preventScrollReset>
           <Textarea
             defaultValue={question || undefined}
             name="question"

@@ -19,7 +19,7 @@ export function Textarea({ label, id, ...props }: TextAreaProps) {
   }, [value]);
 
   return (
-    <div className="flex flex-col gap-2 w-full lg:max-w-3xl">
+    <div className="flex flex-col gap-2 w-full">
       <label htmlFor={id} className="text-sm">
         {label}
       </label>

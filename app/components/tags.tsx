@@ -13,6 +13,7 @@ export function Tag({ children, className = '', ...props }: LinkProps) {
         getFocusClasses(true),
         className,
       )}
+      preventScrollReset
     >
       {children}
     </Link>

@@ -158,11 +158,11 @@ export default function Component() {
   const { markdownReply, matches } = useLoaderData<typeof loader>();
   return (
     <div className="w-full flex flex-col items-center lg:flex-row lg:items-stretch wide:flex-col gap-10">
-      <article className="w-full lg:max-w-3xl border-primary leading-loose p-4 rounded-md bg-teal-100 dark:bg-teal-900 text-gray-800 dark:text-white">
+      <article className="w-full lg:max-w-3xl wide:max-w-5xl border-primary leading-loose p-4 rounded-md bg-teal-100 dark:bg-teal-900 text-gray-800 dark:text-white">
         <BlogMarkdownContainer className="w-full flex flex-col gap-4" content={markdownReply} />
       </article>
       {!!matches?.length && (
-        <aside className="w-full lg:max-w-3xl">
+        <aside className="w-full lg:max-w-3xl wide:max-w-5xl">
           <h2 className="text-xl lg:text-2lx font-bold mb-4">Related Blog Posts</h2>
           <ul className="flex flex-col gap-10" title="Related articles">
             {matches.map(({ frontmatter, slug }) => (
