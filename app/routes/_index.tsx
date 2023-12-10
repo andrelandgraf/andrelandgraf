@@ -1,10 +1,11 @@
 import type { HeadersFunction, LinksFunction, MetaFunction } from '@remix-run/node';
 import type { LinkProps } from '@remix-run/react';
 import clsx from 'clsx';
-import type { HTMLAttributes } from 'react';
+import { type HTMLAttributes, useEffect, useState } from 'react';
 
 import { ButtonLink } from '~/components/buttons';
 import { UnstyledLink } from '~/components/links';
+import { Book3DScene } from '~/components/models/book';
 import { PageTransitionProgressBar } from '~/components/progress';
 import indexStyles from '~/styles/index.css';
 import { getFocusClasses } from '~/utilities/ariaClasses';
@@ -50,10 +51,10 @@ export default function Component() {
         ))}
         <Frame className="frame-one text-center font-mono">
           <div className="min-h-[100vh] whitespace-normal lg:whitespace-nowrap flex flex-col items-center justify-center gap-4 lg:gap-8">
-            <h1 className="frame-one-heading text-6xl lg:text-9xl text-allThingsWebPurple font-extrabold">
+            <h1 className="frame-one-heading text-6xl lg:text-8xl xl:text-9xl text-allThingsWebPurple font-extrabold">
               All Things Web
             </h1>
-            <p className="frame-one-subheading text-2xl lg:text-4xl text-allThingsWebOrange font-extrabold">
+            <p className="frame-one-subheading text-2xl lg:text-3xl xl:text-4xl text-allThingsWebOrange font-extrabold">
               Web Dev, <SubHeadingLink to="#talks">Talks</SubHeadingLink>,{' '}
               <SubHeadingLink to="#tutoring">Tutoring</SubHeadingLink>,{' '}
               <SubHeadingLink to="/blog">Blog Posts</SubHeadingLink>,{' '}
@@ -96,13 +97,7 @@ export default function Component() {
                 Check it out now!
               </ButtonLink>
             </div>
-            <img
-              className="max-w-[50vw] lg:max-w-[30vw] shadow-lg shadow-black"
-              src={images.bookCoverImage.src}
-              alt={images.bookCoverImage.alt}
-              height={images.bookCoverImage.height}
-              width={images.bookCoverImage.width}
-            />
+            <BookModel />
           </div>
         </Frame>
         <Frame className="frame-three text-center font-mono" id="tutoring">
@@ -250,5 +245,30 @@ function Star({ w, h, t, r }: StarProps) {
         right: `${r}vw`,
       }}
     ></div>
+  );
+}
+
+function BookModel() {
+  const [is3DSupported, setIs3DSupported] = useState(false);
+
+  useEffect(() => {
+    setIs3DSupported(!!window.WebGLRenderingContext);
+  }, []);
+
+  if (!is3DSupported) {
+    return (
+      <img
+        className="max-w-[50vw] lg:max-w-[30vw] shadow-lg shadow-black"
+        src={images.bookCoverImage.src}
+        alt={images.bookCoverImage.alt}
+        height={images.bookCoverImage.height}
+        width={images.bookCoverImage.width}
+      />
+    );
+  }
+  return (
+    <div className="h-[40vh] lg:h-[30vh] xl:h-[60vh] wide:[80vh] max-h-[1200px] w-full">
+      <Book3DScene />
+    </div>
   );
 }
