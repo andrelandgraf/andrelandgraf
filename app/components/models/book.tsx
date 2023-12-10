@@ -88,8 +88,8 @@ export function Book3DScene() {
     <Canvas onPointerOver={(e) => setHover(true)} onPointerOut={(e) => setHover(false)}>
       <Suspense fallback={null}>
         <PerspectiveCamera makeDefault position={[0, 0, 300]} rotation={[0, 0, 0]} fov={50} />
-        <ambientLight intensity={0.2} />
-        <directionalLight position={[0, 500, 500]} intensity={hovered ? 1.2 : 1} />
+        <ambientLight intensity={0.8} />
+        <directionalLight position={[0, 200, 500]} intensity={hovered ? 1.4 : 1} />
         <Book3DModel hoveredRef={hoveredRef} />
       </Suspense>
     </Canvas>
