@@ -22,10 +22,13 @@ export function Book3DModel({ hoveredRef }: { hoveredRef: MutableRefObject<boole
   const { nodes, materials } = useGLTF('/book-v1.glb');
   useFrame(() => {
     if (!ref.current || hoveredRef.current) return;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const fourSecondsSinceDrag = !draggedRef.current || Date.now() - draggedRef.current.timestamp > 4000;
     const stoppedDragging = !draggedRef.current || Date.now() - draggedRef.current.timestamp > 200;
     if (!draggedRef.current || fourSecondsSinceDrag) {
-      ref.current.rotation.y += 0.005;
+      if (!prefersReducedMotion) {
+        ref.current.rotation.y += 0.005;
+      }
       // slowly back to base x and z
       if (ref.current.rotation.z > baseZ) {
         ref.current.rotation.z -= 0.005;
