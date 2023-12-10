@@ -1,11 +1,10 @@
 {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-    "[markdown][javascript][javascriptreact][typescript][typescriptreact]": {
-      "editor.formatOnSave": false
-    },
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
-    }
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "[markdown][javascript][javascriptreact][typescript][typescriptreact]": {
+    "editor.formatOnSave": false
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
   }
-  
+}

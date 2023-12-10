@@ -72,10 +72,10 @@ export default function Component() {
             </div>
           </div>
         </Frame>
-        <Frame className="frame-two text-center font-mono">
+        <Frame className="frame-two text-center font-mono" id="book">
           <div className="min-h-[100vh] mx-4 lg:mx-[10vw] flex items-center justify-center flex-col-reverse lg:flex-row gap-16 lg:gap-[10vw]">
             <div className="lg:max-w-[40vw] flex flex-col items-center justify-center gap-4 lg:gap-8">
-              <h2 className="text-2xl lg:text-4xl text-packtOrange font-extrabold" id="book">
+              <h2 className="text-2xl lg:text-4xl text-packtOrange font-extrabold">
                 Full Stack Web Development with Remix
               </h2>
               <p className="text-xl lg:text-2xl text-white font-bold">
