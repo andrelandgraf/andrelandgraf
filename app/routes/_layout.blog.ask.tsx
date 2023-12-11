@@ -9,8 +9,8 @@ import { config } from '~/modules/blog/config';
 import { articleToMarkdocFile } from '~/modules/blog/db/fetchArticle.server';
 import { fetchClosestArticles, getContentOfChunkIndex } from '~/modules/blog/db/fetchArticles.server';
 import type { BlogArticleFrontmatter } from '~/modules/blog/validation.server';
+import { getPrivateEnvVars } from '~/modules/config/env.server';
 import { db } from '~/modules/db.server';
-import { getPrivateEnvVars } from '~/modules/env.server';
 import {
   type Conversation,
   FetchEmbeddingResState,

@@ -8,7 +8,7 @@ import { fetchArticle } from '~/modules/blog/db/fetchArticle.server';
 import { fetchMarkdownFileFs } from '~/modules/blog/fs/fetchMarkdownFile.server';
 import { fetchMarkdownFile } from '~/modules/blog/github/fetchMarkdownFile.server';
 import { validateFrontMatter } from '~/modules/blog/validation.server';
-import { getPrivateEnvVars } from '~/modules/env.server';
+import { getPrivateEnvVars } from '~/modules/config/env.server';
 import { useTwitterEmbeds } from '~/modules/twitter-embeds';
 import syntaxHighlightingStylesUrl from '~/styles/code.css';
 import { getISODate, getReadableDate } from '~/utilities/dates';

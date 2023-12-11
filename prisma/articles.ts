@@ -1,4 +1,4 @@
-import { getPrivateEnvVars } from '~/modules/env.server';
+import { getPrivateEnvVars } from '~/modules/config/env.server';
 import { fetchEmbedding, FetchEmbeddingResState, MAX_CONTENT_LENGTH } from '~/modules/openAI/fetchOpenAI';
 
 import { fetchMarkdownFilesFs, FetchMarkdownFilesResState } from '../app/modules/blog/fs/fetchMarkdownFiles.server';

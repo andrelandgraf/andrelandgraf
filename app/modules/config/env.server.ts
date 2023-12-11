@@ -1,15 +1,16 @@
 import dotenv from 'dotenv';
 import invariant from 'tiny-invariant';
 
+import type { PrivateEnvVars, PublicEnvVars } from './types';
+
 dotenv.config();
 
-type PrivateEnvVars = {
-  readContentFrom: 'locale' | 'github' | 'production';
-  databaseUrl: string;
-  githubAccessToken: string;
-  githubRepoAPIUrl: string;
-  openAIKey: string;
-};
+export function getPublicEnvVars(): PublicEnvVars {
+  const env = process.env.NODE_ENV === 'production' ? 'production' : 'development';
+  return {
+    env,
+  };
+}
 
 const DEV_FETCH_FROM = 'production';
 
@@ -23,6 +24,7 @@ export function getPrivateEnvVars(): PrivateEnvVars {
   const openAIKey = process.env.OPEN_AI_KEY;
   invariant(openAIKey && typeof openAIKey === 'string', 'Open AI key is not defined');
   return {
+    ...getPublicEnvVars(),
     databaseUrl,
     githubAccessToken,
     githubRepoAPIUrl,

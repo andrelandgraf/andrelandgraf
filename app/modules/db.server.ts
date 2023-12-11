@@ -4,7 +4,7 @@ import { PrismaNeon } from '@prisma/adapter-neon';
 import { PrismaClient } from '@prisma/client';
 import ws from 'ws';
 
-import { getPrivateEnvVars } from './env.server';
+import { getPrivateEnvVars } from './config/env.server';
 
 let db: PrismaClient;
 

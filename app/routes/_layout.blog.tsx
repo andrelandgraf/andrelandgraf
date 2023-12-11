@@ -1,6 +1,7 @@
 import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { Form, Outlet, useLoaderData, useRouteError, useSearchParams } from '@remix-run/react';
+import { captureRemixErrorBoundaryError } from '@sentry/remix';
 import clsx from 'clsx';
 
 import { Textarea } from '~/components/forms';
@@ -11,7 +12,7 @@ import { fetchArticles } from '~/modules/blog/db/fetchArticles.server';
 import { fetchMarkdownFilesFs } from '~/modules/blog/fs/fetchMarkdownFiles.server';
 import { fetchMarkdownFiles } from '~/modules/blog/github/fetchMarkdownFiles.server';
 import { validateFrontMatter } from '~/modules/blog/validation.server';
-import { getPrivateEnvVars } from '~/modules/env.server';
+import { getPrivateEnvVars } from '~/modules/config/env.server';
 import { getFocusClasses } from '~/utilities/ariaClasses';
 import { images } from '~/utilities/images';
 import { getMetaTags } from '~/utilities/metaTags';
@@ -132,6 +133,7 @@ export default function Component() {
 
 export function ErrorBoundary() {
   const error = useRouteError();
+  captureRemixErrorBoundaryError(error);
   const message = error instanceof Error ? error.message : 'An error occurred.';
   return (
     <section className="w-full flex flex-col items-center justify-center gap-10">
