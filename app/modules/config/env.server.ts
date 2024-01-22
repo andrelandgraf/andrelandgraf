@@ -1,9 +1,11 @@
-import dotenv from 'dotenv';
 import invariant from 'tiny-invariant';
 
 import type { PrivateEnvVars, PublicEnvVars } from './types';
 
-dotenv.config();
+if (process.env.NODE_ENV === 'development') {
+  const dotenv = await import('dotenv');
+  dotenv.config();
+}
 
 export function getPublicEnvVars(): PublicEnvVars {
   const env = process.env.NODE_ENV === 'production' ? 'production' : 'development';
