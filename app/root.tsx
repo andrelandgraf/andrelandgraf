@@ -1,14 +1,4 @@
-import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useLoaderData,
-  useRouteError,
-} from '@remix-run/react';
-import { captureRemixErrorBoundaryError } from '@sentry/remix';
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from '@remix-run/react';
 import type { LinksFunction } from '@vercel/remix';
 
 import styles from '~/styles/tailwind.css';
@@ -45,7 +35,5 @@ export default function App() {
 }
 
 export function ErrorBoundary() {
-  const error = useRouteError();
-  captureRemixErrorBoundaryError(error);
   return <div>Something went wrong</div>;
 }

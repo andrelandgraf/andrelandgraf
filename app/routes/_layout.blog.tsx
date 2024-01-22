@@ -1,7 +1,6 @@
 import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { Form, Outlet, useLoaderData, useRouteError, useSearchParams } from '@remix-run/react';
-import { captureRemixErrorBoundaryError } from '@sentry/remix';
 import clsx from 'clsx';
 
 import { Textarea } from '~/components/forms';
@@ -133,7 +132,6 @@ export default function Component() {
 
 export function ErrorBoundary() {
   const error = useRouteError();
-  captureRemixErrorBoundaryError(error);
   const message = error instanceof Error ? error.message : 'An error occurred.';
   return (
     <section className="w-full flex flex-col items-center justify-center gap-10">
