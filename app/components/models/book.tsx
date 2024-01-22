@@ -19,7 +19,7 @@ export function Book3DModel({ hoveredRef }: { hoveredRef: MutableRefObject<boole
   // size: {x: 150, y: 185, z: 15}
   const ref = useRef<Group<Object3DEventMap>>(null);
   const draggedRef = useRef<DragData | null>(null);
-  const { nodes, materials } = useGLTF('/book-v1.glb');
+  const { nodes, materials } = useGLTF('/book-v2.glb');
   useFrame(() => {
     if (!ref.current || hoveredRef.current) return;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -96,4 +96,4 @@ export function Book3DScene() {
   );
 }
 
-useGLTF.preload('/book-v1.glb');
+useGLTF.preload('/book-v2.glb');
