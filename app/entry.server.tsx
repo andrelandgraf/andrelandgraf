@@ -1,28 +1,25 @@
 import { PassThrough } from 'node:stream';
 
-import type { AppLoadContext, EntryContext, HandleErrorFunction } from '@remix-run/node';
+import type { AppLoadContext, EntryContext } from '@remix-run/node';
 import { createReadableStreamFromReadable } from '@remix-run/node';
 import { RemixServer } from '@remix-run/react';
-import { captureRemixServerException, init } from '@sentry/remix';
 import isbot from 'isbot';
 import { renderToPipeableStream } from 'react-dom/server';
 
-import { getPrivateEnvVars } from './modules/config/env.server';
+// export const handleError: HandleErrorFunction = (error, { request }) => {
+//   captureRemixServerException(error, 'remix.server', request);
+// };
 
-export const handleError: HandleErrorFunction = (error, { request }) => {
-  captureRemixServerException(error, 'remix.server', request);
-};
+// function initSentry() {
+//   const { env } = getPrivateEnvVars();
+//   init({
+//     dsn: 'https://020aa2228a95a91776db532a05b75c55@o4504234754899968.ingest.sentry.io/4506177521188864',
+//     tracesSampleRate: 1,
+//     enabled: env === 'production',
+//   });
+// }
 
-function initSentry() {
-  const { env } = getPrivateEnvVars();
-  init({
-    dsn: 'https://020aa2228a95a91776db532a05b75c55@o4504234754899968.ingest.sentry.io/4506177521188864',
-    tracesSampleRate: 1,
-    enabled: env === 'production',
-  });
-}
-
-initSentry();
+// initSentry();
 
 const ABORT_DELAY = 5_000;
 
