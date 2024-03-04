@@ -3,6 +3,8 @@ date: 2024-03-03
 title: Use Terraform for your app's Cloudflare infra 
 description: Terraform is an infrastructure as code tool that enables you to provision and manage infrastructure. Let's get started using Terraform to provision Cloudflare infrastructure for your Remix projects.
 categories: [DevOps, Remix.run, Terraform, Cloudflare]
+imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1682302824/andrelandgraf.dev/terraform-remix-cloudflare_y7viaf
+imageAltText: A beginner's guide by Andre Landgraf. Use Terraform for your app's Cloudflare infra. 
 ---
 
 [Terraform](https://www.terraform.io/) is an infrastructure as code tool that enables you to provision and manage infrastructure. It uses an adapter/provider model to work with different cloud providers such as AWS, Azure, Google Cloud, and Cloudflare (just like Remix!). In this article, we will use Terraform to provision Cloudflare infrastructure for a Remix app.
