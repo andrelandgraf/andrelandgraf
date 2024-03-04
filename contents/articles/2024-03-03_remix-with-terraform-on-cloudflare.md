@@ -250,7 +250,48 @@ I personally wasn't able to connect my GitHub account on Terraform Cloud: `Faile
 
 ## Terraform for Remix
 
-Overall, I am very happy with this setup. You can inspect my Aproxima Terraform configurations [here](https://github.com/aproxima-tech/aproxima/blob/main/infra/main.tf). For now, I use Terraform to manage DNS records, including my Cloudflare Workers domains, manage Workers secrets, and the provisioning of a [D1 database](https://developers.cloudflare.com/d1/). All other configurations live within the `wrangler.toml` files in each project folder. I hope this helps you to get started with Terraform! Happy coding!
+Overall, I am very happy with this setup. You can inspect my Aproxima Terraform configurations [here](https://github.com/aproxima-tech/aproxima/blob/main/infra/main.tf). For now, I use Terraform to manage DNS records, including my Cloudflare Workers domains, manage Workers secrets, and the provisioning of a [D1 database](https://developers.cloudflare.com/d1/). All other configurations live within the `wrangler.toml` files in each project folder.
+
+Some examples:
+
+### Define a Worker Domain
+
+```tf
+resource "cloudflare_worker_domain" "shop" {
+  account_id = var.CLOUDFLARE_ACCOUNT_ID
+  zone_id    = var.CLOUDFLARE_APROXIMA_NET_ZONE_ID
+  hostname   = "shop.aproxima.net"
+  service    = "shop"
+}
+```
+
+### Define a D1 database
+
+```tf
+resource "cloudflare_d1_database" "core-db" {
+  account_id = var.CLOUDFLARE_ACCOUNT_ID
+  name       = "core-db"
+}
+```
+
+### Define a session cookie secret
+
+```tf
+variable "CLOUDFLARE_AUTH_SESSION_COOKIE_SECRET_ONE" {
+  description = "The first secret used to sign the user session cookie. Variable set on Terraform Cloud as a sensitive environment variable: TF_VAR_CLOUDFLARE_AUTH_SESSION_COOKIE_SECRET_ONE"
+  type        = string
+  sensitive   = true
+}
+
+resource "cloudflare_worker_secret" "auth-session-cookie-secret-one" {
+  account_id  = var.CLOUDFLARE_ACCOUNT_ID
+  name        = "AUTH_SESSION_COOKIE_SECRET_ONE"
+  script_name = "auth"
+  secret_text = var.CLOUDFLARE_AUTH_SESSION_COOKIE_SECRET_ONE
+}
+```
+
+I hope this helps you to get started with Terraform! Happy coding!
 
 ## Resources
 
