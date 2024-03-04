@@ -24,17 +24,17 @@ npx create-remix@latest --template remix-run/remix/templates/cloudflare-workers
 
 Of course, we are using Remix! However, for this guide it actually doesn't matter what code runs on Cloudflare Workers. For instance, you could use a [Hono](https://hono.dev/) app instead. What's important is that we have an example app that we can deploy and configure.
 
-Note that Remix's official `cloudflare-workers` template is not yet running on Vite. If you want to use a Vite template, you can use `vite-cloudflare` instead, which uses Cloudflare Pages. I personally haven't used Cloudflare Pages and to keep it simple, I am sticking with the `cloudflare-workers` template for this guide.
+Note that Remix's official `cloudflare-workers` template is not yet running on Vite. If you want to use a Vite template, you can use `vite-cloudflare` instead, which uses Cloudflare Pages. I personally haven't used Cloudflare Pages and to keep it simple, I am sticking with `cloudflare-workers` for this guide.
 
 ## Deploy your app via wrangler
 
 Follow the instructions in the project's README to deploy the Remix app to Cloudflare. It should be as easy as [installing wrangler](https://developers.cloudflare.com/workers/wrangler/install-and-update/), [creating a Cloudflare account](https://dash.cloudflare.com/sign-up), and running `npm run deploy`.
 
-[wrangler](https://developers.cloudflare.com/workers/wrangler/) is Cloudflare's command-line interface (CLI). `wrangler` can be used to run Worker apps in development, deploy them to Cloudflare, and configure the production and development Worker environments. `wrangler` uses the `wrangler.toml` file in the project root to understand what Cloudflare Worker to run, deploy, and configure.
+[wrangler](https://developers.cloudflare.com/workers/wrangler/) is Cloudflare's command-line interface (CLI). It can be used to run Workers apps in development, deploy them to Cloudflare, and configure the Worker's production and development environments. `wrangler` uses the `wrangler.toml` file in the project root to understand what Worker to run, deploy, and configure.
 
 ## Inspecting wrangler.toml
 
-Let's inspect the `wrangler.toml` file in the root of the Remix project. We can configure many aspects of our worker via `wrangler.toml` ([see docs](https://developers.cloudflare.com/workers/wrangler/configuration/)), including [Custom Domains](https://developers.cloudflare.com/workers/wrangler/configuration/#custom-domains), [Routes](https://developers.cloudflare.com/workers/wrangler/configuration/#routes), [environment variables](https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables), D1 databases, Durable Objects, KV stores and more!
+Let's inspect the `wrangler.toml` file in the root of the Remix project. We can configure many aspects of our Worker via `wrangler.toml` ([see docs](https://developers.cloudflare.com/workers/wrangler/configuration/)), including [Custom Domains](https://developers.cloudflare.com/workers/wrangler/configuration/#custom-domains), [Routes](https://developers.cloudflare.com/workers/wrangler/configuration/#routes), [environment variables](https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables), D1 databases, Durable Objects, KV stores and more!
 
 Running `wrangler deploy` will also create a new Cloudflare Worker if `wrangler` doesn't find a Worker with the name specified in the `wrangler.toml` file. This sounds a lot like infrastructure as code, doesn't it? So why would we need Terraform if Cloudflare's own CLI tool and configuration options allow us to do all of this?
 
@@ -145,9 +145,9 @@ Make sure to replace the `<OrganizationName>` and `<WorkspaceName>` values with 
 
 ## Provisioning infrastructure
 
-Let's finally provision some Cloudflare infrastructure. Let's say our Remix app requires a third-party API token, e.g., to send emails via Resend, send messages via Slack, or connect to a headless CMS. For this, we can use `wrangler` or the Cloudflare UI to set the secret in our worker environment. Or we use Terraform!
+Let's finally provision some Cloudflare infrastructure. Let's say our Remix app requires a third-party API token, e.g., to send emails via Resend, send messages via Slack, or connect to a headless CMS. For this, we can use `wrangler` or the Cloudflare UI to set the secret in our Worker environment. Or we use Terraform!
 
-Use the [Cloudflare Provider docs](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs) and search for `worker`. This should show you all possible worker configuration options, including `cloudflare_worker_secret`.
+Use the [Cloudflare Provider docs](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs) and search for "worker". This should show you all possible Worker configuration options, including `cloudflare_worker_secret`.
 
 Add the following entry to your `main.tf` file:
 
