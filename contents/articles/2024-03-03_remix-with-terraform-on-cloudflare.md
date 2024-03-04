@@ -1,6 +1,6 @@
 ---
 date: 2024-03-03
-title: Use Terraform to manage Cloudflare for your Remix.run app
+title: Use Terraform for your Remix app's Cloudflare infra 
 description: Terraform is an infrastructure as code tool that enables you to provision and manage infrastructure. Let's get started using Terraform to provision Cloudflare infrastructure for your Remix projects.
 categories: [DevOps, Remix.run, Terraform, Cloudflare]
 ---
