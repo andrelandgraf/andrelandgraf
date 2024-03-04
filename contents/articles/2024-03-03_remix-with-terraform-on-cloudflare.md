@@ -9,14 +9,14 @@ categories: [DevOps, Remix.run, Terraform, Cloudflare]
 
 ## Context
 
-I recently started a new side project, [Aproxima](https://github.com/aproxima-tech/aproxima). The goal is to design and build good-looking smart home devices and sell them online! This is my most ambitious side project to date, and it will be a long journey. To share my learnings, I want to build in public. With this context, I was looking for a way to codify my infrastructure and cloud settings so they are easier to replicate and review. At the same time, a coworker recommended that I check out Terraform. Perfect timing, as it seemed like just what I was looking for!
+I recently started a new side project, [Aproxima](https://github.com/aproxima-tech/aproxima). The goal is to design and build smart and good-looking IoT devices and sell them online! This is my most ambitious side project to date, and it will be a long journey. To share my learnings, I want to build in public. In this context, I was looking for a way to codify my infrastructure and cloud settings so they are easier to replicate and review. At the same time, a coworker recommended that I check out Terraform. Perfect timing, as it seemed like just what I was looking for!
 
-Please note that I am very much a DevOps beginner, and this is my first time seriously dabbling with infrastructure as code. I hope this article helps you get started and avoid some of my confusion and issues. However, remember that I am very new to Terraform and take my conclusions as such.
+Please note that I am very much a DevOps beginner, and this is my first time seriously dabbling with infrastructure as code. I hope this article helps you get started and avoid some of my confusion and issues. However, remember that I am new to Terraform and take my advice as such.
 
 
 ## Initialize a Cloudflare Workers app
 
-First, let's create a new Remix app using the Cloudflare Workers template.
+First, let's create a new Remix app using the Cloudflare Workers template:
 
 ```bash
 npx create-remix@latest --template remix-run/remix/templates/cloudflare-workers
@@ -28,9 +28,9 @@ Note that Remix's official `cloudflare-workers` template is not yet running on V
 
 ## Deploy your app via wrangler
 
-After setting up a Remix app, follow the instructions in the README and use [wrangler](https://developers.cloudflare.com/workers/wrangler/), Cloudflare's command-line interface (CLI), to deploy it to Cloudflare. It should be as easy as [installing wrangler](https://developers.cloudflare.com/workers/wrangler/install-and-update/), [creating a Cloudflare account](https://dash.cloudflare.com/sign-up), and running `npm run deploy`.
+Follow the instructions in the project's README to deploy the Remix app to Cloudflare. It should be as easy as [installing wrangler](https://developers.cloudflare.com/workers/wrangler/install-and-update/), [creating a Cloudflare account](https://dash.cloudflare.com/sign-up), and running `npm run deploy`.
 
-Great, we have our Remix app up and running on Cloudflare! 🎉
+[wrangler](https://developers.cloudflare.com/workers/wrangler/) is Cloudflare's command-line interface (CLI). `wrangler` can be used to run Worker apps in development, deploy them to Cloudflare, and configure the production and development Worker environments. `wrangler` uses the `wrangler.toml` file in the project root to understand what Cloudflare Worker to run, deploy, and configure.
 
 ## Inspecting wrangler.toml
 
@@ -38,9 +38,9 @@ Let's inspect the `wrangler.toml` file in the root of the Remix project. It cont
 
 ## Why Terraform
 
-Terraform allows you to manage infrastructure in a uniform manner (standardization), while being able to automate changes and track changes across different cloud and infrastructure providers. Cloudflare's Terraform configuration options go far beyond provisioning a single Workers environment. You can go as far as manage your organization, employee access, API tokens, and more. Personally, I was primarily interested in Terraform because of secret management.
+Terraform allows you to standardization infrastructure management across your organization. It allows automation and tracking configuration changes across different cloud and infrastructure providers. Cloudflare's Terraform configuration options go far beyond provisioning a single Workers environment. You can manage DNS records, your organization, user account access, API tokens, and more. Personally, I was primarily interested in Terraform because of secret management. One downside of `wrangler.toml` is that it doesn't accept environment variables to inject secrets. As I want to build in public, I want to showcase my infrastructure configuration as code without leaking my Cloudflare Workers sensitive information (Workers secrets, account id, zone id). I didn't like the idea of adding `wrangler.toml` to `.gitignore`.
 
-Let's be real, Terraform is definitely overkill for most weekend projects. However, one downside of `wrangler.toml` is that it doesn't accept environment variables to inject secrets. As I want to build in public, I want to showcase my infrastructure configuration as code without leaking my Cloudflare Workers sensitive information (Workers secrets, account id, zone id). I didn't like the idea of adding `wrangler.toml` to `.gitignore`. I found that Terraform, especially in combination with [Terraform Cloud](https://www.hashicorp.com/products/terraform) and [HCP Vault](https://www.hashicorp.com/products/vault), offers a really great experience for secret management across your GitHub Actions, local development environments, and Terraform runs.
+Let's be real, Terraform is definitely overkill for most weekend projects. However, I found that Terraform, especially in combination with [Terraform Cloud](https://www.hashicorp.com/products/terraform) and [HCP Vault](https://www.hashicorp.com/products/vault), offers a really great experience for secret management across your GitHub Actions, local development environments, and Terraform runs.
 
 ## Set up Terraform
 
@@ -54,7 +54,7 @@ brew install hashicorp/tap/terraform
 terraform -v   
 ```
 
-Done! Next, create a `main.tf` file in the root of your Remix project, and set it up to use the [Cloudflare Provider](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs).
+Create a `main.tf` file in the root of your Remix project, and set it up to use the [Cloudflare Provider](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs).
 
 ```tf
 terraform {
@@ -71,7 +71,9 @@ provider "cloudflare" {
 }
 ```
 
-Next, use the Cloudflare UI to [create a Cloudflare API token](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/). The `Edit Cloudflare Workers` token preset should be sufficient! Once you copied your API token, replace `<API_TOKEN>` in `main.tf` with your token value. We will move the secret API token out of `main.tf` file in a moment, but first, let's try and run `terraform`:
+`.tf` files contain the Terraform configuration. The `main.tf` file is the main entry point for Terraform. The `required_providers` block tells Terraform to use the Cloudflare provider and which version to use. The `provider` block configures the Cloudflare provider with your API token.
+
+Next, [create a Cloudflare API token](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/). The `Edit Cloudflare Workers` token preset should be sufficient! Once you copied your API token, replace `<API_TOKEN>` in `main.tf` with your token value. We will move the secret API token out of `main.tf` file in a moment, but first, let's try to initialize Terraform:
 
 ```bash
 terraform init
@@ -244,13 +246,13 @@ Terraform is infrastructure management, not continuous deployment.
 
 ## Automating Terraform runs
 
-Let's wrap this up by automating `terraform plan` and `terraform apply` as part of a deployment GitHub Action. There are several ways to connect Terraform Cloud with GitHub. The easiest is probably to connect your GitHub repository directly from the Terraform Cloud UI and set Terraform up as a GitHub app. Alternatively, you can use the `terraform` CLI tool in a GitHub Action.
+Let's wrap this up by reviewing options for automating Terraform runs. There are several ways to connect Terraform Cloud with GitHub. The easiest is probably to connect your GitHub repository directly from the Terraform Cloud UI and set Terraform up as a GitHub app. Alternatively, you can use the `terraform` CLI tool in a GitHub Action.
 
-I personally wasn't able to connect my GitHub account on Terraform Cloud: `Failed to install GitHub App`. Instead, I had to select `GitHub.com (Custom)` to create a custom Terraform app for my repository. That worked fairly well so far for [Aproxima](https://github.com/aproxima-tech/aproxima), but it lacks a bit of transparency and control. At least on GitHub, you cannot tell that a push to `main` triggers a Terraform Cloud run. That's why I am likely switching to a custom GitHub Action soon ([example](https://github.com/andrelandgraf/remix-terraform-cloudflare)). Stay tuned!
+I personally wasn't able to connect my GitHub account to Terraform Cloud: `Failed to install GitHub App`. Instead, I had to select `GitHub.com (Custom)` to create a custom Terraform app for my repository. That worked fairly well so far for [Aproxima](https://github.com/aproxima-tech/aproxima), but it lacks transparency and control. At least on GitHub, you cannot tell that a push to `main` triggers a Terraform Cloud run. That's why I am likely switching to a custom GitHub Action soon ([example](https://github.com/andrelandgraf/remix-terraform-cloudflare)). Stay tuned!
 
 ## Terraform for Remix
 
-Overall, I am very happy with this setup. You can inspect my Aproxima Terraform configurations [here](https://github.com/aproxima-tech/aproxima/blob/main/infra/main.tf). For now, I use Terraform to manage DNS records, including my Cloudflare Workers domains, manage Workers secrets, and the provisioning of a [D1 database](https://developers.cloudflare.com/d1/). All other configurations live within the `wrangler.toml` files in each project folder.
+Overall, I am very happy with this setup. You can inspect my Aproxima Terraform configurations [here](https://github.com/aproxima-tech/aproxima/blob/main/infra/main.tf). For now, I am using Terraform to manage DNS records, my Cloudflare Workers domains, Workers secrets, and to provision a [D1 database](https://developers.cloudflare.com/d1/). All other configurations live within the `wrangler.toml` files in each project folder.
 
 Some examples:
 
