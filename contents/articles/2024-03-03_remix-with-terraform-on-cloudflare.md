@@ -263,3 +263,4 @@ Overall, I am very happy with this setup. You can see my Aproxima Terraform conf
 
 - [remix-terraform-cloudflare GitHub repo](https://github.com/andrelandgraf/remix-terraform-cloudflare)
 - [learn-terraform-github-actions GitHub repo](https://github.com/hashicorp-education/learn-terraform-github-actions/blob/main/.github/workflows/terraform-apply.yml)
+- [GitHub Action .yaml to deploy via wrangler](https://github.com/andrelandgraf/remix-terraform-cloudflare/blob/f68efe9c7a54d2c0eeaeb3f4ef8295f9925be48e/.github/workflows/release.yaml)
