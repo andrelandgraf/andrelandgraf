@@ -11,13 +11,9 @@ categories: [DevOps, Remix.run, Terraform, Cloudflare]
 
 I recently started a new side project, [Aproxima](https://github.com/aproxima-tech/aproxima). The goal is to design and build good-looking smart home devices, and sell them online! This is my most ambitious side project to date and it's going to be a long journey. In order to better share my learning, I decided to build in public. However, to truly build in public, I was looking for a way to codify my infrastructure and cloud settings so it is easier to replicate and review. At the same time, a coworker recommended me to check out Terraform. Just what I was looking for!
 
-Please note that I am very much a DevOps beginner. This is the first time that I am seriously dabbling with infrastructure as code. I hope this article helps you to get started with Terraform so that you can avoid some of my confusions and issues. However, keep in mind that I am very new to Terraform as well and take my conclusions as such.
+Please note that I am very much a DevOps beginner. This is the first time that I am seriously dabbling with infrastructure as code. I hope this article helps you get started and avoid some of my confusions and issues. However, keep in mind that I am very new to Terraform as well and take my conclusions as such.
 
-## Getting started
-
-Without further due, let's get started!
-
-### Initialize a Cloudflare Workers app
+## Initialize a Cloudflare Workers app
 
 First, let's create a new Remix app using the Cloudflare Workers template.
 
@@ -27,31 +23,25 @@ npx create-remix@latest --template remix-run/remix/templates/cloudflare-workers
 
 Of course, we are going to use Remix! However, for this guide it actually doesn't matter what code runs on the Cloudflare Workers. You can use a [Hono](https://hono.dev/) REST API or any other app running on Cloudflare Workers.
 
-Note that Remix's official `cloudflare-workers` template is not yet running on Vite. The alternative would be the `vite-cloudflare` template, which uses Cloudflare Pages, which I personally haven't used. To keep it simple, I am sticking with the `cloudflare-workers` template for this guide.
+Note that Remix's official `cloudflare-workers` template is not yet running on Vite. If you want to use the latest Vite template, you can use `vite-cloudflare` instead, which uses Cloudflare Pages. I personally haven't used Cloudflare Pages and to keep it simple, I am sticking with the `cloudflare-workers` template for this guide.
 
-### Deploy your app via wrangler
+## Deploy your app via wrangler
 
-Once you have your Remix app initiated, we use [wrangler](https://developers.cloudflare.com/workers/wrangler/), Cloudflare's command-line interface (CLI), to deploy our app to Cloudflare. For this, just follow the instructions in the README.
-
-It should be as easy as [installing wrangler](https://developers.cloudflare.com/workers/wrangler/install-and-update/), [creating a Cloudflare account](https://dash.cloudflare.com/sign-up), and running `npm run deploy`.
+Once you have your Remix app initiated, use [wrangler](https://developers.cloudflare.com/workers/wrangler/), Cloudflare's command-line interface (CLI), to deploy our app to Cloudflare. For this, just follow the instructions in the README. It should be as easy as [installing wrangler](https://developers.cloudflare.com/workers/wrangler/install-and-update/), [creating a Cloudflare account](https://dash.cloudflare.com/sign-up), and running `npm run deploy`.
 
 Great, we have our Remix app up and running on Cloudflare! 🎉 But wait, how does Terraform fit into the picture?
 
-### Inspecting wrangler.toml
+## Inspecting wrangler.toml
 
-Let's inspect the `wrangler.toml` file in the root of your Remix project. It contains the configuration options used by `wrangler` to deploy the Cloudflare Workers script, including a `name` entry. This is the name of the Workers script that will be created or updated when you run `wrangler deploy`. I named mine `remix-terraform-cloudflare` after my test repository (this is a heads-up for later).
-
-We can already configure many aspects of our Workers script via `wrangler.toml` ([see docs](https://developers.cloudflare.com/workers/wrangler/configuration/)), including [Custom Domains](https://developers.cloudflare.com/workers/wrangler/configuration/#custom-domains), [Routes](https://developers.cloudflare.com/workers/wrangler/configuration/#routes), [environment variables](https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables), D1 databases, Durable Objects, KV stores and more! So why would we need Terraform if Cloudflare's own CLI tool and configuration options allow us to do all of this?
+Let's inspect the `wrangler.toml` file in the root of your Remix project. It contains the configuration options used by `wrangler` to deploy the Cloudflare Workers script. We can already configure many aspects of our Workers script via `wrangler.toml` ([see docs](https://developers.cloudflare.com/workers/wrangler/configuration/)), including [Custom Domains](https://developers.cloudflare.com/workers/wrangler/configuration/#custom-domains), [Routes](https://developers.cloudflare.com/workers/wrangler/configuration/#routes), [environment variables](https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables), D1 databases, Durable Objects, KV stores and more! So why would we need Terraform if Cloudflare's own CLI tool and configuration options allow us to do all of this?
 
 ## Why Terraform
 
-Terraform can be used to provision and manage infrastructure across different providers and clouds. This allows you to use one tool (Terraform) to manage and automate all of your infrastructure requirements. For Cloudflare, the Terraform configuration options go far beyond provisioning a single Workers environment. Personally, I really was interested in Terraform because of it's secret management capabilities.
+Terraform is definitely overkill for most weekend projects and meant for bigger organizations, where it is used to provision and manage infrastructure and settings across different providers and clouds. This allows you to use one tool (Terraform) to manage and automate all of your infrastructure. For Cloudflare, the Terraform configuration options go far beyond provisioning a single Workers environment. You can go as far as manage your organization, employee access, API tokens, and more. Personally, I was mostly interested in Terraform because of secret management.
 
-One downside of `wrangler.toml` is that it doesn't accept environment variables to inject secrets. As I want to build in public, I want to showcase my infrastructure configuration as code without leaking my Cloudflare Workers secrets and other potentially sensitive information (account id, zone id). I found that Terraform, especially in combination with [Terraform Cloud](https://www.hashicorp.com/products/terraform) and [HCP Vault](https://www.hashicorp.com/products/vault), offers a really great experience for secret management across your GitHub Actions, local development environments, and Terraform `apply` runs.
+One downside of `wrangler.toml` is that it doesn't accept environment variables to inject secrets. As I want to build in public, I want to showcase my infrastructure configuration as code without leaking my Cloudflare Workers secrets and other potentially sensitive information (account id, zone id). I didn't like the idea to add `wrangler.toml` to `.gitignore`. I found that Terraform, especially in combination with [Terraform Cloud](https://www.hashicorp.com/products/terraform) and [HCP Vault](https://www.hashicorp.com/products/vault), offers a really great experience for secret management across your GitHub Actions, local development environments, and Terraform runs.
 
-Of course, Terraform is meant for bigger organizations that operate across several clouds where it is used to provision employee access across cloud platforms, manage API tokens, execute infra migrations, and much more. Terraform is definitely overkill for most side-projects but, I also have to say that, after the initial painful first setup, I really enjoy using it!
-
-## Setup Terraform
+## Set up Terraform
 
 Let's start by installing the `terraform` CLI. You can find the installation instructions [here](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli#install-terraform).
 
@@ -80,13 +70,15 @@ provider "cloudflare" {
 }
 ```
 
-This configures terraform to install the Cloudflare provider. Next, use the Cloudflare UI to [create a Cloudflare API token](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/). The `Edit Cloudflare Workers` token preset should be sufficient! If your project concerns one or a set of domains, it's probably best to limit your API token's scope to these domain zones. If you don't have a domain on Cloudflare, then you can just select 'All zones'. Finally, replace `<API_TOKEN>` in `main.tf` with your Cloudflare API token. We will move the secret API token out of `main.tf` file in a moment, but first, let's try and run `terraform`.
+Next, use the Cloudflare UI to [create a Cloudflare API token](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/). The `Edit Cloudflare Workers` token preset should be sufficient! If your project concerns one or a set of domains, it's probably best to limit your API token's scope to these domain zones. If you don't have a domain on Cloudflare, then you can just select 'All zones'. Finally, replace `<API_TOKEN>` in `main.tf` with your Cloudflare API token. We will move the secret API token out of `main.tf` file in a moment, but first, let's try and run `terraform`.
 
 ```
 terraform init
 ```
 
-This should create a `.terraform` folder and `.terraform.lock.hcl` file. The `.terraform.lock.hcl` file works similarly to a `package-lock.json` file, and it is recommended to add it to your version control. However, the `.terraform` folder should be added to `.gitignore`. You can learn more about the initialization artifacts in the [Terraform docs](https://developer.hashicorp.com/terraform/tutorials/cli/init#review-initialization-artifacts). According to the docs, your `.gitignore` file should look as follows:
+This should create a `.terraform` folder and `.terraform.lock.hcl` file. The `.terraform.lock.hcl` file works similarly to a `package-lock.json` file and should be added to version control. However, the `.terraform` folder should be added to `.gitignore`. You can learn more about the initialization artifacts in the [Terraform docs](https://developer.hashicorp.com/terraform/tutorials/cli/init#review-initialization-artifacts). 
+
+According to the docs, your `.gitignore` file should look as follows:
 
 ```txt
 .terraform/
@@ -95,7 +87,7 @@ terraform.tfstate*
 
 ### Planning phase
 
-Once setup, Terraform has two main phases: `plan` and `apply` - fairly self-explanatory. Let's run `plan` to see what changes Terraform would want to make to our current infrastructure:
+Once setup, Terraform has two steps: `plan` and `apply` - fairly self-explanatory. Let's run `plan` to see what changes Terraform would want to make to our current infrastructure:
 
 ```bash
 terraform plan
@@ -106,20 +98,18 @@ It should print: `No changes. Your infrastructure matches the configuration.` to
 ### Terraform is stateful
 
 ```ts
-const [terraform, setTerraform] = useState('main.tf');
+const [terraform, setTerraform] = useState(file('terraform.tfstate'));
 ```
 
-Terraform is stateful. It uses a state file (`terraform.tfstate`) to compute what infrastructure changes to apply based on the diff of previous configuration and new configuration files. This means, Terraform does not ask Cloudflare what infrastructure exists to compute any changes, but only it's (local) state. Conclusively, you must not make any changes to your Cloudflare infrastructure manually as that may confuse Terraform. Similarly, you always need to execute `terraform plan` and `terraform apply` in the folder of your `terraform.tfstate` file.
+Terraform is stateful. It uses a state file (`terraform.tfstate`) to compute what infrastructure changes to apply based on the diff of previous state and new configurations. This means, you always need to execute `terraform plan` and `terraform apply` in the folder of your `terraform.tfstate` file so that Terraform is aware of the current state of your cloud infrastructure. Terraform does not ask Cloudflare what infrastructure exists to compute any changes. Conclusively, you must not make any changes to your Cloudflare infrastructure manually as that may confuse Terraform. 
 
 Now it gets tricky, `terraform.tfstate` may contain sensitive information and must not be added to your version control. How do we automate `terraform plan` and `terraform apply` via GitHub Actions or across different devices if we need to share a file that cannot be version controlled? This is where I was ready to quit Terraform for the first time...
 
 ## Managing Terraform
 
-There are several ways to manage `terraform.tfstate` ([see docs](https://developer.hashicorp.com/terraform/language/state/remote)). For example, you can host it in a secure S3 bucket, or, of course, use Terraform Cloud.
+There are several ways to manage `terraform.tfstate` ([see docs](https://developer.hashicorp.com/terraform/language/state/remote)). For example, you can host it in a secure S3 bucket, or, of course, use Terraform Cloud. [HashiCorp's Terraform Cloud](https://www.hashicorp.com/products/terraform) provides a cloud for running `terraform plan` and `terraform apply` and hosting your `terraform.tfstate`. Since it has a very [generous-looking free tier](https://www.hashicorp.com/products/terraform/pricing), I gave it a shot!
 
-Turns out this is one of the main use cases of [HashiCorp's Terraform Cloud](https://www.hashicorp.com/products/terraform). It provides a cloud for running `terraform plan` and `terraform apply` and hosting your `terraform.tfstate`. Since it has a very [generous-looking free tier](https://www.hashicorp.com/products/terraform/pricing), I gave it a shot!
-
-Create a Terraform Cloud account, create a new Terraform Cloud organization and workspace. When asked what kind of workspace to create, I recommend "CLI-Driven Workflow". You can just add a Version Control Workflow later in the workflow settings. With the organization name and workspace name at hand, update your `main.tf` file to inform Terraform to run `terraform plan` and `terraform apply` remotely:
+Create a Terraform Cloud account, a new Terraform Cloud organization, and a workspace. When asked what kind of workspace to create, I recommend "CLI-Driven Workflow". You can configure version control later in the workflow settings. With the organization name and workspace name at hand, update your `main.tf` file to inform Terraform to perform runs remotely in the cloud:
 
 ```tf
 terraform {
@@ -144,9 +134,9 @@ provider "cloudflare" {
 }
 ```
 
-Make sure to replace the `organization` and `workspaces` values with your organization and workspace name from Terraform Cloud. Now you can run `terraform` locally or via CI/CD to trigger runs on Terraform Cloud.
+Make sure to replace the `organization` and `workspaces` values with your organization and workspace name from Terraform Cloud.
 
-Locally, run `terraform login` to connect the CLI with your Terraform Cloud account, and `terraform init` after that to set up Terraform Cloud.
+In your terminal, run `terraform login` to connect the CLI with your Terraform Cloud account, and `terraform init` after that to set up Terraform Cloud.
 
 ## Provisioning infrastructure
 
