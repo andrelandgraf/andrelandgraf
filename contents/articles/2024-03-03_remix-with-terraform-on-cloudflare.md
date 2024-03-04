@@ -22,7 +22,7 @@ First, let's create a new Remix app using the Cloudflare Workers template:
 npx create-remix@latest --template remix-run/remix/templates/cloudflare-workers
 ```
 
-Of course, we are going to use Remix! However, for this guide it actually doesn't matter what code runs on Cloudflare Workers. For instance, you could use a [Hono](https://hono.dev/) app instead.
+Of course, we are using Remix! However, for this guide it actually doesn't matter what code runs on Cloudflare Workers. For instance, you could use a [Hono](https://hono.dev/) app instead. What's important is that we have an example app that we can deploy and configure.
 
 Note that Remix's official `cloudflare-workers` template is not yet running on Vite. If you want to use a Vite template, you can use `vite-cloudflare` instead, which uses Cloudflare Pages. I personally haven't used Cloudflare Pages and to keep it simple, I am sticking with the `cloudflare-workers` template for this guide.
 
@@ -34,11 +34,13 @@ Follow the instructions in the project's README to deploy the Remix app to Cloud
 
 ## Inspecting wrangler.toml
 
-Let's inspect the `wrangler.toml` file in the root of the Remix project. It contains the configuration options used by `wrangler` to deploy the Cloudflare Workers script. We can configure many aspects of our worker via `wrangler.toml` ([see docs](https://developers.cloudflare.com/workers/wrangler/configuration/)), including [Custom Domains](https://developers.cloudflare.com/workers/wrangler/configuration/#custom-domains), [Routes](https://developers.cloudflare.com/workers/wrangler/configuration/#routes), [environment variables](https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables), D1 databases, Durable Objects, KV stores and more! So why would we need Terraform if Cloudflare's own CLI tool and configuration options allow us to do all of this?
+Let's inspect the `wrangler.toml` file in the root of the Remix project. We can configure many aspects of our worker via `wrangler.toml` ([see docs](https://developers.cloudflare.com/workers/wrangler/configuration/)), including [Custom Domains](https://developers.cloudflare.com/workers/wrangler/configuration/#custom-domains), [Routes](https://developers.cloudflare.com/workers/wrangler/configuration/#routes), [environment variables](https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables), D1 databases, Durable Objects, KV stores and more!
+
+Running `wrangler deploy` will also create a new Cloudflare Worker if `wrangler` doesn't find a Worker with the name specified in the `wrangler.toml` file. This sounds a lot like infrastructure as code, doesn't it? So why would we need Terraform if Cloudflare's own CLI tool and configuration options allow us to do all of this?
 
 ## Why Terraform
 
-Terraform allows you to standardization infrastructure management across your organization. It allows automation and tracking configuration changes across different cloud and infrastructure providers. Cloudflare's Terraform configuration options go far beyond provisioning a single Workers environment. You can manage DNS records, your organization, user account access, API tokens, and more. Personally, I was primarily interested in Terraform because of secret management. One downside of `wrangler.toml` is that it doesn't accept environment variables to inject secrets. As I want to build in public, I want to showcase my infrastructure configuration as code without leaking my Cloudflare Workers sensitive information (Workers secrets, account id, zone id). I didn't like the idea of adding `wrangler.toml` to `.gitignore`.
+Terraform standardizes infrastructure management across an organization. It allows automation and tracking configuration changes across different cloud and infrastructure providers. Cloudflare's Terraform configuration options go far beyond provisioning a single Workers environment. You can manage DNS records, your organization, user account access, API tokens, and more. Personally, I was primarily interested in Terraform because of secret management. One limitation of `wrangler.toml` is that it doesn't accept environment variables to inject secrets. As I want to build in public, I want to showcase my `wrangler.toml` without leaking my Cloudflare Workers sensitive information (Workers secrets, account id, zone id). I didn't like the idea of adding `wrangler.toml` to `.gitignore`.
 
 Let's be real, Terraform is definitely overkill for most weekend projects. However, I found that Terraform, especially in combination with [Terraform Cloud](https://www.hashicorp.com/products/terraform) and [HCP Vault](https://www.hashicorp.com/products/vault), offers a really great experience for secret management across your GitHub Actions, local development environments, and Terraform runs.
 
@@ -71,7 +73,7 @@ provider "cloudflare" {
 }
 ```
 
-`.tf` files contain the Terraform configuration. The `main.tf` file is the main entry point for Terraform. The `required_providers` block tells Terraform to use the Cloudflare provider and which version to use. The `provider` block configures the Cloudflare provider with your API token.
+`.tf` files contain the Terraform infrastructure definitions and configurations. The `main.tf` file is the entry point for Terraform. The `required_providers` block tells Terraform to use the Cloudflare provider and which version to use. The `provider` block configures the Cloudflare provider with your API token.
 
 Next, [create a Cloudflare API token](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/). The `Edit Cloudflare Workers` token preset should be sufficient! Once you copied your API token, replace `<API_TOKEN>` in `main.tf` with your token value. We will move the secret API token out of `main.tf` file in a moment, but first, let's try to initialize Terraform:
 
@@ -108,11 +110,11 @@ Terraform is stateful. It uses a state file (`terraform.tfstate`) to compute wha
 
 Now it gets tricky, `terraform.tfstate` may contain sensitive information and must not be added to your version control. How do we allow coworkers to execute Terraform runs if the state lives locally on our computer? How do we automate `terraform plan` and `terraform apply` via GitHub Actions if the state cannot be version-controlled? This is where I was ready to quit Terraform for the first time...
 
-Side-note: There is a way to import existing resources into an existing Terraform state. Find more information in the [Cloudflare docs](https://developers.cloudflare.com/terraform/advanced-topics/import-cloudflare-resources/).
+Side-note: There is a way to import existing resources into an existing Terraform state. For Cloudflare, you can find more information in the [Cloudflare docs](https://developers.cloudflare.com/terraform/advanced-topics/import-cloudflare-resources/).
 
 ## Managing Terraform
 
-There are several ways to manage `terraform.tfstate` ([see docs](https://developer.hashicorp.com/terraform/language/state/remote)). For example, you can host it in a secure S3 bucket, or, of course, use Terraform Cloud. [HashiCorp's Terraform Cloud](https://www.hashicorp.com/products/terraform) provides a cloud for running `terraform plan` and `terraform apply` and hosting your `terraform.tfstate`. Since it has a very [generous-looking free tier](https://www.hashicorp.com/products/terraform/pricing), I gave it a shot!
+There are several ways to manage `terraform.tfstate` ([see docs](https://developer.hashicorp.com/terraform/language/state/remote)). For example, you can host it in a secure S3 bucket, or, of course, use Terraform Cloud. [HashiCorp's Terraform Cloud](https://www.hashicorp.com/products/terraform) provides a cloud for running `terraform plan` and `terraform apply` remotely and hosting your `terraform.tfstate`. Since it has a very [generous-looking free tier](https://www.hashicorp.com/products/terraform/pricing), I gave it a shot!
 
 Create a Terraform Cloud account, a new Terraform Cloud organization, and a workspace. When asked what kind of workspace to create, I recommend "CLI-Driven Workflow". You can configure version control later in your workspace settings. With the organization and workspace names at hand, update your `main.tf` file to inform Terraform to perform runs remotely in the cloud:
 
@@ -139,7 +141,7 @@ provider "cloudflare" {
 }
 ```
 
-Make sure to replace the `<OrganizationName>` and `<WorkspaceName>` values with your organization and workspace names from Terraform Cloud. In your terminal, run `terraform login` to connect the CLI with your Terraform Cloud account, and run `terraform init` after that to set up Terraform Cloud.
+Make sure to replace the `<OrganizationName>` and `<WorkspaceName>` values with your organization and workspace names from Terraform Cloud. In your terminal, run `terraform login` to connect the CLI with your Terraform Cloud account, and run `terraform init` to set up Terraform Cloud.
 
 ## Provisioning infrastructure
 
@@ -160,15 +162,27 @@ resource "cloudflare_worker_secret" "my_secret" {
 
 Rename the resource name (`"my_secret"`), the secret name (`"API_KEY"`), and the secret value (`"my_secret_value"`) based on your use case. Definitely make sure to update the `account_id` value and replace the `script_name` value with the name of your Cloudflare Worker (see `wrangler.toml` name entry).
 
-Next, run `terraform plan`, which triggers a new remote plan: `Preparing the remote plan..`. It prints the configuration changes to your terminal. Additionally, you can visit the `Run` tab in your Terraform Cloud workspace to view the plan. Run `terraform apply` to trigger an `apply` on Terraform Cloud. By default `apply` runs are not applied without approval. Navigate to the Terraform Cloud `Run` tab, select the `apply` run, and hit `Confirm & apply` after reviewing the changes. 
+Next, run `terraform plan` to trigger a new remote plan. This should print the configuration changes to your terminal. Additionally, you can visit the `Run` tab in your Terraform Cloud workspace to view the plan.
 
-If you head to your Cloudflare UI, navigate to Workers & Pages, and view your Worker's settings (Variables), you should now see the new `API_KEY` pop up! 🎉 Don't you see all the potential to over-engineer your dev blog to new levels with this power?!
+```bash
+terraform plan
+```
+
+Run `terraform apply` to trigger an apply run on Terraform Cloud:
+
+```bash
+terraform apply
+```
+
+By default apply runs are not applied without approval - confusing, right? Navigate to the Terraform Cloud `Run` tab, select the apply run, and hit `Confirm & apply` after reviewing the changes. If you head to your Cloudflare UI, navigate to Workers & Pages, and view your Worker's settings (Variables), you should now see the new `API_KEY` pop up! 🎉 
+
+Do you see all the potential to over-engineer your dev blog to new levels with this power?!
 
 Note that you can update your workspace settings to auto-apply `terraform apply`. Also, we probably don't want to run `terraform plan` and `terraform apply` manually every time we make changes to our `.tf` files. Ideally, we want to automate this. But first, let's fix our secret management.
 
 ## Secret management
 
-So far, we hardcoded our secret values in the `main.tf` file. Let's change that by utilizing `variable` definitions. We want to create variables for the Cloudflare account id, Cloudflare API token, and the Cloudflare Workers secret value:
+So far, we hardcoded our secret values in the `main.tf` file. Let's change that by utilizing `variable` definitions. We want to create variables for the Cloudflare account id, Cloudflare API token, and our Cloudflare Workers secret value:
 
 ```tf
 terraform {
@@ -218,6 +232,8 @@ resource "cloudflare_worker_secret" "my_secret" {
 }
 ```
 
+Note: Terraform also supports variable files (`.tfvars`), but so far I didn't feel the need to look into that ([more infos here](https://developer.hashicorp.com/terraform/language/values/variables#variable-definitions-tfvars-files)).
+
 {% statement %}
 You may want to download the [HashiCorp Terraform VSCode extension](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform) for syntax highting in `.tf` files.
 {% /statement %}
@@ -230,25 +246,23 @@ So, you should have three environment variables defined on Terraform Cloud:
 - `TF_VAR_CLOUDFLARE_ACCOUNT_ID` for your Cloudflare account id (`Environment variable`).
 - `TF_VAR_MY_SECRET` for your Remix app secret that we are injecting into your Cloudflare Workers configuration (`Environment variable`).
 
-Note: Terraform also supports variable files (`.tfvars`), but so far I didn't feel the need to look into that ([more infos here](https://developer.hashicorp.com/terraform/language/values/variables#variable-definitions-tfvars-files)).
-
 Great! We now have Terraform Cloud set up to work with the `terraform` CLI to manage our Cloudflare infrastructure. Or do we? You may have noticed that we ran `wrangler deploy` to create our Workers script. Actually, our `terraform apply` run would fail without the initial `wrangler deploy` run that created our Cloudflare Worker. Feels odd, doesn't it?
 
 ## Infra provisioning vs. app deployment
 
-Terraform is meant to manage infrastructure, and, as far as I understand it, is not meant to to deploy applications. Terraform is not a deployment pipeline. Instead, Terraform is integrated into your deployment pipeline to make infrastructure changes, e.g., before or after your deployments.
-
-However, I would have still loved to provision at least the skeleton Workers script ("the Worker infrastructure") with Terraform before deploying the Remix app with `wrangler`. Unfortunately, the `cloudflare_worker_script` Terraform resource requires a content property that links to your Workers script: `content = file("script.js")` ([see docs](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/worker_script)), and I didn't find an easy way to point it to my Remix build. Instead, I just used `wrangler` and called it a day.
+Terraform is meant to manage infrastructure, and, as far as I understand it, is not meant to to deploy applications. Terraform is not a deployment pipeline. Instead, Terraform is integrated into your deployment pipeline to make infrastructure changes, e.g., before or after your code deployments. However, I would have still loved to provision at least the skeleton Workers script ("the Worker infrastructure") with Terraform before deploying the Remix app with `wrangler`. Unfortunately, the `cloudflare_worker_script` Terraform resource requires a content property that links to your Workers script: `content = file("script.js")` ([see docs](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/worker_script)), and I didn't find an easy way to point it to my Remix build. Instead, I just used `wrangler` and called it a day. This may very well be a limitation of Cloudflare's current Terraform provider, but it's also not a big deal.
 
 {% statement %}
 Terraform is infrastructure management, not continuous deployment.
 {% /statement %}
 
+Ideally, I want to set up a workflow that runs `terraform plan` on pull requests to main, and `terraform apply` and `wrangler deploy` in sequence on push to main. So, let's discuss automation next.
+
 ## Automating Terraform runs
 
-Let's wrap this up by reviewing options for automating Terraform runs. There are several ways to connect Terraform Cloud with GitHub. The easiest is probably to connect your GitHub repository directly from the Terraform Cloud UI and set Terraform up as a GitHub app. Alternatively, you can use the `terraform` CLI tool in a GitHub Action.
+There are several ways to connect Terraform Cloud with GitHub (and other version control systems). The easiest is probably to connect your GitHub repository directly from the Terraform Cloud UI and set up a Terraform GitHub app. The app will then set up a webhook on the selected GitHub repository to be notified on pull requests and push to trigger runs. Alternatively, you can use the `terraform` CLI tool in a custom GitHub Action and trigger the runs from there.
 
-I personally wasn't able to connect my GitHub account to Terraform Cloud: `Failed to install GitHub App`. Instead, I had to select `GitHub.com (Custom)` to create a custom Terraform app for my repository. That worked fairly well so far for [Aproxima](https://github.com/aproxima-tech/aproxima), but it lacks transparency and control. At least on GitHub, you cannot tell that a push to `main` triggers a Terraform Cloud run. That's why I am likely switching to a custom GitHub Action soon ([example](https://github.com/andrelandgraf/remix-terraform-cloudflare)). Stay tuned!
+I personally wasn't able to connect my GitHub account to Terraform Cloud: `Failed to install GitHub App`. Instead, I had to select `GitHub.com (Custom)` in the Terraform Cloud dashboard to create a custom Terraform app for my repository. That worked fairly well so far for [Aproxima](https://github.com/aproxima-tech/aproxima). However, at least on GitHub, you cannot tell easily that a push to `main` triggers a Terraform Cloud run unless you navigate to the Webhook settings. That's why I am likely switching to a custom GitHub Action soon ([example](https://github.com/andrelandgraf/remix-terraform-cloudflare)). Stay tuned!
 
 ## Terraform for Remix
 
