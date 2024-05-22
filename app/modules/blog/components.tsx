@@ -129,6 +129,14 @@ export function TD({ children, color = 'default', ...props }: TDProps) {
   );
 }
 
+export function InlineCode({ children, ...props }: HTMLAttributes<HTMLLIElement>) {
+  return (
+    <code className="text-base lg:text-lg xl:text-xl font-light font-mono p-1 bg-gray-200 dark:bg-gray-700" {...props}>
+      {children}
+    </code>
+  );
+}
+
 type BlogMarkdownContainerProps = HTMLAttributes<HTMLElement> & {
   content: RenderableTreeNode;
 };
@@ -152,6 +160,7 @@ export function BlogMarkdownContainer({ content, ...props }: BlogMarkdownContain
         Table,
         TH,
         TD,
+        InlineCode,
       }}
     />
   );

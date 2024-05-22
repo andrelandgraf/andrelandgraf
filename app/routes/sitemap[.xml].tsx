@@ -34,7 +34,6 @@ function generateSiteMap(articles: { slug: string; date: Date }[], questions: { 
             ${getUrlElementWithDate('https://andrelandgraf.dev/demos', new Date().toISOString())}
             ${getUrlElementWithDate('https://andrelandgraf.dev/demos/jumpNRun', new Date().toISOString())}
             ${getUrlElementWithDate('https://andrelandgraf.dev/tutoring', new Date().toISOString())}
-            ${getUrlElementWithDate('https://andrelandgraf.dev/uses', new Date().toISOString())}
         </urlset>`;
 }
 
