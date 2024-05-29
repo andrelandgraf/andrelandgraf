@@ -1,17 +1,17 @@
 ---
 date: 2024-03-03
-title: Use Terraform for your app's Cloudflare infra 
-description: Terraform is an infrastructure as code tool that enables you to provision and manage infrastructure. Let's get started using Terraform to provision Cloudflare infrastructure for your Remix projects.
+title: Use Terraform for your app's Cloudflare Workers 
+description: Terraform is an infrastructure as code tool that enables you to provision and manage infrastructure. Let's get started using Terraform to provision Cloudflare infrastructure for your projects.
 categories: [DevOps, Remix.run, Terraform, Cloudflare]
 imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1682302824/andrelandgraf.dev/terraform-remix-cloudflare_y7viaf
 imageAltText: A beginner's guide by Andre Landgraf. Use Terraform for your app's Cloudflare infra. 
 ---
 
-[Terraform](https://www.terraform.io/) is an infrastructure as code tool that enables you to provision and manage infrastructure. It uses an adapter/provider model to work with different cloud providers such as AWS, Azure, Google Cloud, and Cloudflare (just like Remix!). In this article, we will use Terraform to provision Cloudflare infrastructure for a Remix app.
+[Terraform](https://www.terraform.io/) is an infrastructure as code tool that enables you to provision and manage infrastructure. It uses an adapter/provider model to work with different cloud providers such as AWS, Azure, Google Cloud, and Cloudflare (just like Remix!). In this article, we will use Terraform to provision Cloudflare infrastructure like Workers for a Remix app.
 
 ## Context
 
-I recently started a new side project, [Aproxima](https://github.com/aproxima-tech/aproxima). The goal is to design and build smart and good-looking IoT devices and sell them online! This is my most ambitious side project to date, and it will be a long journey. To share my learnings, I want to build in public. In this context, I was looking for a way to codify my infrastructure and cloud settings so they are easier to replicate and review. At the same time, a coworker recommended that I check out Terraform. Perfect timing, as it seemed like just what I was looking for!
+I was looking for a way to codify my infrastructure and cloud settings so they are easier to replicate and review as I work on open source projects. At the same time, a coworker recommended that I check out Terraform. Perfect timing, as it seemed like just what I was looking for!
 
 Please note that I am very much a DevOps beginner, and this is my first time seriously dabbling with infrastructure as code. I hope this article helps you get started and avoid some of my confusion and issues. However, remember that I am new to Terraform and take my advice as such.
 
