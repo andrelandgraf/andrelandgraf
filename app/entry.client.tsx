@@ -6,8 +6,8 @@ import { getClientEnvVars } from './modules/config/env';
 
 async function initSentry() {
   const { env } = getClientEnvVars();
-  const { BrowserTracing, init, remixRouterInstrumentation, Replay } = await import('@sentry/remix');
-  init({
+  const Sentry = await import('@sentry/remix');
+  Sentry.init({
     dsn: 'https://020aa2228a95a91776db532a05b75c55@o4504234754899968.ingest.sentry.io/4506177521188864',
     tracesSampleRate: 1,
     replaysSessionSampleRate: 0.1,
@@ -15,10 +15,13 @@ async function initSentry() {
     enabled: env === 'production',
 
     integrations: [
-      new BrowserTracing({
-        routingInstrumentation: remixRouterInstrumentation(useEffect, useLocation, useMatches),
+      Sentry.browserTracingIntegration({
+        useEffect,
+        useLocation,
+        useMatches,
       }),
-      new Replay(),
+      // Replay is only available in the client
+      Sentry.replayIntegration(),
     ],
   });
 }
