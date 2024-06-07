@@ -12,12 +12,13 @@ export type Conversation = Array<{
   content: string;
 }>;
 
-type Model = 'gpt-3.5-turbo-16k' | 'gpt-3.5-turbo' | 'text-embedding-ada-002';
+type Model = 'gpt-4o' | 'gpt-3.5-turbo-16k' | 'gpt-3.5-turbo' | 'text-embedding-ada-002';
 
-export const MAX_CONTENT_LENGTH = {
-  'gpt-3.5-turbo-16k': 16384,
-  'gpt-3.5-turbo': 8192,
-  'text-embedding-ada-002': 8191,
+export const MAX_CONTENT_LENGTH: Record<Model, number> = {
+  'gpt-4o': 128_000,
+  'gpt-3.5-turbo-16k': 16_384,
+  'gpt-3.5-turbo': 8_192,
+  'text-embedding-ada-002': 8_191,
 } as const;
 
 export async function fetchOpenAI({

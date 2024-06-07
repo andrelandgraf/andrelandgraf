@@ -115,7 +115,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     },
   ];
 
-  const [, state, response] = await fetchOpenAI({ openAIKey, conversation, question, model: 'gpt-3.5-turbo-16k' });
+  const [, state, response] = await fetchOpenAI({ openAIKey, conversation, question, model: 'gpt-4o' });
   if (state !== FetchOpenAIResState.success || !response) {
     console.error('Failed to fetch response from OpenAI');
 
