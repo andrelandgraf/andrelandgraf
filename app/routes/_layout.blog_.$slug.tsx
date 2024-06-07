@@ -10,7 +10,7 @@ import { fetchMarkdownFile } from '~/modules/blog/github/fetchMarkdownFile.serve
 import { validateFrontMatter } from '~/modules/blog/validation.server';
 import { getPrivateEnvVars } from '~/modules/config/env.server';
 import { useTwitterEmbeds } from '~/modules/twitter-embeds';
-import syntaxHighlightingStylesUrl from '~/styles/code.css';
+import syntaxHighlightingStylesUrl from '~/styles/code.css?url';
 import { getISODate, getReadableDate } from '~/utilities/dates';
 import { getMetaTags } from '~/utilities/metaTags';
 

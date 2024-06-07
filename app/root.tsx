@@ -1,17 +1,8 @@
-import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useLoaderData,
-  useRouteError,
-} from '@remix-run/react';
+import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData, useRouteError } from '@remix-run/react';
 import { captureRemixErrorBoundaryError } from '@sentry/remix';
 import type { LinksFunction } from '@vercel/remix';
 
-import styles from '~/styles/tailwind.css';
+import styles from '~/styles/tailwind.css?url';
 
 import { EnvMeta } from './modules/config/env';
 import { getPublicEnvVars } from './modules/config/env.server';
@@ -38,7 +29,6 @@ export default function App() {
         <Outlet />
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
       </body>
     </html>
   );

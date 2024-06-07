@@ -7,7 +7,7 @@ import { ButtonLink } from '~/components/buttons';
 import { UnstyledLink } from '~/components/links';
 import { Book3DScene } from '~/components/models/book';
 import { PageTransitionProgressBar } from '~/components/progress';
-import indexStyles from '~/styles/index.css';
+import indexStyles from '~/styles/index.css?url';
 import { getFocusClasses } from '~/utilities/ariaClasses';
 import { images } from '~/utilities/images';
 import { getMetaTags } from '~/utilities/metaTags';

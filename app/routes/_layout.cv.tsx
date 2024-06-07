@@ -3,7 +3,7 @@ import type { LinksFunction, MetaFunction } from '@remix-run/node';
 import { PageHeading, SectionHeadingWithIcon } from '~/components/headings';
 import { CollegeSvg, GroupSvg, RocketSvg } from '~/components/icons';
 import { StyledLink } from '~/components/links';
-import resumeStylesUrl from '~/styles/resume.css';
+import resumeStylesUrl from '~/styles/resume.css?url';
 import { getMetaTags } from '~/utilities/metaTags';
 
 export const config = { runtime: 'edge' };

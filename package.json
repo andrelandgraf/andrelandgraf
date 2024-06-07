@@ -12,13 +12,11 @@
     "format:db": "npx prisma format",
     "build": "run-s \"build:*\"",
     "build:db": "npx prisma generate",
-    "build:remix": "remix build --sourcemap",
+    "build:remix": "remix vite:build",
     "sentry:build": "npx sentry-upload-sourcemaps && rm ./public/**/*.map && rm ./build/**/*.map",
     "update:db": "npx prisma db push",
     "update:articles": "bun prisma/articles.ts",
-    "dev": "run-p \"dev:*\"",
-    "dev:remix": "remix dev --manual",
-    "start": "remix-serve ./build/index.js"
+    "dev": "remix vite:dev"
   },
   "dependencies": {
     "@markdoc/markdoc": "^0.3.4",
@@ -27,14 +25,11 @@
     "@prisma/client": "^5.5.2",
     "@react-three/drei": "^9.90.2",
     "@react-three/fiber": "^8.15.12",
-    "@remix-run/css-bundle": "^2.1.0",
-    "@remix-run/express": "^2.1.0",
-    "@remix-run/node": "^2.1.0",
-    "@remix-run/react": "^2.1.0",
-    "@remix-run/serve": "^2.0.0",
-    "@sentry/remix": "^7.94.1",
-    "@types/three": "^0.159.0",
-    "@vercel/remix": "^2.0.0",
+    "@remix-run/node": "^2.9.2",
+    "@remix-run/react": "^2.9.2",
+    "@remix-run/server-runtime": "^2.9.2",
+    "@sentry/remix": "^8.8.0",
+    "@vercel/remix": "^2.9.2-patch.2",
     "clsx": "^2.0.0",
     "dotenv": "^16.3.1",
     "isbot": "^3.6.8",
@@ -47,11 +42,12 @@
     "ws": "^8.14.2"
   },
   "devDependencies": {
-    "@remix-run/dev": "^2.1.0",
-    "@remix-run/eslint-config": "^2.1.0",
+    "@remix-run/dev": "^2.9.2",
+    "@remix-run/eslint-config": "^2.9.2",
     "@types/js-yaml": "^4.0.8",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
+    "@types/three": "^0.165.0",
     "@types/ws": "^8.5.8",
     "eslint": "^8.49.0",
     "eslint-config-prettier": "^8.10.0",
@@ -66,7 +62,9 @@
     "prisma": "^5.5.2",
     "rimraf": "^5.0.1",
     "tailwindcss": "^3.3.3",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "vite": "^5.2.13",
+    "vite-tsconfig-paths": "^4.3.2"
   },
   "engines": {
     "node": "^18.0.0"
