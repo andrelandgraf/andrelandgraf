@@ -1,10 +1,8 @@
 import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { Form, Outlet, useLoaderData, useRouteError, useSearchParams } from '@remix-run/react';
+import { Outlet, useLoaderData, useRouteError, useSearchParams } from '@remix-run/react';
 import { captureRemixErrorBoundaryError } from '@sentry/remix';
-import clsx from 'clsx';
 
-import { Textarea } from '~/components/forms';
 import { PageHeading } from '~/components/headings';
 import { SkipToContentLink, StyledLink } from '~/components/links';
 import { Tags } from '~/components/tags';
@@ -13,7 +11,6 @@ import { fetchMarkdownFilesFs } from '~/modules/blog/fs/fetchMarkdownFiles.serve
 import { fetchMarkdownFiles } from '~/modules/blog/github/fetchMarkdownFiles.server';
 import { validateFrontMatter } from '~/modules/blog/validation.server';
 import { getPrivateEnvVars } from '~/modules/config/env.server';
-import { getFocusClasses } from '~/utilities/ariaClasses';
 import { images } from '~/utilities/images';
 import { getMetaTags } from '~/utilities/metaTags';
 
@@ -102,27 +99,15 @@ export default function Component() {
               Skip to content
             </SkipToContentLink>
             <p>
-              Filter blog posts by tag,{' '}
+              Filter blog posts by tag or{' '}
               <StyledLink to="/blog" preventScrollReset>
                 show all
-              </StyledLink>{' '}
-              or <StyledLink to="#ask">ask a question</StyledLink>.
+              </StyledLink>
+              .
             </p>
             <Tags title="All tags" tags={tags} />
           </nav>
         </div>
-        <Form method="GET" action="/blog/ask" className="flex flex-row gap-2 relative w-full" preventScrollReset>
-          <Textarea
-            defaultValue={question || undefined}
-            name="question"
-            placeholder="Why is Remix a full stack web framework?"
-            label="All content at your fingertips. Ask a question about all things web."
-            id="ask"
-          />
-          <button className={clsx(getFocusClasses(true), 'absolute bottom-2 right-2')} type="submit">
-            » Ask
-          </button>
-        </Form>
       </div>
       <main id="content">
         <Outlet />

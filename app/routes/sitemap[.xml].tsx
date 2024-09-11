@@ -10,7 +10,7 @@ function getUrlElementWithDate(url: string, date: string) {
 function generateSiteMap(articles: { slug: string; date: Date }[], questions: { question: string }[]) {
   return `<?xml version="1.0" encoding="UTF-8"?>
         <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
-            ${getUrlElementWithDate('https://andrelandgraf.dev', new Date().toISOString())}
+            ${getUrlElementWithDate('https://andrelandgraf.dev/', new Date().toISOString())}
             ${getUrlElementWithDate('https://andrelandgraf.dev/blog', new Date().toISOString())}
             ${articles
               .map(
@@ -21,19 +21,6 @@ function generateSiteMap(articles: { slug: string; date: Date }[], questions: { 
                   )}`,
               )
               .join('\n')}
-            ${questions
-              .map(
-                (question) =>
-                  `${getUrlElementWithDate(
-                    `https://andrelandgraf.dev/blog/ask?question=${encodeURIComponent(question.question)}`,
-                    new Date().toISOString(),
-                  )}`,
-              )
-              .join('\n')}
-            ${getUrlElementWithDate('https://andrelandgraf.dev/cv', new Date().toISOString())}
-            ${getUrlElementWithDate('https://andrelandgraf.dev/demos', new Date().toISOString())}
-            ${getUrlElementWithDate('https://andrelandgraf.dev/demos/jumpNRun', new Date().toISOString())}
-            ${getUrlElementWithDate('https://andrelandgraf.dev/tutoring', new Date().toISOString())}
         </urlset>`;
 }
 
