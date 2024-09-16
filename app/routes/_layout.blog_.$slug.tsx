@@ -8,7 +8,7 @@ import { fetchArticle } from '~/modules/blog/db/fetchArticle.server';
 import { fetchMarkdownFileFs } from '~/modules/blog/fs/fetchMarkdownFile.server';
 import { fetchMarkdownFile } from '~/modules/blog/github/fetchMarkdownFile.server';
 import { validateFrontMatter } from '~/modules/blog/validation.server';
-import { getPrivateEnvVars } from '~/modules/config/env.server';
+import { env } from '~/modules/env.server';
 import { useTwitterEmbeds } from '~/modules/twitter-embeds';
 import syntaxHighlightingStylesUrl from '~/styles/code.css?url';
 import { getISODate, getReadableDate } from '~/utilities/dates';
@@ -33,7 +33,6 @@ const redirects: Record<string, string | undefined> = {
 };
 
 export async function loader({ params }: LoaderFunctionArgs) {
-  const { githubAccessToken, githubRepoAPIUrl, readContentFrom } = getPrivateEnvVars();
   const { slug } = params;
 
   if (!slug) {
@@ -48,10 +47,10 @@ export async function loader({ params }: LoaderFunctionArgs) {
   }
 
   const mdFilePromise =
-    readContentFrom === 'production'
+    env.server.readContentFrom === 'production'
       ? fetchArticle(slug)
-      : readContentFrom === 'github'
-      ? fetchMarkdownFile(githubAccessToken, `${githubRepoAPIUrl}/contents/articles`, slug, validateFrontMatter)
+      : env.server.readContentFrom === 'github'
+      ? fetchMarkdownFile(env.github.accessToken, `${env.github.repoURI}/contents/articles`, slug, validateFrontMatter)
       : fetchMarkdownFileFs(`./contents/articles`, slug, validateFrontMatter);
 
   const [status, state, article] = await mdFilePromise;

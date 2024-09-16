@@ -10,7 +10,7 @@ import { fetchArticles } from '~/modules/blog/db/fetchArticles.server';
 import { fetchMarkdownFilesFs } from '~/modules/blog/fs/fetchMarkdownFiles.server';
 import { fetchMarkdownFiles } from '~/modules/blog/github/fetchMarkdownFiles.server';
 import { validateFrontMatter } from '~/modules/blog/validation.server';
-import { getPrivateEnvVars } from '~/modules/config/env.server';
+import { env } from '~/modules/env.server';
 import { images } from '~/utilities/images';
 import { getMetaTags } from '~/utilities/metaTags';
 
@@ -34,16 +34,15 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 };
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const { githubAccessToken, githubRepoAPIUrl, readContentFrom } = getPrivateEnvVars();
   const url = new URL(request.url);
   const searchParams = new URLSearchParams(url.search);
   const tag = searchParams.get('tag');
 
   const mdFilesPromise =
-    readContentFrom === 'production'
+    env.server.readContentFrom === 'production'
       ? fetchArticles()
-      : readContentFrom === 'github'
-      ? fetchMarkdownFiles(githubAccessToken, `${githubRepoAPIUrl}/contents/articles`, validateFrontMatter)
+      : env.server.readContentFrom === 'github'
+      ? fetchMarkdownFiles(env.github.accessToken, `${env.github.repoURI}/contents/articles`, validateFrontMatter)
       : fetchMarkdownFilesFs(`./contents/articles`, validateFrontMatter);
 
   const [status, state, files] = await mdFilesPromise;

@@ -1,13 +1,11 @@
-import { getPrivateEnvVars } from '~/modules/config/env.server';
 import { fetchEmbedding, FetchEmbeddingResState, MAX_CONTENT_LENGTH } from '~/modules/openAI/fetchOpenAI';
 
 import { fetchMarkdownFilesFs, FetchMarkdownFilesResState } from '../app/modules/blog/fs/fetchMarkdownFiles.server';
 import { validateFrontMatter } from '../app/modules/blog/validation.server';
 import { db } from '../app/modules/db.server';
+import { env } from '~/modules/env.server';
 
 const OVERRIDE_EMBEDDINGS = false;
-
-const { openAIKey } = getPrivateEnvVars();
 
 console.log('reading articles from fs...');
 const [status, state, files] = await fetchMarkdownFilesFs(`./contents/articles`, validateFrontMatter);
@@ -86,7 +84,7 @@ for (const file of files) {
     for (const chunk of chunks) {
       const [status, state, embedding] = await fetchEmbedding({
         content: chunk,
-        openAIKey,
+        openAIKey: env.openAI.apiKey,
       });
       if (state !== FetchEmbeddingResState.success || !embedding) {
         throw new Error(`(${status}) fetchEmbeddings error: ${state}`);

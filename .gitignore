@@ -9,3 +9,7 @@ node_modules
 .vscode/settings.json
 /prisma/dev.db
 .DS_Store
+
+# Sentry Config File
+.sentryclirc
+

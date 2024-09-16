@@ -39,11 +39,6 @@ export default function Component() {
                       </StyledLink>
                     </li>
                     <li>
-                      <StyledLink to="/cv/" nav>
-                        CV
-                      </StyledLink>
-                    </li>
-                    <li>
                       <StyledLink to="/blog/" nav>
                         Blog
                       </StyledLink>

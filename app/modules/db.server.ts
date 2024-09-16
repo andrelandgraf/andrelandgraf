@@ -4,7 +4,7 @@ import { PrismaNeon } from '@prisma/adapter-neon';
 import { PrismaClient } from '@prisma/client';
 import ws from 'ws';
 
-import { getPrivateEnvVars } from './config/env.server';
+import { env } from './env.server';
 
 let db: PrismaClient;
 
@@ -14,10 +14,9 @@ declare global {
 }
 
 function buildPrismaClient() {
-  const { databaseUrl } = getPrivateEnvVars();
   neonConfig.webSocketConstructor = ws;
 
-  const pool = new Pool({ connectionString: databaseUrl });
+  const pool = new Pool({ connectionString: env.databaseConnectionStr });
   const adapter = new PrismaNeon(pool);
   return new PrismaClient({ adapter });
 }
@@ -25,7 +24,7 @@ function buildPrismaClient() {
 // this is needed because in development we don't want to restart
 // the server with every change, but we want to make sure we don't
 // create a new connection to the DB with every change either.
-if (process.env.NODE_ENV === 'production') {
+if (env.environment === 'production') {
   db = buildPrismaClient();
 } else {
   if (!global.__db) {
