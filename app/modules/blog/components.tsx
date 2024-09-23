@@ -129,11 +129,10 @@ export function TD({ children, color = 'default', ...props }: TDProps) {
   );
 }
 
-export function InlineCode({ children, ...props }: HTMLAttributes<HTMLElement>) {
-  console.log('InlineCode', children);
+export function InlineCode({ content, ...props }: HTMLAttributes<HTMLElement>) {
   return (
-    <code className="text-lg lg:text-xl xl:text-2xl font-light font-mono p-1 bg-gray-200 dark:bg-gray-500" {...props}>
-      {children}
+    <code className="text-lg lg:text-xl xl:text-2xl font-light font-mono px-1 rounded-md bg-gray-100 dark:bg-gray-700" {...props}>
+      {content}
     </code>
   );
 }
@@ -153,11 +152,11 @@ export function BlogMarkdownContainer({ content, ...props }: BlogMarkdownContain
         Paragraph,
         List,
         ListItem,
-        CodeBlock: CodeBlock,
+        CodeBlock,
         Link: MarkdownLinkWrapper,
-        TweetEmbed: TweetEmbed,
-        Statement: Statement,
-        Quote: Quote,
+        TweetEmbed,
+        Statement,
+        Quote,
         Table,
         TH,
         TD,

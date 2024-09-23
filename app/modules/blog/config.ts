@@ -19,6 +19,12 @@ export const config: Config = {
     paragraph: {
       render: 'Paragraph',
     },
+    code: {
+      render: 'InlineCode',
+      attributes: {
+        content: { type: String, required: true },
+      },
+    },
     list: {
       render: 'List',
     },
