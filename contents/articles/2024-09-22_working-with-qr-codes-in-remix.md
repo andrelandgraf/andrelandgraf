@@ -3,7 +3,7 @@ date: 2024-09-22
 title: Working with QR codes in Remix
 description: Learn how to easily generate QR codes in your Remix app to share URLs and other information with your users.
 categories: [Remix.run]
-imageUrl: https://andrelandgraf.dev/2024-09-22_working-with-qr-codes-in-remix.png?qr
+imageUrl: https://andrelandgraf.dev/blog/2024-09-22_working-with-qr-codes-in-remix.png?qr
 imageAltText: QR code to this very blog post.
 ---
 
@@ -46,6 +46,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 In this example, we use the `qrcode` package's `toBuffer` method to generate the QR code image from the `data` query parameter and set the width of the QR code to 1200 pixels. Then, we return the QR code as a PNG image. Try it out by visiting [https://andrelandgraf.dev/qr.png?data=https://andrelandgraf.dev](https://andrelandgraf.dev/qr.png?data=https://andrelandgraf.dev). You should see a QR code image that contains the URL `https://andrelandgraf.dev`. You can replace the `data` parameter with any URL or other data. The Cache-Control header caches each QR code for 24 hours, reducing the need to regenerate it on every request.
 
 Generating a QR code image on the server is useful when you want to integrate the QR code into your server-side rendered site or when you need to generate the QR code based on server-side data. One cool use case of generating a QR code on the server is to include it in a dynamically generated image using [satori and resvg-js](https://www.jacobparis.com/content/remix-og). satori allows you to turn HTML and CSS into an SVG and resvg-js renders SVGs to PNGs. If you want to include a QR code in a dynamic image generated with HTML and CSS, you can include an image tag with the QR code URL in the overall HTML content and turn it into an SVG with satori. Then, you can render the SVG to a PNG with resvg-js.
+
+### Example
 
 ![Preview image for this blog post with QR code](https://andrelandgraf.dev/blog/2024-09-22_working-with-qr-codes-in-remix.png?qr)
 
