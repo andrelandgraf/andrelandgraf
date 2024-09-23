@@ -119,9 +119,9 @@ This code does the following:
 - Renders a canvas where the QR code will be displayed.
 - Render a form with an input field for the user to enter the data for the QR code.
 - Use `useEffect` to draw a white background on the canvas when the component mounts.
-- Calls the `qrcode` package's `toCanvas` method to generate the QR code and display it on the canvas when the form is submitted.
+- Calls the `qrcode` package's `toCanvas` method to display the QR code on the canvas when the form is submitted.
 - Displays an error message if something goes wrong during the generation process.
-- Ensures the canvas is responsive by using the `object-fit: contain` CSS property to keep it proportional within its container.
+- Ensures the canvas is responsive by using the `object-fit: contain` CSS property.
 
 You can view this code in action at [https://andrelandgraf.dev/demos/qr](https://andrelandgraf.dev/demos/qr). Try entering a URL or any other data and click the "Generate QR Code" button to generate the QR code image.
 
