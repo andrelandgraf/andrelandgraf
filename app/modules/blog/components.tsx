@@ -129,9 +129,10 @@ export function TD({ children, color = 'default', ...props }: TDProps) {
   );
 }
 
-export function InlineCode({ children, ...props }: HTMLAttributes<HTMLLIElement>) {
+export function InlineCode({ children, ...props }: HTMLAttributes<HTMLElement>) {
+  console.log('InlineCode', children);
   return (
-    <code className="text-base lg:text-lg xl:text-xl font-light font-mono p-1 bg-gray-200 dark:bg-gray-700" {...props}>
+    <code className="text-lg lg:text-xl xl:text-2xl font-light font-mono p-1 bg-gray-200 dark:bg-gray-500" {...props}>
       {children}
     </code>
   );

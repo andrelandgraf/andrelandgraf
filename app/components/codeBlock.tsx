@@ -21,9 +21,9 @@ export function CodeBlock({ content = '', language = 'text' }: CodeBlockProps) {
           <pre className="overflow-scroll p-2 lg:p-4">
             <code>
               {tokens.map((line, i) => (
-                <div key={i} {...getLineProps({ line, key: i })}>
+                <div {...getLineProps({ line, key: i })} key={i} >
                   {line.map((token, key) => (
-                    <span key={key} {...getTokenProps({ token, key })} />
+                    <span {...getTokenProps({ token, key })} key={key} />
                   ))}
                 </div>
               ))}

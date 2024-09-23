@@ -37,3 +37,26 @@ export function Textarea({ label, id, ...props }: TextAreaProps) {
     </div>
   );
 }
+
+type InputProps = InputHTMLAttributes<HTMLInputElement> & {
+  label: string;
+  id: string;
+};
+
+export function Input({ label, id, ...props }: InputProps) {
+  return (
+    <div className="flex flex-col gap-2 w-full">
+      <label htmlFor={id} className="text-sm">
+        {label}
+      </label>
+      <input
+        {...props}
+        id={id}
+        className={clsx(
+          getFocusClasses(true),
+          'p-4 rounded-md bg-teal-100 dark:bg-teal-900 text-gray-800 dark:text-white',
+        )}
+      />
+    </div>
+  );
+}
