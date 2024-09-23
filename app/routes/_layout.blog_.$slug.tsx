@@ -55,6 +55,9 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
   const [status, state, article] = await mdFilePromise;
   if (status !== 200 || !article) {
+    if(status === 404) {
+      throw new Response(null, { status: 404, statusText: 'Not Found' });
+  }
     throw Error(`Error (${status}) ${state}: Failed to fetch blog articles.`);
   }
 
