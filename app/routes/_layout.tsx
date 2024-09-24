@@ -29,7 +29,7 @@ export default function Component() {
               <div className="flex flex-col gap-2 lg:gap-4">
                 <h2 className="font-bold text-2xl xl:text-4xl">Andre Landgraf</h2>
                 <p className="max-w-2xl text-xl xl:text-2xl font-semibold">
-                  Web Dev, Talks, Tutoring, Blog Posts, Meetups, and more.
+                  Web Dev, Blog, Book, Talks, Meetups, and more.
                 </p>
                 <nav>
                   <ul className="lg:mrl-auto flex gap-5">
@@ -41,6 +41,21 @@ export default function Component() {
                     <li>
                       <StyledLink to="/blog/" nav>
                         Blog
+                      </StyledLink>
+                    </li>
+                    <li>
+                      <StyledLink to="/#book" nav>
+                        Book
+                      </StyledLink>
+                    </li>
+                    <li>
+                      <StyledLink to="/#talks" nav>
+                        Talks
+                      </StyledLink>
+                    </li>
+                    <li>
+                      <StyledLink to="/#meetups" nav>
+                        Meetups
                       </StyledLink>
                     </li>
                   </ul>

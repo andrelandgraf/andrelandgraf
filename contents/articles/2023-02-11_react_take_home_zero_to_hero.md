@@ -1218,12 +1218,6 @@ Inspect how I was able to reduce the existing React state by using web standards
 
 I hope this example was fun and insightful! Good luck on your journey! 👋
 
-## Tutoring
-
-In case you are interested in more content like this, I run a weekly tutoring session where we practice all things web.
-
-You can find us on [Meetup.com](https://www.meetup.com/all-things-web-react-html-css-javascript-tutoring/) and [Discord](https://discord.gg/uMcfrj9Q). We are always happy to have more folks join us!
-
 ## Conclusion
 
 Using a pre-defined process helps you to focus on one task at a time, just like a recipe! Defining processes is a great way to divide and conquer a previously overwhelming problem. This does not only apply to take-home exercises but to any daunting problem.

@@ -1,10 +1,10 @@
 import type { HeadersFunction, LinksFunction, MetaFunction } from '@remix-run/node';
-import type { LinkProps } from '@remix-run/react';
+import { NavLink, type LinkProps } from '@remix-run/react';
 import clsx from 'clsx';
 import { type HTMLAttributes, useEffect, useState } from 'react';
 
 import { ButtonLink } from '~/components/buttons';
-import { UnstyledLink } from '~/components/links';
+import { StyledLink, UnstyledLink } from '~/components/links';
 import { Book3DScene } from '~/components/models/book';
 import { PageTransitionProgressBar } from '~/components/progress';
 import indexStyles from '~/styles/index.css?url';
@@ -55,10 +55,9 @@ export default function Component() {
               All Things Web
             </h1>
             <p className="frame-one-subheading text-2xl lg:text-3xl xl:text-4xl text-allThingsWebOrange font-extrabold">
-              Web Dev, <SubHeadingLink to="#talks">Talks</SubHeadingLink>,{' '}
-              <SubHeadingLink to="#tutoring">Tutoring</SubHeadingLink>,{' '}
-              <SubHeadingLink to="/blog">Blog Posts</SubHeadingLink>,{' '}
-              <SubHeadingLink to="#meetups">Meetups</SubHeadingLink>, and more. <br />
+              Web Dev, <SubHeadingLink to="#book">Book</SubHeadingLink>,{' '}
+              <SubHeadingLink to="#talks">Talks</SubHeadingLink>, <SubHeadingLink to="/blog">Blog Posts</SubHeadingLink>
+              , <SubHeadingLink to="#meetups">Meetups</SubHeadingLink>
             </p>
             <div className="frame-one-subheading flex lg:flex-col items-center justify-center transform rotate-6 absolute top-8 lg:right-8">
               <img
@@ -100,35 +99,6 @@ export default function Component() {
             <BookModel />
           </div>
         </Frame>
-        <Frame className="frame-three text-center font-mono" id="tutoring">
-          <div className="min-h-[100vh] mx-4 lg:mx-[10vw] flex items-center justify-center flex-col-reverse lg:flex-row gap-16 lg:gap-[10vw]">
-            <img
-              className="max-w-[80vw] max-h-[40vh] lg:max-w-[min(30vw,800px)] shadow-lg shadow-black"
-              src={images.allThingsWebCoverImage.src}
-              alt={images.allThingsWebCoverImage.alt}
-              width={images.allThingsWebCoverImage.width}
-              height={images.allThingsWebCoverImage.height}
-            />
-            <div className="lg:max-w-[40vw] flex flex-col items-center justify-center gap-4 lg:gap-8">
-              <h2 className="text-2xl lg:text-4xl text-allThingsWebOrange font-extrabold">All Things Web</h2>
-              <p className="text-xl lg:text-2xl text-white font-bold">
-                Join us on{' '}
-                <SubHeadingLink target="_blank" rel="noopener noreferrer" to="https://discord.gg/TVAKCyKX6K">
-                  Discord
-                </SubHeadingLink>{' '}
-                and for our{' '}
-                <SubHeadingLink
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  to="https://www.meetup.com/all-things-web-react-html-css-javascript-tutoring/"
-                >
-                  weekly Meetups
-                </SubHeadingLink>{' '}
-                for HTML, CSS, and JavaScript tutoring!
-              </p>
-            </div>
-          </div>
-        </Frame>
         <Frame className="text-center font-mono" id="talks">
           <div className="min-h-[100vh] w-full flex items-center justify-center flex-col gap-16">
             <div className="mx-4 lg:max-w-[800px] flex flex-col items-center justify-center gap-4 lg:gap-8">
@@ -147,51 +117,35 @@ export default function Component() {
           id="meetups"
         >
           <div className="mx-4 lg:max-w-[800px] flex flex-col items-center justify-center gap-4 lg:gap-8">
-            <h2 className="text-2xl lg:text-4xl text-white font-bold">Meetups</h2>
+            <h2 className="text-2xl lg:text-4xl text-white font-bold">Bay Area Meetups</h2>
             <p className="text-white text-xl lg:text-2xl">
-              Join us in person or virtually! I help organizing the Remix Bay Area meetup and I tutor up-and-coming devs
-              every Monday on Zoom!
+              Join monthly events about All Things Web. We organize monthly React & Remix meetups, hackathons, and more.
+              Don't miss out on the fun! Check out upcoming events on{' '}
+              <StyledLink
+                to="https://allthingsweb.dev?utm_source=andrelandgraf.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                allthingsweb.dev
+              </StyledLink>{' '}
+              or our{' '}
+              <StyledLink
+                to="https://lu.ma/allthingsweb?utm_source=andrelandgraf.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Lu.ma calendar
+              </StyledLink>
+              .
             </p>
           </div>
-          <div className="mx-4 lg:mx-[10vw] flex items-center justify-center flex-col lg:flex-row gap-8 lg:gap-[10vh]">
-            <UnstyledLink
-              aria-label="Remix Bay Area Meetup"
-              target="_blank"
-              rel="noopener noreferrer"
-              to="https://www.meetup.com/remix-bay-area/"
-              outline="none"
-              className={clsx(
-                'shadow-lg shadow-black hover:transform-gpu hover:scale-105 transition-all duration-300 ease-in-out',
-                getFocusClasses(true, 'focus-visible:ring-allThingsWebPurple'),
-              )}
-            >
-              <img
-                className="max-w-[80vw] max-h-[40vh] lg:max-w-[min(30vw,800px)]"
-                src={images.remixBayAreaCoverImage.src}
-                alt={images.remixBayAreaCoverImage.alt}
-                width={images.remixBayAreaCoverImage.width}
-                height={images.remixBayAreaCoverImage.height}
-              />
-            </UnstyledLink>
-            <UnstyledLink
-              aria-label="All Things Web, HTML, CSS, and JavaScript tutoring meetup"
-              target="_blank"
-              rel="noopener noreferrer"
-              to="https://www.meetup.com/all-things-web-react-html-css-javascript-tutoring/"
-              outline="none"
-              className={clsx(
-                'shadow-lg shadow-black hover:transform-gpu hover:scale-105 transition-all duration-300 ease-in-out',
-                getFocusClasses(true, 'focus-visible:ring-allThingsWebPurple'),
-              )}
-            >
-              <img
-                className="max-w-[80vw] max-h-[40vh] lg:max-w-[min(30vw,800px)]"
-                src={images.allThingsWebCoverImage.src}
-                alt={images.allThingsWebCoverImage.alt}
-                width={images.allThingsWebCoverImage.width}
-                height={images.allThingsWebCoverImage.height}
-              />
-            </UnstyledLink>
+          <div className="w-full mx-4 lg:mx-[10vw] flex items-center justify-center flex-col lg:flex-row gap-8 lg:gap-[10vh]">
+            <iframe
+              src="https://lu.ma/embed/calendar/cal-3AAimKnRVQEId4r/events?"
+              style={{ width: '100%', height: '400px', border: 'none' }}
+              className="w-full h-[400px] lg:h-[800px] max-w-[1024px] rounded-md"
+              aria-hidden="false"
+            ></iframe>
           </div>
         </Frame>
       </main>
@@ -221,7 +175,7 @@ type FrameProps = HTMLAttributes<HTMLDivElement>;
 
 function Frame({ children, className, ...props }: FrameProps) {
   return (
-    <section {...props} className={clsx('frame relative w-full', className)}>
+    <section {...props} className={clsx('frame relative w-full p-2', className)}>
       {children}
     </section>
   );
