@@ -66,7 +66,7 @@ export default function Component() {
           <div className="pb-20 wide:m-auto w-full max-w-wide flex flex-col wide:items-center">
             <Outlet />
           </div>
-          <footer className="absolute bottom-0 p-5 w-full flex justify-center items-center">
+          <footer className="absolute bottom-0 py-5 text-center left-0 right-0">
             <small>Andre Landgraf © {new Date().getFullYear()}</small>
           </footer>
         </div>
