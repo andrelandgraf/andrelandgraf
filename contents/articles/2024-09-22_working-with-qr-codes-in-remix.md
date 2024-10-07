@@ -58,7 +58,7 @@ Note that generating the QR code image on the server does require server resourc
 If you want to generate the QR code image on the client-side, we can use the `qrcode` package's `toCanvas` method. The following example shows how to create a QR code generator form that allows users to enter data and generate a QR code image on the client-side:
 
 ```tsx
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import QRCode from 'qrcode';
 import { Button } from '~/components/buttons';
 import { Input } from '~/components/forms';
@@ -67,47 +67,82 @@ import { SectionHeading } from '~/components/headings';
 export default function Component() {
   const [error, setError] = useState('');
   const ref = useRef<HTMLCanvasElement>(null);
+  const currentQRCodeData = useRef<string>('');
+
+  const renderQRCode = useCallback((data: string) => {
+    const canvas = ref.current;
+    if (!canvas) {
+      setError('Canvas not found');
+      return;
+    }
+    QRCode.toCanvas(canvas, data, { width: canvas.width }, function (error) {
+      if (error) {
+        setError(error.message);
+        return;
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const canvas = ref.current;
     if (!canvas) return;
-    let ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-  }, []);
+
+    const setupCanvas = () => {
+      // Clear style set by qrcode library
+      canvas.style.width = '';
+      canvas.style.height = '';
+
+      // Set width and height to available space
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
+
+      let ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      if (currentQRCodeData.current) {
+        // Re-draw QR code on changed dimensions
+        renderQRCode(currentQRCodeData.current);
+      } else {
+        // Clear canvas, draw white background
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+    };
+
+    const resizeObserver = new ResizeObserver(setupCanvas);
+    const section = document.getElementById('qr-code-container');
+    if (section) resizeObserver.observe(section);
+
+    setupCanvas();
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [renderQRCode]);
 
   return (
-    <section className="w-full space-y-4 pt-10 lg:p-20 max-w-[1200px]">
+    <section id="qr-code-container" className="w-full space-y-4 pt-10 lg:p-20 max-w-[1200px]">
       <SectionHeading>QR Code Generator</SectionHeading>
       <div className="flex flex-col lg:flex-row gap-8 w-full">
         <form
-          className="flex flex-col gap-4 w-full max-w-[800px]"
+          className="flex flex-col gap-4 w-full max-w-[600px]"
           onSubmit={async (e) => {
             e.preventDefault();
             setError('');
-            if (!ref.current) {
-              setError('Canvas not found');
-              return;
-            }
             const data = new FormData(e.currentTarget).get('data');
             if (!data || typeof data !== 'string') {
               setError('Data is required');
               return;
             }
-            QRCode.toCanvas(ref.current, data, { width: 600 }, function (error) {
-              if (error) {
-                setError(error.message);
-                return;
-              }
-            });
+            currentQRCodeData.current = data;
+            renderQRCode(currentQRCodeData.current);
           }}
         >
           <Input label="Data" type="text" id="data" name="data" required />
           <Button type="submit">Generate QR Code</Button>
           {error && <p className="text-red text-sm">{error}</p>}
         </form>
-        <canvas width="600" height="600" className='w-full max-w-[600px] object-contain' ref={ref} />
+        <canvas className="w-full max-w-[600px] aspect-square" ref={ref} />
       </div>
     </section>
   );
@@ -116,12 +151,13 @@ export default function Component() {
 
 This code does the following:
 
-- Renders a canvas where the QR code will be displayed.
+- Render a canvas where the QR code will be displayed.
 - Render a form with an input field for the user to enter the data for the QR code.
-- Use `useEffect` to draw a white background on the canvas when the component mounts.
-- Calls the `qrcode` package's `toCanvas` method to display the QR code on the canvas when the form is submitted.
-- Displays an error message if something goes wrong during the generation process.
-- Ensures the canvas is responsive by using the `object-fit: contain` CSS property.
+- Use `useEffect` to draw a white canvas background when the component mounts.
+- Use `useEffect` to set up a `ResizeObserver` to redraw the canvas when the screen dimensions change.
+- Call the `qrcode` package's `toCanvas` method to display the QR code on the canvas when the form is submitted.
+- Displays an error message if something goes wrong.
+- Ensure the canvas is resized correctly when the screen dimensions change, using `aspect-square` to maintain the aspect ratio.
 
 You can view this code in action at [https://andrelandgraf.dev/demos/qr](https://andrelandgraf.dev/demos/qr). Try entering a URL or any other data and click the "Generate QR Code" button to generate the QR code image.
 

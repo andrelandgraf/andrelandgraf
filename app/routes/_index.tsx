@@ -1,5 +1,5 @@
 import type { HeadersFunction, LinksFunction, MetaFunction } from '@remix-run/node';
-import { NavLink, type LinkProps } from '@remix-run/react';
+import { type LinkProps } from '@remix-run/react';
 import clsx from 'clsx';
 import { type HTMLAttributes, useEffect, useState } from 'react';
 
