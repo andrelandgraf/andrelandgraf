@@ -1,5 +1,5 @@
 export type BlogArticleFrontmatter = {
-  date: string;
+  date: Date;
   title: string;
   description: string;
   categories: string[];
@@ -10,11 +10,10 @@ export type BlogArticleFrontmatter = {
 export function validateFrontMatter(attributes: unknown): attributes is BlogArticleFrontmatter {
   return (
     !!attributes &&
-    typeof attributes !== 'function' &&
     typeof attributes === 'object' &&
-    typeof (attributes as any)['title'] === 'string' &&
-    typeof (attributes as any)['description'] === 'string' &&
-    Array.isArray((attributes as any)['categories']) &&
-    typeof (attributes as any)['date'] === 'object'
+    'title' in attributes && typeof attributes.title === 'string' &&
+    'description' in attributes && typeof attributes.description === 'string' &&
+    'categories' in attributes && Array.isArray(attributes.categories) &&
+    'date' in attributes && attributes.date instanceof Date
   );
 }

@@ -22,7 +22,7 @@ export function Book3DModel({ hoveredRef }: { hoveredRef: MutableRefObject<boole
   const { nodes, materials } = useGLTF('/book-v2.glb');
   useFrame(() => {
     if (!ref.current || hoveredRef.current) return;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReducedMotion = globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const fourSecondsSinceDrag = !draggedRef.current || Date.now() - draggedRef.current.timestamp > 4000;
     const stoppedDragging = !draggedRef.current || Date.now() - draggedRef.current.timestamp > 200;
     if (!draggedRef.current || fourSecondsSinceDrag) {
@@ -85,7 +85,7 @@ export function Book3DScene() {
   }, [hovered]);
 
   return (
-    <Canvas onPointerOver={(e) => setHover(true)} onPointerOut={(e) => setHover(false)}>
+    <Canvas onPointerOver={() => setHover(true)} onPointerOut={() => setHover(false)}>
       <Suspense fallback={null}>
         <PerspectiveCamera makeDefault position={[0, 0, 300]} rotation={[0, 0, 0]} fov={50} />
         <ambientLight intensity={0.8} />

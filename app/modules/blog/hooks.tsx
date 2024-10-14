@@ -1,7 +1,6 @@
 import { useRouteLoaderData } from '@remix-run/react';
 import invariant from 'tiny-invariant';
-
-import type { loader } from '~/routes/_layout.blog';
+import type { loader } from '~/routes/_layout.blog.tsx';
 
 export function useBlogContent() {
   const data = useRouteLoaderData<typeof loader>('routes/_layout.blog');

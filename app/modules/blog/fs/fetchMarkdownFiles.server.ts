@@ -1,10 +1,9 @@
 import Markdoc from '@markdoc/markdoc';
-import fs from 'fs/promises';
+import fs from 'node:fs/promises';
 import yaml from 'js-yaml';
 import invariant from 'tiny-invariant';
-
-import type { ActionResult, MarkdocFile } from '../../../types';
-import { config } from '../config';
+import type { ActionResult, MarkdocFile } from '~/types.ts';
+import { config } from '../config.ts';
 
 enum FetchMarkdownFilesResState {
   directoryNotFound = 'directory_not_found',
@@ -41,7 +40,7 @@ async function fetchMarkdownFilesFs<FrontMatter>(
       }
       try {
         invariant(hasValidFrontMatter(frontmatter), `File ${entry.name} is missing frontmatter attributes`);
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error(error);
         return [500, FetchMarkdownFilesResState.internalError, undefined];
       }

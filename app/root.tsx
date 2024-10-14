@@ -1,10 +1,10 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, useRouteError } from '@remix-run/react';
 import { captureRemixErrorBoundaryError } from '@sentry/remix';
 import type { LinksFunction, LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
-
+import { requireCanonicalSession } from './modules/session.server.ts';
+import { env } from './modules/env.server.ts';
+// @ts-ignore comment
 import styles from '~/styles/tailwind.css?url';
-import { env } from './modules/env.server';
-import { requireCanonicalSession } from './modules/session.server';
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
 
@@ -39,10 +39,10 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
 
 export default function App() {
   return (
-    <html lang="en">
+    <html lang='en'>
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
         <Meta />
         <Links />
       </head>

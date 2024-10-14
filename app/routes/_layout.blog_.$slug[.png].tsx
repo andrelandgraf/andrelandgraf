@@ -1,10 +1,10 @@
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 import { LoaderFunctionArgs } from '@remix-run/node';
-import { getFont } from '~/modules/image-gen/utils.server';
-import { fetchArticle } from '~/modules/blog/db/fetchArticle.server';
-import { ArticlePreview } from '~/modules/image-gen/templates';
-import { env } from '~/modules/env.server';
+import { getFont } from '~/modules/image-gen/utils.server.ts';
+import { fetchArticle } from '~/modules/blog/db/fetchArticle.server.ts';
+import { ArticlePreview } from '~/modules/image-gen/templates.tsx';
+import { env } from '~/modules/env.server.ts';
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
   const { slug } = params;

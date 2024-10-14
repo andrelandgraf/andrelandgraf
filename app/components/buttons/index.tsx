@@ -1,12 +1,10 @@
 import clsx from 'clsx';
 import type { ButtonHTMLAttributes, PropsWithoutRef } from 'react';
 import { forwardRef } from 'react';
-
-import type { AriaClasses } from '~/utilities/ariaClasses';
-import { getAriaClasses, getFocusClasses } from '~/utilities/ariaClasses';
-
-import type { LinkProps } from '../links';
-import { UnstyledLink } from '../links';
+import type { AriaClasses } from '~/utilities/ariaClasses.ts';
+import { getAriaClasses, getFocusClasses } from '~/utilities/ariaClasses.ts';
+import type { LinkProps } from '../links.tsx';
+import { UnstyledLink } from '../links.tsx';
 
 type ButtonOverrides = {
   colorClassName: string;
@@ -64,13 +62,13 @@ export function ButtonLink({
   ...props
 }: ButtonLinkProps) {
   return (
-    <div className="w-full md:w-fit">
+    <div className='w-full md:w-fit'>
       <UnstyledLink
         {...props}
         to={to}
         aria-disabled={disabled}
         className={getClasses(primary, className, overrides, disabled)}
-        outline="none"
+        outline='none'
       >
         {children}
       </UnstyledLink>
@@ -96,10 +94,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.displayName = 'Button';
 
-export function IconButton({ title, children, className = '', ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
+export function IconButton({ children, className = '', ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
-      type="button"
+      type='button'
       className={`transform motion-safe:hover:scale-105 ${getAriaClasses(true)} ${className}`}
       {...props}
     >

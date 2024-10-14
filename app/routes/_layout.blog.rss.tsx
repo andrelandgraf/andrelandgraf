@@ -1,4 +1,4 @@
-import { db } from '~/modules/db.server';
+import { fetchArticlesFrontmatter } from '~/modules/blog/db/fetchArticles.server.ts';
 
 type RSSArticles = {
   slug: string;
@@ -15,7 +15,8 @@ function generateRSS(articles: RSSArticles[]) {
     <description>Hey there! I write about all things web development. Check out my blog posts.</description>
     <link>https://andrelandgraf.dev</link>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-    ${articles
+    ${
+    articles
       .map((article) => {
         return `<item>
         <title>${article.title}</title>
@@ -24,23 +25,14 @@ function generateRSS(articles: RSSArticles[]) {
         <pubDate>${new Date(article.date).toUTCString()}</pubDate>
         </item>`;
       })
-      .join('\n')}
+      .join('\n')
+  }
     </channel>
     </rss>`;
 }
 
 export async function loader() {
-  const articles = await db.article.findMany({
-    select: {
-      slug: true,
-      date: true,
-      title: true,
-      description: true,
-    },
-    orderBy: {
-      date: 'desc',
-    },
-  });
+  const articles = await fetchArticlesFrontmatter();
   return new Response(generateRSS(articles), {
     headers: {
       'content-type': 'application/rss+xml',

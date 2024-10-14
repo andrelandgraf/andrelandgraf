@@ -1,6 +1,5 @@
 import type { MetaFunction } from '@remix-run/node';
-
-import { images } from './images';
+import { images } from './images.ts';
 
 type GetMetaTagsParams = {
   title?: string;

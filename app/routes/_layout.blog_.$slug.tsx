@@ -1,18 +1,14 @@
 import type { LinksFunction, LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
 import { json, redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-
-import { SectionHeading } from '~/components/headings';
-import { BlogMarkdownContainer, H1 } from '~/modules/blog/components';
-import { fetchArticle } from '~/modules/blog/db/fetchArticle.server';
-import { fetchMarkdownFileFs } from '~/modules/blog/fs/fetchMarkdownFile.server';
-import { fetchMarkdownFile } from '~/modules/blog/github/fetchMarkdownFile.server';
-import { validateFrontMatter } from '~/modules/blog/validation.server';
-import { env } from '~/modules/env.server';
-import { useTwitterEmbeds } from '~/modules/twitter-embeds';
+import { SectionHeading } from '~/components/headings.tsx';
+import { BlogMarkdownContainer, H1 } from '~/modules/blog/components.tsx';
+import { fetchArticle } from '~/modules/blog/db/fetchArticle.server.ts';
+import { useTwitterEmbeds } from '~/modules/twitter-embeds.ts';
+import { getISODate, getReadableDate } from '~/utilities/dates.ts';
+import { getMetaTags } from '~/utilities/metaTags.ts';
+// @ts-ignore comment
 import syntaxHighlightingStylesUrl from '~/styles/code.css?url';
-import { getISODate, getReadableDate } from '~/utilities/dates';
-import { getMetaTags } from '~/utilities/metaTags';
 
 export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: syntaxHighlightingStylesUrl }];
@@ -46,18 +42,11 @@ export async function loader({ params }: LoaderFunctionArgs) {
     }
   }
 
-  const mdFilePromise =
-    env.server.readContentFrom === 'production'
-      ? fetchArticle(slug)
-      : env.server.readContentFrom === 'github'
-      ? fetchMarkdownFile(env.github.accessToken, `${env.github.repoURI}/contents/articles`, slug, validateFrontMatter)
-      : fetchMarkdownFileFs(`./contents/articles`, slug, validateFrontMatter);
-
-  const [status, state, article] = await mdFilePromise;
+  const [status, state, article] = await fetchArticle(slug);
   if (status !== 200 || !article) {
-    if(status === 404) {
+    if (status === 404) {
       throw new Response(null, { status: 404, statusText: 'Not Found' });
-  }
+    }
     throw Error(`Error (${status}) ${state}: Failed to fetch blog articles.`);
   }
 
@@ -69,14 +58,14 @@ export default function Component() {
   const { article } = useLoaderData<typeof loader>();
 
   return (
-    <article className="w-full max-w-7xl flex flex-col wide:m-auto gap-5 leading-loose">
-      <div className="flex flex-col gap-1">
+    <article className='w-full max-w-7xl flex flex-col wide:m-auto gap-5 leading-loose'>
+      <div className='flex flex-col gap-1'>
         <H1>{article.frontmatter.title}</H1>
         <SectionHeading>
           <time dateTime={getISODate(article.frontmatter.date)}>{getReadableDate(article.frontmatter.date)}</time>
         </SectionHeading>
       </div>
-      <BlogMarkdownContainer className="w-full flex flex-col gap-5" content={article.content} />
+      <BlogMarkdownContainer className='w-full flex flex-col gap-5' content={article.content} />
     </article>
   );
 }

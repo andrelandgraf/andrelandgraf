@@ -5,15 +5,17 @@ type PageHeadingProps = HTMLAttributes<HTMLHeadingElement> & {
 };
 
 export function PageHeading({ children, asH2 = false, className = '', ...props }: PageHeadingProps) {
-  return asH2 ? (
-    <h2 {...props} className={`text-xl md:text-2xl xl:text-4xl 2xl:text-5xl font-semibold ${className}`}>
-      {children}
-    </h2>
-  ) : (
-    <h1 {...props} className={`text-xl md:text-2xl xl:text-4xl 2xl:text-5xl font-semibold ${className}`}>
-      {children}
-    </h1>
-  );
+  return asH2
+    ? (
+      <h2 {...props} className={`text-xl md:text-2xl xl:text-4xl 2xl:text-5xl font-semibold ${className}`}>
+        {children}
+      </h2>
+    )
+    : (
+      <h1 {...props} className={`text-xl md:text-2xl xl:text-4xl 2xl:text-5xl font-semibold ${className}`}>
+        {children}
+      </h1>
+    );
 }
 
 export function SectionHeading({ children, className = '', ...props }: HTMLAttributes<HTMLHeadingElement>) {

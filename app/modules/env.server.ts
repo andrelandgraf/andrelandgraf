@@ -1,4 +1,5 @@
 import invariant from 'tiny-invariant';
+import process from 'node:process';
 
 function enforceInProd(variable: string | undefined, variableName: string) {
   const isProduction = environment === 'production';
@@ -15,19 +16,11 @@ invariant(environment, 'NODE_ENV env variable is required');
 const origin = process.env.ORIGIN;
 invariant(origin, 'ORIGIN env variable is required');
 
-const githubAccessToken = process.env.GITHUB_ACCESS_TOKEN;
-invariant(githubAccessToken, 'GITHUB_ACCESS_TOKEN env variable is required');
-const githubRepoURI = process.env.GITHUB_REPO_URI;
-invariant(githubRepoURI, 'GITHUB_REPO_URI env variable is required');
-
-const openAIApiKey = process.env.OPEN_AI_KEY;
-invariant(openAIApiKey, 'OPEN_AI_KEY env variable is required');
-
-const databaseConnectionStr = process.env.DATABASE_URL;
-invariant(databaseConnectionStr, 'DATABASE_URL env variable is required');
+const dbConnectionStr = process.env.DATABASE_URL;
+invariant(dbConnectionStr, 'DATABASE_URL env variable is required');
 
 const sentryDsn = process.env.SENTRY_DSN;
-if(!sentryDsn) {
+if (!sentryDsn) {
   console.warn('SENTRY_DSN env variable is not set');
 }
 enforceInProd(process.env.SENTRY_ORG, 'SENTRY_ORG');
@@ -46,15 +39,10 @@ export const env = {
     origin,
     readContentFrom: 'production',
   },
-  github: {
-    accessToken: githubAccessToken,
-    repoURI: githubRepoURI,
+  db: {
+    path: dbConnectionStr,
   },
   sentry: {
     dsn: sentryDsn,
   },
-  openAI: {
-    apiKey: openAIApiKey,
-  },
-  databaseConnectionStr,
 };

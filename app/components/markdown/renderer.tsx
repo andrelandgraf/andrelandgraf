@@ -1,9 +1,8 @@
+import React from 'react';
 import type { RenderableTreeNode } from '@markdoc/markdoc';
 import Markdoc from '@markdoc/markdoc';
 import type { HTMLAttributes } from 'react';
-import React from 'react';
-
-export * from '../codeBlock';
+export * from '../codeBlock.tsx';
 
 type MarkdownContainerProps = HTMLAttributes<HTMLDivElement> & {
   content: RenderableTreeNode;

@@ -1,10 +1,10 @@
 import { createRequestHandler } from '@remix-run/express';
-import * as Sentry from '@sentry/bun';
+import * as Sentry from '@sentry/node';
 import compression from 'compression';
 import express from 'express';
 import morgan from 'morgan';
-
-import { env } from '~/modules/env.server.js';
+import process from 'node:process';
+import { env } from '~/modules/env.server.ts';
 
 const productionBuild = env.environment === 'production' ? await import('../build/server/index.js') : undefined;
 
@@ -22,14 +22,13 @@ if (env.sentry.dsn) {
   });
 }
 
-const viteDevServer =
-  env.environment === 'production'
-    ? undefined
-    : await import('vite').then((vite) =>
-        vite.createServer({
-          server: { middlewareMode: true },
-        }),
-      );
+const viteDevServer = env.environment === 'production'
+  ? undefined
+  : await import('vite').then((vite) =>
+    vite.createServer({
+      server: { middlewareMode: true },
+    })
+  );
 
 declare module '@remix-run/node' {
   interface AppLoadContext {
@@ -66,8 +65,8 @@ app.use(express.static('build/client', { maxAge: '1h' }));
 
 app.use(morgan('tiny'));
 
-app.use('/tests/errors/server-error', (req, res) => {
-  throw new Error('This is a test error from Express on Bun.');
+app.use('/tests/errors/server-error', () => {
+  throw new Error('This is a test error from Express.');
 });
 
 // handle SSR requests

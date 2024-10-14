@@ -2,8 +2,7 @@ import type { NavLinkProps as RemixNavLinkProps } from '@remix-run/react';
 import { NavLink } from '@remix-run/react';
 import clsx from 'clsx';
 import type { AnchorHTMLAttributes, ReactNode } from 'react';
-
-import { getAriaClasses, getFocusClasses } from '~/utilities/ariaClasses';
+import { getAriaClasses, getFocusClasses } from '~/utilities/ariaClasses.ts';
 
 type UnstyledLinkProps = {
   children: ReactNode;
@@ -22,9 +21,9 @@ export function UnstyledLink({ to, outline = 'small', style, children, className
       <a
         {...props}
         href={to}
-        style={
-          typeof style === 'function' ? style({ isActive: false, isPending: false, isTransitioning: false }) : style
-        }
+        style={typeof style === 'function'
+          ? style({ isActive: false, isPending: false, isTransitioning: false })
+          : style}
         className={clsx(
           outline === 'none' ? undefined : getAriaClasses(outline === 'small'),
           typeof className === 'function'
@@ -45,9 +44,8 @@ export function UnstyledLink({ to, outline = 'small', style, children, className
         clsx(
           outline === 'none' ? undefined : getAriaClasses(outline === 'small'),
           typeof className === 'function' ? className(params) : className,
-        )
-      }
-      prefetch="intent"
+        )}
+      prefetch='intent'
       end
     >
       {children}
@@ -60,7 +58,7 @@ export function StyledLink({ to, nav = false, className = '', children, ...props
     <UnstyledLink
       {...props}
       to={to}
-      outline="none"
+      outline='none'
       className={({ isActive }) =>
         clsx(
           getFocusClasses(true),
@@ -71,8 +69,7 @@ export function StyledLink({ to, nav = false, className = '', children, ...props
             'decoration-primaryAccent': isActive,
           },
           className,
-        )
-      }
+        )}
     >
       {children}
     </UnstyledLink>
@@ -81,7 +78,7 @@ export function StyledLink({ to, nav = false, className = '', children, ...props
 
 export function MarkdownLinkWrapper({ href = '/404', children, ...props }: AnchorHTMLAttributes<HTMLAnchorElement>) {
   return (
-    <StyledLink to={href} className="font-normal" {...props}>
+    <StyledLink to={href} className='font-normal' {...props}>
       {children}
     </StyledLink>
   );

@@ -7,7 +7,7 @@ export function TweetEmbed({ url }: TweetEmbedProps) {
     return null;
   }
   return (
-    <blockquote className="twitter-tweet">
+    <blockquote className='twitter-tweet'>
       <a href={url}></a>
     </blockquote>
   );

@@ -44,10 +44,10 @@ export function PageTransitionProgressBar({
 
   return (
     <div
-      role="progressbar"
+      role='progressbar'
       aria-hidden={!isTransitioning}
       aria-valuetext={isTransitioning ? 'Loading' : undefined}
-      className="fixed inset-x-0 top-0 left-0 z-50 h-2 animate-pulse"
+      className='fixed inset-x-0 top-0 left-0 z-50 h-2 animate-pulse'
     >
       <div
         ref={ref}

@@ -1,17 +1,30 @@
 import type { RenderableTreeNode } from '@markdoc/markdoc';
 import Markdoc from '@markdoc/markdoc';
-import type { Article } from '@prisma/client';
-
-import { db } from '~/modules/db.server';
-import type { ActionResult, MarkdocFile } from '~/types';
-
-import { config } from '../config';
-import type { BlogArticleFrontmatter } from '../validation.server';
+import { db } from '~/modules/db/db.server.ts';
+import type { ActionResult, MarkdocFile } from '~/types.ts';
+import { config } from '../config.ts';
+import type { BlogArticleFrontmatter } from '../validation.server.ts';
+import { Article, articlesTable } from '~/modules/db/schema.server.ts';
+import { eq } from 'drizzle-orm';
 
 export enum FetchArticleResState {
   fileNotFound = 'file_not_found',
   internalError = 'internal_error',
   success = 'success',
+}
+
+export function parseCategories(categories: unknown): string[] {
+  if (typeof categories !== 'string') {
+    const loggableVal = !!categories && typeof categories === 'object' && 'toString' in categories
+      ? categories.toString()
+      : null;
+    throw Error(`Malformed categories, expected string: ${loggableVal}`);
+  }
+  const parsed = JSON.parse(categories);
+  if (!Array.isArray(parsed)) {
+    throw Error(`Malformed categories, expected array: ${parsed}`);
+  }
+  return parsed;
 }
 
 export function articleToMarkdocFile(
@@ -24,7 +37,7 @@ export function articleToMarkdocFile(
       title: article.title,
       description: article.description,
       date: article.date.toISOString(),
-      categories: article.categories,
+      categories: parseCategories(article.categories),
       imageUrl: article.imageUrl || undefined,
       imageAltText: article.imageAltText || undefined,
     },
@@ -36,7 +49,7 @@ export function articleToMarkdocFile(
 export async function fetchArticle(
   slug: string,
 ): Promise<ActionResult<FetchArticleResState, MarkdocFile<BlogArticleFrontmatter>>> {
-  const article = await db.article.findUnique({ where: { slug } });
+  const [article] = await db.select().from(articlesTable).where(eq(articlesTable.slug, slug));
   if (!article) {
     return [404, FetchArticleResState.fileNotFound, undefined];
   }

@@ -1,8 +1,7 @@
 import { Link, type LinkProps } from '@remix-run/react';
 import clsx from 'clsx';
 import type { HTMLAttributes } from 'react';
-
-import { getFocusClasses } from '~/utilities/ariaClasses';
+import { getFocusClasses } from '~/utilities/ariaClasses.ts';
 
 export function Tag({ children, className = '', ...props }: LinkProps) {
   return (
@@ -24,7 +23,7 @@ type TagsProps = HTMLAttributes<HTMLUListElement> & {
   tags: string[];
 };
 
-export function Tags({ tags, children, className, ...props }: TagsProps) {
+export function Tags({ tags, className, ...props }: TagsProps) {
   return (
     <ul {...props} className={clsx('flex gap-2 flex-wrap', className)}>
       {tags.map((tag) => (

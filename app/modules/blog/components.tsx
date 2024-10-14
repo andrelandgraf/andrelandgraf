@@ -1,11 +1,10 @@
 import type { RenderableTreeNode } from '@markdoc/markdoc';
 import clsx from 'clsx';
 import type { HTMLAttributes } from 'react';
-
-import { MarkdownLinkWrapper } from '~/components/links';
-import { CodeBlock, MarkdownContainer } from '~/components/markdown/renderer';
-import { Quote, Statement } from '~/components/texts';
-import { TweetEmbed } from '~/components/tweetEmbed';
+import { MarkdownLinkWrapper } from '~/components/links.tsx';
+import { CodeBlock, MarkdownContainer } from '~/components/markdown/renderer.tsx';
+import { Quote, Statement } from '~/components/texts.tsx';
+import { TweetEmbed } from '~/components/tweetEmbed.tsx';
 
 export function Container({ children }: HTMLAttributes<HTMLElement>) {
   return children;
@@ -17,7 +16,7 @@ type HeadingProps = HTMLAttributes<HTMLHeadingElement> & {
 
 export function H1({ children, ...props }: HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <h1 {...props} className="text-3xl lg:text-4xl xl:text-6xl text-primaryDark dark:text-primary font-extrabold">
+    <h1 {...props} className='text-3xl lg:text-4xl xl:text-6xl text-primaryDark dark:text-primary font-extrabold'>
       {children}
     </h1>
   );
@@ -28,7 +27,7 @@ export function Heading({ children, level = 2, ...props }: HeadingProps) {
     return (
       <h2
         {...props}
-        className="text-2xl lg:text-3xl xl:text-4xl text-secondary dark:text-primary font-bold mt-6 lg:mt-8"
+        className='text-2xl lg:text-3xl xl:text-4xl text-secondary dark:text-primary font-bold mt-6 lg:mt-8'
       >
         {children}
       </h2>
@@ -38,7 +37,7 @@ export function Heading({ children, level = 2, ...props }: HeadingProps) {
     return (
       <h3
         {...props}
-        className="text-xl lg:text-2xl xl:text-3xl font-semibold text-secondary dark:text-primary mt-4 lg:mt-6"
+        className='text-xl lg:text-2xl xl:text-3xl font-semibold text-secondary dark:text-primary mt-4 lg:mt-6'
       >
         {children}
       </h3>
@@ -48,14 +47,14 @@ export function Heading({ children, level = 2, ...props }: HeadingProps) {
     return (
       <h4
         {...props}
-        className="text-lg lg:text-xl xl:text-2xl font-normal text-secondary dark:text-primary mt-2 lg:mt-4"
+        className='text-lg lg:text-xl xl:text-2xl font-normal text-secondary dark:text-primary mt-2 lg:mt-4'
       >
         {children}
       </h4>
     );
   }
   return (
-    <h5 className="text-lg lg:text-xl xl:text-2xl" {...props}>
+    <h5 className='text-lg lg:text-xl xl:text-2xl' {...props}>
       {children}
     </h5>
   );
@@ -68,13 +67,13 @@ type ListProps = HTMLAttributes<HTMLElement> & {
 export function List({ children, ordered, ...props }: ListProps) {
   if (ordered) {
     return (
-      <ol className="list-inside list-decimal" {...props}>
+      <ol className='list-inside list-decimal' {...props}>
         {children}
       </ol>
     );
   }
   return (
-    <ul className="list-disc list-inside" {...props}>
+    <ul className='list-disc list-inside' {...props}>
       {children}
     </ul>
   );
@@ -82,7 +81,7 @@ export function List({ children, ordered, ...props }: ListProps) {
 
 export function ListItem({ children, ...props }: HTMLAttributes<HTMLLIElement>) {
   return (
-    <li className="pl-4 lg:mb-1 w-full text-lg lg:text-xl xl:text-2xl font-light" {...props}>
+    <li className='pl-4 lg:mb-1 w-full text-lg lg:text-xl xl:text-2xl font-light' {...props}>
       {children}
     </li>
   );
@@ -90,7 +89,7 @@ export function ListItem({ children, ...props }: HTMLAttributes<HTMLLIElement>) 
 
 export function Paragraph({ children, ...props }: HTMLAttributes<HTMLParagraphElement>) {
   return (
-    <p {...props} className="text-lg lg:text-xl xl:text-2xl font-light">
+    <p {...props} className='text-lg lg:text-xl xl:text-2xl font-light'>
       {children}
     </p>
   );
@@ -99,7 +98,7 @@ export function Paragraph({ children, ...props }: HTMLAttributes<HTMLParagraphEl
 export function Table({ children, ...props }: HTMLAttributes<HTMLTableElement>) {
   return (
     <div>
-      <table {...props} className="border-collapse">
+      <table {...props} className='border-collapse'>
         {children}
       </table>
     </div>
@@ -108,7 +107,7 @@ export function Table({ children, ...props }: HTMLAttributes<HTMLTableElement>) 
 
 export function TH({ children, ...props }: HTMLAttributes<HTMLTableCellElement>) {
   return (
-    <th {...props} className="p-2 border border-gray-300">
+    <th {...props} className='p-2 border border-gray-300'>
       {children}
     </th>
   );
@@ -131,7 +130,10 @@ export function TD({ children, color = 'default', ...props }: TDProps) {
 
 export function InlineCode({ content, ...props }: HTMLAttributes<HTMLElement>) {
   return (
-    <code className="text-lg lg:text-xl xl:text-2xl font-light font-mono px-1 rounded-md bg-gray-100 dark:bg-gray-700" {...props}>
+    <code
+      className='text-lg lg:text-xl xl:text-2xl font-light font-mono px-1 rounded-md bg-gray-100 dark:bg-gray-700'
+      {...props}
+    >
       {content}
     </code>
   );

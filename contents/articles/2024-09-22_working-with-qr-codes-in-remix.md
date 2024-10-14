@@ -7,21 +7,26 @@ imageUrl: https://andrelandgraf.dev/blog/2024-09-22_working-with-qr-codes-in-rem
 imageAltText: QR code to this very blog post.
 ---
 
-QR codes are two-dimensional barcodes that can easily be scanned by phones and other devices. They are commonly used to share URLs but can store any kind of data. QR codes can hold up to 3 KB of data, which is about 4000 alphanumeric or 7000 numeric characters. In this article, we will cover different ways to generate QR codes in Remix.
+QR codes are two-dimensional barcodes that can easily be scanned by phones and other devices. They are commonly used to
+share URLs but can store any kind of data. QR codes can hold up to 3 KB of data, which is about 4000 alphanumeric or
+7000 numeric characters. In this article, we will cover different ways to generate QR codes in Remix.
 
 ## Getting started
 
-The `qrcode` package is an excellent tool for generating QR codes, taking care of the heavy lifting. Start by installing the `qrcode` package ([view on npm](https://www.npmjs.com/package/qrcode)):
+The `qrcode` package is an excellent tool for generating QR codes, taking care of the heavy lifting. Start by installing
+the `qrcode` package ([view on npm](https://www.npmjs.com/package/qrcode)):
 
 ```bash
 npm install qrcode
 ```
 
-In Remix, you can choose to render QR codes either on the server or the client, each with its own pros and cons. We'll cover both approaches and when to use each one.
+In Remix, you can choose to render QR codes either on the server or the client, each with its own pros and cons. We'll
+cover both approaches and when to use each one.
 
 ## Server-side QR code generation
 
-We can generate QR codes on the server and serve them as PNGs using a resource route's `loader` function. The example below shows how to create a QR code image from a query parameter and return it as a PNG in response to GET requests:
+We can generate QR codes on the server and serve them as PNGs using a resource route's `loader` function. The example
+below shows how to create a QR code image from a query parameter and return it as a PNG in response to GET requests:
 
 ```tsx
 import { LoaderFunctionArgs } from '@remix-run/server-runtime';
@@ -30,7 +35,7 @@ import QRCode from 'qrcode';
 export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const qrCodeData = url.searchParams.get('data');
-  if(!qrCodeData) {
+  if (!qrCodeData) {
     return new Response('Missing data parameter', { status: 400, statusText: 'Bad Request' });
   }
   const qrCode = await QRCode.toBuffer(qrCodeData, { width: 1200 });
@@ -43,19 +48,35 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 ```
 
-In this example, we use the `qrcode` package's `toBuffer` method to generate the QR code image from the `data` query parameter and set the width of the QR code to 1200 pixels. Then, we return the QR code as a PNG image. Try it out by visiting [https://andrelandgraf.dev/qr.png?data=https://andrelandgraf.dev](https://andrelandgraf.dev/qr.png?data=https://andrelandgraf.dev). You should see a QR code image that contains the URL `https://andrelandgraf.dev`. You can replace the `data` parameter with any URL or other data. The Cache-Control header caches each QR code for 24 hours, reducing the need to regenerate it on every request.
+In this example, we use the `qrcode` package's `toBuffer` method to generate the QR code image from the `data` query
+parameter and set the width of the QR code to 1200 pixels. Then, we return the QR code as a PNG image. Try it out by
+visiting
+[https://andrelandgraf.dev/qr.png?data=https://andrelandgraf.dev](https://andrelandgraf.dev/qr.png?data=https://andrelandgraf.dev).
+You should see a QR code image that contains the URL `https://andrelandgraf.dev`. You can replace the `data` parameter
+with any URL or other data. The Cache-Control header caches each QR code for 24 hours, reducing the need to regenerate
+it on every request.
 
-Generating a QR code image on the server is useful when you want to integrate the QR code into your server-side rendered site or when you need to generate the QR code based on server-side data. One cool use case of generating a QR code on the server is to include it in a dynamically generated image using satori and resvg-js ([blog post by Jacob Paris](https://www.jacobparis.com/content/remix-og)). satori allows you to turn HTML and CSS into an SVG and resvg-js renders SVGs to PNGs. If you want to include a QR code in a dynamic image generated with HTML and CSS, you can include an image tag with the QR code URL in the overall HTML content and turn it into an SVG with satori. Then, you can render the SVG to a PNG with resvg-js.
+Generating a QR code image on the server is useful when you want to integrate the QR code into your server-side rendered
+site or when you need to generate the QR code based on server-side data. One cool use case of generating a QR code on
+the server is to include it in a dynamically generated image using satori and resvg-js
+([blog post by Jacob Paris](https://www.jacobparis.com/content/remix-og)). satori allows you to turn HTML and CSS into
+an SVG and resvg-js renders SVGs to PNGs. If you want to include a QR code in a dynamic image generated with HTML and
+CSS, you can include an image tag with the QR code URL in the overall HTML content and turn it into an SVG with satori.
+Then, you can render the SVG to a PNG with resvg-js.
 
 ### Example
 
 ![Preview image for this blog post with QR code](https://andrelandgraf.dev/blog/2024-09-22_working-with-qr-codes-in-remix.png?qr)
 
-Note that generating the QR code image on the server does require server resources. This is usually fine, especially when utilizing caching. However, if I were to create a QR code generator website, I would generate the QR code image on the client-side instead so that each user generates their QR codes in their browser, reducing the load on the server.
+Note that generating the QR code image on the server does require server resources. This is usually fine, especially
+when utilizing caching. However, if I were to create a QR code generator website, I would generate the QR code image on
+the client-side instead so that each user generates their QR codes in their browser, reducing the load on the server.
 
 ## Client-side QR code generation
 
-If you want to generate the QR code image on the client-side, we can use the `qrcode` package's `toCanvas` method. The following example shows how to create a QR code generator form that allows users to enter data and generate a QR code image on the client-side:
+If you want to generate the QR code image on the client-side, we can use the `qrcode` package's `toCanvas` method. The
+following example shows how to create a QR code generator form that allows users to enter data and generate a QR code
+image on the client-side:
 
 ```tsx
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -121,11 +142,11 @@ export default function Component() {
   }, [renderQRCode]);
 
   return (
-    <section id="qr-code-container" className="w-full space-y-4 pt-10 lg:p-20 max-w-[1200px]">
+    <section id='qr-code-container' className='w-full space-y-4 pt-10 lg:p-20 max-w-[1200px]'>
       <SectionHeading>QR Code Generator</SectionHeading>
-      <div className="flex flex-col lg:flex-row gap-8 w-full">
+      <div className='flex flex-col lg:flex-row gap-8 w-full'>
         <form
-          className="flex flex-col gap-4 w-full max-w-[600px]"
+          className='flex flex-col gap-4 w-full max-w-[600px]'
           onSubmit={async (e) => {
             e.preventDefault();
             setError('');
@@ -138,11 +159,11 @@ export default function Component() {
             renderQRCode(currentQRCodeData.current);
           }}
         >
-          <Input label="Data" type="text" id="data" name="data" required />
-          <Button type="submit">Generate QR Code</Button>
-          {error && <p className="text-red text-sm">{error}</p>}
+          <Input label='Data' type='text' id='data' name='data' required />
+          <Button type='submit'>Generate QR Code</Button>
+          {error && <p className='text-red text-sm'>{error}</p>}
         </form>
-        <canvas className="w-full max-w-[600px] aspect-square" ref={ref} />
+        <canvas className='w-full max-w-[600px] aspect-square' ref={ref} />
       </div>
     </section>
   );
@@ -157,10 +178,14 @@ This code does the following:
 - Use `useEffect` to set up a `ResizeObserver` to redraw the canvas when the screen dimensions change.
 - Call the `qrcode` package's `toCanvas` method to display the QR code on the canvas when the form is submitted.
 - Displays an error message if something goes wrong.
-- Ensure the canvas is resized correctly when the screen dimensions change, using `aspect-square` to maintain the aspect ratio.
+- Ensure the canvas is resized correctly when the screen dimensions change, using `aspect-square` to maintain the aspect
+  ratio.
 
-You can view this code in action at [https://andrelandgraf.dev/demos/qr](https://andrelandgraf.dev/demos/qr). Try entering a URL or any other data and click the "Generate QR Code" button to generate the QR code image.
+You can view this code in action at [https://andrelandgraf.dev/demos/qr](https://andrelandgraf.dev/demos/qr). Try
+entering a URL or any other data and click the "Generate QR Code" button to generate the QR code image.
 
 ## Conclusion
 
-QR codes are a great way to share URLs and other information. Generating QR codes in Remix is straightforward. The `qrcode` package does all the heavy lifting. Start with server-side generation unless you're concerned about server resources or only need QR codes based on user input. Happy coding!
+QR codes are a great way to share URLs and other information. Generating QR codes in Remix is straightforward. The
+`qrcode` package does all the heavy lifting. Start with server-side generation unless you're concerned about server
+resources or only need QR codes based on user input. Happy coding!
