@@ -3,8 +3,6 @@ date: 2023-02-11
 title: A process for solving React take-home exercises
 description: Take-home can be intimidating, especially for those new to the job market. In this blog post, I want to guide you through my process for solving React take-home exercises.
 categories: [React, Interview Prep, Beginner Friendly]
-imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1676234337/andrelandgraf.dev/take-home-exercises_hr145l
-imageAltText: Solving React take-home exercises - from zero to hero.
 ---
 
 Take-home exercises are a common part of the interview process. They can be intimidating, especially for those new to
@@ -364,7 +362,7 @@ debugging your over-complicated code when you could already be done.
 
 Start very simple and get it to work first. Once it works, we can make it more pretty (if necessary).
 
-{% statement %} Keep it simple and make it work. Do not over-complicate things and don't add premature abstractions. {%
+{% statement %}Keep it simple and make it work. Do not over-complicate things and don't add premature abstractions.{%
 /statement %}
 
 Maybe I sound a bit harsh here. I have lost countless of hours trying to fix my stupid over-engineered code. I have
@@ -665,8 +663,8 @@ web standard that we can use to make our life easier!
 It turns out there is an input attribute called `type` which can be set to "email". This way we can avoid implementing a
 regular expression.
 
-{% statement %} It's always a good idea to search for a web standard or web API to solve your problems before trying to
-solve it with React. {% /statement %}
+{% statement %}It's always a good idea to search for a web standard or web API to solve your problems before trying to
+solve it with React.{% /statement %}
 
 1. Add the static markup HTML
 
@@ -879,7 +877,7 @@ Please note that using a regular expression would have also been a valid impleme
 advantage of the web platform and avoid reinventing the wheel. However, just a note, that if you want to use a different
 implementation, that is great as well! This is just one out of many implementations.
 
-{% statement %} When in doubt, search for an existing browser API to solve your problem. {% /statement %}
+{% statement %}When in doubt, search for an existing browser API to solve your problem.{% /statement %}
 
 ##### Task 3
 

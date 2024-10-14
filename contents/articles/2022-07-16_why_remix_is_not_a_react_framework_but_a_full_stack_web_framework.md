@@ -31,8 +31,8 @@ first-class citizens in Remix. Remix's conventions, levers, and primitives are t
 of existing web APIs and standards. This sets Remix apart from other popular frameworks that feel more decoupled from
 the web platform.
 
-{% statement %} Remix embraces the web platform and provides thoughtfully designed conventions, levers, and primitives
-for existing web APIs and standards. {% /statement %}
+{% statement %}Remix embraces the web platform and provides thoughtfully designed conventions, levers, and primitives
+for existing web APIs and standards.{% /statement %}
 
 React still plays an important role in Remix. After all, Remix comes from the same folks that created React Router -
 Ryan Florence and Michael Jackson. Remix aims to leverage everything great React has to offer. For instance,
@@ -75,8 +75,8 @@ trigger data mutations. Much PHP vibes, very old school. Funny enough, this gave
 framework. I would much rather phrase it this way: from a PHP/Rails perspective, Remix feels familiar but comes with all
 the advancements of the JavaScript ecosystem.
 
-{% statement %} Remix is a healthy combination of what works (the web platform) and new ideas, trends, and technologies.
-{% /statement %}
+{% statement %}Remix is a healthy combination of what works (the web platform) and new ideas, trends, and
+technologies.{% /statement %}
 
 ### The JavaScript perspective
 
@@ -96,7 +96,7 @@ seem like just another pendulum swing in the never-ending back and forth between
 However, I believe Remix is the next evolutionary step that addresses the pain points of SPAs but still enables me to
 create modern web apps.
 
-{% statement %} Remix addresses the pain points of SPAs and still lets me build modern web apps. {% /statement %}
+{% statement %}Remix addresses the pain points of SPAs and still lets me build modern web apps.{% /statement %}
 
 Both Remix and Next.js aim to solve the pain points of SPAs by utilizing the latest improvements in React and taking
 advantage of server-side rendering (SSR). From an SPA perspective, I believe
@@ -123,8 +123,8 @@ are just developing a website/web app and thinking about using GraphQL to aggreg
 organization is using GraphQL, you can also easily integrate with GraphQL in Remix's loaders and actions without
 shipping a heavy GraphQL client to the user's browser.
 
-{% statement %} Remix is the perfect replacement for an SPA and works well in microservice architectures as it can
-aggregate data on the server and avoid overfetching. {% /statement %}
+{% statement %}Remix is the perfect replacement for an SPA and works well in microservice architectures as it can
+aggregate data on the server and avoid overfetching.{% /statement %}
 
 #### From MERN stack to Remix
 
@@ -150,8 +150,8 @@ significantly reduce the amount of code needed to solve those complex problems. 
 and React Router boilerplate code you can get rid of by using Remix's file-based routing for both your API and document
 routes.
 
-{% statement %} Coming from MERN, Remix provides insane quality-of-life improvements and a better user experience out of
-the box. {% /statement %}
+{% statement %}Coming from MERN, Remix provides insane quality-of-life improvements and a better user experience out of
+the box.{% /statement %}
 
 #### From Jamstack to Remix
 
@@ -184,7 +184,7 @@ statement: Remix feels less decoupled from the web platform. There are a lot of 
 website for and Remix is all about providing levers so that we can choose what to optimize for. For me, this sets Remix
 apart from Jamstack.
 
-{% statement %} Remix is about providing levers to optimize for what's most important to you. {% /statement %}
+{% statement %}Remix is about providing levers to optimize for what's most important to you.{% /statement %}
 
 ### Remix runs everywhere
 
@@ -197,8 +197,8 @@ Remix can adapt to your use case much better than other frameworks. For instance
 easiest way to deploy a simple REST API to the edge. Speaking of the edge, I believe the edge is one of the areas where
 Remix is currently accelerating a trend by making it so accessible.
 
-{% statement %} Remix's ability to run anywhere adds to its flexibility. Remix's adapters let you choose a platform and
-environment based on your own requirements. {% /statement %}
+{% statement %}Remix's ability to run anywhere adds to its flexibility. Remix's adapters let you choose a platform and
+environment based on your own requirements.{% /statement %}
 
 ### API-first
 

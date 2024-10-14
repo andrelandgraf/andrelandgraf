@@ -1,5 +1,3 @@
-import { images } from '~/utilities/images.ts';
-
 declare module 'react' {
   interface HTMLAttributes<T> {
     tw?: string;
@@ -32,8 +30,14 @@ export function ArticlePreview({
     >
       <div tw='w-full flex items-start'>
         <div tw='flex flex-col' style={{ gap: '1rem' }}>
-          <div tw='w-30 h-30 rounded-full overflow-hidden flex items-center justify-center'>
-            <img className='w-full rounded-md' src={images.resumeImage.src} alt={images.resumeImage.alt} />
+          <div tw='w-28 h-28 rounded-full overflow-hidden flex items-center justify-center'>
+            <img
+              width='112'
+              height='112'
+              className='w-full rounded-md'
+              src={`${serverOrigin}/profile.png`}
+              alt='Andre smiles at the camera'
+            />
           </div>
           <div tw='text-2xl font-semibold'>Andre Landgraf</div>
         </div>

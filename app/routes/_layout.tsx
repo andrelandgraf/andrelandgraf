@@ -19,11 +19,11 @@ export default function Component() {
           <header className='w-full flex flex-col lg:flex-row items-center mb-6 lg:mb-16'>
             <div className='w-full flex flex-col lg:flex-row items-start gap-4 lg:gap-10 lg:ml-auto'>
               <img
-                className='w-40 lg:w-60 rounded-md'
-                src={images.resumeImage.src}
-                alt={images.resumeImage.alt}
-                width={images.resumeImage.width}
-                height={images.resumeImage.height}
+                className='w-40 rounded-md'
+                alt="Andre smiles into the camera."
+                src="/img/public/profile.png?w=160&h=160"
+                width="160"
+                height="160"
               />
               <div className='flex flex-col gap-2 lg:gap-4'>
                 <h2 className='font-bold text-2xl xl:text-4xl'>Andre Landgraf</h2>

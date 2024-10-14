@@ -59,11 +59,11 @@ export default function Component() {
             </p>
             <div className='frame-one-subheading flex lg:flex-col items-center justify-center transform rotate-6 absolute top-8 lg:right-8'>
               <img
-                alt={images.resumeImage.alt}
-                src={images.resumeImage.src}
+                alt="Andre smiles into the camera."
+                src="img/public/profile.png?w=96&h=96"
                 className='w-10 lg:w-24 rounded-full mr-4 lg:mb-4'
-                width={images.resumeImage.width}
-                height={images.resumeImage.height}
+                width="96"
+                height="96"
               />
               <p className='handwritten font-extrabold text-4xl text-primary'>By Andre Landgraf</p>
             </div>
@@ -214,10 +214,11 @@ function BookModel() {
     return (
       <img
         className='max-w-[50vw] lg:max-w-[30vw] shadow-lg shadow-black'
-        src={images.bookCoverImage.src}
-        alt={images.bookCoverImage.alt}
-        height={images.bookCoverImage.height}
-        width={images.bookCoverImage.width}
+        src="/img/public/full-stack-web-dev-with-remix-book-cover.png?w=562&h=694"
+        alt="Full Stack Web Development with Remix book cover"
+        width="562"
+        height="1387"
+        loading='lazy'
       />
     );
   }

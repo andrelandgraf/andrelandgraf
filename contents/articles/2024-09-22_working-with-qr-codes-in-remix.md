@@ -66,7 +66,7 @@ Then, you can render the SVG to a PNG with resvg-js.
 
 ### Example
 
-![Preview image for this blog post with QR code](https://andrelandgraf.dev/blog/2024-09-22_working-with-qr-codes-in-remix.png?qr)
+![Preview image for this blog post with QR code](/img/gen/blog/2024-09-22_working-with-qr-codes-in-remix.png?qr&w=800&h=800)
 
 Note that generating the QR code image on the server does require server resources. This is usually fine, especially
 when utilizing caching. However, if I were to create a QR code generator website, I would generate the QR code image on

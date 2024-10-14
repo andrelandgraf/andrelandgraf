@@ -7,6 +7,7 @@ import { fetchArticle } from '~/modules/blog/db/fetchArticle.server.ts';
 import { useTwitterEmbeds } from '~/modules/twitter-embeds.ts';
 import { getISODate, getReadableDate } from '~/utilities/dates.ts';
 import { getMetaTags } from '~/utilities/metaTags.ts';
+import { env } from '~/modules/env.server.ts';
 // @ts-ignore comment
 import syntaxHighlightingStylesUrl from '~/styles/code.css?url';
 
@@ -15,11 +16,18 @@ export const links: LinksFunction = () => {
 };
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  if (!data) {
+    return getMetaTags({
+      title: 'Blog',
+      description: 'This is my personal blog! Find a list of all my posts here!',
+    });
+  }
+  const tile = data.article.frontmatter.title;
   return getMetaTags({
-    title: data?.article.frontmatter.title || 'Blog',
-    description: data?.article.frontmatter.description || 'This is my personal blog! Find a list of all my posts here!',
-    image: data?.article.frontmatter.imageUrl,
-    imageAlt: data?.article.frontmatter.imageAltText,
+    title: tile,
+    description: data.article.frontmatter.description,
+    image: data?.article.frontmatter.imageUrl || `${data.serverOrigin}/img/gen/blog/${data.article.slug}.png?w=1200&h=1200`,
+    imageAlt: data?.article.frontmatter.imageAltText || `${tile} by Andre Landgraf`,
     type: 'article',
   });
 };
@@ -50,7 +58,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
     throw Error(`Error (${status}) ${state}: Failed to fetch blog articles.`);
   }
 
-  return json({ article }, { headers: { 'cache-control': 'public, max-age=7200' } });
+  return json({ article, serverOrigin: env.server.origin }, { headers: { 'cache-control': 'public, max-age=7200' } });
 }
 
 export default function Component() {

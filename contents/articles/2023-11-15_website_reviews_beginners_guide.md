@@ -3,8 +3,6 @@ date: 2023-11-15
 title: Website Reviews - A beginner's guide
 description: In this short article, I provide a simple step-by-step process to reviewing websites. Follow this guide to give constructive feedback to your peers or find ways to improve your own web app.
 categories: [Web Development, Beginner Friendly]
-imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1682302824/andrelandgraf.dev/website_reviews_scqfml
-imageAltText: Website Reviews - A beginner's guide by Andre Landgraf
 ---
 
 Reviewing websites is the process of analyzing different aspects of a website. You can review your own site to find

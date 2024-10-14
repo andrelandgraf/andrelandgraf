@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs } from '@remix-run/server-runtime';
+import { LoaderFunctionArgs } from '@remix-run/node';
 import QRCode from 'qrcode';
 
 export async function loader({ request }: LoaderFunctionArgs) {

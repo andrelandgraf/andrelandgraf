@@ -19,6 +19,9 @@ invariant(origin, 'ORIGIN env variable is required');
 const dbConnectionStr = process.env.DATABASE_URL;
 invariant(dbConnectionStr, 'DATABASE_URL env variable is required');
 
+const volumePath = process.env.VOLUME_PATH;
+invariant(volumePath, 'VOLUME_PATH env variable is required')
+
 const sentryDsn = process.env.SENTRY_DSN;
 if (!sentryDsn) {
   console.warn('SENTRY_DSN env variable is not set');
@@ -38,6 +41,7 @@ export const env = {
   server: {
     origin,
     readContentFrom: 'production',
+    volumePath,
   },
   db: {
     path: dbConnectionStr,

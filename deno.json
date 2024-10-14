@@ -2,7 +2,7 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "lib": ["dom", "dom.iterable", "es2023"]
+    "lib": ["deno.ns", "dom", "dom.iterable", "es2023"]
   },
   "imports": {
     "~/": "./app/"
@@ -12,7 +12,8 @@
     "useTabs": false,
     "lineWidth": 120,
     "singleQuote": true,
-    "semiColons": true
+    "semiColons": true,
+    "exclude": ["contents/articles"]
   },
-  "exclude": ["dist", "build", ".cache", ".git"]
+  "exclude": ["dist", "build", ".cache", ".git", "contents"]
 }

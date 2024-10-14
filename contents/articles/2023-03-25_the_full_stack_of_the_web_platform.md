@@ -7,7 +7,7 @@ imageUrl: https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v
 imageAltText: A diagram showcasing the different tools the web platform offers across the client and the server. On the client, the web platform provides standards such as HTML, CSS, and JavaScript and APIs such as the DOM and browser APIs. On the server, we have access to the HTTP request-response cycle and server-only capabilities of HTTP.
 ---
 
-![A diagram showcasing the different tools the web platform offers across the client and the server. On the client, the web platform provides standards such as HTML, CSS, and JavaScript and APIs such as the DOM and browser APIs. On the server, we have access to the HTTP request-response cycle and server-only capabilities of HTTP.](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1679795914/andrelandgraf.dev/full-stack-of-web-platform_ykh5pg.png)
+![A diagram showcasing the different tools the web platform offers across the client and the server. On the client, the web platform provides standards such as HTML, CSS, and JavaScript and APIs such as the DOM and browser APIs. On the server, we have access to the HTTP request-response cycle and server-only capabilities of HTTP.](/img/public/2023-03-25_the_full_stack_of_the_web_platform/full-stack-of-web-platform.png)
 
 I previously wrote about
 [how Remix is a full stack web framework](blog/2022-07-16_why_remix_is_not_a_react_framework_but_a_full_stack_web_framework).
@@ -19,7 +19,7 @@ and server runtime matters.
 
 Let's start by reviewing the architecture of the web platform.
 
-![A diagram showcasing the client-server model. A client requests a resource from a server. The server responds with the resource.](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1679795190/andrelandgraf.dev/client-server-model_rotjin.png)
+![A diagram showcasing the client-server model. A client requests a resource from a server. The server responds with the resource.](/img/public/2023-03-25_the_full_stack_of_the_web_platform/client-server-model.png)
 
 The web is a distributed platform and works on a client-server model.
 
@@ -30,8 +30,8 @@ The web is a distributed platform and works on a client-server model.
 When building for the web, it always comes down to the client-server model. We can't build a web application without a
 client and a server.
 
-{% statement %} It doesn't matter which tech stack we use to build our app, there will always be a web server, even if
-we don't have access to it. {% /statement %}
+{% statement %}It doesn't matter which tech stack we use to build our app, there will always be a web server, even if we
+don't have access to it.{% /statement %}
 
 ## The tools of the web platform
 
@@ -55,7 +55,7 @@ give up control of the web server and use third-party services to host our appli
 For instance, client-side React apps (such as [Create React App](https://create-react-app.dev/)) consist only of static
 files and can be hosted on a CDN (Content Delivery Network).
 
-![Diagram showcasing a React app running on a browser being served by a third-party CDN.](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1679799531/andrelandgraf.dev/client-side-react-via-cdn_eidpxt.png).
+![Diagram showcasing a React app running on a browser being served by a third-party CDN.](/img/public/2023-03-25_the_full_stack_of_the_web_platform/client-side-react-via-cdn.png).
 
 When hosting a React app on a CDN, we give up control of the web server. It's now the CDN who is in charge of serving
 our app!
@@ -69,7 +69,7 @@ Popular architectures such as the [Jamstack](https://jamstack.org/) or
 [MERN (MongoDB, Express, React, Node)](https://www.mongodb.com/mern-stack) promote the implementation of client-side
 React apps that fetch data from REST and GraphQL APIs.
 
-![Diagram showcasing the Jamstack and MERN architectures. In both cases, a React app is served by a third-party CDN communicating with backend APIs.](https://res.cloudinary.com/andre-landgraf/image/upload/f_auto,q_auto/v1679797361/andrelandgraf.dev/jamstack-and-mern_mmtkqy.png).
+![Diagram showcasing the Jamstack and MERN architectures. In both cases, a React app is served by a third-party CDN communicating with backend APIs.](/img/public/2023-03-25_the_full_stack_of_the_web_platform/jamstack-and-mern.png).
 
 When focusing on client-side-heavy apps, we might decide to give up the tools of the web server as we focus on the
 client runtime.
@@ -109,8 +109,7 @@ Just like that, we use Express.js to serve our React app. From here, we can rega
 platform that are available on the server. For instance, we could add Express.js middlewares to add HTTP caching
 headers, work with cookies, and utilize HTTP redirects.
 
-{% statement %} By implementing our own web server, we gain access to the full stack of the web platform. {% /statement
-%}
+{% statement %}By implementing our own web server, we gain access to the full stack of the web platform.{% /statement %}
 
 ## You can't not have a framework
 

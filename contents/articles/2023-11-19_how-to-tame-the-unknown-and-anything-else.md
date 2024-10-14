@@ -148,8 +148,7 @@ the `name` query parameter from the URL, we throw a 404 error, potentially displ
 we avoid unexpected runtime errors and gain the ability to handle errors gracefully - communicating to the user what
 exactly went wrong.
 
-{% statement %} By narrowing types, we force ourselves to consider edge cases and handle them gracefully. {% /statement
-%}
+{% statement %}By narrowing types, we force ourselves to consider edge cases and handle them gracefully.{% /statement %}
 
 Truthiness assertions work for both primitive (strings, numbers, and booleans) and non-primitive (objects, arrays)
 types, but note that `0` and empty string are also falsy values. If you want to allow `0` and empty strings, you may

@@ -6,7 +6,6 @@ import { PageHeading } from '~/components/headings.tsx';
 import { SkipToContentLink, StyledLink } from '~/components/links.tsx';
 import { Tags } from '~/components/tags.tsx';
 import { fetchArticles } from '~/modules/blog/db/fetchArticles.server.ts';
-import { images } from '~/utilities/images.ts';
 import { getMetaTags } from '~/utilities/metaTags.ts';
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
@@ -71,10 +70,10 @@ export default function Component() {
             <a title='RSS feed' href='/blog/rss'>
               <img
                 className='w-6 h-6 object-contain'
-                src={images.rssLogoImage.src}
-                alt={images.rssLogoImage.alt}
-                width={images.rssLogoImage.width}
-                height={images.rssLogoImage.height}
+                src="/img/public/rss.png?w=24&h=24"
+                alt="RSS logo"
+                width="24"
+                height="24"
               />
             </a>
           </div>
