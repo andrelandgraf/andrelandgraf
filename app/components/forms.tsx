@@ -18,8 +18,8 @@ export function Textarea({ label, id, ...props }: TextAreaProps) {
   }, [value]);
 
   return (
-    <div className='flex flex-col gap-2 w-full'>
-      <label htmlFor={id} className='text-sm'>
+    <div className="flex flex-col gap-2 w-full">
+      <label htmlFor={id} className="text-sm">
         {label}
       </label>
       <textarea
@@ -44,8 +44,8 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 
 export function Input({ label, id, ...props }: InputProps) {
   return (
-    <div className='flex flex-col gap-2 w-full'>
-      <label htmlFor={id} className='text-sm'>
+    <div className="flex flex-col gap-2 w-full">
+      <label htmlFor={id} className="text-sm">
         {label}
       </label>
       <input

@@ -8,3 +8,9 @@ node_modules
 
 # Volume folder
 /data
+
+# Markdoc files
+/contents
+
+# Drizzle auto-gen files
+/drizzle

@@ -15,9 +15,8 @@ export enum FetchArticleResState {
 
 export function parseCategories(categories: unknown): string[] {
   if (typeof categories !== 'string') {
-    const loggableVal = !!categories && typeof categories === 'object' && 'toString' in categories
-      ? categories.toString()
-      : null;
+    const loggableVal =
+      !!categories && typeof categories === 'object' && 'toString' in categories ? categories.toString() : null;
     throw Error(`Malformed categories, expected string: ${loggableVal}`);
   }
   const parsed = JSON.parse(categories);

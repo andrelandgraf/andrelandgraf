@@ -3,10 +3,7 @@
  * https://gist.github.com/jacobparis/1e428524be3a31096ba3ecb35a7a15bb
  */
 
-export type PerformanceServerTimings = Record<
-  string,
-  Array<PerformanceServerTiming>
->;
+export type PerformanceServerTimings = Record<string, Array<PerformanceServerTiming>>;
 
 export type TimeFn = ReturnType<typeof getServerTiming>['time'];
 
@@ -22,9 +19,9 @@ export function getServerTiming() {
       serverTiming:
         | string
         | {
-          name: string;
-          description: string;
-        },
+            name: string;
+            description: string;
+          },
       fn: Promise<T> | (() => Promise<T>),
     ) {
       return time(serverTimings, serverTiming, fn);
@@ -33,9 +30,9 @@ export function getServerTiming() {
       serverTiming:
         | string
         | {
-          name: string;
-          description: string;
-        },
+            name: string;
+            description: string;
+          },
       fn: () => T,
     ) {
       return timeSync(serverTimings, serverTiming, fn);
@@ -56,9 +53,9 @@ async function time<T>(
   serverTimingParam:
     | string
     | {
-      name: string;
-      description: string;
-    },
+        name: string;
+        description: string;
+      },
   fn: Promise<T> | (() => Promise<T>),
 ) {
   const start = performance.now();
@@ -97,9 +94,9 @@ function timeSync<T>(
   serverTimingParam:
     | string
     | {
-      name: string;
-      description: string;
-    },
+        name: string;
+        description: string;
+      },
   fn: () => T,
 ) {
   const start = performance.now();
@@ -160,10 +157,7 @@ function getServerTimeHeaderField(serverTimings: PerformanceServerTimings) {
   return Object.entries(serverTimings)
     .map(([name, timingInfos]) => {
       // duration is in milliseconds with microseconds precision
-      const dur = timingInfos.reduce(
-        (totalDuration, { duration }) => totalDuration + duration,
-        0,
-      ).toFixed(3);
+      const dur = timingInfos.reduce((totalDuration, { duration }) => totalDuration + duration, 0).toFixed(3);
 
       const desc = timingInfos
         .map(({ description }) => description)

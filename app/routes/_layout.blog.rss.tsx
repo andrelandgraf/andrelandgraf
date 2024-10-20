@@ -15,8 +15,7 @@ function generateRSS(articles: RSSArticles[]) {
     <description>Hey there! I write about all things web development. Check out my blog posts.</description>
     <link>https://andrelandgraf.dev</link>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-    ${
-    articles
+    ${articles
       .map((article) => {
         return `<item>
         <title>${article.title}</title>
@@ -25,8 +24,7 @@ function generateRSS(articles: RSSArticles[]) {
         <pubDate>${new Date(article.date).toUTCString()}</pubDate>
         </item>`;
       })
-      .join('\n')
-  }
+      .join('\n')}
     </channel>
     </rss>`;
 }

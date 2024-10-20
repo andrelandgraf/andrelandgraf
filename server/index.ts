@@ -22,13 +22,14 @@ if (env.sentry.dsn) {
   });
 }
 
-const viteDevServer = env.environment === 'production'
-  ? undefined
-  : await import('vite').then((vite) =>
-    vite.createServer({
-      server: { middlewareMode: true },
-    })
-  );
+const viteDevServer =
+  env.environment === 'production'
+    ? undefined
+    : await import('vite').then((vite) =>
+        vite.createServer({
+          server: { middlewareMode: true },
+        }),
+      );
 
 declare module '@remix-run/node' {
   interface AppLoadContext {

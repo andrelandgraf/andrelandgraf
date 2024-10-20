@@ -26,7 +26,8 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return getMetaTags({
     title: tile,
     description: data.article.frontmatter.description,
-    image: data?.article.frontmatter.imageUrl || `${data.serverOrigin}/img/gen/blog/${data.article.slug}.png?w=1200&h=1200`,
+    image:
+      data?.article.frontmatter.imageUrl || `${data.serverOrigin}/img/gen/blog/${data.article.slug}.png?w=1200&h=1200`,
     imageAlt: data?.article.frontmatter.imageAltText || `${tile} by Andre Landgraf`,
     type: 'article',
   });
@@ -66,14 +67,14 @@ export default function Component() {
   const { article } = useLoaderData<typeof loader>();
 
   return (
-    <article className='w-full max-w-7xl flex flex-col wide:m-auto gap-5 leading-loose'>
-      <div className='flex flex-col gap-1'>
+    <article className="w-full max-w-7xl flex flex-col wide:m-auto gap-5 leading-loose">
+      <div className="flex flex-col gap-1">
         <H1>{article.frontmatter.title}</H1>
         <SectionHeading>
           <time dateTime={getISODate(article.frontmatter.date)}>{getReadableDate(article.frontmatter.date)}</time>
         </SectionHeading>
       </div>
-      <BlogMarkdownContainer className='w-full flex flex-col gap-5' content={article.content} />
+      <BlogMarkdownContainer className="w-full flex flex-col gap-5" content={article.content} />
     </article>
   );
 }

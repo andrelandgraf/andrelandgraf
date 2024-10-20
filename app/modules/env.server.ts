@@ -20,7 +20,7 @@ const dbConnectionStr = process.env.DATABASE_URL;
 invariant(dbConnectionStr, 'DATABASE_URL env variable is required');
 
 const volumePath = process.env.VOLUME_PATH;
-invariant(volumePath, 'VOLUME_PATH env variable is required')
+invariant(volumePath, 'VOLUME_PATH env variable is required');
 
 const sentryDsn = process.env.SENTRY_DSN;
 if (!sentryDsn) {

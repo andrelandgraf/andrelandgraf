@@ -62,13 +62,13 @@ export function ButtonLink({
   ...props
 }: ButtonLinkProps) {
   return (
-    <div className='w-full md:w-fit'>
+    <div className="w-full md:w-fit">
       <UnstyledLink
         {...props}
         to={to}
         aria-disabled={disabled}
         className={getClasses(primary, className, overrides, disabled)}
-        outline='none'
+        outline="none"
       >
         {children}
       </UnstyledLink>
@@ -97,7 +97,7 @@ Button.displayName = 'Button';
 export function IconButton({ children, className = '', ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
-      type='button'
+      type="button"
       className={`transform motion-safe:hover:scale-105 ${getAriaClasses(true)} ${className}`}
       {...props}
     >

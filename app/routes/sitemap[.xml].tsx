@@ -12,19 +12,15 @@ function generateSiteMap(articles: { slug: string; date: Date }[]) {
         <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
             ${getUrlElementWithDate('https://andrelandgraf.dev/', new Date().toISOString())}
             ${getUrlElementWithDate('https://andrelandgraf.dev/blog', new Date().toISOString())}
-            ${
-    articles
-      .map(
-        (article) =>
-          `${
-            getUrlElementWithDate(
-              `https://andrelandgraf.dev/blog/${article.slug}`,
-              article.date.toISOString(),
-            )
-          }`,
-      )
-      .join('\n')
-  }
+            ${articles
+              .map(
+                (article) =>
+                  `${getUrlElementWithDate(
+                    `https://andrelandgraf.dev/blog/${article.slug}`,
+                    article.date.toISOString(),
+                  )}`,
+              )
+              .join('\n')}
         </urlset>`;
 }
 

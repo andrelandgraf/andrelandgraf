@@ -24,9 +24,9 @@ export function CopyClipboardButton({ id, title, content, className = '', ...pro
 
   return (
     <div className={`relative inline-flex items-center ${className}`}>
-      <Tooltip elementId={id} text={text} width='w-10' />
+      <Tooltip elementId={id} text={text} width="w-10" />
       <IconButton {...props} onClick={handleClick} title={title} id={id}>
-        <CopyClipboardSvg className='mobile:w-5 mobile:h-5' />
+        <CopyClipboardSvg className="mobile:w-5 mobile:h-5" />
       </IconButton>
     </div>
   );

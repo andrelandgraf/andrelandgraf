@@ -11,9 +11,7 @@ export enum FetchArticleResState {
   success = 'success',
 }
 
-export async function fetchArticles(): Promise<
-  MarkdocFile<BlogArticleFrontmatter>[]
-> {
+export async function fetchArticles(): Promise<MarkdocFile<BlogArticleFrontmatter>[]> {
   const articles = await db.select().from(articlesTable);
   return articles.map((article) => {
     const ast = Markdoc.parse(article.markdown);
@@ -23,13 +21,15 @@ export async function fetchArticles(): Promise<
 }
 
 export async function fetchArticlesFrontmatter() {
-  const articles = await db.select({
-    slug: articlesTable.slug,
-    title: articlesTable.title,
-    categories: articlesTable.categories,
-    description: articlesTable.description,
-    date: articlesTable.date,
-  }).from(articlesTable);
+  const articles = await db
+    .select({
+      slug: articlesTable.slug,
+      title: articlesTable.title,
+      categories: articlesTable.categories,
+      description: articlesTable.description,
+      date: articlesTable.date,
+    })
+    .from(articlesTable);
   return articles.map((article) => {
     return {
       ...article,

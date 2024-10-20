@@ -113,9 +113,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
   sharpInstance.webp({ effort: 6 });
 
   try {
-    await time('mkdirRec', fsp
-      .mkdir(path.dirname(filePath), { recursive: true })
-      .catch(() => {}));
+    await time(
+      'mkdirRec',
+      fsp.mkdir(path.dirname(filePath), { recursive: true }).catch(() => {}),
+    );
     const transformStream = resBody.pipe(sharpInstance);
     const cacheFileStream = fs.createWriteStream(filePath);
     await time(

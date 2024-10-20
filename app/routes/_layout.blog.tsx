@@ -56,10 +56,10 @@ export default function Component() {
   const { entries, tag, tags } = useLoaderData<typeof loader>();
 
   return (
-    <section className='flex flex-col gap-10 w-full wide:items-center'>
-      <div className='flex flex-col gap-10 w-full lg:max-w-3xl wide:max-w-5xl wide:items-center'>
-        <div className='w-full flex flex-col gap-2'>
-          <div className='w-full flex flex-row gap-2'>
+    <section className="flex flex-col gap-10 w-full wide:items-center">
+      <div className="flex flex-col gap-10 w-full lg:max-w-3xl wide:max-w-5xl wide:items-center">
+        <div className="w-full flex flex-col gap-2">
+          <div className="w-full flex flex-row gap-2">
             <PageHeading>
               {question
                 ? 'Ask me about All Things Web'
@@ -67,9 +67,9 @@ export default function Component() {
                 ? `All Things ${tag}`
                 : 'All Things Web Blog Posts'}
             </PageHeading>
-            <a title='RSS feed' href='/blog/rss'>
+            <a title="RSS feed" href="/blog/rss">
               <img
-                className='w-6 h-6 object-contain'
+                className="w-6 h-6 object-contain"
                 src="/img/public/rss.png?w=24&h=24"
                 alt="RSS logo"
                 width="24"
@@ -77,22 +77,22 @@ export default function Component() {
               />
             </a>
           </div>
-          <nav className='w-full flex flex-col gap-2'>
-            <SkipToContentLink className='sr-only focus:not-sr-only' href='#content'>
+          <nav className="w-full flex flex-col gap-2">
+            <SkipToContentLink className="sr-only focus:not-sr-only" href="#content">
               Skip to content
             </SkipToContentLink>
             <p>
               Filter blog posts by tag or{' '}
-              <StyledLink to='/blog' preventScrollReset>
+              <StyledLink to="/blog" preventScrollReset>
                 show all
               </StyledLink>
               .
             </p>
-            <Tags title='All tags' tags={tags} />
+            <Tags title="All tags" tags={tags} />
           </nav>
         </div>
       </div>
-      <main id='content'>
+      <main id="content">
         <Outlet />
       </main>
     </section>
@@ -104,10 +104,10 @@ export function ErrorBoundary() {
   captureRemixErrorBoundaryError(error);
   const message = error instanceof Error ? error.message : 'An error occurred.';
   return (
-    <section className='w-full flex flex-col items-center justify-center gap-10'>
-      <div className='text-center flex flex-col gap-2 border border-red p-8'>
+    <section className="w-full flex flex-col items-center justify-center gap-10">
+      <div className="text-center flex flex-col gap-2 border border-red p-8">
         <PageHeading>Something went wrong</PageHeading>
-        <p className='text-center'>{message}</p>
+        <p className="text-center">{message}</p>
       </div>
     </section>
   );

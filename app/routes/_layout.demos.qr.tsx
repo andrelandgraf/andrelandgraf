@@ -60,11 +60,11 @@ export default function Component() {
   }, [renderQRCode]);
 
   return (
-    <section id='qr-code-container' className='w-full space-y-4 pt-10 lg:p-20 max-w-[1200px]'>
+    <section id="qr-code-container" className="w-full space-y-4 pt-10 lg:p-20 max-w-[1200px]">
       <SectionHeading>QR Code Generator</SectionHeading>
-      <div className='flex flex-col lg:flex-row gap-8 w-full'>
+      <div className="flex flex-col lg:flex-row gap-8 w-full">
         <form
-          className='flex flex-col gap-4 w-full max-w-[600px]'
+          className="flex flex-col gap-4 w-full max-w-[600px]"
           onSubmit={(e) => {
             e.preventDefault();
             setError('');
@@ -77,11 +77,11 @@ export default function Component() {
             renderQRCode(currentQRCodeData.current);
           }}
         >
-          <Input label='Data' type='text' id='data' name='data' required />
-          <Button type='submit'>Generate QR Code</Button>
-          {error && <p className='text-red text-sm'>{error}</p>}
+          <Input label="Data" type="text" id="data" name="data" required />
+          <Button type="submit">Generate QR Code</Button>
+          {error && <p className="text-red text-sm">{error}</p>}
         </form>
-        <canvas className='w-full max-w-[600px] aspect-square' ref={ref} />
+        <canvas className="w-full max-w-[600px] aspect-square" ref={ref} />
       </div>
     </section>
   );

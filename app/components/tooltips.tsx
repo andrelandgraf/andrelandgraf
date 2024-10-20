@@ -30,16 +30,16 @@ export function Tooltip({ text, elementId, className = '', children }: TooltipPr
 
   return (
     <div className={`absolute transform -translate-y-2 bottom-full ${className}`}>
-      <div className='bg-black flex relative shadow-xl text-xs rounded-md py-1'>
+      <div className="bg-black flex relative shadow-xl text-xs rounded-md py-1">
         <span className={`text-white text-xs font-semibold py-1 px-2 block w-full whitespace-nowrap`}>{text}</span>
         <svg
           className={`absolute text-gray-900 dark:text-gray-100 transform translate-x-full h-2 top-full shadow-xl`}
-          x='0px'
-          y='0px'
-          viewBox='0 0 255 255'
-          xmlSpace='preserve'
+          x="0px"
+          y="0px"
+          viewBox="0 0 255 255"
+          xmlSpace="preserve"
         >
-          <polygon className='fill-current' points='0,0 127.5,127.5 255,0' />
+          <polygon className="fill-current" points="0,0 127.5,127.5 255,0" />
         </svg>
       </div>
       {children}
