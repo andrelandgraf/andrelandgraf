@@ -477,7 +477,7 @@ In bigger organizations, downstream services and APIs are likely owned by other 
 
 We can replace the client-only SPA with a full stack web app by using a full stack web framework like Next.js or Remix. Using a full stack app unlocks the tools of the backend of the web platform. With access to a server environment, we naturally implement the BFF (backend for frontend) pattern. We gain control over a server runtime and can use it to optimize the web performance.
 
-You can read more about the benefits of owning the full stack of the web platform in this blog post: "[The full stack of the web platform](blog/2023-03-25_the_full_stack_of_the_web_platform.md)".
+You can read more about the benefits of owning the full stack of the web platform in this blog post: "[The full stack of the web platform](/blog/2023-03-25_the_full_stack_of_the_web_platform)".
 
 ## Building the business case
 

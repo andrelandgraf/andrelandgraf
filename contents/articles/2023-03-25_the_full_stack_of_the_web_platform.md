@@ -10,7 +10,7 @@ imageAltText: A diagram showcasing the different tools the web platform offers a
 ![A diagram showcasing the different tools the web platform offers across the client and the server. On the client, the web platform provides standards such as HTML, CSS, and JavaScript and APIs such as the DOM and browser APIs. On the server, we have access to the HTTP request-response cycle and server-only capabilities of HTTP.](/img/public/2023-03-25_the_full_stack_of_the_web_platform/full-stack-of-web-platform.png)
 
 I previously wrote about
-[how Remix is a full stack web framework](blog/2022-07-16_why_remix_is_not_a_react_framework_but_a_full_stack_web_framework).
+[how Remix is a full stack web framework](/blog/2022-07-16_why_remix_is_not_a_react_framework_but_a_full_stack_web_framework).
 I argued that Remix gives you access to the full stack of the web platform. In this article, I want to explain in more
 detail what I mean by the full stack of the web platform. I want to make a case that having access to both the client
 and server runtime matters.
