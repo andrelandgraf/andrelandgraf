@@ -216,7 +216,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
 Great! Your Markdown content is now styled and includes frontmatter for any metadata, such as meta tags. For a simple blog post, this is already a great setup.
 
-Next, we replace the HTML render and instead render the content to React, using custom React components. We were able to render the HTML on the server and then inject the HTML string into our React app. Now, we have to move the rendering part into our React component. From our `loader` function, we will now return the transformed JSON representation of the content before rendering it to a React Node in our component:
+Next, we will render the content to React instead of HTML. We were able to render the HTML on the server and then inject the HTML string into our React app. Now, we have to move the rendering part into our React component. From our `loader` function, we will now return the transformed JSON representation of the content before rendering it to a React Node in our component:
 
 ```tsx
 // Add new imports
