@@ -27,7 +27,6 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
     <ArticlePreview
       serverOrigin={env.server.origin}
       title={article.frontmatter.title}
-      description={article.frontmatter.description}
       slug={slug}
       includeQRCode={includeQRCode}
     />

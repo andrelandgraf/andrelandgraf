@@ -11,13 +11,11 @@ declare module 'react' {
 export function ArticlePreview({
   serverOrigin,
   title,
-  description,
   slug,
   includeQRCode,
 }: {
   serverOrigin: string;
   title: string;
-  description: string;
   slug: string;
   includeQRCode?: boolean;
 }) {
@@ -44,7 +42,6 @@ export function ArticlePreview({
       </div>
       <div tw="flex flex-col items-start" style={{ gap: '1rem', marginTop: '8rem' }}>
         <div tw="text-8xl font-bold leading-tight max-w-[1100px]">{title}</div>
-        <div tw="text-4xl leading-tight">{description}</div>
       </div>
       <div tw="text-3xl flex justify-center items-end" style={{ marginTop: 'auto' }}>
         <span>{serverOrigin}</span>
