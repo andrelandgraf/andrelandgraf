@@ -1,16 +1,15 @@
 ---
 date: 2024-11-01
 title: Use Markdoc to render Markdown content in Remix
-description: Markdown is a powerful tool for writing and publishing content. In this blog post, we use Markdoc to parse and render Markdown content in Remix, including styling, frontmatter support, and using custom React components for Markdoc nodes and tags.
+description: Markdown is a great tool for working with formatted text content. In this blog post, we use Markdoc to parse and render Markdown content in Remix. We will cover styling, frontmatter, and how to render Markdown content as custom React components.
 categories: [Remix.run, Markdown]
 ---
 
-Markdown is amazing. It's a powerful tool for writing and publishing content. In fact, the text you are reading right
-now is stored in a Markdown file. There are different ways of integrating Markdown into a Remix application, and you can certainly spent hours over-engineering your personal blog trying out different solutions... Anyways, I am currently using Markdoc and think it's great. In this blog post, we will set up Markdoc with Remix, including frontmatter, styling, and mapping custom React components to Markdoc nodes and tags.
+Markdown is a great tool for working with formatted text content and is commonly used for blog posts and documentation. In fact, the text you are reading right now is written in Markdown. There are different ways of working with Markdown content in Remix. I am currently using Markdoc and think it's great. In this blog post, we will set up Markdoc with Remix and cover the initial setup, styling, frontmatter, and how to render Markdown content as custom React components.
 
 ## What is Markdoc?
 
-[Markdoc](https://markdoc.dev/) is a all-in-one solution for parsing Markdown, converting it to an abstract syntax tree (AST), transforming it using variables, tags, and functions, and then rendering it to HTML or React. First developed by Stripe for its documentation, it is now open source and quite popular ((GitHub repo)[https://github.com/markdoc/markdoc]).
+[Markdoc](https://markdoc.dev/) is an all-in-one solution for parsing Markdown, converting it to an abstract syntax tree (AST), transforming it using variables, tags, and functions, and then rendering it to HTML or React. First developed by Stripe for its documentation, it is now open source and quite popular ((GitHub repo)[https://github.com/markdoc/markdoc]).
 
 ### Markdoc vs. unified
 
@@ -18,7 +17,7 @@ The unified ecosystem is widely popular for Markdown processing, offering packag
 
 ## Setting up Markdoc
 
-First, install the latest version of markdoc in your Remix project:
+First, install the latest version of Markdoc in your Remix project:
 
 ```bash
 npm i @markdoc/markdoc@latest
@@ -46,7 +45,7 @@ Markdoc experiment on {% $date %}.
 }
 ```
 
-Just like that, we’ve parsed Markdown content into static HTML. First, we call `Markdoc.parse` to convert the Markdown string into an abstract syntax tree (AST). We can then transform the AST using `Markdoc.transform`, which allows us to resolve variables, tags, and functions. Finally, we render the transformed content to HTML using `Markdoc.renderers.html`. By handling everything server-side, we gain access to the filesystem for reading Markdown files and can securely fetch content from remote sources like GitHub or a database—connections that aren’t accessible in the browser. We can also cache the rendered HTML for better performance using tools like [cachified](https://github.com/epicweb-dev/cachified) or HTTP caching.
+Just like that, we’ve parsed Markdown content into static HTML. First, we call `Markdoc.parse` to convert the Markdown string into an abstract syntax tree (AST). We then transform the AST using `Markdoc.transform`, which allows us to resolve variables, tags, and functions. Finally, we render the transformed content to HTML using `Markdoc.renderers.html`. By handling everything server-side, we gain access to the filesystem for reading Markdown files and/or can securely fetch content from remote sources like GitHub or databases. We can also cache the rendered HTML for better performance using tools like [cachified](https://github.com/epicweb-dev/cachified) or HTTP caching.
 
 Next, we can access the returned loader data in the route component and render it:
 
@@ -73,9 +72,11 @@ export default function Component() {
 }
 ```
 
+We use the `dangerouslySetInnerHTML` prop to render the HTML content. This is safe because we control the content and ensure it’s sanitized. With this approach, we server-side render our page with the Markdown content, which is great for SEO and performance.
+
 ### Styling
 
-The simplest way to style Markdown content is to target each HTML tag within a Markdown container. For example, we can create a `markdown.css` file, import it in our Remix route module, and apply a class name to the wrapping `div` that holds our Markdown content.
+The simplest way to style Markdown content is to target each HTML tag within the Markdown container. For example, we can create a `markdown.css` file, import it in our Remix route module, and apply a class to the wrapping `div` containing our Markdown content that includes styles for headings, paragraphs, and other elements:
 
 `app/styles/markdown.scss`:
 
@@ -121,11 +122,11 @@ export default function Component() {
 }
 ```
 
-This approach alone gets us really far. We can now style the headings, paragraphs, links, tables, and other [supported Markdoc nodes](https://markdoc.dev/docs/syntax#nodes). For more extensibility, we will later switch to rendering the content to React, allowing us to map custom React components to Markdoc nodes and tags.
+This approach alone gets us really far. We can now style the headings, paragraphs, links, tables, and other [supported Markdoc nodes](https://markdoc.dev/docs/syntax#nodes). For more extensibility, we will later switch to rendering the content with React, allowing us to map custom React components to Markdoc nodes and tags.
 
 ### Using frontmatter
 
-Frontmatter is a common way to add page-level metadata to a Markdown document. Though it’s not part of the Markdown spec, Markdoc supports extracting frontmatter out of the box ([see docs](https://markdoc.dev/docs/frontmatter)). We can access the parsed frontmatter JSON directly from the AST object. By formatting the frontmatter as JSON, we simply need to `JSON.parse` the string to work with it. To ensure all required attributes are present, we can use [zod](https://www.npmjs.com/package/zod) or a simple type check.
+Frontmatter is a common way to add page-level metadata to a Markdown document. Though it’s not part of the Markdown spec, Markdoc supports extracting frontmatter out of the box ([see docs](https://markdoc.dev/docs/frontmatter)). Markdoc supports frontmatter in different formats like YAML and JSON. We can access the parsed frontmatter directly from the AST object. When formatting the frontmatter as JSON, we simply need to call `JSON.parse` to turn it into a JavaScript object. To ensure all required attributes are present, we can use [zod](https://www.npmjs.com/package/zod) or a simple type check:
 
 
 ```tsx
@@ -189,9 +190,9 @@ export default function Component() {
 }
 ```
 
-Note: I personally use the YAML format because that seems to be the most widely used format. Instead of `JSON.parse`, we can use [js-yaml](https://www.npmjs.com/package/js-yaml) to parse the YAML string into a JavaScript object.
+Note: I personally manage my frontmatter as YAML, instead of JSON, because that seems to be the most widely used format. Instead of `JSON.parse`, I use [js-yaml](https://www.npmjs.com/package/js-yaml) to parse the YAML string into a JavaScript object.
 
-Frontmatter is excellent for adding metadata, which we can use in Remix's `meta` function to dynamically set the route's title, description, and other meta information. Add a `meta` function to the route module and use the `frontmatter` loader data for the page's title, description, and keywords meta tags:
+Next, we use Remix's `meta` function to dynamically set the route's title, description, and other meta information based on our frontmatter. Add a `meta` function to the route module and use the `frontmatter` loader data for the page's title, description, and keywords meta tags:
 
 ```tsx
 // Add new import
@@ -213,9 +214,9 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 };
 ```
 
-If you don't want to display custom React components or use custom syntax highlighting, you can now call it a day and enjoy your new Markdoc-driven blog in Remix!
+Great! Your Markdown content is now styled and includes frontmatter for any metadata, such as meta tags. For a simple blog post, this is already a great setup.
 
-Next, we will replace the HTML render and instead render the content to React, using custom React components. We were able to render the HTML on the server and then injecting the HTML string in our React app. Now, we have to move the rendering part into our React component. From our `loader` function, we will now return the transformed JSON representation of the content, before rendering it to a React Node in our component:
+Next, we replace the HTML render and instead render the content to React, using custom React components. We were able to render the HTML on the server and then inject the HTML string into our React app. Now, we have to move the rendering part into our React component. From our `loader` function, we will now return the transformed JSON representation of the content before rendering it to a React Node in our component:
 
 ```tsx
 // Add new imports
@@ -264,9 +265,9 @@ export default function Component() {
 
 ### Mapping custom React components
 
-Markdoc allows us to map custom React components to Markdoc nodes and tags. For example, we can create a custom `Link` component for rendering all anchor tags with Remix's `NavLink` component. Additionally, we can map custom tags to React components. For instance, let's say we want to add custom callout messages to our Markdown content. We can create a custom `Callout` component and map it to a custom tag, such as `{% callout type="info" %} This is an info message {% /callout %}` to render a styled info box.
+Markdoc has the concept of nodes and tags. Nodes are Markdown elements such as headings or paragraphs. Tags are a syntactic extension of Markdown, allowing us to define custom elements. Using Markdoc's React renderer, we can map React components to both nodes and tags. For example, we can create a custom `Link` component for rendering all anchor tags (link node) with Remix's `NavLink` component. We can further create a callout tag for highlighted text and map it to a `Callout` component.
 
-First, we need to expand the configuration object passed to `Markdoc.transform`:
+First, we need to expand the configuration object passed to `Markdoc.transform`. We will also add a link and callout tag to the Markdown content:
 
 ```tsx
 export function loader() {
@@ -282,9 +283,9 @@ export function loader() {
 
 Markdoc experiment on {% $date %}.
 
-{% callout type="info" %} This is an info message {% /callout %}
+{% callout type="info" %} This is an info message. {% /callout %}
 
-Visit my blog at [blog](/blog)
+Visit my blog at [blog](/blog).
 `;
 
   const ast = Markdoc.parse(doc);
@@ -319,9 +320,9 @@ Visit my blog at [blog](/blog)
 }
 ```
 
-You can refer to the Markdoc documentation for more information on the offered attributes and options for [nodes](https://markdoc.dev/docs/nodes) and [tags](https://markdoc.dev/docs/tags).
+You can refer to the Markdoc documentation for more information on the supported attributes and options for [nodes](https://markdoc.dev/docs/nodes).
 
-With this, we can now create a custom `Link` and `Callout` component:
+Next, we create the `Link` and `Callout` components:
 
 ```tsx
 // Add new imports
@@ -379,7 +380,7 @@ export default function Component() {
 }
 ```
 
-And that's it! We have successfully integrated Markdoc with Remix, including frontmatter support, styling, and mapping custom React components to Markdoc nodes and tags.
+And that's it! We have successfully integrated Markdoc with Remix.
 
 Final code:
 
@@ -436,9 +437,9 @@ export function loader() {
 
 Markdoc experiment on {% $date %}.
 
-{% callout type="info" %} This is an info message {% /callout %}
+{% callout type="info" %} This is an info message. {% /callout %}
 
-Visit my blog at [blog](/blog)
+Visit my blog at [blog](/blog).
 `;
 
   const ast = Markdoc.parse(doc);
@@ -517,6 +518,6 @@ export default function Component() {
 
 ## Conclusion
 
-Markdoc is a powerful tool for parsing and rendering Markdown content. It offers a simple and straightforward way to transform Markdown content into an abstract syntax tree, resolve variables, tags, and functions, and render it to HTML or React. By mapping custom React components to Markdoc nodes and tags, we can extend the functionality of our Markdown content and have the full power of dynamic React components at our disposal. Remix allows us to split the rendering process between the server and the client, ensuring fast and SEO-friendly content delivery with server-side rendering.
+Markdoc is a powerful tool for parsing and rendering Markdown content. It offers a simple and straightforward way to transform Markdown content into an abstract syntax tree, resolve variables, tags, and functions, and render it to HTML or React. By mapping custom React components to Markdoc nodes and tags, we can extend the functionality of the Markdown content and have the full power of React at our disposal. Remix allows us to split the rendering process between the server and the client, ensuring fast and SEO-friendly content delivery with server-side rendering.
 
 Happy coding!
