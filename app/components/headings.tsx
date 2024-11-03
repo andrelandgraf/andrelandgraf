@@ -16,7 +16,19 @@ export function PageHeading({ children, asH2 = false, className = '', ...props }
   );
 }
 
-export function SectionHeading({ children, className = '', ...props }: HTMLAttributes<HTMLHeadingElement>) {
+export function SectionHeading({
+  children,
+  asParagraph = false,
+  className = '',
+  ...props
+}: HTMLAttributes<HTMLHeadingElement> & { asParagraph?: boolean }) {
+  if (asParagraph) {
+    return (
+      <p {...props} className={`text-lg md:text-xl xl:text-2xl font-semibold ${className}`}>
+        {children}
+      </p>
+    );
+  }
   return (
     <h2 {...props} className={`text-lg md:text-xl xl:text-2xl font-semibold ${className}`}>
       {children}

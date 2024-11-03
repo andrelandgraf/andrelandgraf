@@ -2,8 +2,9 @@ import Markdoc from '@markdoc/markdoc';
 import fs from 'node:fs/promises';
 import yaml from 'js-yaml';
 import invariant from 'tiny-invariant';
-import type { ActionResult, MarkdocFile } from '~/types.ts';
+import type { ActionResult } from '~/types.ts';
 import { config } from '../config.ts';
+import { MarkdocFile } from './fetchMarkdownFile.server.ts';
 
 enum FetchMarkdownFilesResState {
   directoryNotFound = 'directory_not_found',

@@ -8,6 +8,7 @@ import { useTwitterEmbeds } from '~/modules/twitter-embeds.ts';
 import { getISODate, getReadableDate } from '~/utilities/dates.ts';
 import { getMetaTags } from '~/utilities/metaTags.ts';
 import { env } from '~/modules/env.server.ts';
+import { StyledLink } from '~/components/links';
 // @ts-ignore comment
 import syntaxHighlightingStylesUrl from '~/styles/code.css?url';
 
@@ -22,13 +23,12 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
       description: 'This is my personal blog! Find a list of all my posts here!',
     });
   }
-  const tile = data.article.frontmatter.title;
+  const tile = data.article.title;
   return getMetaTags({
     title: tile,
-    description: data.article.frontmatter.description,
-    image:
-      data?.article.frontmatter.imageUrl || `${data.serverOrigin}/img/gen/blog/${data.article.slug}.png?w=1200&h=1200`,
-    imageAlt: data?.article.frontmatter.imageAltText || `${tile} by Andre Landgraf`,
+    description: data.article.description,
+    image: data?.article.imageUrl || `${data.serverOrigin}/img/gen/blog/${data.article.slug}.png?w=1200&h=1200`,
+    imageAlt: data?.article.imageAltText || `${tile} by Andre Landgraf`,
     type: 'article',
   });
 };
@@ -68,10 +68,19 @@ export default function Component() {
 
   return (
     <article className="w-full max-w-7xl flex flex-col wide:m-auto gap-5 leading-loose">
+      {article.newVersionSlug && article.newVersionTitle && (
+        <div className="p-4 lg:p-8 bg-muted dark:bg-mutedDark text-mutedForeground dark:text-mutedDarkForeground font-semibold rounded-md">
+          Hey! This article is outdated. You can find a newer article about this topic here:{' '}
+          <StyledLink prefetch="intent" to={`/blog/${article.newVersionSlug}`}>
+            {article.newVersionTitle}
+          </StyledLink>
+          .
+        </div>
+      )}
       <div className="flex flex-col gap-1">
-        <H1>{article.frontmatter.title}</H1>
-        <SectionHeading>
-          <time dateTime={getISODate(article.frontmatter.date)}>{getReadableDate(article.frontmatter.date)}</time>
+        <H1>{article.title}</H1>
+        <SectionHeading asParagraph>
+          <time dateTime={getISODate(article.date)}>{getReadableDate(article.date)}</time>
         </SectionHeading>
       </div>
       <BlogMarkdownContainer className="w-full flex flex-col gap-5" content={article.content} />

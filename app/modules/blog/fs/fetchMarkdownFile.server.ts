@@ -1,9 +1,16 @@
-import Markdoc from '@markdoc/markdoc';
+import Markdoc, { type RenderableTreeNode } from '@markdoc/markdoc';
 import fs from 'node:fs/promises';
 import yaml from 'js-yaml';
 import invariant from 'tiny-invariant';
-import type { ActionResult, MarkdocFile } from '~/types.ts';
+import type { ActionResult } from '~/types.ts';
 import { config } from '../config.ts';
+
+export type MarkdocFile<FrontMatter> = {
+  slug: string;
+  content: RenderableTreeNode;
+  markdown: string;
+  frontmatter: FrontMatter;
+};
 
 export enum FetchMarkdownFileResState {
   fileNotFound = 'file_not_found',

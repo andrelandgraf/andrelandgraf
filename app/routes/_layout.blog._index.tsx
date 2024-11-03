@@ -11,20 +11,20 @@ export default function Component() {
 
   return (
     <ul className="w-full lg:max-w-3xl wide:max-w-5xl flex flex-col gap-10" title="Articles">
-      {entries.map(({ frontmatter, slug }) => (
-        <li key={slug}>
+      {entries.map((article) => (
+        <li key={article.slug}>
           <article className="flex flex-col gap-3 w-full">
-            <Link to={`/blog/${slug}`} prefetch="intent" className={getFocusClasses(true)}>
+            <Link to={`/blog/${article.slug}`} prefetch="intent" className={getFocusClasses(true)}>
               <PageHeading asH2 className="text-primaryDark dark:text-primary font-bold">
-                {frontmatter.title}
+                {article.title}
               </PageHeading>
             </Link>
             <h3>
-              <time dateTime={getISODate(frontmatter.date)}>{getReadableDate(frontmatter.date)}</time>
+              <time dateTime={getISODate(article.date)}>{getReadableDate(article.date)}</time>
             </h3>
-            <Tags tags={frontmatter.categories} />
-            <p>{frontmatter.description}</p>
-            <ButtonLink to={`/blog/${slug}`} aria-label={`View Article ${frontmatter.title}`} prefetch="intent">
+            <Tags tags={article.categories} />
+            <p>{article.description}</p>
+            <ButtonLink to={`/blog/${article.slug}`} aria-label={`View Article ${article.title}`} prefetch="intent">
               View Article
             </ButtonLink>
           </article>

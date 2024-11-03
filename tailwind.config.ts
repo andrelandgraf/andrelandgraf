@@ -11,6 +11,10 @@ export default {
         primaryAccent: 'rgb(20 184 166)', // teal-500
         primaryDark: 'rgb(19 78 74)', // teal-900
         primaryDarkAccent: 'rgb(17 94 89)', // teal-800
+        muted: 'rgb(153 246 228)',
+        mutedForeground: 'rgb(0 0 0)',
+        mutedDark: 'rgb(19 78 74)',
+        mutedDarkForeground: 'rgb(255 255 255)',
         red: '#ff0000',
         orange: '#ff9a00',
         yellow: '#d0de21',

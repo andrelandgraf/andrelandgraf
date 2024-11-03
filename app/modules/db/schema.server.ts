@@ -13,6 +13,7 @@ export const articlesTable = table(
     imageUrl: t.text('img_url'),
     imageAltText: t.text('img_alt_text'),
     markdown: t.text('markdown').notNull(),
+    newVersionSlug: t.text('new_version_slug').references((): t.AnySQLiteColumn => articlesTable.slug),
   },
   (table) => {
     return {

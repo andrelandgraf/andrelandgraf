@@ -41,6 +41,7 @@ export async function generateArticles() {
           imageUrl: file.frontmatter.imageUrl,
           imageAltText: file.frontmatter.imageAltText,
           markdown: file.markdown,
+          newVersionSlug: file.frontmatter.newVersionSlug,
         })
         .where(eq(articlesTable.slug, file.slug));
     } else {

@@ -34,15 +34,15 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   const articles = await fetchArticles();
   const entries = articles
-    .filter((entry) => !tag || entry.frontmatter.categories.includes(tag))
+    .filter((entry) => !tag || entry.categories.includes(tag))
     .sort((a, b) => {
-      return new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime();
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
     });
 
   const tags = Array.from(
     new Set(
       entries.reduce((acc, entries) => {
-        return [...acc, ...entries.frontmatter.categories];
+        return [...acc, ...entries.categories];
       }, [] as string[]),
     ),
   );

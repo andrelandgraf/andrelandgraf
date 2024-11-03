@@ -5,6 +5,7 @@ export type BlogArticleFrontmatter = {
   categories: string[];
   imageUrl?: string;
   imageAltText?: string;
+  newVersionSlug?: string;
 };
 
 export function validateFrontMatter(attributes: unknown): attributes is BlogArticleFrontmatter {

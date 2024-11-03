@@ -24,12 +24,7 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
   }
 
   const jsx = (
-    <ArticlePreview
-      serverOrigin={env.server.origin}
-      title={article.frontmatter.title}
-      slug={slug}
-      includeQRCode={includeQRCode}
-    />
+    <ArticlePreview serverOrigin={env.server.origin} title={article.title} slug={slug} includeQRCode={includeQRCode} />
   );
 
   const svg = await satori(jsx, {
