@@ -267,7 +267,7 @@ export default function Component() {
 
 Markdoc has the concept of nodes and tags. Nodes are Markdown elements such as headings or paragraphs. Tags are a syntactic extension of Markdown, allowing us to define custom elements. Using Markdoc's React renderer, we can map React components to both nodes and tags. For example, we can create a custom `Link` component for rendering all anchor tags (link node) with Remix's `NavLink` component. We can further create a callout tag for highlighted text and map it to a `Callout` component.
 
-First, we need to expand the configuration object passed to `Markdoc.transform`. We will also add a link and callout tag to the Markdown content:
+First, let's update our example Markdown content to include a new custom tag `{% callout %}` and an anchor tag `[blog](/blog)`. Additionally, we need to expand the configuration object passed to `Markdoc.transform` to instruct Markdoc how to render these elements:
 
 ```tsx
 export function loader() {
