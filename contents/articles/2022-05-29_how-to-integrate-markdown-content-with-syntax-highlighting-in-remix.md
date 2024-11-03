@@ -2,7 +2,7 @@
 date: 2022-05-29
 title: How to integrate Markdown content with syntax highlighting in Remix.run
 description: Markdown is a powerful tool for writing and publishing content. There are different ways of integrating Markdown into your Remix application. In this blog post, I want to show you how my own Markdown setup works.
-categories: [Remix.run]
+categories: [Remix.run, Markdown]
 newVersionSlug: 2024-11-01_rendering-markdown-in-remix
 ---
 
