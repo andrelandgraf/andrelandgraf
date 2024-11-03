@@ -38,8 +38,8 @@ headers:
 # A route module using MDX
 ```
 
-So why don't we just stop here? MDX route modules are a great starting point but they aren't as flexibile as other
-options. MDX is convinient to work with but personally, I like to separate content from code. Instead of importing React
+So why don't we just stop here? MDX route modules are a great starting point but they aren't as flexible as other
+options. MDX is convenient to work with but personally, I like to separate content from code. Instead of importing React
 components into my content (MDX), I'd rather render my Markdown inside components. It's also worth mentioning that if
 you want to maintain hundreds of Markdown files, then you will likely run into
 [scalability issues](https://remix.run/docs/en/v1/guides/mdx#:~:text=Clearly%20this%20is,MDX%20Bundler.) when using MDX
