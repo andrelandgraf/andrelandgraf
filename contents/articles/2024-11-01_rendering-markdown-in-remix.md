@@ -1,5 +1,5 @@
 ---
-date: 2022-05-29
+date: 2024-11-01
 title: Use Markdoc to render Markdown content in Remix
 description: Markdown is a powerful tool for writing and publishing content. In this blog post, we use Markdoc to parse and render Markdown content in Remix, including styling, frontmatter support, and using custom React components for Markdoc nodes and tags.
 categories: [Remix.run, Markdown]
