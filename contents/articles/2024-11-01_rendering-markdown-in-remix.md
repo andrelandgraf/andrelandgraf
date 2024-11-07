@@ -9,7 +9,7 @@ Markdown is a great tool for working with formatted text content and is commonly
 
 ## What is Markdoc?
 
-[Markdoc](https://markdoc.dev/) is an all-in-one solution for parsing Markdown, converting it to an abstract syntax tree (AST), transforming it using variables, tags, and functions, and then rendering it to HTML or React. First developed by Stripe for its documentation, it is now open source and quite popular ((GitHub repo)[https://github.com/markdoc/markdoc]).
+[Markdoc](https://markdoc.dev/) is an all-in-one solution for parsing Markdown, converting it to an abstract syntax tree (AST), transforming it using variables, tags, and functions, and then rendering it to HTML or React. First developed by Stripe for its documentation, it is now open source and quite popular ([GitHub repo](https://github.com/markdoc/markdoc)).
 
 ### Markdoc vs. unified
 
