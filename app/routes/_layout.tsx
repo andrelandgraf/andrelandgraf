@@ -13,7 +13,7 @@ export default function Component() {
   return (
     <>
       <PageTransitionProgressBar />
-      <div className="relative transition-colors duration-1000 bg-gradient-to-br from-teal-50 via-white to-teal-100 dark:from-stone-800 dark:via-slate-800 dark:to-gray-800 text-gray-800 dark:text-white font-medium text-lg min-h-screen w-screen overflow-x-hidden px-5 py-10 lg:p-10 2xl:p-16">
+      <div className="relative bg-white dark:bg-gray-800 lg:transition-colors lg:duration-1000 lg:bg-gradient-to-br lg:from-teal-50 lg:via-white lg:to-teal-100 lg:dark:from-stone-800 lg:dark:via-slate-800 lg:dark:to-gray-800 text-gray-800 dark:text-white font-medium text-lg min-h-screen w-screen overflow-x-hidden px-5 py-10 lg:p-10 2xl:p-16">
         <div className="w-full max-w-ultraWide ultraWide:m-auto flex flex-col">
           <header className="w-full flex flex-col lg:flex-row items-center mb-6 lg:mb-16">
             <div className="w-full flex flex-col lg:flex-row items-start gap-4 lg:gap-10 lg:ml-auto">
