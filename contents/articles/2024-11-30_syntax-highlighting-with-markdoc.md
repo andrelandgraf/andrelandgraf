@@ -102,7 +102,7 @@ export function CodeBlock({ content, language, innerHtml }: CodeBlockProps) {
 
 The CodeBlock component is agnostic to the syntax highlighting library and has access to the code content string, the code language, and the syntax-highlighted text content. Adding a copy-to-clipboard button or other custom functionality is easy with this setup!
 
-Note that require all three props to be present. However, there is no real type checking as Markdoc's React renderer component mapping does not provide type information about what attributes are available on the node. You could add custom assertions (e.g., via `tiny-invariant`) to ensure that the required props are present:
+Note that we expect all three props to be present. We shouldn't call `CodeBlock` with undefined `content`, `language`, or `innerHtml` as this would lead to a broken code block. However, Markdoc's React renderer component mapping doesn't provide type information about what attributes are available on the node. Hence, there is a chance that the `CodeBlock` component is called without the required props. One way to mitigate this is to provide default values for the props or by using assertions to throw useful runtime errors. Below, we add custom assertions (via `tiny-invariant`) to ensure that the required props are present:
 
 ```tsx
 import invariant from 'tiny-invariant';
