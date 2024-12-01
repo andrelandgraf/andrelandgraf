@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 import yaml from 'js-yaml';
 import invariant from 'tiny-invariant';
 import type { ActionResult } from '~/types.ts';
-import { config } from '../config.ts';
+import { getMarkdocConfig } from '../config.server.ts';
 
 export type MarkdocFile<FrontMatter> = {
   slug: string;
@@ -31,6 +31,7 @@ export async function fetchMarkdownFileFs<FrontMatter>(
   slug: string,
   hasValidFrontMatter: (attributes: unknown) => attributes is FrontMatter & Record<string, unknown>,
 ): Promise<ActionResult<FetchMarkdownFileResState, MarkdocFile<FrontMatter>>> {
+  const markdocConfig = await getMarkdocConfig();
   const file = await fs.readFile(getContentPath(path, slug), 'utf8');
   if (!file) {
     return [500, FetchMarkdownFileResState.fileNotFound, undefined];
@@ -45,7 +46,7 @@ export async function fetchMarkdownFileFs<FrontMatter>(
     return [500, FetchMarkdownFileResState.internalError, undefined];
   }
 
-  const content = Markdoc.transform(ast, config);
+  const content = Markdoc.transform(ast, markdocConfig);
   return [
     200,
     FetchMarkdownFileResState.success,

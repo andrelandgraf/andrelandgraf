@@ -2,7 +2,7 @@
 date: 2024-11-01
 title: Use Markdoc to render Markdown content in Remix
 description: Markdown is a great tool for working with formatted text content. In this blog post, we use Markdoc to parse and render Markdown content in Remix. We will cover styling, frontmatter, and how to render Markdown content as custom React components.
-categories: [Remix.run, Markdown]
+categories: [Remix.run, Markdown, Markdoc]
 ---
 
 Markdown is a great tool for working with formatted text content and is commonly used for blog posts and documentation. In fact, the text you are reading right now is written in Markdown. There are different ways of working with Markdown content in Remix. I am currently using Markdoc and think it's great. In this blog post, we will set up Markdoc with Remix and cover the initial setup, styling, frontmatter, and how to render Markdown content as custom React components.
@@ -515,6 +515,10 @@ export default function Component() {
   );
 }
 ```
+
+### Syntax highlighting
+
+Markdown doesn't provide syntax highlighting for code blocks out of the box. However, we can use Prism, Shiki, or other syntax highlighters to add this feature. The Markdoc documentation provides an example for [rendering code blocks with syntax highlighting using Prism](https://markdoc.dev/docs/examples#syntax-highlighting). I personally use Shiki, which is the engine behind VS Code's syntax highlighting. I wrote a separate blog post on integrating Shiki with Markdoc, which you can find [here](/2024-11-30_syntax-highlighting-with-markdoc.md).
 
 ## Conclusion
 

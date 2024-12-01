@@ -1,4 +1,4 @@
-import type { LinksFunction, LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
+import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
 import { json, redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { SectionHeading } from '~/components/headings.tsx';
@@ -9,12 +9,6 @@ import { getISODate, getReadableDate } from '~/utilities/dates.ts';
 import { getMetaTags } from '~/utilities/metaTags.ts';
 import { env } from '~/modules/env.server.ts';
 import { StyledLink } from '~/components/links';
-// @ts-ignore comment
-import syntaxHighlightingStylesUrl from '~/styles/code.css?url';
-
-export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: syntaxHighlightingStylesUrl }];
-};
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   if (!data) {

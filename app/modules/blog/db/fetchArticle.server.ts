@@ -3,7 +3,7 @@ import type { RenderableTreeNode } from '@markdoc/markdoc';
 import Markdoc from '@markdoc/markdoc';
 import { db } from '~/modules/db/db.server.ts';
 import type { ActionResult } from '~/types.ts';
-import { config } from '../config.ts';
+import { getMarkdocConfig } from '../config.server.ts';
 import { Article, articlesTable } from '~/modules/db/schema.server.ts';
 
 export enum FetchArticleResState {
@@ -56,7 +56,7 @@ export function toArticleDetails(
   };
 }
 
-export async function fetchArticle(slug: string): Promise<ActionResult<FetchArticleResState, ArticleDetails>> {
+async function queryArticle(slug: string) {
   const newArticlesTable = aliasedTable(articlesTable, 'newArticle');
   const [article] = (await db
     .select({
@@ -73,7 +73,12 @@ export async function fetchArticle(slug: string): Promise<ActionResult<FetchArti
     })
     .from(articlesTable)
     .leftJoin(newArticlesTable, eq(newArticlesTable.slug, articlesTable.newVersionSlug))
-    .where(eq(articlesTable.slug, slug))) as (Article & { newVersionTitle?: string | null })[];
+    .where(eq(articlesTable.slug, slug))) as Array<Article & { newVersionTitle?: string | null }>;
+  return article;
+}
+
+export async function fetchArticle(slug: string): Promise<ActionResult<FetchArticleResState, ArticleDetails>> {
+  const [article, config] = await Promise.all([queryArticle(slug), getMarkdocConfig()]);
   if (!article) {
     return [404, FetchArticleResState.fileNotFound, undefined];
   }

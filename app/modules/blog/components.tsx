@@ -2,7 +2,8 @@ import type { RenderableTreeNode } from '@markdoc/markdoc';
 import clsx from 'clsx';
 import type { HTMLAttributes } from 'react';
 import { MarkdownLinkWrapper } from '~/components/links.tsx';
-import { CodeBlock, MarkdownContainer } from '~/components/markdown/renderer.tsx';
+import { MarkdownContainer } from '~/components/markdown/renderer.tsx';
+import { CodeBlock } from '~/components/codeBlock.tsx';
 import { Quote, Statement } from '~/components/texts.tsx';
 import { TweetEmbed } from '~/components/tweetEmbed.tsx';
 

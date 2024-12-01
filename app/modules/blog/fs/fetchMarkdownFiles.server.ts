@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 import yaml from 'js-yaml';
 import invariant from 'tiny-invariant';
 import type { ActionResult } from '~/types.ts';
-import { config } from '../config.ts';
+import { getMarkdocConfig } from '../config.server.ts';
 import { MarkdocFile } from './fetchMarkdownFile.server.ts';
 
 enum FetchMarkdownFilesResState {
@@ -17,7 +17,7 @@ async function fetchMarkdownFilesFs<FrontMatter>(
   hasValidFrontMatter: (attributes: unknown) => attributes is FrontMatter & Record<string, unknown>,
 ): Promise<ActionResult<FetchMarkdownFilesResState, MarkdocFile<FrontMatter>[]>> {
   console.debug('fs/fetchMarkdownFiles called');
-
+  const markdocConfig = await getMarkdocConfig();
   const entries = await fs.readdir(path, {
     encoding: 'utf8',
     withFileTypes: true,
@@ -46,7 +46,7 @@ async function fetchMarkdownFilesFs<FrontMatter>(
         return [500, FetchMarkdownFilesResState.internalError, undefined];
       }
 
-      const content = Markdoc.transform(ast, config);
+      const content = Markdoc.transform(ast, markdocConfig);
       mdFiles.push({
         slug: entry.name.replace('.md', '').replace('index', ''),
         frontmatter,

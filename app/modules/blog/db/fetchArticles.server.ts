@@ -1,6 +1,5 @@
 import Markdoc from '@markdoc/markdoc';
 import { db } from '~/modules/db/db.server.ts';
-import { config } from '../config.ts';
 import { parseCategories } from './fetchArticle.server.ts';
 import { Article, articlesTable } from '~/modules/db/schema.server.ts';
 
@@ -36,8 +35,6 @@ export function toArticleListItem(article: Article): ArticleListItem {
 export async function fetchArticles(): Promise<ArticleListItem[]> {
   const articles = await db.select().from(articlesTable);
   return articles.map((article) => {
-    const ast = Markdoc.parse(article.markdown);
-    const content = Markdoc.transform(ast, config);
     return toArticleListItem(article);
   });
 }
