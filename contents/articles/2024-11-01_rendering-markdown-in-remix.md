@@ -518,7 +518,7 @@ export default function Component() {
 
 ### Syntax highlighting
 
-Markdown doesn't provide syntax highlighting for code blocks out of the box. However, we can use Prism, Shiki, or other syntax highlighters to add this feature. The Markdoc documentation provides an example for [rendering code blocks with syntax highlighting using Prism](https://markdoc.dev/docs/examples#syntax-highlighting). I personally use Shiki, which is the engine behind VS Code's syntax highlighting. I wrote a separate blog post on integrating Shiki with Markdoc, which you can find [here](/2024-11-30_syntax-highlighting-with-markdoc).
+Markdown doesn't provide syntax highlighting for code blocks out of the box. However, we can use Prism, Shiki, or other syntax highlighters to add this feature. The Markdoc documentation provides an example for [rendering code blocks with syntax highlighting using Prism](https://markdoc.dev/docs/examples#syntax-highlighting). I personally use Shiki, which is the engine behind VS Code's syntax highlighting. I wrote a separate blog post on integrating Shiki with Markdoc, which you can find [here](/blog/2024-11-30_syntax-highlighting-with-markdoc).
 
 ## Conclusion
 
