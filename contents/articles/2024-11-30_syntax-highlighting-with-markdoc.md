@@ -23,9 +23,11 @@ const html = await codeToHtml(code, {
 
 ### Shiki vs. Prism
 
-Prism is another popular syntax highlighter that is often used with React. I have personally used `react-prism` for a long time for this blog. I recently switched to Shiki highlighting after reading through their great documentation. When using Prism client-side, either via packages like `react-prism` or directly, the syntax highlighting is applied during rendering. This can lead to performance issues for large code blocks. Note that this is not an issue with Prism itself, but rather how it is used in React. Both Prism and Shiki can be used to generate the HTML for code blocks server-side.
+Prism is another popular syntax highlighter that is often used with React. I have used `react-prism` for a while for this blog. When using Prism client-side, either via packages like `react-prism` or directly, the syntax highlighting is applied during rendering. This can lead to performance issues for large code blocks. Note that this is not an issue with Prism itself, but rather how it is used in React. Both Prism and Shiki can be used to generate the HTML for code blocks server-side.
 
-One major difference between Shiki and Prism is how both solutions load the required CSS. Prims provides a [theme repository](https://github.com/PrismJS/prism-themes) and works by exposing classes for tokens in the code block that different themes can style. When using Prism, you must load the theme CSS in your application. On the other hand, Shiki utilizes inline styling and lazily loads the required theme and language grammar. This makes dynamic theming easier. For instance, you can switch themes based on user preferences just by swapping the theme identifier.
+One major difference between Shiki and Prism is how both solutions load the required CSS. Prism provides a [theme repository](https://github.com/PrismJS/prism-themes) and works by exposing classes for tokens in the code block that different themes can style. When using Prism, you must load the theme CSS in your application. On the other hand, Shiki utilizes inline styling and lazily loads the required theme and language grammar. This makes dynamic theming easier. For instance, you can switch themes based on user preferences just by swapping the theme identifier.
+
+Shiki has great documentation, offers both synchronous and asynchronous APIs (as we will see in this blog post), and is easy to set up. Shiki is a great choice for server-side syntax highlighting in a Remix application. That said, both Prism and Shiki are great tools for syntax highlighting!
 
 ## Integrating Shiki with Markdoc
 

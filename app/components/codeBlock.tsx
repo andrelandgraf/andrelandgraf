@@ -10,7 +10,7 @@ type CodeBlockProps = {
 export function CodeBlock({ content, language, innerHtml }: CodeBlockProps) {
   const clipboardButtonId = useId();
   return (
-    <div className="p-2 lg:p-4 rounded-md font-normal text-sm md:text-base w-full bg-[#2b2b2b] text-white">
+    <div className="p-2 lg:p-4 rounded-md font-normal text-sm md:text-base w-full bg-[#282A36] text-white">
       <div className="flex justify-end">
         <span className="mr-5 text-sm md:text-lg">{language}</span>
         <CopyClipboardButton title="Copy code" content={content} id={clipboardButtonId} />
