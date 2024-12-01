@@ -5,7 +5,7 @@ description: Markdown is a great tool for working with formatted text content, i
 categories: [Markdown, Markdoc]
 ---
 
-Markdown is a great tool for formatted text content, including code blocks. However, Markdown doesn't provide syntax highlighting by default. In a [previous blog post](/2024-11-01_rendering-markdown-in-remix.md), we set up Markdoc to render Markdown content in a Remix application. In this blog post, we will add syntax highlighting using Shiki.
+Markdown is a great tool for formatted text content, including code blocks. However, Markdown doesn't provide syntax highlighting by default. In a [previous blog post](/2024-11-01_rendering-markdown-in-remix), we set up Markdoc to render Markdown content in a Remix application. In this blog post, we will add syntax highlighting using Shiki.
 
 ## What is Shiki?
 
@@ -21,7 +21,7 @@ I personally picked Shiki after using Prims for many years. The documentation is
 
 ## Integrating Shiki with Markdoc
 
-[Markdoc](https://markdoc.dev/) is an all-in-one solution for parsing Markdown. It provides a React renderer that can be used to render Markdown content in React apps. To set up Markdoc in Remix, follow the steps in the previous blog post: [Use Markdoc to render Markdown content in Remix](/2024-11-01_rendering-markdown-in-remix.md).
+[Markdoc](https://markdoc.dev/) is an all-in-one solution for parsing Markdown. It provides a React renderer that can be used to render Markdown content in React apps. To set up Markdoc in Remix, follow the steps in the previous blog post: [Use Markdoc to render Markdown content in Remix](/2024-11-01_rendering-markdown-in-remix).
 
 ### Mapping custom React components
 
@@ -170,7 +170,7 @@ export default function Component() {
 }
 ```
 
-This code example builds on top of the Markdoc setup from my [previous blog post](/2024-11-01_rendering-markdown-in-remix.md). In a Remix route modules, we define a `loader` function that parses the Markdown content and transforms the AST. We map the `fence` node to our custom `CodeBlock` component, and render the Markdown content using the Markdoc React renderer.
+This code example builds on top of the Markdoc setup from my [previous blog post](/2024-11-01_rendering-markdown-in-remix). In a Remix route modules, we define a `loader` function that parses the Markdown content and transforms the AST. We map the `fence` node to our custom `CodeBlock` component, and render the Markdown content using the Markdoc React renderer.
 
 This code example doesn't yet include syntax highlighting. The `CodeBlock` component does not yet receive the `innerHtml` prop and will instead render an empty code block. Earlier, we outlined that we want to generate the syntax-highlighted HTML server-side before rendering the React component. For this, we can provide Markdoc `transform` with a custom `transform` function for the `fence` node to inject the `innerHtml` prop:
 
