@@ -146,7 +146,7 @@ infrastructure instructions yet. Before we add those, a word about state.
 
 ### Terraform is stateful
 
-```ts
+```tsx
 const [terraform, setTerraform] = useState(file('terraform.tfstate'));
 ```
 
