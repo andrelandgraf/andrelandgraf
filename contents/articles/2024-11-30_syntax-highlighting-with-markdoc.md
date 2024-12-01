@@ -9,23 +9,31 @@ Markdown is a great tool for formatted text content, including code blocks. Howe
 
 ## What is Shiki?
 
-[Shiki](https://shiki.style/), Japanese word for Style, is a popular syntax highlighter. It is based on the grammar and themes from TextMate, the same engine used by VS Code. Shiki many popular themes and languages and has a modular API for switching out themes at runtime.
+[Shiki](https://shiki.style/), Japanese word for Style, is a popular syntax highlighter. It is based on the grammar and themes from TextMate, the same engine used by VS Code. Shiki offers many popular themes and supports all popular programming languages. Syntax highlighting with Shiki is as easy as calling a function with the code content and theme and language identifiers:
+
+```javascript
+import { codeToHtml } from 'shiki';
+
+const code = "const message = 'Hello, world!';";
+const html = await codeToHtml(code, {
+  lang: 'javascript',
+  theme: 'vitesse-dark',
+});
+```
 
 ### Shiki vs. Prism
 
-Prism is another popular syntax highlighter that is often used with React. One major difference between Shiki and Prism is how both solutions load the required CSS. Prism requires you to import the CSS file for the theme you want to use. Usually, you copy one of the existing CSS files from the [Prism theme repository](https://github.com/PrismJS/prism-themes) to apply the theme to all rendered code blocks. However, Shiki provides a way to load themes lazily at runtime. This can be useful when you want to switch themes based on user preferences, but you also create a similar experience with Prism by dynamically importing the CSS file for the selected theme.
+Prism is another popular syntax highlighter that is often used with React. I have personally used `react-prism` for a long time for this blog. I recently switched to Shiki highlighting after reading through their great documentation. When using Prism client-side, either via packages like `react-prism` or directly, the syntax highlighting is applied during rendering. This can lead to performance issues for large code blocks. Note that this is not an issue with Prism itself, but rather how it is used in React. Both Prism and Shiki can be used to generate the HTML for code blocks server-side.
 
-When using Prism client-side, either via packages like `react-prism` or directly, the syntax highlighting is applied during rendering. This can lead to performance issues for large code blocks. Note that this is not an issue with Prism itself, but rather how it is used in React. Both Prism and Shiki can be used to generate the HTML for code blocks server-side.
-
-I personally picked Shiki after using Prims for many years. The documentation is great and the API is easy to use!
+One major difference between Shiki and Prism is how both solutions load the required CSS. Prims provides a [theme repository](https://github.com/PrismJS/prism-themes) and works by exposing classes for tokens in the code block that different themes can style. When using Prism, you must load the theme CSS in your application. On the other hand, Shiki utilizes inline styling and lazily loads the required theme and language grammar. This makes dynamic theming easier. For instance, you can switch themes based on user preferences just by swapping the theme identifier.
 
 ## Integrating Shiki with Markdoc
 
-[Markdoc](https://markdoc.dev/) is an all-in-one solution for parsing Markdown. It provides a React renderer that can be used to render Markdown content in React apps. To set up Markdoc in Remix, follow the steps in the previous blog post: [Use Markdoc to render Markdown content in Remix](/blog/2024-11-01_rendering-markdown-in-remix).
+[Markdoc](https://markdoc.dev/) is an all-in-one solution for parsing Markdown. If you haven't set up Markdoc yet, follow the steps in the previous blog post: [Use Markdoc to render Markdown content in Remix](/blog/2024-11-01_rendering-markdown-in-remix). 
 
 ### Mapping custom React components
 
-When parsing Markdown content, Markdoc converts it to an abstract syntax tree (AST). Here, each Markdown element is represented by a node. We can then transform the AST and map nodes to custom React components. Code blocks are represented by the `fence` node. [The Markdoc docs](https://markdoc.dev/docs/examples#syntax-highlighting) already provide an example of mapping a custom React component to the `fence` node using `prismjs` for syntax highlighting:
+When parsing Markdown content, Markdoc converts it to an abstract syntax tree (AST). Here, each Markdown element is represented by a node. We can then transform the AST and map nodes to custom tags which can then be rendered as React components. Code blocks are represented by the `fence` node. [The Markdoc docs](https://markdoc.dev/docs/examples#syntax-highlighting) already provide an example of mapping a custom React component to the `fence` node using Prism for syntax highlighting:
 
 ```jsx
 import 'prismjs';
@@ -63,12 +71,14 @@ Markdoc.renderers.react(content, React, {
 });
 ```
 
-In the code example, a custom React `Fence` component is mapped to the `fence` node. The `Fence` component renders the code block with syntax highlighting using `Prism`. A per the [Markdoc docs built-in nodes section](https://markdoc.dev/docs/nodes#built-in-nodes), the `fence` node is supplied with the following attributes (among others):
+In the code example, a custom React `Fence` component is mapped to the `fence` node. The `Fence` component renders the code block with syntax highlighting using `Prism`. The `fence` node is supplied with the following attributes (among others):
 
 - `content`: A string containing the plain text content of the code block.
 - `language`: A string containing the language identifier for the code block.
 
-Note that the documented example applies the transformation from code block content to HTML using `Prism` during rendering. This is probably fine for most cases, but can be optimized by generating the code block HTML server-side before rendering the React component.
+Find more information in the Markdoc docs: [https://markdoc.dev/docs/nodes#built-in-nodes](https://markdoc.dev/docs/nodes#built-in-nodes).
+
+Note that the code example uses Prism to parse the code content string to HTML during rendering. This is probably fine for most cases, but can be optimized by generating the code block HTML server-side before rendering the React component. Next, we will do just that in a Remix route module!
 
 ### Create a custom CodeBlock component
 
@@ -101,21 +111,6 @@ export function CodeBlock({ content, language, innerHtml }: CodeBlockProps) {
 ```
 
 The CodeBlock component is agnostic to the syntax highlighting library and has access to the code content string, the code language, and the syntax-highlighted text content. Adding a copy-to-clipboard button or other custom functionality is easy with this setup!
-
-Note that we expect all three props to be present. We shouldn't call `CodeBlock` with undefined `content`, `language`, or `innerHtml` as this would lead to a broken code block. However, Markdoc's React renderer component mapping doesn't provide type information about what attributes are available on the node. Hence, there is a chance that the `CodeBlock` component is called without the required props. One way to mitigate this is to provide default values for the props or by using assertions to throw useful runtime errors. Below, we add custom assertions (via `tiny-invariant`) to ensure that the required props are present:
-
-```tsx
-import invariant from 'tiny-invariant';
-
-export function CodeBlock({ content, language, innerHtml }: CodeBlockProps) {
-  invariant(content, 'CodeBlock must have content');
-  invariant(language, 'CodeBlock must have language');
-  invariant(innerHtml, 'CodeBlock must have innerHtml');
-  // ...
-}
-```
-
-This is helpful for debugging and ensures that the component is used correctly. It's easy to forget to specify the language for every code block in the Markdown content, so it's good to have a safety net in place.
 
 ### Mapping the custom CodeBlock component
 
@@ -220,7 +215,7 @@ npm install shiki
 Here is an easy example of how to use Shiki to generate syntax-highlighted HTML content for a code block:
 
 ```javascript
-const code = `const message = 'Hello, world!';`;
+const code = "const message = 'Hello, world!';";
 const html = await codeToHtml(code, {
   lang: 'javascript',
   theme: 'vitesse-dark',
@@ -229,7 +224,7 @@ const html = await codeToHtml(code, {
 
 Notice that `codeToHtml` is an async function. This is because Shiki lazily loads the required language grammars and themes, as well as engine dependencies. Markdoc currently has experimental support for async transforms (see [GitHub Issue](https://github.com/markdoc/markdoc/discussions/90) and [release notes](https://github.com/markdoc/markdoc/releases/tag/0.1.4)). However, the implementation is still marked as experimental and not documented.
 
-Instead, we can use Shiki's synchronous API to generate the syntax-highlighted HTML content. This is a bit more involved than its async default API, but it gets the job done! Shiki's synchronous API is documented here: [https://shiki.style/guide/sync-usage](https://shiki.style/guide/sync-usage).
+Instead, we can use Shiki's synchronous API to generate the syntax-highlighted HTML content. This is a bit more involved than the async default API, but it gets the job done! Shiki's synchronous API is documented here: [https://shiki.style/guide/sync-usage](https://shiki.style/guide/sync-usage).
 
 Let's create a `shiki.server.ts` module to export a function to initialize Shiki (async) and a function to generate syntax-highlighted HTML content (sync):
 
@@ -280,9 +275,9 @@ export function codeToHtml(content: string, language: string, ctx: CodeToHtmlCtx
 }
 ```
 
-Note that we use `invariant` from the `tiny-invariant` package to assert that the required props are present and have the expected values. This is especially useful when working with custom components and attributes in Markdoc where we don't have type information about the node attributes at compile time.
+We import (preload) all themes we want to support (e.g., `dracula-soft`) and languages (e.g., `javascript`) from Shiki and provide it to the Shiki instance. The `codeToHtml` function generates the syntax-highlighted HTML content for a code block using an existing Shiki instance. This is how we avoid async calls during the highlighting process.
 
-We can now import all themes we want to support (e.g., `dracula-soft`) and languages (e.g., `javascript`) from Shiki. The `codeToHtml` function generates the syntax-highlighted HTML content for a code block using the Shiki instance.
+Note that we use `invariant` from the `tiny-invariant` package to assert that the required props are present and match our supported preloaded themes and languages. This is nice to avoid using unsupported languages by mistake.
 
 ### Using Shiki in Markdoc transforms
 
