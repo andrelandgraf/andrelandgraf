@@ -2,7 +2,7 @@
 date: 2024-11-30
 title: Syntax highlighting with Markdoc and Shiki in Remix
 description: Markdown is a great tool for working with formatted text content, including code blocks. In this blog post, we set up Shiki for syntax highlighting with Markdoc and Remix.
-categories: [Markdown, Markdoc]
+categories: [Remix.run, Markdown]
 ---
 
 Markdown is a great tool for formatted text content, including code blocks. However, Markdown doesn't provide syntax highlighting by default. In a [previous blog post](/blog/2024-11-01_rendering-markdown-in-remix), we set up Markdoc to render Markdown content in a Remix application. In this blog post, we will add syntax highlighting using Shiki.
