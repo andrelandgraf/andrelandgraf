@@ -9,7 +9,7 @@ Markdown is a great tool for formatted text content, including code blocks. Howe
 
 ## What is Shiki?
 
-[Shiki](https://shiki.style/), Japanese word for Style, is a popular syntax highlighter. It is based on the grammar and themes from TextMate, the same engine used by VS Code. Shiki offers many popular themes and supports all popular programming languages. Syntax highlighting with Shiki is as easy as calling a function with the code content and theme and language identifiers:
+[Shiki](https://shiki.style/), Japanese word for Style, is a popular syntax highlighter. It is based on the grammar and themes from TextMate, the same engine used by VS Code. Shiki offers many popular themes and supports all popular programming languages. Syntax highlighting with Shiki is as easy as calling a function with the code content, theme, and language identifiers:
 
 ```javascript
 import { codeToHtml } from 'shiki';
@@ -350,6 +350,6 @@ Success! We have now set up Shiki for syntax highlighting with Markdoc in a Remi
 
 ## Conclusion
 
-In this blog post, we set up Shiki for syntax highlighting with Markdoc in a Remix application. We created a custom `CodeBlock` component to render code blocks with syntax highlighting. We used Shiki's synchronous API and Markdoc's custom transforms to generate the syntax-highlighted HTML content server-side. Finally, we mapped the custom `CodeBlock` component to the `fence` node in Markdoc to render Markdown content with syntax highlighting.
+In this blog post, we set up Shiki for syntax highlighting with Markdoc in Remix. We created a custom `CodeBlock` component to render code with syntax highlighting and used Shiki's synchronous API and Markdoc's custom transforms to generate the syntax-highlighted HTML content server-side. Finally, we mapped the custom `CodeBlock` component to the `fence` node in Markdoc to render the Markdown content in React.
 
 Happy coding!
