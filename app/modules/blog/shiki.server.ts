@@ -13,10 +13,23 @@ import jsx from 'shiki/langs/jsx.mjs';
 import json from 'shiki/langs/json.mjs';
 import tf from 'shiki/langs/tf.mjs';
 import css from 'shiki/langs/css.mjs';
+import html from 'shiki/langs/html.mjs';
 
 const supportedThemes = ['dracula-soft'];
 
-const supportedLanguages = ['javascript', 'typescript', 'markdown', 'tsx', 'bash', 'jsx', 'json', 'tf', 'css', 'txt'];
+const supportedLanguages = [
+  'javascript',
+  'typescript',
+  'markdown',
+  'tsx',
+  'bash',
+  'jsx',
+  'json',
+  'tf',
+  'css',
+  'txt',
+  'html',
+];
 
 function isSupportedTheme(theme: string) {
   return supportedThemes.includes(theme);
@@ -30,7 +43,7 @@ export async function initShiki(): Promise<HighlighterCore> {
   const engine = await createOnigurumaEngine(import('shiki/wasm'));
   const shiki = createHighlighterCoreSync({
     themes: [dracula],
-    langs: [js, ts, markdown, tsx, bash, jsx, json, tf, css],
+    langs: [js, ts, markdown, tsx, bash, jsx, json, tf, css, html],
     engine,
   });
   return shiki;
