@@ -637,7 +637,7 @@ bigger. This way you can work on several related small tasks at once. This is a 
 speed of development.
 
 Was it too hard? This can happen and it's okay. Between every step, feel free to Google for help, read related blog
-posts, make breaks, and take it step by step. A take-home exercise is a great opportunity to learn and practice!
+posts, take breaks, and take it step by step. A take-home exercise is a great opportunity to learn and practice!
 
 Let's get going!
 
