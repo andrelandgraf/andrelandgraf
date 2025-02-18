@@ -3,6 +3,7 @@ date: 2024-12-30
 title: Optimizing images with Remix
 description: Markdown is a great tool for working with formatted text content, including code blocks. In this blog post, we set up Shiki for syntax highlighting with Markdoc and Remix.
 categories: [Remix.run, Web Development]
+ignore: true
 ---
 
 When it comes to optimizing a website, images are a great place to start. Reducing gigabytes—or at least megabytes—of image data can dramatically improve your site's performance and web vitals, and it’s often a quick win. But how do you build an effective image optimization solution for your project?
