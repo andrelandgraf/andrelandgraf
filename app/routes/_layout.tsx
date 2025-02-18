@@ -1,5 +1,6 @@
 import type { HeadersFunction } from '@remix-run/node';
 import { Outlet } from '@remix-run/react';
+import { Img } from 'openimg/react';
 import { StyledLink } from '~/components/links.tsx';
 import { PageTransitionProgressBar } from '~/components/progress.tsx';
 
@@ -17,10 +18,10 @@ export default function Component() {
         <div className="w-full max-w-ultraWide ultraWide:m-auto flex flex-col">
           <header className="w-full flex flex-col lg:flex-row items-center mb-6 lg:mb-16">
             <div className="w-full flex flex-col lg:flex-row items-start gap-4 lg:gap-10 lg:ml-auto">
-              <img
+              <Img
                 className="w-40 rounded-md"
                 alt="Andre smiles into the camera."
-                src="/img/public/profile.png?w=160&h=160"
+                src="/profile.png"
                 width="160"
                 height="160"
               />

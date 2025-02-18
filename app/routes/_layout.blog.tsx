@@ -2,6 +2,7 @@ import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { Outlet, useLoaderData, useRouteError, useSearchParams } from '@remix-run/react';
 import { captureRemixErrorBoundaryError } from '@sentry/remix';
+import { Img } from 'openimg/react';
 import { PageHeading } from '~/components/headings.tsx';
 import { SkipToContentLink, StyledLink } from '~/components/links.tsx';
 import { Tags } from '~/components/tags.tsx';
@@ -68,13 +69,7 @@ export default function Component() {
                 : 'All Things Web Blog Posts'}
             </PageHeading>
             <a title="RSS feed" href="/blog/rss">
-              <img
-                className="w-6 h-6 object-contain"
-                src="/img/public/rss.png?w=24&h=24"
-                alt="RSS logo"
-                width="24"
-                height="24"
-              />
+              <Img className="w-6 h-6 object-contain" src="/rss.png" alt="RSS logo" width="24" height="24" />
             </a>
           </div>
           <nav className="w-full flex flex-col gap-2">

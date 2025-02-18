@@ -1,4 +1,5 @@
 import type { MetaFunction } from '@remix-run/node';
+import { env } from '~/modules/env.server';
 
 type GetMetaTagsParams = {
   title?: string;
@@ -23,7 +24,7 @@ const getTitle = (standaloneTitle: boolean, useCatchPhraseInTitle: boolean, titl
 const getMetaTags: (params: GetMetaTagsParams) => ReturnType<MetaFunction> = ({
   title = 'Andre Landgraf',
   description = 'A tech enthusiast and student who loves to develop fullstack software solutions.',
-  image = '/img/public/profile.png?w=800&h=800',
+  image = '/img?src=/profile.png&w=800&h=800',
   imageAlt = 'Andre smiles into the camera',
   useCatchPhraseInTitle = false,
   standaloneTitle = false,
@@ -63,3 +64,4 @@ const getMetaTags: (params: GetMetaTagsParams) => ReturnType<MetaFunction> = ({
 };
 
 export { getMetaTags };
+

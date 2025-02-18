@@ -2,6 +2,7 @@ import type { HeadersFunction, LinksFunction, MetaFunction } from '@remix-run/no
 import { type LinkProps } from '@remix-run/react';
 import clsx from 'clsx';
 import { type HTMLAttributes, useEffect, useState } from 'react';
+import { Img } from 'openimg/react';
 import { ButtonLink } from '~/components/buttons/index.tsx';
 import { StyledLink, UnstyledLink } from '~/components/links.tsx';
 import { Book3DScene } from '~/components/models/book.tsx';
@@ -59,9 +60,9 @@ export default function Component() {
               , <SubHeadingLink to="#meetups">Meetups</SubHeadingLink>
             </p>
             <div className="frame-one-subheading flex lg:flex-col items-center justify-center transform rotate-6 absolute top-8 lg:right-8">
-              <img
+              <Img
                 alt="Andre smiles into the camera."
-                src="img/public/profile.png?w=96&h=96"
+                src="/profile.png"
                 className="w-10 lg:w-24 rounded-full mr-4 lg:mb-4"
                 width="96"
                 height="96"
@@ -210,13 +211,12 @@ function BookModel() {
 
   if (!is3DSupported) {
     return (
-      <img
+      <Img
         className="max-w-[50vw] lg:max-w-[30vw] shadow-lg shadow-black"
-        src="/img/public/full-stack-web-dev-with-remix-book-cover.png?w=562&h=694"
+        src="/full-stack-web-dev-with-remix-book-cover.png"
         alt="Full Stack Web Development with Remix book cover"
         width="562"
-        height="1387"
-        loading="lazy"
+        height="694"
       />
     );
   }

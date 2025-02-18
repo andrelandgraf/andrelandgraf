@@ -21,7 +21,9 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return getMetaTags({
     title: tile,
     description: data.article.description,
-    image: data?.article.imageUrl || `${data.serverOrigin}/img/gen/blog/${data.article.slug}.png?w=1200&h=1200`,
+    image:
+      data?.article.imageUrl ||
+      `${data.serverOrigin}/img?src=${data.serverOrigin}/blog/${data.article.slug}.png&w=1200&h=1200`,
     imageAlt: data?.article.imageAltText || `${tile} by Andre Landgraf`,
     type: 'article',
   });

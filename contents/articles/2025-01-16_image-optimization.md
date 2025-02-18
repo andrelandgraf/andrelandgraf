@@ -49,7 +49,7 @@ However, this simple setup has some problems:
 
 1. Images can become quite large.
 
-![White and gray cat being goofy and rolling on the floor](/img/public/2025-01-16_image-optimization/cat.png?w=800&h=800)
+![White and gray cat being goofy and rolling on the floor](/img?src=/2025-01-16_image-optimization/cat.png?w=800&h=800)
 
 For instance, this very cute image of my cat is 5.3 MB in size, shot on a Pixel 5, in JPEG format. In PNG, it's 20.2 MB! But don't worry, I optimized it before serving it to you. You can check your browser's network tab to see the actual size, but it should be around 217 KB and served as an WebP image with 800x800 pixels. Overall, this website transferred around 1.6 MB of gzipped content (HTML, CSS, JS, and images). Our unoptimized image would have x14 our website's size (current size - webP size = 1.6MB - 217KB = 1.4MB; size without image divided by PNG size = 20.2MB / 1.4MB = 14.29). This is a problem because it takes longer to download and display the image, especially on slow connections. It also consumes more bandwidth, which can be costly for both the user and the website owner. Now imagine, you are visiting a foreign country with a limited data plan. You don't want to download 20MB of data just to see a cute cat, do you?
 

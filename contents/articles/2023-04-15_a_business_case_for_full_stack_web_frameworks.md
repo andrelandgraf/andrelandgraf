@@ -29,9 +29,9 @@ This business case compares the performance of client-only single-page applicati
 
 Across the board, the full stack web apps outperform the client-only SPAs. For instance, [this test run from WebPageTest](https://www.webpagetest.org/video/compare.php?tests=230424_AiDc85_2TT%2C230424_AiDc4M_2TV%2C230424_AiDc41_2TW%2C230424_BiDcJQ_2T5%2C230424_AiDcGW_2TX) showcases how both a Remix and a Next.js app outperform their SPA counterparts.
 
-![Screenshot of the Largest Contentful Paint results of one WebPageTest visual comparison between different SPA and full stack versions](/img/public/2023-04-15_a_business_case_for_full_stack_web_frameworks/screenshot-web-page-test-lcp-client-side-vs-full-stack-apps.png)
+![Screenshot of the Largest Contentful Paint results of one WebPageTest visual comparison between different SPA and full stack versions](/img?src=/2023-04-15_a_business_case_for_full_stack_web_frameworks/screenshot-web-page-test-lcp-client-side-vs-full-stack-apps.png)
 
-![Screenshot of the Time to Interactive results of one WebPageTest visual comparison between different SPA and full stack versions](/img/public/2023-04-15_a_business_case_for_full_stack_web_frameworks/screenshot-web-page-test-tti-client-side-vs-full-stack-apps.png)
+![Screenshot of the Time to Interactive results of one WebPageTest visual comparison between different SPA and full stack versions](/img?src=/2023-04-15_a_business_case_for_full_stack_web_frameworks/screenshot-web-page-test-tti-client-side-vs-full-stack-apps.png)
 
 ### The demo app
 
@@ -39,7 +39,7 @@ The apps used in this business case are demo applications. All implementations (
 
 As visible in the screenshot below, the page content mostly contains of movie images, titles, and some additional information.
 
-![Screenshot of demo movies app showing an overview page of popular movies](/img/public/2023-04-15_a_business_case_for_full_stack_web_frameworks/movies-app-screenshot.png)
+![Screenshot of demo movies app showing an overview page of popular movies](/img?src=/2023-04-15_a_business_case_for_full_stack_web_frameworks/movies-app-screenshot.png)
 
 The demo app only has one route. This business case only focuses on the lab test performance of the initial page load.
 
@@ -467,13 +467,13 @@ Client-only SPA architectures give up control over the web server environment to
 
 Full stack web apps run both on the client and a server environment. They give developers control over the request response flows and handling of the incoming HTTP requests.
 
-![A diagram comparing a client-only SPA to a full stack web app](/img/public/2023-04-15_a_business_case_for_full_stack_web_frameworks/client-side-vs-full-stack-framework.png)
+![A diagram comparing a client-only SPA to a full stack web app](/img?src=/2023-04-15_a_business_case_for_full_stack_web_frameworks/client-side-vs-full-stack-framework.png)
 
 Downstream services and third-party APIs are used to provide data and functionality. The client-side app is responsible for fetching data from the APIs and rendering it in the browser.
 
 In bigger organizations, downstream services and APIs are likely owned by other teams, departments, and suppliers. All API requests leave the frontend team’s control zone and are handled by third parties. Conclusively, the performance of the client-only SPA is dependent on the priorities and decisions of third parties.
 
-![A diagram showing the control zone when working on a client-only SPA. The control zone includes the browser runtime and client-only app. It also includes the requests made from the frontend. However, all API requests leave the control zone and are handled by third-party APIs.](/img/public/2023-04-15_a_business_case_for_full_stack_web_frameworks/control-zone-client-side-spa.png)
+![A diagram showing the control zone when working on a client-only SPA. The control zone includes the browser runtime and client-only app. It also includes the requests made from the frontend. However, all API requests leave the control zone and are handled by third-party APIs.](/img?src=/2023-04-15_a_business_case_for_full_stack_web_frameworks/control-zone-client-side-spa.png)
 
 We can replace the client-only SPA with a full stack web app by using a full stack web framework like Next.js or Remix. Using a full stack app unlocks the tools of the backend of the web platform. With access to a server environment, we naturally implement the BFF (backend for frontend) pattern. We gain control over a server runtime and can use it to optimize the web performance.
 
@@ -541,7 +541,7 @@ HTTP streaming is a technique that allows the server to stream data to the clien
 
 In this first step, the full stack web app still employs client-side data fetching. So far, we only server-side render the loading states and fetch the movies once React has re-hydrated on the client. This version of the full stack web app serves as the baseline.
 
-![Screenshot of the visual comparison on WebPageTest showing how using server-side rendering and streaming reduces the Largest Contentful Paint by 0.5 seconds](/img/public/2023-04-15_a_business_case_for_full_stack_web_frameworks/screenshot-web-page-test-client-only-spa-vs-full-stack-with-client-side-data-fetching.png)
+![Screenshot of the visual comparison on WebPageTest showing how using server-side rendering and streaming reduces the Largest Contentful Paint by 0.5 seconds](/img?src=/2023-04-15_a_business_case_for_full_stack_web_frameworks/screenshot-web-page-test-client-only-spa-vs-full-stack-with-client-side-data-fetching.png)
 
 A comparison on WebPageTest between the client-only SPA and the full stack app with client-side data fetching shows that server-side rendering and streaming provides comparable performance to the client-side SPA \[[1](https://www.webpagetest.org/video/compare.php?tests=230423_BiDcS2_7QH%2C230423_BiDcR6_7QJ&thumbSize=150&ival=500&end=visual)\].
 
@@ -598,7 +598,7 @@ For instance, in [this particular test](https://www.webpagetest.org/video/compar
 
 The Time to Interactive (TTI) was also improved from 3.7 seconds to 2.6 seconds.
 
-![Screenshot of the visual comparison on WebPageTest showing how using server-side data fetching reduces the Largest Contentful Paint by another 0.5 seconds](/img/public/2023-04-15_a_business_case_for_full_stack_web_frameworks/screenshot-web-page-test-client-only-spa-vs-full-stack-apps-with-client-or-server-data-fetching.png)
+![Screenshot of the visual comparison on WebPageTest showing how using server-side data fetching reduces the Largest Contentful Paint by another 0.5 seconds](/img?src=/2023-04-15_a_business_case_for_full_stack_web_frameworks/screenshot-web-page-test-client-only-spa-vs-full-stack-apps-with-client-or-server-data-fetching.png)
 
 Server-side data fetching also allows us to aggregate and filter the data on our server environment before forwarding it to the client. This unlocks further performance improvements.
 

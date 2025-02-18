@@ -39,7 +39,7 @@ Above all things, React allowed me to ignore the complexity of the web platform.
 web and browser APIs all at once, I turned every problem I encountered into a React problem. This allowed me to get good
 at one thing and move fast. Something that turned out to be very rewarding.
 
-![Circle showing the relationship between moving fast, quick results, positive feedback, and growing motivation. Moving fast enables quick results which results in positive feedback, which in turn motivates to keep moving fast.](/img/public/2023-03-11_web_standards_and_react/how-react-made-me-a-web-dev.png)
+![Circle showing the relationship between moving fast, quick results, positive feedback, and growing motivation. Moving fast enables quick results which results in positive feedback, which in turn motivates to keep moving fast.](/img?src=/2023-03-11_web_standards_and_react/how-react-made-me-a-web-dev.png)
 
 ## Back to the web platform
 
