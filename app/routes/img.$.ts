@@ -1,7 +1,7 @@
 import { LoaderFunctionArgs } from '@remix-run/node';
-import { internalServerError, notFound } from '~/modules/responses.server.ts';
+import { internalServerError } from '~/modules/responses.server.ts';
 import { captureException } from '~/modules/sentry/capture.server.ts';
-import { Fit, Format, getImgResponse, GetImgSourceArgs } from 'openimg/node';
+import { getImgResponse, GetImgSourceArgs } from 'openimg/node';
 import { env } from '~/modules/env.server';
 
 export { headers } from '~/modules/headers.server.ts';
