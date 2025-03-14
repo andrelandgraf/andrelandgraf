@@ -16,31 +16,27 @@ export async function loader({ request }: LoaderFunctionArgs) {
       getImgSource: ({ request, params }: GetImgSourceArgs) => {
         const url = new URL(request.url);
         const gen = url.searchParams.get('gen');
+        const src = url.searchParams.get('src');
+        if (!src) {
+          throw new Error('src is required');
+        }
         if (gen) {
           return {
             type: 'fetch',
-            url: env.server.origin + params.src,
+            url: env.server.origin + src,
           };
         }
 
-        let isUrl = false;
-        try {
-          new URL(params.src);
-          isUrl = true;
-        } catch (err: unknown) {
-          // ignore
-        }
-
-        if (isUrl) {
+        if (URL.canParse(src)) {
           return {
             type: 'fetch',
-            url: params.src,
+            url: src,
           };
         }
 
         return {
           type: 'fs',
-          path: './public' + params.src,
+          path: './public' + src,
         };
       },
     });

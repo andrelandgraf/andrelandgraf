@@ -39,7 +39,7 @@
     "isbot": "^4.1.0",
     "js-yaml": "^4.1.0",
     "morgan": "^1.10.0",
-    "openimg": "^0.0.18",
+    "openimg": "^0.7.0",
     "posthog-js": "^1.161.3",
     "posthog-node": "^4.2.0",
     "qrcode": "^1.5.4",
