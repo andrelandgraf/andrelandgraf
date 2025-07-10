@@ -49,6 +49,8 @@ Most MCP servers are best used in development, as many have pointed out througho
 
 Some MCP servers offer read-only authorization grants. For instance, [the initial Postgres MCP server](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/postgres) only supports read-only queries. By preventing write-access, prompt injection may still trigger tool calls, but cannot alter the system. Of course, when working with production data, sensitive and thoughtful processing is always required - this is true with and without LLM usage.
 
+Note that if you want to protect yourself against prompt injection, all connected MCP servers must be read-only. Otherwise, the LLM could still chain tool calls to leak data or otherwise harm the system.
+
 ### MCP in Production for Codegen Tools
 
 Different production environments may pose varying levels of risk when compromised. Internal tools or ephemeral and personal apps built by codegen agents, for instance, may not face the same threat level as publicly-available applications with sensitive data. Tools like Replit, v0, and same.new build and deploy real applications today. Same.new even utilizes MCP to integrate its apps with Neon.
