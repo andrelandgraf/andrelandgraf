@@ -31,6 +31,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
 const redirects: Record<string, string | undefined> = {
   '2023-07-01_why_you_shouldnt_use_useactiondata': '2023-01-07_why_you_shouldnt_use_useactiondata',
+  '2023-11-19_how-to-tame-the-unknown-and-anything-else': '2023-11-19_how-to-work-with-typescript-unknown-and-any',
 };
 
 export async function loader({ params }: LoaderFunctionArgs) {

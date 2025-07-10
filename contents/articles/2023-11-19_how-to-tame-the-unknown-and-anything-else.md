@@ -1,6 +1,6 @@
 ---
 date: 2023-11-19
-title: How to tame the unknown (and anything else)
+title: How to work with TypeScript unknown and any
 description: TypeScript is a powerful tool to help us write better code. However, it can sometimes also get in the way, especially on the boundaries of the application where we interact with untyped data. In this article, I want to show you how to quickly narrow types and validate unknown and any.
 categories: [Web Development, TypeScript]
 ---
