@@ -12,15 +12,23 @@ export async function generateArticles() {
   }
 
   console.log('fetching articles from database...');
-  const articles = await db.select().from(articlesTable);
+  const articles = await db.select({ slug: articlesTable.slug }).from(articlesTable);
 
-  const deletedArticles = articles.filter((article) => !files.find((file) => file.slug === article.slug));
+  const deletedArticles = articles.filter((article) => !files.find((file) => file.slug === article.slug)).map((a) => a.slug);
   console.log(`deleting ${deletedArticles.length} articles from database...`);
-  for (const article of deletedArticles) {
-    await db.delete(articlesTable).where(eq(articlesTable.slug, article.slug));
+  for (const slug of deletedArticles) {
+    await db.delete(articlesTable).where(eq(articlesTable.slug, slug));
   }
 
-  console.log('looping over fs articles...');
+  const availableSlugs = new Set(files.map((file) => file.slug));
+  for (const file of files) {
+    const targetSlug = file.frontmatter.newVersionSlug;
+    if (targetSlug && !availableSlugs.has(targetSlug)) {
+      throw new Error(`file ${file.slug} references missing newVersionSlug ${targetSlug}`);
+    }
+  }
+
+  console.log('upserting base article rows...');
   for (const file of files) {
     if (!file.content) {
       throw new Error(`file ${file.slug} has no content`);
@@ -28,34 +36,47 @@ export async function generateArticles() {
     if (typeof file.content !== 'object') {
       throw new Error(`file ${file.slug} content must be of type JSON`);
     }
-    console.log(`upserting article ${file.slug} with content length ${file.markdown.length}...`);
-    if (articles.find((a) => a.slug === file.slug)) {
-      await db
-        .update(articlesTable)
-        .set({
-          slug: file.slug,
-          title: file.frontmatter.title,
-          description: file.frontmatter.description,
-          date: new Date(file.frontmatter.date),
-          categories: JSON.stringify(file.frontmatter.categories),
-          imageUrl: file.frontmatter.imageUrl,
-          imageAltText: file.frontmatter.imageAltText,
-          markdown: file.markdown,
-          newVersionSlug: file.frontmatter.newVersionSlug,
-        })
-        .where(eq(articlesTable.slug, file.slug));
-    } else {
-      await db.insert(articlesTable).values({
+    await db
+      .insert(articlesTable)
+      .values({
         slug: file.slug,
         title: file.frontmatter.title,
         description: file.frontmatter.description,
         date: new Date(file.frontmatter.date),
-        categories: JSON.stringify(file.frontmatter.categories),
+        categories: file.frontmatter.categories,
         imageUrl: file.frontmatter.imageUrl,
         imageAltText: file.frontmatter.imageAltText,
         markdown: file.markdown,
+        newVersionSlug: null,
+      })
+      .onConflictDoUpdate({
+        target: articlesTable.slug,
+        set: {
+          title: file.frontmatter.title,
+          description: file.frontmatter.description,
+          date: new Date(file.frontmatter.date),
+          categories: file.frontmatter.categories,
+          imageUrl: file.frontmatter.imageUrl,
+          imageAltText: file.frontmatter.imageAltText,
+          markdown: file.markdown,
+          newVersionSlug: null,
+        },
       });
+  }
+
+  console.log('updating newVersionSlug links...');
+  for (const file of files) {
+    if (!file.frontmatter.newVersionSlug) {
+      continue;
     }
+
+    console.log(`setting newVersionSlug for ${file.slug} -> ${file.frontmatter.newVersionSlug}...`);
+    await db
+      .update(articlesTable)
+      .set({
+        newVersionSlug: file.frontmatter.newVersionSlug,
+      })
+      .where(eq(articlesTable.slug, file.slug));
   }
 
   console.log('done');

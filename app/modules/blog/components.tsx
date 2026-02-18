@@ -140,7 +140,7 @@ export function InlineCode({ content, ...props }: HTMLAttributes<HTMLElement>) {
   );
 }
 
-type BlogMarkdownContainerProps = HTMLAttributes<HTMLElement> & {
+type BlogMarkdownContainerProps = Omit<HTMLAttributes<HTMLElement>, 'content'> & {
   content: RenderableTreeNode;
 };
 

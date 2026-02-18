@@ -1,21 +1,17 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { drizzle } from 'drizzle-orm/better-sqlite3';
-import { migrate } from 'drizzle-orm/better-sqlite3/migrator';
-import Database from 'better-sqlite3';
-import { env } from '../env.server.ts';
-import { generateArticles } from '~/modules/db/articles.server.ts';
+import { attachDatabasePool } from '@vercel/functions';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import { Pool } from 'pg';
+import * as schema from './schema.server.ts';
+import { databaseConfig } from '~/modules/config/database.ts';
 
-// Recursively create path to DB file on volume
-const dir = path.dirname(env.db.path);
-fs.mkdirSync(dir, { recursive: true });
+const pool = new Pool({
+  connectionString: databaseConfig.server.url,
+});
+attachDatabasePool(pool);
+const db = drizzle(pool, { casing: 'snake_case', schema });
 
-const sqlite = new Database(env.db.path);
-const db = drizzle(sqlite, { casing: 'snake_case' });
+async function closeDbConnection() {
+  await pool.end();
+}
 
-// This will automatically run needed migrations on the database
-migrate(db, { migrationsFolder: './drizzle' });
-// Generate articles
-generateArticles();
-
-export { db };
+export { closeDbConnection, db };

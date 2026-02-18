@@ -3,7 +3,7 @@ import type { RenderableTreeNode } from '@markdoc/markdoc';
 import Markdoc from '@markdoc/markdoc';
 import type { HTMLAttributes } from 'react';
 
-type MarkdownContainerProps = HTMLAttributes<HTMLDivElement> & {
+type MarkdownContainerProps = Omit<HTMLAttributes<HTMLDivElement>, 'content'> & {
   content: RenderableTreeNode;
   components?: {} | undefined; // Type from Markdoc.renderers.react
 };

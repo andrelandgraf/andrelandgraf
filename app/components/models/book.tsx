@@ -19,7 +19,7 @@ export function Book3DModel({ hoveredRef }: { hoveredRef: MutableRefObject<boole
   // size: {x: 150, y: 185, z: 15}
   const ref = useRef<Group<Object3DEventMap>>(null);
   const draggedRef = useRef<DragData | null>(null);
-  const { nodes, materials } = useGLTF('/book-v2.glb');
+  const { nodes, materials } = useGLTF('/book-v2.glb') as any;
   useFrame(() => {
     if (!ref.current || hoveredRef.current) return;
     const prefersReducedMotion = globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;

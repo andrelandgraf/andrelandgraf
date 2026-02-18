@@ -1,6 +1,11 @@
 node_modules
 /build
+.next
+.vercel
 .env
+.env.local
+.env.development
+.env.production
 .DS_Store
 
 # Sentry Config File

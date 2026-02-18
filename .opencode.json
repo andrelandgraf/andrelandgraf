@@ -1,0 +1,9 @@
+{
+  "mcp": {
+    "fullstackrecipes": {
+      "type": "remote",
+      "url": "https://fullstackrecipes.com/api/mcp",
+      "enabled": true
+    }
+  }
+}

@@ -1,0 +1,3 @@
+[mcp_servers.fullstackrecipes]
+type = "http"
+url = "https://fullstackrecipes.com/api/mcp"
