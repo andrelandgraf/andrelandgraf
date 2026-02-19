@@ -13,12 +13,14 @@
     "db:studio": "bunx --bun drizzle-kit studio",
     "db:seed": "NODE_ENV=development TZ=Etc/UTC bun run scripts/db-seed.ts",
     "update:articles": "bun run db:seed",
-    "env:pull": "vercel env pull .env.development --environment=development",
-    "env:push": "bun run scripts/vercel-env-push.ts --file=.env.development --environment=development --scope=andrelandgraf",
-    "env:pull:prod": "vercel env pull .env.production --environment=production",
-    "env:push:prod": "bun run scripts/vercel-env-push.ts --file=.env.production --environment=production --scope=andrelandgraf",
-    "env:validate": "bun run scripts/validate-env.ts --environment=development",
-    "env:validate:prod": "bun run scripts/validate-env.ts --environment=production",
+    "env:pull": "better-env pull --environment development",
+    "env:push": "better-env load .env.development --environment development --upsert",
+    "env:pull:preview": "better-env pull --environment preview",
+    "env:push:preview": "better-env load .env.preview --environment preview --upsert",
+    "env:pull:prod": "better-env pull --environment production",
+    "env:push:prod": "better-env load .env.production --environment production --upsert",
+    "env:validate": "better-env validate --environment development",
+    "env:validate:prod": "better-env validate --environment production",
     "prebuild": "bun run env:validate:prod",
     "sentry:build": "sentry-upload-sourcemaps && rm ./public/**/*.map && rm ./build/**/*.map",
     "dev": "NODE_ENV=development TZ=Etc/UTC bunx --bun next dev",
@@ -47,6 +49,7 @@
     "@sentry/node": "^8.48.0",
     "@sentry/remix": "^8.48.0",
     "@vercel/functions": "^3.4.1",
+    "better-env": "^0.1.1",
     "better-sqlite3": "^11.3.0",
     "clsx": "^2.1.1",
     "compression": "^1.7.4",
@@ -71,7 +74,7 @@
     "tsx": "^4.19.2",
     "vercel": "^50.14.0",
     "ws": "^8.14.2",
-    "zod": "^3.24.2"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@flydotio/dockerfile": "^0.5.8",
@@ -102,3 +105,4 @@
     "node": ">=20.0.0"
   }
 }
+

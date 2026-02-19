@@ -1,4 +1,4 @@
-import { configSchema, server } from './schema.ts';
+import { configSchema, server } from 'better-env/config-schema';
 
 export const databaseConfig = configSchema('Database', {
   url: server({

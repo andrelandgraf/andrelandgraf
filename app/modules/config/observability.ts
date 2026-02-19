@@ -1,4 +1,4 @@
-import { configSchema, pub, server } from './schema.ts';
+import { configSchema, pub, server } from 'better-env/config-schema';
 
 export const observabilityConfig = configSchema('Observability', {
   sentryDsn: server({

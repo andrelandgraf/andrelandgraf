@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { configSchema, server } from './schema.ts';
+import { configSchema, server } from 'better-env/config-schema';
 
 export const eventsConfig = configSchema('Events', {
   lumaApiKey: server({
