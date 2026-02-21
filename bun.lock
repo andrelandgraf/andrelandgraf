@@ -17,7 +17,7 @@
         "@sentry/node": "^8.48.0",
         "@sentry/remix": "^8.48.0",
         "@vercel/functions": "^3.4.1",
-        "better-env": "^0.1.1",
+        "better-env": "^0.3.1",
         "better-sqlite3": "^11.3.0",
         "clsx": "^2.1.1",
         "compression": "^1.7.4",
@@ -956,7 +956,7 @@
 
     "basic-auth": ["basic-auth@2.0.1", "", { "dependencies": { "safe-buffer": "5.1.2" } }, "sha512-NF+epuEdnUYVlGuhaxbbq+dvJttwLnGY+YixlXlME5KpQ5W3CnXA5cVTneY3SPbPDRkcjMbifrwmFYcClgOZeg=="],
 
-    "better-env": ["better-env@0.1.1", "", { "dependencies": { "@next/env": "^16.0.10", "commander": "^14.0.3", "zod": "^4" }, "bin": { "better-env": "dist/cli.js" } }, "sha512-5H2ila/jzGz2ionozdB2Bacokbvf7msQw9VNigfJQi5r3lONhFQ23Se6mggWFRQ+NXEe8wwDh3jJ0kwVldIS2w=="],
+    "better-env": ["better-env@0.3.1", "", { "dependencies": { "@next/env": "^16.0.10", "commander": "^14.0.3", "jiti": "^2.6.1", "zod": "^4" }, "bin": { "better-env": "dist/cli.js" } }, "sha512-fmJ6stposMd/8TFogxRL0xsI57+QVTywFZnfGNJfSlg7EF2R6ORVA7U1SHrZMIiVIh8JJa9Bk+cMrlTjpt1hDA=="],
 
     "better-sqlite3": ["better-sqlite3@11.7.2", "", { "dependencies": { "bindings": "^1.5.0", "prebuild-install": "^7.1.1" } }, "sha512-10a57cHVDmfNQS4jrZ9AH2t+2ekzYh5Rhbcnb4ytpmYweoLdogDmyTt5D+hLiY9b44Mx9foowb/4iXBTO2yP3Q=="],
 
@@ -2595,6 +2595,8 @@
     "basic-auth/safe-buffer": ["safe-buffer@5.1.2", "", {}, "sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g=="],
 
     "better-env/@next/env": ["@next/env@16.1.6", "", {}, "sha512-N1ySLuZjnAtN3kFnwhAwPvZah8RJxKasD7x1f8shFqhncnWZn4JMfg37diLNuoHsLAlrDfM3g4mawVdtAG8XLQ=="],
+
+    "better-env/jiti": ["jiti@2.6.1", "", { "bin": { "jiti": "lib/jiti-cli.mjs" } }, "sha512-ekilCSN1jwRvIbgeg/57YFh8qQDNbwDb9xT/qu2DAHbFFZUicIl4ygVaAvzveMhMVr3LnpSKTNnwt8PoOfmKhQ=="],
 
     "bl/buffer": ["buffer@5.7.1", "", { "dependencies": { "base64-js": "^1.3.1", "ieee754": "^1.1.13" } }, "sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ=="],
 

@@ -49,7 +49,7 @@
     "@sentry/node": "^8.48.0",
     "@sentry/remix": "^8.48.0",
     "@vercel/functions": "^3.4.1",
-    "better-env": "^0.1.1",
+    "better-env": "^0.3.1",
     "better-sqlite3": "^11.3.0",
     "clsx": "^2.1.1",
     "compression": "^1.7.4",
@@ -105,4 +105,3 @@
     "node": ">=20.0.0"
   }
 }
-
