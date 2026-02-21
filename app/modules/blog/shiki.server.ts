@@ -1,5 +1,5 @@
 import { createHighlighterCoreSync, type HighlighterCore } from 'shiki/core';
-import { createOnigurumaEngine } from 'shiki/engine/oniguruma';
+import { createJavaScriptRegexEngine } from 'shiki/engine/javascript';
 import invariant from 'tiny-invariant';
 
 import dracula from 'shiki/themes/dracula-soft.mjs';
@@ -40,11 +40,11 @@ function isSupportedLanguage(language: string) {
 }
 
 export async function initShiki(): Promise<HighlighterCore> {
-  const engine = await createOnigurumaEngine(import('shiki/wasm'));
   const shiki = createHighlighterCoreSync({
     themes: [dracula],
     langs: [js, ts, markdown, tsx, bash, jsx, json, tf, css, html],
-    engine,
+    // Avoid Oniguruma WASM crashes during Bun-powered Vercel builds.
+    engine: createJavaScriptRegexEngine(),
   });
   return shiki;
 }
