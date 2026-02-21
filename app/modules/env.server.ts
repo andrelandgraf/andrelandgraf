@@ -1,7 +1,7 @@
 import invariant from 'tiny-invariant';
-import { eventsConfig } from './config/events.ts';
-import { mainConfig } from './config/main.ts';
-import { observabilityConfig } from './config/observability.ts';
+import { eventsConfig } from '../../src/lib/events/config.ts';
+import { mainConfig } from '../../src/lib/main/config.ts';
+import { observabilityConfig } from '../../src/lib/observability/config.ts';
 
 function enforceInProd(variable: string | undefined, variableName: string, environment: string) {
   const isProduction = environment === 'production';

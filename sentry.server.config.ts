@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/nextjs';
-import { observabilityConfig } from './app/modules/config/observability.ts';
+import { observabilityConfig } from './src/lib/observability/config.ts';
 
 const dsn = observabilityConfig.server.sentryDsn;
 

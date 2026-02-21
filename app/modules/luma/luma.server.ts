@@ -1,4 +1,4 @@
-import { eventsConfig } from '~/modules/config/events.ts';
+import { eventsConfig } from '../../../src/lib/events/config.ts';
 
 const LUMA_API_BASE_URL = 'https://api.lu.ma/public/v1';
 const MAX_PAGES = 25;

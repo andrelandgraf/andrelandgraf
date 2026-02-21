@@ -1,6 +1,6 @@
-import './app/modules/config/events.ts';
-import './app/modules/config/main.ts';
-import './app/modules/config/observability.ts';
+import './src/lib/events/config.ts';
+import './src/lib/main/config.ts';
+import './src/lib/observability/config.ts';
 
 export async function register() {
   if (process.env.NEXT_RUNTIME === 'nodejs') {

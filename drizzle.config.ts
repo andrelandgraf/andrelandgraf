@@ -3,7 +3,7 @@ import { loadEnvConfig } from '@next/env';
 
 loadEnvConfig(process.cwd());
 
-import { databaseConfig } from './app/modules/config/database.ts';
+import { databaseConfig } from './app/modules/db/config.ts';
 
 export default defineConfig({
   dialect: 'postgresql',
