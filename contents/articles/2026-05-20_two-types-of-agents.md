@@ -5,7 +5,7 @@ description: Today's agents fall into two categories. There are declarative agen
 categories: [AI, Agents]
 ---
 
-I've noticed that when developers talk about "agents," we're often talking about different things: Claude Code running in a sandbox vs. an agentic endpoint inside a web app. It's a spectrum but I think we can distinguish two types of agents by now and they're running on different infra and abstraction levels.
+I've noticed that when developers talk about "agents", we're often talking about different things: Claude Code running in a sandbox vs. an agentic endpoint inside a web app. It's a spectrum but I think we can distinguish two types of agents by now and they're running on different infra and abstraction levels.
 
 ## Before agents: an AI endpoint
 
