@@ -1,1 +1,0 @@
-ALTER TABLE `articles` ADD `new_version_slug` text REFERENCES articles(slug);
