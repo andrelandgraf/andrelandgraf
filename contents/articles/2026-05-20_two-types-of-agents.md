@@ -39,7 +39,7 @@ How do LLM API calls turn into agents? You provide your model calls with a harne
 
 For this, Vercel's AI SDK introduced [ToolLoopAgent](https://ai-sdk.dev/docs/reference/ai-sdk-core/tool-loop-agent) - a small declarative agent abstraction on top of single-step calls like `generateText()`.
 
-```ts
+```typescript
 import { ToolLoopAgent } from "ai";
 
 const agent = new ToolLoopAgent({
