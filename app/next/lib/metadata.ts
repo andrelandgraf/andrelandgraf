@@ -72,8 +72,8 @@ export function buildMetadata({
       card: 'summary_large_image',
       title: resolvedTitle,
       description,
-      creator: '@andrelandgraf94',
-      site: '@andrelandgraf94',
+      creator: '@andrelandgraf',
+      site: '@andrelandgraf',
       images: [imageUrl],
     },
   };

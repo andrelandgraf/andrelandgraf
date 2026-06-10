@@ -555,7 +555,7 @@ highlighting through a custom code block component and a CSS theme with prism-re
 Wow, that's a lot of work! And there is so much more to explore! We are now able to fetch one dynamic Markdown file from
 GitHub but what about fetching multiple Markdown files from GitHub? I will not go into more code examples here but touch
 onto some more topics in the following. I will also try to add more blog posts about more advanced topics in the future,
-so make sure to follow me [on Twitter](https://twitter.com/AndreLandgraf94)!
+so make sure to follow me [on Twitter](https://twitter.com/andrelandgraf)!
 
 Thanks for reading! Have a great one! 👋
 
@@ -582,7 +582,7 @@ So far, I have not found a nice way to create a dynamic table of contents based 
 [Particular.Cloud](https://particular.cloud/documentation/developers/v1), I dynamically parse through the final HTML (in
 a `useEffect`), but I don't think that's a very elegant solution. I hope I can update this section soon!
 
-Please let me know [on Twitter](https://twitter.com/AndreLandgraf94) if you have any suggestions!
+Please let me know [on Twitter](https://twitter.com/andrelandgraf) if you have any suggestions!
 
 ## Alternative solutions
 
